@@ -22,7 +22,7 @@ public class Game
         pub = new Room("in the campus pub");
         lab = new Room("in a computing lab");
         office = new Room("in the computing admin office");
-        busStop = new Room("at the bus-termninal");
+        busStop = new Room("køkken");
 
         // opretter udgange
         outside.setExit("east", u55);
