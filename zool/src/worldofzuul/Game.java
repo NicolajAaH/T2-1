@@ -16,7 +16,9 @@ public class Game
     private void createRooms()
     {
         Room store, outside, utlity, bathroom, bedroom, kidsRoom, room, kitchen, livingRoom, corrridor1, corridor2, corridor3, corridor4; // liste over rum
-        // opretter rum og beskrivelse
+        // create room and description
+        // translate from danish to english
+        
         store = new Room("nu i Super Duper Byg, her kan du købe tingene til huset");
         outside = new Room("ude foran huset");
         utlity = new Room("i bryggerset");
