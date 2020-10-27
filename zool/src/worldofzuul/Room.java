@@ -28,7 +28,7 @@ public class Room
 
     public String getLongDescription()
     {
-        return "You are " + description + ".\n" + getExitString();
+        return "Du er " + description + ".\n" + getExitString();
     }
 
     private String getExitString() // henter mulige udgange (keys i hashmap) og returnerer dem i en streng
