@@ -15,7 +15,7 @@ public class Room
         this.description = description;
         exits = new HashMap<String, Room>();
     }
-
+    // hej med dig
     public void setExit(String direction, Room neighbor) 
     {
         exits.put(direction, neighbor);
