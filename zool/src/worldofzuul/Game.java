@@ -15,64 +15,64 @@ public class Game
 
     private void createRooms()
     {
-        Room butik, udenfor, bryggers, badeværelse, soveværelse, børneværelse, værelse, køkken, stue, gang1, gang2, gang3, gang4; // liste over rum
+        Room store, outside, utlity, bathroom, bedroom, kidsRoom, room, kitchen, livingRoom, corrridor1, corridor2, corridor3, corridor4; // liste over rum
         // opretter rum og beskrivelse
-        butik = new Room("nu i Super Duper Byg, her kan du købe tingene til huset");
-        udenfor = new Room("ude foran huset");
-        bryggers = new Room("i bryggerset");
-        badeværelse = new Room("i badeværelset");
-        soveværelse = new Room("i soveværelset");
-        børneværelse = new Room("i børneværelset");
-        værelse = new Room("i værelset");
-        køkken = new Room("i køkkenet");
-        stue = new Room("i stuen");
-        gang1 = new Room("i første del af gangen");
-        gang2 = new Room("i anden del af gangen");
-        gang3 = new Room("i tredje del af gangen");
-        gang4 = new Room("i fjerde del af gangen");
+        store = new Room("nu i Super Duper Byg, her kan du købe tingene til huset");
+        outside = new Room("ude foran huset");
+        utlity = new Room("i bryggerset");
+        bathroom = new Room("i badeværelset");
+        bedroom = new Room("i badeværelse");
+        kidsRoom = new Room("i børneværelset");
+        room = new Room("i værelset");
+        kitchen = new Room("i køkkenet");
+        livingRoom = new Room("i stuen");
+        corrridor1 = new Room("i første del af gangen");
+        corridor2 = new Room("i anden del af gangen");
+        corridor3 = new Room("i tredje del af gangen");
+        corridor4 = new Room("i fjerde del af gangen");
 
         // opretter udgange
-        butik.setExit("east", udenfor); //Fra butikken kan man gå udenfor
+        store.setExit("east", outside); //Fra butikken kan man gå outside
 
-        udenfor.setExit("west", butik); //fra udenfor kan man gå i butikken og gang 1
-        udenfor.setExit("east", gang1);
+        outside.setExit("west", store); //fra outside kan man gå i butikken og gang 1
+        outside.setExit("east", corrridor1);
 
-        gang1.setExit("north", bryggers); //fra gang 1 kan man gå i bryggerset, køkkenet, gang 2 og udenfor
-        gang1.setExit("south", køkken);
-        gang1.setExit("east", gang2);
-        gang1.setExit("west", udenfor);
+        corrridor1.setExit("north", utlity); //fra gang 1 kan man gå i utlityet, kitchenet, gang 2 og outside
+        corrridor1.setExit("south", kitchen);
+        corrridor1.setExit("east", corridor2);
+        corrridor1.setExit("west", outside);
 
-        bryggers.setExit("south", gang1); //fra bryggerset kan man gå i gang 1
+        utlity.setExit("south", corrridor1); //fra utlityet kan man gå i gang 1
 
-        køkken.setExit("north", gang1); //fra køkkenet kan man gå til gang 1 og stuen
-        køkken.setExit("east", stue);
+        kitchen.setExit("north", corrridor1); //fra kitchenet kan man gå til gang 1 og livingRoomn
+        kitchen.setExit("east", livingRoom);
 
-        stue.setExit("west", køkken); //fra stuen kan man gå til køkkenet og gang 3
-        stue.setExit("north", gang3);
+        livingRoom.setExit("west", kitchen); //fra livingRoomn kan man gå til kitchenet og gang 3
+        livingRoom.setExit("north", corridor3);
 
-        gang2.setExit("north", badeværelse); //fra gang 2 kan man gå til gang 1, gang 3 og badeværelse
-        gang2.setExit("east", gang3);
-        gang2.setExit("west", gang1);
+        corridor2.setExit("north", bathroom); //fra gang 2 kan man gå til gang 1, gang 3 og bathroom
+        corridor2.setExit("east", corridor3);
+        corridor2.setExit("west", corrridor1);
 
-        badeværelse.setExit("south", gang2); //fra badeværelset kan man gå til gang 2
+        bathroom.setExit("south", corridor2); //fra bathroomt kan man gå til gang 2
 
-        gang3.setExit("north", soveværelse); //fra gang 3 kan man gå til gangn 2, gang 4, soveværelse og stuen
-        gang3.setExit("south", stue);
-        gang3.setExit("east", gang4);
-        gang3.setExit("west", gang2);
+        corridor3.setExit("north", bedroom); //fra gang 3 kan man gå til gangn 2, gang 4, bedroom og livingRoomn
+        corridor3.setExit("south", livingRoom);
+        corridor3.setExit("east", corridor4);
+        corridor3.setExit("west", corridor2);
 
-        soveværelse.setExit("south", gang3); //fra soveværelse kan man gå til gang 3
+        bedroom.setExit("south", corridor3); //fra bedroom kan man gå til gang 3
 
-        gang4.setExit("north", børneværelse); //fra gang 4 kan man gå til gang 3, børneværelse og værelset
-        gang4.setExit("south", værelse);
-        gang4.setExit("west", gang3);
+        corridor4.setExit("north", kidsRoom); //fra gang 4 kan man gå til gang 3, kidsRoom og roomt
+        corridor4.setExit("south", room);
+        corridor4.setExit("west", corridor3);
 
-        børneværelse.setExit("south", gang4); //fra børneværelset kan man gå til gang 4
+        kidsRoom.setExit("south", corridor4); //fra kidsRoomt kan man gå til gang 4
 
-        værelse.setExit("north", gang4); //fra værelset kan man gå til gang 4
+        room.setExit("north", corridor4); //fra roomt kan man gå til gang 4
 
-        // sætter startrummet til udenfor
-        currentRoom = udenfor;
+        // sætter startrummet til outside
+        currentRoom = outside;
     }
 
     public void play() 
