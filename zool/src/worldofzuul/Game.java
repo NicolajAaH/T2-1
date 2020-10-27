@@ -17,7 +17,7 @@ public class Game
     {
         Room store, outside, utlity, bathroom, bedroom, kidsRoom, room, kitchen, livingRoom, corrridor1, corridor2, corridor3, corridor4; // liste over rum
         // create room and description
-        // oversæt fra dansk til engelsk
+        // translate from danish to english
         
         store = new Room("nu i Super Duper Byg, her kan du købe tingene til huset");
         outside = new Room("ude foran huset");
