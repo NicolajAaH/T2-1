@@ -24,12 +24,6 @@ public class Item {
         return name;
     }
 
-    /* evt
-    public EnergyLabel getEnergyLabel() {
-        return energyLabel;
-    }
-    */
-
     public int getPrice() {
         return price;
     }

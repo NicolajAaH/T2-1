@@ -146,6 +146,8 @@ public class Game {
             goRoom(command);
         } else if (commandWord == CommandWord.QUIT) {
             wantToQuit = quit(command);
+        } else if (commandWord == CommandWord.TEST) {
+            test(command);
         }
         return wantToQuit;
     }
@@ -176,7 +178,7 @@ public class Game {
         }
         currentRoom.printRoomInv();
 
-        moveItem(store.getRoomInv(), 1, player.getInventory());
+        copyItem(store.getRoomInv(), 1, player.getInventory());
         System.out.println("player index:");
         player.getInventory().printInventory();
     }
@@ -190,11 +192,18 @@ public class Game {
         }
     }
 
+    private void test(Command command){
+        System.out.println("test");
+    }
+
     private void copyItem(Inventory sourceInventory, int itemIndex, Inventory destInventory) {
         destInventory.addItem(sourceInventory.getItem(itemIndex));
-
     }
+
+
+
 }
+// command: buy item nr: xxx
 
  /*
    for (Item item : sourceInventory) {

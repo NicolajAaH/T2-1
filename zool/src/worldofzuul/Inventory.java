@@ -7,7 +7,6 @@ public class Inventory {
     private ArrayList<Item> items = new ArrayList<>();
 
     public Inventory(){
-
     }
 
     public void addItem(Item item) {
@@ -27,9 +26,4 @@ public class Inventory {
     public Item getItem(int i) {
         return items.get(i);
     }
-
-    public ArrayList<Item> getItems() {
-        return items;
-    }
-
 }
