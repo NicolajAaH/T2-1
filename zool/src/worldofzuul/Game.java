@@ -178,9 +178,8 @@ public class Game {
         }
         currentRoom.printRoomInv();
 
-        copyItem(store.getRoomInv(), 1, player.getInventory());
-        System.out.println("player index:");
-        player.getInventory().printInventory();
+       // copyItem(store.getRoomInv(), 1, player.getInventory());
+
     }
 
     private boolean quit(Command command) {
@@ -198,20 +197,18 @@ public class Game {
             return;
         }
 
-        System.out.println("køb køb køb");
+        int index = -1 + Integer.parseInt(command.getSecondWord());
+
+        copyItem(store.getRoomInv(), index, player.getInventory());
+
+        System.out.println("item er købt");
+
+        System.out.println("player index:");
+        player.getInventory().printInventory();
+
     }
 
     private void copyItem(Inventory sourceInventory, int itemIndex, Inventory destInventory) {
         destInventory.addItem(sourceInventory.getItem(itemIndex));
     }
-
-
-
 }
-// command: buy item nr: xxx
-
- /*
-   for (Item item : sourceInventory) {
-           if (item.getItemType()==1) // jeg har fundet en vaskemaskine
-
-  */
