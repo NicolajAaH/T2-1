@@ -1,11 +1,9 @@
 package worldofzuul;
 
-public class Game 
-{
+public class Game {
     private Parser parser;
     private Room currentRoom; // holder styr på det rum man befinder sig i
-        
-
+    Room store, outside, utlity, bathroom, bedroom, kidsRoom, room, kitchen, livingRoom, corrridor1, corridor2, corridor3, corridor4; // liste over rum
     public Game() // opretter nyt spil
     {
         createRooms(); // kalder createRooms() sætter rum og udgange
@@ -13,25 +11,24 @@ public class Game
     }
 
 
-    private void createRooms()
-    {
-        Room store, outside, utlity, bathroom, bedroom, kidsRoom, room, kitchen, livingRoom, corrridor1, corridor2, corridor3, corridor4; // liste over rum
+    private void createRooms() {
+
         // create room and description
         // translate from danish to english
-        
-        store = new Room("nu i Super Duper Byg, her kan du købe tingene til huset");
-        outside = new Room("ude foran huset");
-        utlity = new Room("i bryggerset");
-        bathroom = new Room("i badeværelset");
-        bedroom = new Room("i badeværelse");
-        kidsRoom = new Room("i børneværelset");
-        room = new Room("i værelset");
-        kitchen = new Room("i køkkenet");
-        livingRoom = new Room("i stuen");
-        corrridor1 = new Room("i første del af gangen");
-        corridor2 = new Room("i anden del af gangen");
-        corridor3 = new Room("i tredje del af gangen");
-        corridor4 = new Room("i fjerde del af gangen");
+
+        store = new Room("nu i Super Duper Byg, her kan du købe tingene til huset", true);
+        outside = new Room("ude foran huset", false);
+        utlity = new Room("i bryggerset", false);
+        bathroom = new Room("i badeværelset", false);
+        bedroom = new Room("i badeværelse", false);
+        kidsRoom = new Room("i børneværelset", false);
+        room = new Room("i værelset", false);
+        kitchen = new Room("i køkkenet", false);
+        livingRoom = new Room("i stuen", false);
+        corrridor1 = new Room("i første del af gangen", false);
+        corridor2 = new Room("i anden del af gangen", false);
+        corridor3 = new Room("i tredje del af gangen", false);
+        corridor4 = new Room("i fjerde del af gangen", false);
 
         // opretter udgange
         store.setExit("east", outside); //Fra butikken kan man gå outside
@@ -77,13 +74,12 @@ public class Game
         currentRoom = outside;
     }
 
-    public void play() 
-    {            
+    public void play() {
         printWelcome(); // velkomst hilsen
 
-                
+
         boolean finished = false;
-        while (! finished) {
+        while (!finished) {
             Command command = parser.getCommand();
             finished = processCommand(command);
         }
@@ -100,31 +96,27 @@ public class Game
         System.out.println(currentRoom.getLongDescription()); // skriver beskrivelsen af første rum
     }
 
-    private boolean processCommand(Command command) 
-    {
+    private boolean processCommand(Command command) {
         boolean wantToQuit = false;
 
         CommandWord commandWord = command.getCommandWord();
 
-        if(commandWord == CommandWord.UNKNOWN) {
+        if (commandWord == CommandWord.UNKNOWN) {
             System.out.println("I don't know what you mean...");
             return false;
         }
 
         if (commandWord == CommandWord.HELP) {
             printHelp();
-        }
-        else if (commandWord == CommandWord.GO) {
+        } else if (commandWord == CommandWord.GO) {
             goRoom(command);
-        }
-        else if (commandWord == CommandWord.QUIT) {
+        } else if (commandWord == CommandWord.QUIT) {
             wantToQuit = quit(command);
         }
         return wantToQuit;
     }
 
-    private void printHelp() 
-    {
+    private void printHelp() {
         System.out.println("You are lost. You are alone. You wander");
         System.out.println("around at the university.");
         System.out.println();
@@ -132,9 +124,8 @@ public class Game
         parser.showCommands();
     }
 
-    private void goRoom(Command command) 
-    {
-        if(!command.hasSecondWord()) {
+    private void goRoom(Command command) {
+        if (!command.hasSecondWord()) {
             System.out.println("Go where?");
             return;
         }
@@ -145,20 +136,17 @@ public class Game
 
         if (nextRoom == null) {
             System.out.println("There is no door!");
-        }
-        else {
+        } else {
             currentRoom = nextRoom;
             System.out.println(currentRoom.getLongDescription());
         }
     }
 
-    private boolean quit(Command command) 
-    {
-        if(command.hasSecondWord()) {
+    private boolean quit(Command command) {
+        if (command.hasSecondWord()) {
             System.out.println("Quit what?");
             return false;
-        }
-        else {
+        } else {
             return true;
         }
     }
