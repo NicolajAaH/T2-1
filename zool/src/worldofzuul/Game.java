@@ -198,6 +198,8 @@ public class Game {
             return;
         }
 
+        // UNDERSØG OM DU ER I BUTIKKEN
+
         // finder index af det der skal købes
         int index = Integer.parseInt(command.getSecondWord()) - 1;
         // TO DO:   check at second word er en integer inden parsing
