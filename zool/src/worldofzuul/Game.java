@@ -146,8 +146,8 @@ public class Game {
             goRoom(command);
         } else if (commandWord == CommandWord.QUIT) {
             wantToQuit = quit(command);
-        } else if (commandWord == CommandWord.TEST) {
-            test(command);
+        } else if (commandWord == CommandWord.BUY) {
+            buy(command);
         }
         return wantToQuit;
     }
@@ -192,8 +192,13 @@ public class Game {
         }
     }
 
-    private void test(Command command){
-        System.out.println("test");
+    private void buy(Command command){
+        if (!command.hasSecondWord()) {
+            System.out.println("Buy what?");
+            return;
+        }
+
+        System.out.println("køb køb køb");
     }
 
     private void copyItem(Inventory sourceInventory, int itemIndex, Inventory destInventory) {
