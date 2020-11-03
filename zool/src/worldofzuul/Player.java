@@ -13,8 +13,9 @@ public class Player {
     public int viewWallet(){
         return wallet;
     }
-    public void copyItem(Inventory storeInv, Item item){
-        inventory.addItem(storeInv.getItem(item));
-    }
 
+    public Inventory getInventory() {
+        return inventory;
+    }
 }
+

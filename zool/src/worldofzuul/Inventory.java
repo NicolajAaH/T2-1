@@ -24,11 +24,12 @@ public class Inventory {
         }
     }
 
-    public Item getItem(int item) {
-        return items.get(item);
+    public Item getItem(int i) {
+        return items.get(i);
     }
 
     public ArrayList<Item> getItems() {
         return items;
     }
+
 }

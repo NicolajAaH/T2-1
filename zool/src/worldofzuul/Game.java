@@ -19,12 +19,13 @@ public class Game {
     private Player player;
     private Room currentRoom; // holder styr på det rum man befinder sig i
     Room store, outside, utlity, bathroom, bedroom, kidsRoom, room, kitchen, livingRoom, corrridor1, corridor2, corridor3, corridor4; // liste over rum
+
     public Game() // opretter nyt spil
     {
         createRooms(); // kalder createRooms() sætter rum og udgange
         parser = new Parser();
+        player = new Player();
     }
-
 
     private void createRooms() {
 
@@ -90,7 +91,9 @@ public class Game {
         store.addToInventory(new Item("Tørretumbler", 2000, 1000, DRYER));
         store.addToInventory(new Item("Varmeanlæg", 40000, 10000, HEATING));
         store.addToInventory(new Item("Komfur", 5000, 500, STOVE));
-        store.addToInventory(new Item("Køleskab", 6000, 900, FRIDGE));
+        store.addToInventory(new Item("Køleskab A+++", 8000, 470, FRIDGE)); // færdig
+        store.addToInventory(new Item("Køleskab A++", 6500, 400, FRIDGE)); // færdig
+        store.addToInventory(new Item("Køleskab A+", 4500, 350, FRIDGE)); // færdig
         store.addToInventory(new Item("Opvaskemaskine", 2500, 300, DISHWASHER));
         store.addToInventory(new Item("Vindue", 1000, 300, WINDOW));
         store.addToInventory(new Item("Belysning", 100, 100, LIGHTS));
@@ -99,7 +102,7 @@ public class Game {
         store.addToInventory(new Item("Isolering", 20000, 5000, ISOLATION));
         store.addToInventory(new Item("Solceller", 40000, 5500, SOLARCELLS));
 
-
+        kitchen.addToInventory(new Item("Køleskab D", 0, 0, FRIDGE)); // færdig
 
         // sætter startrummet til outside
         currentRoom = outside;
@@ -172,7 +175,10 @@ public class Game {
             System.out.println(currentRoom.getLongDescription());
         }
         currentRoom.printRoomInv();
-        player.copyItem(store.getRoomInv(), store.getRoomInv().getItem(WINDOW));
+
+        moveItem(store.getRoomInv(), 1, player.getInventory());
+        System.out.println("player index:");
+        player.getInventory().printInventory();
     }
 
     private boolean quit(Command command) {
@@ -183,4 +189,15 @@ public class Game {
             return true;
         }
     }
+
+    private void copyItem(Inventory sourceInventory, int itemIndex, Inventory destInventory) {
+        destInventory.addItem(sourceInventory.getItem(itemIndex));
+
+    }
 }
+
+ /*
+   for (Item item : sourceInventory) {
+           if (item.getItemType()==1) // jeg har fundet en vaskemaskine
+
+  */
