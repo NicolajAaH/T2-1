@@ -1,6 +1,22 @@
 package worldofzuul;
 
+import java.util.ArrayList;
+
 public class Game {
+
+    private final int WASHINGMACHINE = 1;
+    private final int DRYER = 2;
+    private final int HEATING = 3;
+    private final int STOVE = 4;
+    private final int FRIDGE = 5;
+    private final int DISHWASHER = 6;
+    private final int WINDOW = 7;
+    private final int LIGHTS = 8;
+    private final int TV = 9;
+    private final int WALLFIXER = 10;
+    private final int ISOLATION = 11;
+    private final int SOLARCELLS = 12;
+
     private Parser parser;
     private Room currentRoom; // holder styr på det rum man befinder sig i
     Room store, outside, utlity, bathroom, bedroom, kidsRoom, room, kitchen, livingRoom, corrridor1, corridor2, corridor3, corridor4; // liste over rum
@@ -69,6 +85,22 @@ public class Game {
         kidsRoom.setExit("south", corridor4); //fra kidsRoomt kan man gå til gang 4
 
         room.setExit("north", corridor4); //fra roomt kan man gå til gang 4
+
+        //add to inventory ÆNDRER SCOREIMPACT TIL REALISTISKE
+        store.addToInventory(new Item("Vaskemaskine", 2000, 1000, WASHINGMACHINE));
+        store.addToInventory(new Item("Tørretumbler", 2000, 1000, DRYER));
+        store.addToInventory(new Item("Varmeanlæg", 40000, 10000, HEATING));
+        store.addToInventory(new Item("Komfur", 5000, 500, STOVE));
+        store.addToInventory(new Item("Køleskab", 6000, 900, FRIDGE));
+        store.addToInventory(new Item("Opvaskemaskine", 2500, 300, DISHWASHER));
+        store.addToInventory(new Item("Vindue", 1000, 300, WINDOW));
+        store.addToInventory(new Item("Belysning", 100, 100, LIGHTS));
+        store.addToInventory(new Item("TV", 2800, 200, TV));
+        store.addToInventory(new Item("Hul-fikser-kit", 150, 500, WALLFIXER));
+        store.addToInventory(new Item("Isolering", 20000, 5000, ISOLATION));
+        store.addToInventory(new Item("Solceller", 40000, 5500, SOLARCELLS));
+
+
 
         // sætter startrummet til outside
         currentRoom = outside;
@@ -140,6 +172,7 @@ public class Game {
             currentRoom = nextRoom;
             System.out.println(currentRoom.getLongDescription());
         }
+        currentRoom.getRoomInv();
     }
 
     private boolean quit(Command command) {

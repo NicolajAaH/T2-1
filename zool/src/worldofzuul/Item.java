@@ -46,7 +46,6 @@ public class Item {
     public String toString() {
         return "Item{" +
                 "name='" + name + '\'' +
-                ", energyLabel=" + "energyLabel" +
                 ", price=" + price +
                 ", scoreImpact=" + scoreImpact +
                 ", itemType=" + itemType +
