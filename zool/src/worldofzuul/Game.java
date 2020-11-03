@@ -1,5 +1,7 @@
 package worldofzuul;
 
+import java.util.Scanner;
+
 public class Game {
 
     private final int WASHINGMACHINE = 1;
@@ -109,6 +111,9 @@ public class Game {
     }
 
     public void play() {
+        Scanner s = new Scanner(System.in);
+        System.out.println("Indtast startbeløb: ");
+        player.setWallet(s.nextInt());
         printWelcome(); // velkomst hilsen
 
 
@@ -117,15 +122,15 @@ public class Game {
             Command command = parser.getCommand();
             finished = processCommand(command);
         }
-        System.out.println("Thank you for playing.  Good bye.");
+        System.out.println("Tak for, at du spillede vores spil");
     }
 
     private void printWelcome() // velkomst hilsen udskrift
     {
         System.out.println();
-        System.out.println("Welcome to the World of Zuul!");
-        System.out.println("World of Zuul is a new, incredibly boring adventure game.");
-        System.out.println("Type '" + CommandWord.HELP + "' if you need help.");
+        System.out.println("Dette er dit hus");
+        System.out.println("Der er mange ting der kan forbedres, så du sparer mange penge, og udnytter energien bedre");
+        System.out.println("Skriv '" + CommandWord.HELP + "' hvis du har brug for hjælp.");
         System.out.println();
         System.out.println(currentRoom.getLongDescription()); // skriver beskrivelsen af første rum
     }
@@ -148,15 +153,14 @@ public class Game {
             wantToQuit = quit(command);
         } else if (commandWord == CommandWord.BUY) {
             buy(command);
+        } else if (commandWord == CommandWord.WALLET){
+            wallet();
         }
         return wantToQuit;
     }
 
     private void printHelp() {
-        System.out.println("You are lost. You are alone. You wander");
-        System.out.println("around at the university.");
-        System.out.println();
-        System.out.println("Your command words are:");
+        System.out.println("Dine kommandoer er:");
         parser.showCommands();
     }
 
@@ -177,10 +181,6 @@ public class Game {
             System.out.println(currentRoom.getLongDescription());
         }
         currentRoom.printRoomInv();
-
-        copyItem(store.getRoomInv(), 1, player.getInventory());
-        System.out.println("player index:");
-        player.getInventory().printInventory();
     }
 
     private boolean quit(Command command) {
@@ -198,20 +198,38 @@ public class Game {
             return;
         }
 
-        System.out.println("køb køb køb");
+        // finder index af det der skal købes
+        int index = -1 + Integer.parseInt(command.getSecondWord());
+        // TO DO:   check at second word er en integer inden parsing
+        //          check at det er en gyldig INT, dvs mellem 0 og size()
+
+        // finder pris på det der skal købes
+        int price = store.getRoomInv().getItem(index).getPrice();
+
+        // tjekker om spiller har råd
+        if (player.getWallet() >= price) {
+
+            // kopierer fra index fra butikkens inventory til players inventory
+            copyItem(store.getRoomInv(), index, player.getInventory());
+
+            // fratrækker købet fra players wallet
+            int amount = player.getWallet() - price;
+            player.setWallet(amount);
+
+            // udskriver køb og index (for tjek!)
+            System.out.println("item er købt");
+            System.out.println("Spiller Inventory:");
+            player.getInventory().printInventory();
+        } else {
+            System.out.println("du har ikke råd");
+        }
+    }
+
+    private void wallet(){
+        System.out.println(player.viewWallet());
     }
 
     private void copyItem(Inventory sourceInventory, int itemIndex, Inventory destInventory) {
         destInventory.addItem(sourceInventory.getItem(itemIndex));
     }
-
-
-
 }
-// command: buy item nr: xxx
-
- /*
-   for (Item item : sourceInventory) {
-           if (item.getItemType()==1) // jeg har fundet en vaskemaskine
-
-  */
