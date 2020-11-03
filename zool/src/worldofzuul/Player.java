@@ -2,6 +2,8 @@ package worldofzuul;
 
 public class Player {
     String name;
+
+
     private int wallet = 30000;
     int score;
     private Inventory inventory = new Inventory();
@@ -12,6 +14,14 @@ public class Player {
 
     public int viewWallet(){
         return wallet;
+    }
+
+    public int getWallet() {
+        return wallet;
+    }
+
+    public void setWallet(int wallet) {
+        this.wallet = wallet;
     }
 
     public Inventory getInventory() {
