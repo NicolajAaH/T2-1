@@ -14,6 +14,14 @@ public class Player {
         return wallet;
     }
 
+    public int getWallet() {
+        return wallet;
+    }
+
+    public void setWallet(int wallet) {
+        this.wallet = wallet;
+    }
+
     public Inventory getInventory() {
         return inventory;
     }
@@ -21,5 +29,9 @@ public class Player {
     public void setWallet(int wallet) {
         this.wallet = wallet;
     }
+    public int getWallet() {
+        return wallet;
+    }
+
 }
 

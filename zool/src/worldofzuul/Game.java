@@ -181,9 +181,6 @@ public class Game {
             System.out.println(currentRoom.getLongDescription());
         }
         currentRoom.printRoomInv();
-
-       // copyItem(store.getRoomInv(), 1, player.getInventory());
-
     }
 
     private boolean quit(Command command) {
@@ -201,15 +198,26 @@ public class Game {
             return;
         }
 
+        // finder index af det der skal købes
         int index = -1 + Integer.parseInt(command.getSecondWord());
+        // TO DO:   check at second word er en integer inden parsing
+        //          check at det er en gyldig INT, dvs mellem 0 og size()
 
+        // finder pris på det der skal købes
+        // int price =
+
+        // kopierer fra index fra butikkens inventory til players inventory
         copyItem(store.getRoomInv(), index, player.getInventory());
 
-        System.out.println("item er købt");
+        // fratrækker købet fra players wallet
+        int amount = player.getWallet() - store.getRoomInv().getItem(index).getPrice();
+        player.setWallet(amount);
 
+
+        // udskriver køb og index (for tjek!)
+        System.out.println("item er købt");
         System.out.println("player index:");
         player.getInventory().printInventory();
-
     }
 
     private void wallet(){
