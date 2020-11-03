@@ -27,6 +27,8 @@ public class Game {
         createRooms(); // kalder createRooms() sætter rum og udgange
         parser = new Parser();
         player = new Player();
+        // max kapacitet i player inventory
+        player.getInventory().setMaxSize(5);
     }
 
     private void createRooms() {
@@ -112,8 +114,10 @@ public class Game {
 
     public void play() {
         Scanner s = new Scanner(System.in);
-        System.out.println("Indtast startbeløb: ");
+        System.out.print("Indtast startbeløb: ");
         player.setWallet(s.nextInt());
+        System.out.println();
+
         printWelcome(); // velkomst hilsen
 
 
@@ -193,43 +197,59 @@ public class Game {
     }
 
     private void buy(Command command) {
-        // Undersøger om du er i butikke
+        // Undersøger om du er i butikken
         if (!inShop()) {
             System.out.println("du kan kun handle i butikken!");
             return;
         }
+
         // undersøger om kommandoen har et andet ord
         if (!command.hasSecondWord()) {
             System.out.println("Buy what?");
             return;
         }
 
-        // finder index af det der skal købes
-        int index = Integer.parseInt(command.getSecondWord()) - 1;
-        // TO DO:   check at second word er en integer inden parsing
-        //          check at det er en gyldig INT, dvs mellem 0 og size()
+        // Tjekker at det andet ord (string) kan parses til en Integer
+       if (!isInt(command.getSecondWord())) {
+           System.out.println("fejl: ikke gyldigt nummer!");
+           return;
+       }
 
+        // laver kommandoword om til int og finder index af det der skal købes
+        int index = Integer.parseInt(command.getSecondWord()) - 1;
+
+        // Tjekker om index er mellem 0 og butikkens max antal varer
+        if (0 > index || index+1 > store.getRoomInv().getSize() ) {
+            System.out.println("fejl: ikke gyldigt nummer!");
+            return;
+        }
 
         // finder pris på det der skal købes
         int price = store.getRoomInv().getItem(index).getPrice();
 
         // tjekker om spiller har råd
-        if (player.getWallet() >= price) {
-
-            // kopierer fra index fra butikkens inventory til players inventory
-            copyItem(store.getRoomInv(), index, player.getInventory());
-
-            // fratrækker købet fra players wallet
-            int amount = player.getWallet() - price;
-            player.setWallet(amount);
-
-            // udskriver køb og index (for tjek!)
-            System.out.println("item er købt");
-            System.out.println("Spiller Inventory:");
-            player.getInventory().printInventory();
-        } else {
-            System.out.println("du har ikke råd");
+        if (player.getWallet() < price) {
+            System.out.println("du har ikke råd!");
+            return;
         }
+
+        // Undersøger om spillers inventory er fyldt
+        if (player.getInventory().getSize() == player.getInventory().getMaxSize()) {
+            System.out.println("Inventory er fyldt!");
+            return;
+        }
+
+        // kopierer fra butikkens inventory (index) til players inventory
+        copyItem(store.getRoomInv(), index, player.getInventory());
+
+        // fratrækker købet fra players wallet
+        int amount = player.getWallet() - price;
+        player.setWallet(amount);
+
+        // udskriver køb og spiller inventory
+        System.out.println("Du har købt " + store.getRoomInv().getItem(index).getName() + "\n");
+        System.out.print("Spiller ");
+        player.getInventory().printInventory();
     }
 
     private boolean isInt(String s) {
