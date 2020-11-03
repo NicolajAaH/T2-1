@@ -148,6 +148,8 @@ public class Game {
             wantToQuit = quit(command);
         } else if (commandWord == CommandWord.BUY) {
             buy(command);
+        } else if (commandWord == CommandWord.VIEWWALLET){
+            wallet();
         }
         return wantToQuit;
     }
@@ -199,6 +201,10 @@ public class Game {
         }
 
         System.out.println("køb køb køb");
+    }
+
+    private void wallet(){
+        System.out.println(player.viewWallet());
     }
 
     private void copyItem(Inventory sourceInventory, int itemIndex, Inventory destInventory) {

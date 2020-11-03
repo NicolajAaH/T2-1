@@ -2,7 +2,7 @@ package worldofzuul;
 
 public class Player {
     String name;
-    int wallet;
+    private int wallet = 30000;
     int score;
     private Inventory inventory = new Inventory();
 
