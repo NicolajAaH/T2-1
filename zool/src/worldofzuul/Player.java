@@ -26,12 +26,6 @@ public class Player {
         return inventory;
     }
 
-    public void setWallet(int wallet) {
-        this.wallet = wallet;
-    }
-    public int getWallet() {
-        return wallet;
-    }
 
 }
 
