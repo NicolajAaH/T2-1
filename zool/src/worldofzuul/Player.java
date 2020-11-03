@@ -4,7 +4,6 @@ public class Player {
     String name;
     int wallet;
     int score;
-    worldofzuul.Game check = new worldofzuul.Game();
     public int viewScore(){
         return score;
     }
@@ -13,9 +12,5 @@ public class Player {
         return wallet;
     }
 
-    public Item buyItem(Item){
-        if(check.isShop()){
 
-        }
-    }
 }

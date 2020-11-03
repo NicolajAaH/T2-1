@@ -9,11 +9,13 @@ public class Room
 {
     private String description;
     private HashMap<String, Room> exits;
+    private boolean isShop;
 
-    public Room(String description) 
+    public Room(String description, boolean isShop)
     {
         this.description = description;
         exits = new HashMap<String, Room>();
+        this.isShop = isShop;
     }
     // hej med dig
     public void setExit(String direction, Room neighbor) 
@@ -45,5 +47,10 @@ public class Room
     {
         return exits.get(direction);
     }
+
+    public boolean isShop(){
+        return isShop;
+    }
+
 }
 

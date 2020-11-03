@@ -16,19 +16,19 @@ public class Game {
         // create room and description
         // translate from danish to english
 
-        store = new Room("nu i Super Duper Byg, her kan du købe tingene til huset");
-        outside = new Room("ude foran huset");
-        utlity = new Room("i bryggerset");
-        bathroom = new Room("i badeværelset");
-        bedroom = new Room("i badeværelse");
-        kidsRoom = new Room("i børneværelset");
-        room = new Room("i værelset");
-        kitchen = new Room("i køkkenet");
-        livingRoom = new Room("i stuen");
-        corrridor1 = new Room("i første del af gangen");
-        corridor2 = new Room("i anden del af gangen");
-        corridor3 = new Room("i tredje del af gangen");
-        corridor4 = new Room("i fjerde del af gangen");
+        store = new Room("nu i Super Duper Byg, her kan du købe tingene til huset", true);
+        outside = new Room("ude foran huset", false);
+        utlity = new Room("i bryggerset", false);
+        bathroom = new Room("i badeværelset", false);
+        bedroom = new Room("i badeværelse", false);
+        kidsRoom = new Room("i børneværelset", false);
+        room = new Room("i værelset", false);
+        kitchen = new Room("i køkkenet", false);
+        livingRoom = new Room("i stuen", false);
+        corrridor1 = new Room("i første del af gangen", false);
+        corridor2 = new Room("i anden del af gangen", false);
+        corridor3 = new Room("i tredje del af gangen", false);
+        corridor4 = new Room("i fjerde del af gangen", false);
 
         // opretter udgange
         store.setExit("east", outside); //Fra butikken kan man gå outside
@@ -140,7 +140,6 @@ public class Game {
             currentRoom = nextRoom;
             System.out.println(currentRoom.getLongDescription());
         }
-        isShop();
     }
 
     private boolean quit(Command command) {
@@ -149,14 +148,6 @@ public class Game {
             return false;
         } else {
             return true;
-        }
-    }
-    public boolean isShop(){
-        if(currentRoom==store){
-            return true;
-        }
-        else{
-            return false;
         }
     }
 }
