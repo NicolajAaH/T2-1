@@ -18,8 +18,9 @@ public class Inventory {
     }
 
     public void printInventory() {
+        System.out.println("Inventory:");
         for (int i = 0; i < items.size(); i++) {
-            System.out.println(items.get(i).toString());
+            System.out.println(i+1 + ". " + items.get(i).toString());
         }
     }
 
