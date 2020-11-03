@@ -199,9 +199,10 @@ public class Game {
         }
 
         // finder index af det der skal købes
-        int index = -1 + Integer.parseInt(command.getSecondWord());
+        int index = Integer.parseInt(command.getSecondWord()) - 1;
         // TO DO:   check at second word er en integer inden parsing
         //          check at det er en gyldig INT, dvs mellem 0 og size()
+
 
         // finder pris på det der skal købes
         int price = store.getRoomInv().getItem(index).getPrice();
