@@ -204,20 +204,25 @@ public class Game {
         //          check at det er en gyldig INT, dvs mellem 0 og size()
 
         // finder pris på det der skal købes
-        // int price =
+        int price = store.getRoomInv().getItem(index).getPrice();
 
-        // kopierer fra index fra butikkens inventory til players inventory
-        copyItem(store.getRoomInv(), index, player.getInventory());
+        // tjekker om spiller har råd
+        if (player.getWallet() >= price) {
 
-        // fratrækker købet fra players wallet
-        int amount = player.getWallet() - store.getRoomInv().getItem(index).getPrice();
-        player.setWallet(amount);
+            // kopierer fra index fra butikkens inventory til players inventory
+            copyItem(store.getRoomInv(), index, player.getInventory());
 
+            // fratrækker købet fra players wallet
+            int amount = player.getWallet() - price;
+            player.setWallet(amount);
 
-        // udskriver køb og index (for tjek!)
-        System.out.println("item er købt");
-        System.out.println("player index:");
-        player.getInventory().printInventory();
+            // udskriver køb og index (for tjek!)
+            System.out.println("item er købt");
+            System.out.println("Spiller Inventory:");
+            player.getInventory().printInventory();
+        } else {
+            System.out.println("du har ikke råd");
+        }
     }
 
     private void wallet(){
