@@ -148,7 +148,7 @@ public class Game {
             wantToQuit = quit(command);
         } else if (commandWord == CommandWord.BUY) {
             buy(command);
-        } else if (commandWord == CommandWord.VIEWWALLET){
+        } else if (commandWord == CommandWord.WALLET){
             wallet();
         }
         return wantToQuit;
