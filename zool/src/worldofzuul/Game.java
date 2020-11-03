@@ -192,13 +192,17 @@ public class Game {
         }
     }
 
-    private void buy(Command command){
+    private void buy(Command command) {
+        // Undersøger om du er i butikke
+        if (!inShop()) {
+            System.out.println("du kan kun handle i butikken!");
+            return;
+        }
+        // undersøger om kommandoen har et andet ord
         if (!command.hasSecondWord()) {
             System.out.println("Buy what?");
             return;
         }
-
-        // UNDERSØG OM DU ER I BUTIKKEN
 
         // finder index af det der skal købes
         int index = Integer.parseInt(command.getSecondWord()) - 1;
@@ -226,6 +230,18 @@ public class Game {
         } else {
             System.out.println("du har ikke råd");
         }
+    }
+
+    private boolean isInt(String s) {
+        for (int i = 0; i < s.length(); i++) {
+      //      if(i==0 && s.charAt(i) == '-') continue;
+            if( !Character.isDigit(s.charAt(i)) ) return false;
+        }
+        return true;
+    }
+
+    private boolean inShop() {
+        return currentRoom == store;
     }
 
     private void wallet(){
