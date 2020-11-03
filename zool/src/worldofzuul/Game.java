@@ -1,5 +1,7 @@
 package worldofzuul;
 
+import java.util.Scanner;
+
 public class Game {
 
     private final int WASHINGMACHINE = 1;
@@ -109,6 +111,9 @@ public class Game {
     }
 
     public void play() {
+        Scanner s = new Scanner(System.in);
+        System.out.println("Indtast startbeløb: ");
+        player.setWallet(s.nextInt());
         printWelcome(); // velkomst hilsen
 
 
@@ -117,15 +122,15 @@ public class Game {
             Command command = parser.getCommand();
             finished = processCommand(command);
         }
-        System.out.println("Thank you for playing.  Good bye.");
+        System.out.println("Tak for, at du spillede vores spil");
     }
 
     private void printWelcome() // velkomst hilsen udskrift
     {
         System.out.println();
-        System.out.println("Welcome to the World of Zuul!");
-        System.out.println("World of Zuul is a new, incredibly boring adventure game.");
-        System.out.println("Type '" + CommandWord.HELP + "' if you need help.");
+        System.out.println("Dette er dit hus");
+        System.out.println("Der er mange ting der kan forbedres, så du sparer mange penge, og udnytter energien bedre");
+        System.out.println("Skriv '" + CommandWord.HELP + "' hvis du har brug for hjælp.");
         System.out.println();
         System.out.println(currentRoom.getLongDescription()); // skriver beskrivelsen af første rum
     }
@@ -155,10 +160,7 @@ public class Game {
     }
 
     private void printHelp() {
-        System.out.println("You are lost. You are alone. You wander");
-        System.out.println("around at the university.");
-        System.out.println();
-        System.out.println("Your command words are:");
+        System.out.println("Dine kommandoer er:");
         parser.showCommands();
     }
 
