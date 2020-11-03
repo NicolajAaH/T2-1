@@ -10,6 +10,9 @@ public class Inventory {
     // constructors
 
     // methods
+
+
+    
     // when buying things in the shop
     //public void copyItem(Inventory invShop, Item itemShop) {
        // if (this.items.size() != MaxSizeInv) // checks if inventory is not full
