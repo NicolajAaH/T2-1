@@ -24,5 +24,11 @@ public class Inventory {
         }
     }
 
+    public Item getItem(int item) {
+        return items.get(item);
+    }
 
+    public ArrayList<Item> getItems() {
+        return items;
+    }
 }

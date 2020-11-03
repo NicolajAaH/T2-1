@@ -58,8 +58,12 @@ public class Room
         return isShop;
     }
 
-    public void getRoomInv() {
+    public void printRoomInv() {
         roomInv.printInventory();
+    }
+
+    public Inventory getRoomInv() {
+        return roomInv;
     }
 }
 

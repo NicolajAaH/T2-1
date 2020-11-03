@@ -1,7 +1,5 @@
 package worldofzuul;
 
-import java.util.ArrayList;
-
 public class Game {
 
     private final int WASHINGMACHINE = 1;
@@ -18,6 +16,7 @@ public class Game {
     private final int SOLARCELLS = 12;
 
     private Parser parser;
+    private Player player;
     private Room currentRoom; // holder styr på det rum man befinder sig i
     Room store, outside, utlity, bathroom, bedroom, kidsRoom, room, kitchen, livingRoom, corrridor1, corridor2, corridor3, corridor4; // liste over rum
     public Game() // opretter nyt spil
@@ -172,7 +171,8 @@ public class Game {
             currentRoom = nextRoom;
             System.out.println(currentRoom.getLongDescription());
         }
-        currentRoom.getRoomInv();
+        currentRoom.printRoomInv();
+        player.copyItem(store.getRoomInv(), store.getRoomInv().getItem(WINDOW));
     }
 
     private boolean quit(Command command) {
