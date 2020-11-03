@@ -1,5 +1,6 @@
 package worldofzuul;
 
+import java.util.ArrayList;
 import java.util.Set;
 import java.util.HashMap;
 import java.util.Iterator;
@@ -10,6 +11,7 @@ public class Room
     private String description;
     private HashMap<String, Room> exits;
     private boolean isShop;
+    private Inventory roomInv = new Inventory();
 
     public Room(String description, boolean isShop)
     {
@@ -17,7 +19,7 @@ public class Room
         exits = new HashMap<String, Room>();
         this.isShop = isShop;
     }
-    // hej med dig
+
     public void setExit(String direction, Room neighbor) 
     {
         exits.put(direction, neighbor);
@@ -43,6 +45,10 @@ public class Room
         return returnString;
     }
 
+    public void addToInventory(Item item){
+        roomInv.addItem(item);
+    }
+
     public Room getExit(String direction) 
     {
         return exits.get(direction);
@@ -52,5 +58,12 @@ public class Room
         return isShop;
     }
 
+    public void printRoomInv() {
+        roomInv.printInventory();
+    }
+
+    public Inventory getRoomInv() {
+        return roomInv;
+    }
 }
 

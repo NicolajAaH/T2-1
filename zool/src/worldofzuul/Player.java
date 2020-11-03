@@ -4,6 +4,8 @@ public class Player {
     String name;
     int wallet;
     int score;
+    private Inventory inventory = new Inventory();
+
     public int viewScore(){
         return score;
     }
@@ -12,5 +14,8 @@ public class Player {
         return wallet;
     }
 
-
+    public Inventory getInventory() {
+        return inventory;
+    }
 }
+

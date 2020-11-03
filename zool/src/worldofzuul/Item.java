@@ -24,12 +24,6 @@ public class Item {
         return name;
     }
 
-    /* evt
-    public EnergyLabel getEnergyLabel() {
-        return energyLabel;
-    }
-    */
-
     public int getPrice() {
         return price;
     }
@@ -44,12 +38,10 @@ public class Item {
 
     @Override
     public String toString() {
-        return "Item{" +
-                "name='" + name + '\'' +
-                ", energyLabel=" + "energyLabel" +
-                ", price=" + price +
-                ", scoreImpact=" + scoreImpact +
-                ", itemType=" + itemType +
-                '}';
+        return "Name: " + name + ", Price: " + price + ", Årlig besparelse: " + scoreImpact;
+    }
+
+    public String returnName(){
+        return name;
     }
 }
