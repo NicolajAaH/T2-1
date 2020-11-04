@@ -29,7 +29,7 @@ public class Command
         this.commandWord = commandWord;
         this.secondWord = secondWord;
     }
-
+//
     public CommandWord getCommandWord()
     {
         return commandWord;
