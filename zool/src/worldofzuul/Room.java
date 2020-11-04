@@ -37,7 +37,7 @@ public class Room
 
     private String getExitString() // henter mulige udgange (keys i hashmap) og returnerer dem i en streng.
     {
-        String returnString = "Exits:";
+        String returnString = "Udgange:";
         Set<String> keys = exits.keySet();
         for(String exit : keys) {
             returnString += " " + exit;

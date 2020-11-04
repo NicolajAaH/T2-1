@@ -112,8 +112,8 @@ public class Game {
         store.addToInventory(new Item("LED-pære", 60, 350, LIGHTS)); // færdig
         store.addToInventory(new Item("Energisparende TV", 5900, 520, TV)); //færdig
         store.addToInventory(new Item("Hul-fikser-kit", 150, 500, WALLFIXER)); //færdig
-        store.addToInventory(new Item("Isolering", 100000, 9300, ISOLATION)); //færdig
-        store.addToInventory(new Item("Solceller", 80000, 8000, SOLARCELLS)); //færdig
+        store.addToInventory(new Item("Isolering", 10000, 9300, ISOLATION)); //færdig
+        store.addToInventory(new Item("Solceller", 30000, 8000, SOLARCELLS)); //færdig
 
         utlity.addToInventory(new Item("Vaskemaskine D", 0, 0, WASHINGMACHINE));
         utlity.addToInventory(new Item("Tørretumbler D", 0, 0, DRYER));
@@ -187,15 +187,16 @@ public class Game {
         System.out.println("Tak for, at du spillede vores spil\n");
         System.out.println("Du har sparet " + player.getScore() + " kr. om året i energiforbedringer");
         System.out.println("Og har brugt " + (player.getStartAmount() - player.getWallet()) + " kr,-");
-        System.out.println("Energimærke ??");
+        System.out.println("Du startede med energimærke: " + EnergyLabel.createEnergyLabel(0,player.getStartValue()));
+        System.out.println("Du er nu på energimærke " + EnergyLabel.createEnergyLabel(player.getScore(), player.getStartValue()));
+        System.out.println("Lavet af: Yusuf Bayoz, Victor Poulsen, Emil Spangenberg, Theis Langlands & Nicolaj Hansen");
     }
 
     private void printWelcome() // velkomst hilsen udskrift
     {
-        System.out.println("\n Dette er dit hus");
+        System.out.println("\nDette er dit hus");
         System.out.println("Der er mange ting der kan forbedres, så du sparer mange penge, og udnytter energien bedre");
         System.out.println("Skriv '" + CommandWord.HELP + "' hvis du har brug for hjælp.\n");
-        System.out.println();
         System.out.println(currentRoom.getLongDescription()); // skriver beskrivelsen af første rum
     }
 
@@ -205,7 +206,7 @@ public class Game {
         CommandWord commandWord = command.getCommandWord();
 
         if (commandWord == CommandWord.UNKNOWN) {
-            System.out.println("I don't know what you mean...");
+            System.out.println("Jeg ved ikke hvad du mener...");
             return false;
         }
 
@@ -238,7 +239,7 @@ public class Game {
 
     private void goRoom(Command command) {
         if (!command.hasSecondWord()) {
-            System.out.println("Go where?");
+            System.out.println("Hvilken retning?");
             return;
         }
 
@@ -247,7 +248,7 @@ public class Game {
         Room nextRoom = currentRoom.getExit(direction);
 
         if (nextRoom == null) {
-            System.out.println("There is no door!");
+            System.out.println("Der er ingen udgang den vej!");
         } else {
             currentRoom = nextRoom;
             System.out.println(currentRoom.getLongDescription());
@@ -258,7 +259,7 @@ public class Game {
 
     private boolean quit(Command command) {
         if (command.hasSecondWord()) {
-            System.out.println("Quit what?");
+            System.out.println("Quit hvad?");
             return false;
         } else {
             return true;
