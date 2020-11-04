@@ -186,10 +186,9 @@ public class Game {
 
     private void printWelcome() // velkomst hilsen udskrift
     {
-        System.out.println();
-        System.out.println("Dette er dit hus");
+        System.out.println("\n Dette er dit hus");
         System.out.println("Der er mange ting der kan forbedres, så du sparer mange penge, og udnytter energien bedre");
-        System.out.println("Skriv '" + CommandWord.HELP + "' hvis du har brug for hjælp.");
+        System.out.println("Skriv '" + CommandWord.HELP + "' hvis du har brug for hjælp.\n");
         System.out.println();
         System.out.println(currentRoom.getLongDescription()); // skriver beskrivelsen af første rum
     }
