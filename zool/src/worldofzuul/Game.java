@@ -205,7 +205,7 @@ public class Game {
 
         // undersøger om kommandoen har et andet ord
         if (!command.hasSecondWord()) {
-            System.out.println("Buy what?");
+            System.out.println("Køb Hvad?");
             return;
         }
 
