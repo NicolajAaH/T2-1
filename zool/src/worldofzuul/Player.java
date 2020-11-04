@@ -1,11 +1,10 @@
 package worldofzuul;
 
 public class Player {
-    String name;
     private int wallet = 0;
     private int startAmount = 0;
-    int score = 0;
-    int startValue = 36000;
+    private int score = 0;
+    private int startValue = 36000;
     private Inventory inventory = new Inventory();
 
     public int getStartValue() {

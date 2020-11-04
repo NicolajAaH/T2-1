@@ -23,7 +23,6 @@ public class Inventory {
         items.remove(item);
     }
 
-// SKAL DEN HER IKKE BARE VÆRE EN TOSTRING??
     public void printInventory() {
         System.out.println("Inventory:");
         for (int i = 0; i < items.size(); i++) {
