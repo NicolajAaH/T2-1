@@ -93,21 +93,27 @@ public class Game {
         room.setExit("north", corridor4); //fra roomt kan man gå til gang 4
 
         //add to inventory ÆNDRER SCOREIMPACT TIL REALISTISKE
-        store.addToInventory(new Item("Vaskemaskine", 2000, 1000, WASHINGMACHINE));
-        store.addToInventory(new Item("Tørretumbler", 2000, 1000, DRYER));
-        store.addToInventory(new Item("Varmeanlæg", 40000, 10000, HEATING));
-        store.addToInventory(new Item("Komfur", 5000, 500, STOVE));
+        store.addToInventory(new Item("Vaskemaskine A+", 2400, 65, WASHINGMACHINE)); // færdig
+        store.addToInventory(new Item("Vaskemaskine A++", 3000, 49, WASHINGMACHINE)); // færdig
+        store.addToInventory(new Item("Vaskemaskine A+++", 4000, 43, WASHINGMACHINE)); // færdig
+        store.addToInventory(new Item("Tørretumbler A+", 2887, 850, DRYER)); //færdig
+        store.addToInventory(new Item("Tørretumbler A++", 3499, 1039, DRYER)); //færdig
+        store.addToInventory(new Item("Tørretumbler A+++", 4318, 1180, DRYER)); //færdig
+        store.addToInventory(new Item("Pillefyr (varmeanlæg)", 45000, 10057, HEATING)); //færdig
+        store.addToInventory(new Item("Gas (varmeanlæg)", 50000, 12240, HEATING)); // færdig
+        store.addToInventory(new Item("Energibesparende komfur", 4500, 1250, STOVE)); // færdig
         store.addToInventory(new Item("Køleskab A+++", 8000, 470, FRIDGE)); // færdig
         store.addToInventory(new Item("Køleskab A++", 6500, 400, FRIDGE)); // færdig
         store.addToInventory(new Item("Køleskab A+", 4500, 350, FRIDGE)); // færdig
-        store.addToInventory(new Item("Opvaskemaskine", 2500, 300, DISHWASHER));
-        store.addToInventory(new Item("Vindue", 1000, 300, WINDOW));
-        store.addToInventory(new Item("Belysning", 100, 100, LIGHTS));
-        store.addToInventory(new Item("TV", 2800, 200, TV));
-        store.addToInventory(new Item("Hul-fikser-kit", 150, 500, WALLFIXER));
-        store.addToInventory(new Item("Isolering", 20000, 5000, ISOLATION));
-        store.addToInventory(new Item("Solceller", 40000, 5500, SOLARCELLS));
-        store.addToInventory(new Item("Bruser", 1500, 800, BATH));
+        store.addToInventory(new Item("Opvaskemaskine A++", 3300, 400, DISHWASHER));
+        store.addToInventory(new Item("Opvaskemaskine A", 2500, 300, DISHWASHER));
+        store.addToInventory(new Item("Termorude (2 lag)", 1000, 375, WINDOW)); // færdig
+        store.addToInventory(new Item("Sparepære", 20, 230, LIGHTS)); // færdig
+        store.addToInventory(new Item("LED-pære", 60, 350, LIGHTS)); // færdig
+        store.addToInventory(new Item("Energisparende TV", 5900, 520, TV)); //færdig
+        store.addToInventory(new Item("Hul-fikser-kit", 150, 500, WALLFIXER)); //færdig
+        store.addToInventory(new Item("Isolering", 100000, 9300, ISOLATION)); //færdig
+        store.addToInventory(new Item("Solceller", 80000, 8000, SOLARCELLS)); //færdig
 
         utlity.addToInventory(new Item("Vaskemaskine D", 0, 0, WASHINGMACHINE));
         utlity.addToInventory(new Item("Tørretumbler D", 0, 0, DRYER));
@@ -207,6 +213,10 @@ public class Game {
             printHelp();
         } else if (commandWord == CommandWord.GO) {
             goRoom(command);
+        } else if (commandWord == CommandWord.INVENTORY) {
+            inventory();
+        } else if (commandWord == CommandWord.DELETE) {
+            delete(command);
         } else if (commandWord == CommandWord.QUIT) {
             wantToQuit = quit(command);
         } else if (commandWord == CommandWord.BUY) {
@@ -382,6 +392,42 @@ public class Game {
         System.out.println("score er nu: " + player.getScore());
     }
 
+    private void delete(Command command) {
+        // her skal være delete kode
+
+        // undersøger om kommandoen har et andet ord
+        if (!command.hasSecondWord()) {
+            System.out.println("Slet hvad?");
+            return;
+        }
+
+        // Tjekker at det andet ord (string) kan parses til en Integer
+        if (!isInt(command.getSecondWord())) {
+            System.out.println("fejl: ikke gyldigt nummer!");
+            return;
+        }
+
+        // laver kommandoword om til int og finder index af det der skal udskiftes
+        int index = Integer.parseInt(command.getSecondWord()) - 1;
+
+        // Tjekker om index er mellem 0 og player items
+        if (0 > index || index + 1 > player.getInventory().getSize()) {
+            System.out.println("fejl: ikke gyldigt nummer!");
+            return;
+        }
+
+        // fjerner Item fra inventory
+        player.getInventory().removeItem(player.getInventory().getItem(index));
+
+        // printer ny inventory
+        System.out.println("ny inventory");
+        player.getInventory().printInventory();
+
+    }
+
+
+
+
     private boolean isInt(String s) {
         for (int i = 0; i < s.length(); i++) {
             if( !Character.isDigit(s.charAt(i)) ) return false;
@@ -397,6 +443,10 @@ public class Game {
         System.out.println(player.viewWallet());
     }
 
+    private void inventory() {
+        System.out.print("Spiller ");
+        player.getInventory().printInventory();
+    }
     private void copyItem(Inventory sourceInventory, int itemIndex, Inventory destInventory) {
         destInventory.addItem(sourceInventory.getItem(itemIndex));
     }
