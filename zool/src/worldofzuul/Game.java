@@ -184,6 +184,7 @@ public class Game {
             finished = processCommand(command);
         }
 
+        // print exit
         System.out.println("Tak for, at du spillede vores spil\n");
         System.out.println("Du har sparet " + player.getScore() + " kr. om året i energiforbedringer");
         System.out.println("Og har brugt " + (player.getStartAmount() - player.getWallet()) + " kr,-");
@@ -427,8 +428,6 @@ public class Game {
     }
 
 
-
-
     private boolean isInt(String s) {
         for (int i = 0; i < s.length(); i++) {
             if( !Character.isDigit(s.charAt(i)) ) return false;
@@ -441,7 +440,7 @@ public class Game {
     }
 
     private void wallet(){
-        System.out.println(player.viewWallet());
+        System.out.println(player.getWallet());
     }
 
     private void inventory() {

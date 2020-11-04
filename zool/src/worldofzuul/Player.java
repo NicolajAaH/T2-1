@@ -24,13 +24,8 @@ public class Player {
         return startAmount;
     }
 
-
     public void setStartAmount(int startAmount) {
         this.startAmount = startAmount;
-    }
-
-    public int viewWallet(){
-        return wallet;
     }
 
     public int getWallet() {

@@ -10,8 +10,8 @@ public class Room
 {
     private String description;
     private HashMap<String, Room> exits;
-    private boolean isShop;
-    private Inventory roomInv = new Inventory();
+    private boolean isShop; // bliver ikke brugt, skal dø!
+    private Inventory roomInv = new Inventory(); // refactor,please til getInventory
 
     public Room(String description, boolean isShop)
     {
@@ -56,7 +56,7 @@ public class Room
 
     public boolean isShop(){
         return isShop;
-    }
+    } // SKAL OGSÅ DØ!
 
     public void printRoomInv() {
         roomInv.printInventory();
@@ -64,6 +64,6 @@ public class Room
 
     public Inventory getRoomInv() {
         return roomInv;
-    }
+    } // PLEASE REFAVTOR til getInventory
 }
 
