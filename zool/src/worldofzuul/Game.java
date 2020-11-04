@@ -1,5 +1,6 @@
 package worldofzuul;
 
+import java.util.InputMismatchException;
 import java.util.Scanner;
 
 public class Game {
@@ -16,6 +17,7 @@ public class Game {
     private final int WALLFIXER = 10;
     private final int ISOLATION = 11;
     private final int SOLARCELLS = 12;
+    private final int BATH = 13;
 
     private Parser parser;
     private Player player;
@@ -27,6 +29,8 @@ public class Game {
         createRooms(); // kalder createRooms() sætter rum og udgange
         parser = new Parser();
         player = new Player();
+        // max kapacitet i player inventory
+        player.getInventory().setMaxSize(5);
     }
 
     private void createRooms() {
@@ -38,7 +42,7 @@ public class Game {
         outside = new Room("ude foran huset", false);
         utlity = new Room("i bryggerset", false);
         bathroom = new Room("i badeværelset", false);
-        bedroom = new Room("i badeværelse", false);
+        bedroom = new Room("i soveværelsen", false);
         kidsRoom = new Room("i børneværelset", false);
         room = new Room("i værelset", false);
         kitchen = new Room("i køkkenet", false);
@@ -103,8 +107,37 @@ public class Game {
         store.addToInventory(new Item("Hul-fikser-kit", 150, 500, WALLFIXER));
         store.addToInventory(new Item("Isolering", 20000, 5000, ISOLATION));
         store.addToInventory(new Item("Solceller", 40000, 5500, SOLARCELLS));
+        store.addToInventory(new Item("Bruser", 1500, 800, BATH));
+
+        utlity.addToInventory(new Item("Vaskemaskine D", 0, 0, WASHINGMACHINE));
+        utlity.addToInventory(new Item("Tørretumbler D", 0, 0, DRYER));
+        utlity.addToInventory(new Item("Oliefyr", 0, 0, HEATING));
 
         kitchen.addToInventory(new Item("Køleskab D", 0, 0, FRIDGE)); // færdig
+        kitchen.addToInventory(new Item("Komfur C", 0, 0, STOVE));
+        kitchen.addToInventory(new Item("Opvaskemaskine D", 0, 0, DISHWASHER));
+
+        livingRoom.addToInventory(new Item("Enkeltlags vindue", 0, 0, WINDOW));
+        livingRoom.addToInventory(new Item("Glødepære", 0, 0, LIGHTS));
+        livingRoom.addToInventory(new Item("TV D", 0, 0, TV));
+
+        bedroom.addToInventory(new Item("Glødepære", 0, 0, LIGHTS));
+        bedroom.addToInventory(new Item("Enkeltlags vindue", 0, 0, WINDOW));
+        bedroom.addToInventory(new Item("Hul i væggen", 0, 0, WALLFIXER));
+
+        room.addToInventory(new Item("Glødepære", 0, 0, LIGHTS));
+        room.addToInventory(new Item("Enkeltlags vindue", 0, 0, WINDOW));
+
+        kidsRoom.addToInventory(new Item("Glødepære", 0, 0, LIGHTS));
+        kidsRoom.addToInventory(new Item("Enkeltlags vindue", 0, 0, WINDOW));
+        kidsRoom.addToInventory(new Item("Hul i væggen", 0, 0, WALLFIXER));
+
+        bathroom.addToInventory(new Item("Bruser D", 0, 0, BATH));
+
+        outside.addToInventory(new Item("Tag uden solceller", 0, 0, SOLARCELLS));
+        outside.addToInventory(new Item("Tyndt isolering", 0, 0, ISOLATION));
+        
+
 
         // sætter startrummet til outside
         currentRoom = outside;
@@ -112,8 +145,28 @@ public class Game {
 
     public void play() {
         Scanner s = new Scanner(System.in);
-        System.out.println("Indtast startbeløb: ");
-        player.setWallet(s.nextInt());
+        System.out.print("Indtast startbeløb: ");
+        while(true) {
+            String value = s.nextLine();
+            if (isInt(value)) {
+                int value2 = 0;
+                try{
+                    value2 = Integer.parseInt(value);
+                }catch(NumberFormatException e){
+                    System.out.println("Værdien er for høj!");
+                }
+                if (value2 > 0 && value2 <= 100000) {
+                    player.setWallet(value2);
+                    break;
+                } else {
+                    System.out.println("Der må ikke stå bogstaver i beløbet og værdien skal være mellem 0 og 100.000kr. \nIndtast nyt beløb: ");
+                }
+            } else {
+                System.out.println("Der må ikke stå bogstaver i beløbet og værdien skal være mellem 0 og 100.000kr. \nIndtast nyt beløb: ");
+            }
+        }
+
+
         printWelcome(); // velkomst hilsen
 
 
@@ -122,7 +175,11 @@ public class Game {
             Command command = parser.getCommand();
             finished = processCommand(command);
         }
-        System.out.println("Tak for, at du spillede vores spil");
+
+        System.out.println("Tak for, at du spillede vores spil\n");
+        System.out.println("Du har sparet " + player.getScore() + " kr. om året i energiforbedringer");
+        System.out.println("Og har brugt ???? penge");
+        System.out.println("Energimærke ??");
     }
 
     private void printWelcome() // velkomst hilsen udskrift
@@ -153,8 +210,12 @@ public class Game {
             wantToQuit = quit(command);
         } else if (commandWord == CommandWord.BUY) {
             buy(command);
+        } else if (commandWord == CommandWord.REPLACE) {
+            replace(command);
         } else if (commandWord == CommandWord.WALLET){
             wallet();
+        } else if (commandWord == CommandWord.SCORE){
+            System.out.println("Din score er: " + player.getScore());
         }
         return wantToQuit;
     }
@@ -180,6 +241,7 @@ public class Game {
             currentRoom = nextRoom;
             System.out.println(currentRoom.getLongDescription());
         }
+        System.out.print("Rummmet indeholder ");
         currentRoom.printRoomInv();
     }
 
@@ -192,38 +254,142 @@ public class Game {
         }
     }
 
-    private void buy(Command command){
-        if (!command.hasSecondWord()) {
-            System.out.println("Buy what?");
+    private void buy(Command command) {
+        // Undersøger om du er i butikken
+        if (!inShop()) {
+            System.out.println("du kan kun handle i butikken!");
             return;
         }
 
-        // finder index af det der skal købes
-        int index = Integer.parseInt(command.getSecondWord()) - 1;
-        // TO DO:   check at second word er en integer inden parsing
-        //          check at det er en gyldig INT, dvs mellem 0 og size()
+        // undersøger om kommandoen har et andet ord
+        if (!command.hasSecondWord()) {
+            System.out.println("Køb Hvad?");
+            return;
+        }
 
+        // Tjekker at det andet ord (string) kan parses til en Integer
+       if (!isInt(command.getSecondWord())) {
+           System.out.println("fejl: ikke gyldigt nummer!");
+           return;
+       }
+
+        // laver kommandoword om til int og finder index af det der skal købes
+        int index = Integer.parseInt(command.getSecondWord()) - 1;
+
+        // Tjekker om index er mellem 0 og butikkens max antal varer
+        if (0 > index || index+1 > store.getRoomInv().getSize() ) {
+            System.out.println("fejl: ikke gyldigt nummer!");
+            return;
+        }
 
         // finder pris på det der skal købes
         int price = store.getRoomInv().getItem(index).getPrice();
 
         // tjekker om spiller har råd
-        if (player.getWallet() >= price) {
-
-            // kopierer fra index fra butikkens inventory til players inventory
-            copyItem(store.getRoomInv(), index, player.getInventory());
-
-            // fratrækker købet fra players wallet
-            int amount = player.getWallet() - price;
-            player.setWallet(amount);
-
-            // udskriver køb og index (for tjek!)
-            System.out.println("item er købt");
-            System.out.println("Spiller Inventory:");
-            player.getInventory().printInventory();
-        } else {
-            System.out.println("du har ikke råd");
+        if (player.getWallet() < price) {
+            System.out.println("du har ikke råd!");
+            return;
         }
+
+        // Undersøger om spillers inventory er fyldt
+        if (player.getInventory().getSize() == player.getInventory().getMaxSize()) {
+            System.out.println("Inventory er fyldt!");
+            return;
+        }
+
+        // kopierer fra butikkens inventory (index) til players inventory
+        copyItem(store.getRoomInv(), index, player.getInventory());
+
+        // fratrækker købet fra players wallet
+        int amount = player.getWallet() - price;
+        player.setWallet(amount);
+
+        // udskriver køb og spiller inventory
+        System.out.println("Du har købt " + store.getRoomInv().getItem(index).getName() + "\n");
+        System.out.print("Spiller ");
+        player.getInventory().printInventory();
+    }
+
+    private void replace(Command command) {
+        // Undersøger om du er i butikken
+        if (inShop()) {
+            System.out.println("fejl: du kan kun handle i butikken!");
+            return;
+        }
+
+        // undersøger om kommandoen har et andet ord
+        if (!command.hasSecondWord()) {
+            System.out.println("Udskift hvad?");
+            return;
+        }
+
+        // Tjekker at det andet ord (string) kan parses til en Integer
+        if (!isInt(command.getSecondWord())) {
+            System.out.println("fejl: ikke gyldigt nummer!");
+            return;
+        }
+
+        // laver kommandoword om til int og finder index af det der skal udskiftes
+        int index = Integer.parseInt(command.getSecondWord()) - 1;
+
+        // Tjekker om index er mellem 0 og rummets max antal items
+        if (0 > index || index + 1 > currentRoom.getRoomInv().getSize()) {
+            System.out.println("fejl: ikke gyldigt nummer!");
+            return;
+        }
+
+        // Tjekker om players inventory har et Item af samme type. (kunne være metode!)
+        boolean inInventory = false;
+        int playerInvIndex = 0;
+
+        for (int i = 0; i < player.getInventory().getSize(); i++) {
+
+            int itemTypeRoom = currentRoom.getRoomInv().getItem(index).getItemType();
+
+            if (player.getInventory().getItem(i).getItemType() == itemTypeRoom) {
+                inInventory = true;
+                playerInvIndex = i;
+            }
+        }
+
+        if (!inInventory) {
+            System.out.println("du har ikke den type i dit inventory, gå i Super Byg!");
+            return;
+        }
+
+        // Indsætter Item i room inventory fra player inventory
+
+        // Fjerner gammelt Item fra Room
+
+        currentRoom.getRoomInv().removeItem(currentRoom.getRoomInv().getItem(index));
+
+        // Kopierer item fra player index til room
+        copyItem(player.getInventory(), playerInvIndex, currentRoom.getRoomInv());
+
+        // Opdaterer score
+        int nyScore = player.getScore() + player.getInventory().getItem(playerInvIndex).getScoreImpact();
+        player.setScore(nyScore);
+
+        // Sletter item fra player index
+        player.getInventory().removeItem(player.getInventory().getItem(playerInvIndex));
+
+        // Udskriver inventory fra player og Room
+        System.out.print("player ");
+        player.getInventory().printInventory();
+        System.out.print("room ");
+        currentRoom.getRoomInv().printInventory();
+        System.out.println("score er nu: " + player.getScore());
+    }
+
+    private boolean isInt(String s) {
+        for (int i = 0; i < s.length(); i++) {
+            if( !Character.isDigit(s.charAt(i)) ) return false;
+        }
+        return true;
+    }
+
+    private boolean inShop() {
+        return currentRoom == store;
     }
 
     private void wallet(){
