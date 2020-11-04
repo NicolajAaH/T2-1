@@ -3,7 +3,7 @@ package worldofzuul;
 public class Player {
     String name;
     private int wallet = 0;
-    int score;
+    int score = 0;
     private Inventory inventory = new Inventory();
 
     public int viewScore(){

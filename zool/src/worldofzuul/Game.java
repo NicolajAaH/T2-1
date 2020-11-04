@@ -1,5 +1,6 @@
 package worldofzuul;
 
+import java.util.InputMismatchException;
 import java.util.Scanner;
 
 public class Game {
@@ -16,6 +17,7 @@ public class Game {
     private final int WALLFIXER = 10;
     private final int ISOLATION = 11;
     private final int SOLARCELLS = 12;
+    private final int BATH = 13;
 
     private Parser parser;
     private Player player;
@@ -40,7 +42,7 @@ public class Game {
         outside = new Room("ude foran huset", false);
         utlity = new Room("i bryggerset", false);
         bathroom = new Room("i badeværelset", false);
-        bedroom = new Room("i badeværelse", false);
+        bedroom = new Room("i soveværelsen", false);
         kidsRoom = new Room("i børneværelset", false);
         room = new Room("i værelset", false);
         kitchen = new Room("i køkkenet", false);
@@ -105,8 +107,37 @@ public class Game {
         store.addToInventory(new Item("Hul-fikser-kit", 150, 500, WALLFIXER));
         store.addToInventory(new Item("Isolering", 20000, 5000, ISOLATION));
         store.addToInventory(new Item("Solceller", 40000, 5500, SOLARCELLS));
+        store.addToInventory(new Item("Bruser", 1500, 800, BATH));
+
+        utlity.addToInventory(new Item("Vaskemaskine D", 0, 0, WASHINGMACHINE));
+        utlity.addToInventory(new Item("Tørretumbler D", 0, 0, DRYER));
+        utlity.addToInventory(new Item("Oliefyr", 0, 0, HEATING));
 
         kitchen.addToInventory(new Item("Køleskab D", 0, 0, FRIDGE)); // færdig
+        kitchen.addToInventory(new Item("Komfur C", 0, 0, STOVE));
+        kitchen.addToInventory(new Item("Opvaskemaskine D", 0, 0, DISHWASHER));
+
+        livingRoom.addToInventory(new Item("Enkeltlags vindue", 0, 0, WINDOW));
+        livingRoom.addToInventory(new Item("Glødepære", 0, 0, LIGHTS));
+        livingRoom.addToInventory(new Item("TV D", 0, 0, TV));
+
+        bedroom.addToInventory(new Item("Glødepære", 0, 0, LIGHTS));
+        bedroom.addToInventory(new Item("Enkeltlags vindue", 0, 0, WINDOW));
+        bedroom.addToInventory(new Item("Hul i væggen", 0, 0, WALLFIXER));
+
+        room.addToInventory(new Item("Glødepære", 0, 0, LIGHTS));
+        room.addToInventory(new Item("Enkeltlags vindue", 0, 0, WINDOW));
+
+        kidsRoom.addToInventory(new Item("Glødepære", 0, 0, LIGHTS));
+        kidsRoom.addToInventory(new Item("Enkeltlags vindue", 0, 0, WINDOW));
+        kidsRoom.addToInventory(new Item("Hul i væggen", 0, 0, WALLFIXER));
+
+        bathroom.addToInventory(new Item("Bruser D", 0, 0, BATH));
+
+        outside.addToInventory(new Item("Tag uden solceller", 0, 0, SOLARCELLS));
+        outside.addToInventory(new Item("Tyndt isolering", 0, 0, ISOLATION));
+        
+
 
         // sætter startrummet til outside
         currentRoom = outside;
@@ -115,8 +146,26 @@ public class Game {
     public void play() {
         Scanner s = new Scanner(System.in);
         System.out.print("Indtast startbeløb: ");
-        player.setWallet(s.nextInt());
-        System.out.println();
+        while(true) {
+            String value = s.nextLine();
+            if (isInt(value)) {
+                int value2 = 0;
+                try{
+                    value2 = Integer.parseInt(value);
+                }catch(NumberFormatException e){
+                    System.out.println("Værdien er for høj!");
+                }
+                if (value2 > 0 && value2 <= 100000) {
+                    player.setWallet(value2);
+                    break;
+                } else {
+                    System.out.println("Der må ikke stå bogstaver i beløbet og værdien skal være mellem 0 og 100.000kr. \nIndtast nyt beløb: ");
+                }
+            } else {
+                System.out.println("Der må ikke stå bogstaver i beløbet og værdien skal være mellem 0 og 100.000kr. \nIndtast nyt beløb: ");
+            }
+        }
+
 
         printWelcome(); // velkomst hilsen
 
@@ -159,6 +208,8 @@ public class Game {
             buy(command);
         } else if (commandWord == CommandWord.WALLET){
             wallet();
+        } else if (commandWord == CommandWord.SCORE){
+            System.out.println("Din score er: " + player.viewScore());
         }
         return wantToQuit;
     }
