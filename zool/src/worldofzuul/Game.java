@@ -157,6 +157,7 @@ public class Game {
                 }
                 if (value2 > 0 && value2 <= 100000) {
                     player.setWallet(value2);
+                    player.setStartAmount(value2);
                     break;
                 } else {
                     System.out.println("Der må ikke stå bogstaver i beløbet og værdien skal være mellem 0 og 100.000kr. \nIndtast nyt beløb: ");
@@ -164,6 +165,7 @@ public class Game {
             } else {
                 System.out.println("Der må ikke stå bogstaver i beløbet og værdien skal være mellem 0 og 100.000kr. \nIndtast nyt beløb: ");
             }
+
         }
 
 
@@ -178,7 +180,7 @@ public class Game {
 
         System.out.println("Tak for, at du spillede vores spil\n");
         System.out.println("Du har sparet " + player.getScore() + " kr. om året i energiforbedringer");
-        System.out.println("Og har brugt ???? penge");
+        System.out.println("Og har brugt " + (player.getStartAmount() - player.getWallet()) + " kr,-");
         System.out.println("Energimærke ??");
     }
 
