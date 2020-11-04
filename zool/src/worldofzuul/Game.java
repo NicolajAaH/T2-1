@@ -215,7 +215,7 @@ public class Game {
         } else if (commandWord == CommandWord.WALLET){
             wallet();
         } else if (commandWord == CommandWord.SCORE){
-            System.out.println("Din score er: " + player.viewScore());
+            System.out.println("Din score er: " + player.getScore());
         }
         return wantToQuit;
     }
