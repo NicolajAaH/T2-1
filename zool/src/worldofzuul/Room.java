@@ -10,14 +10,12 @@ public class Room
 {
     private String description;
     private HashMap<String, Room> exits;
-    private boolean isShop; // bliver ikke brugt, skal dø!
-    private Inventory roomInv = new Inventory(); // refactor,please til getInventory
+    private Inventory roomInv = new Inventory(); // refactor til getInventory
 
-    public Room(String description, boolean isShop)
+    public Room(String description)
     {
         this.description = description;
         exits = new HashMap<String, Room>();
-        this.isShop = isShop;
     }
 
     public void setExit(String direction, Room neighbor) 
@@ -54,16 +52,12 @@ public class Room
         return exits.get(direction);
     }
 
-    public boolean isShop(){
-        return isShop;
-    } // SKAL OGSÅ DØ!
-
     public void printRoomInv() {
         roomInv.printInventory();
     }
 
     public Inventory getRoomInv() {
         return roomInv;
-    } // PLEASE REFAVTOR til getInventory
+    } // REFACTOR til getInventory
 }
 

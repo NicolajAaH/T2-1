@@ -22,7 +22,7 @@ public class Game {
     private Parser parser;
     private Player player;
     private Room currentRoom; // holder styr på det rum man befinder sig i
-    Room store, outside, utlity, bathroom, bedroom, kidsRoom, room, kitchen, livingRoom, corrridor1, corridor2, corridor3, corridor4; // liste over rum
+    Room store, outside, utility, bathroom, bedroom, kidsRoom, room, kitchen, livingRoom, corrridor1, corridor2, corridor3, corridor4; // liste over rum
 
     public Game() // opretter nyt spil
     {
@@ -36,21 +36,20 @@ public class Game {
     private void createRooms() {
 
         // create room and description
-        // translate from danish to english
 
-        store = new Room("nu i Super Duper Byg, her kan du købe tingene til huset", true);
-        outside = new Room("ude foran huset", false);
-        utlity = new Room("i bryggerset", false);
-        bathroom = new Room("i badeværelset", false);
-        bedroom = new Room("i soveværelsen", false);
-        kidsRoom = new Room("i børneværelset", false);
-        room = new Room("i værelset", false);
-        kitchen = new Room("i køkkenet", false);
-        livingRoom = new Room("i stuen", false);
-        corrridor1 = new Room("i første del af gangen", false);
-        corridor2 = new Room("i anden del af gangen", false);
-        corridor3 = new Room("i tredje del af gangen", false);
-        corridor4 = new Room("i fjerde del af gangen", false);
+        store = new Room("nu i Super Duper Byg, her kan du købe tingene til huset");
+        outside = new Room("ude foran huset");
+        utility = new Room("i bryggerset");
+        bathroom = new Room("i badeværelset");
+        bedroom = new Room("i soveværelsen");
+        kidsRoom = new Room("i børneværelset");
+        room = new Room("i værelset");
+        kitchen = new Room("i køkkenet");
+        livingRoom = new Room("i stuen");
+        corrridor1 = new Room("i første del af gangen");
+        corridor2 = new Room("i anden del af gangen");
+        corridor3 = new Room("i tredje del af gangen");
+        corridor4 = new Room("i fjerde del af gangen");
 
         // opretter udgange
         store.setExit("east", outside); //Fra butikken kan man gå outside
@@ -58,41 +57,41 @@ public class Game {
         outside.setExit("west", store); //fra outside kan man gå i butikken og gang 1
         outside.setExit("east", corrridor1);
 
-        corrridor1.setExit("north", utlity); //fra gang 1 kan man gå i utlityet, kitchenet, gang 2 og outside
+        corrridor1.setExit("north", utility); //fra gang 1 kan man gå i utility, kitchen, gang 2 og outside
         corrridor1.setExit("south", kitchen);
         corrridor1.setExit("east", corridor2);
         corrridor1.setExit("west", outside);
 
-        utlity.setExit("south", corrridor1); //fra utlityet kan man gå i gang 1
+        utility.setExit("south", corrridor1); //fra utility kan man gå i gang 1
 
-        kitchen.setExit("north", corrridor1); //fra kitchenet kan man gå til gang 1 og livingRoomn
+        kitchen.setExit("north", corrridor1); //fra kitchen kan man gå til gang 1 og livingRoom
         kitchen.setExit("east", livingRoom);
 
-        livingRoom.setExit("west", kitchen); //fra livingRoomn kan man gå til kitchenet og gang 3
+        livingRoom.setExit("west", kitchen); //fra livingRoom kan man gå til kitchen og gang 3
         livingRoom.setExit("north", corridor3);
 
         corridor2.setExit("north", bathroom); //fra gang 2 kan man gå til gang 1, gang 3 og bathroom
         corridor2.setExit("east", corridor3);
         corridor2.setExit("west", corrridor1);
 
-        bathroom.setExit("south", corridor2); //fra bathroomt kan man gå til gang 2
+        bathroom.setExit("south", corridor2); //fra bathroom kan man gå til gang 2
 
-        corridor3.setExit("north", bedroom); //fra gang 3 kan man gå til gangn 2, gang 4, bedroom og livingRoomn
+        corridor3.setExit("north", bedroom); //fra gang 3 kan man gå til gang 2, gang 4, bedroom og livingRoom
         corridor3.setExit("south", livingRoom);
         corridor3.setExit("east", corridor4);
         corridor3.setExit("west", corridor2);
 
         bedroom.setExit("south", corridor3); //fra bedroom kan man gå til gang 3
 
-        corridor4.setExit("north", kidsRoom); //fra gang 4 kan man gå til gang 3, kidsRoom og roomt
+        corridor4.setExit("north", kidsRoom); //fra gang 4 kan man gå til gang 3, kidsRoom og room
         corridor4.setExit("south", room);
         corridor4.setExit("west", corridor3);
 
-        kidsRoom.setExit("south", corridor4); //fra kidsRoomt kan man gå til gang 4
+        kidsRoom.setExit("south", corridor4); //fra kidsRoom kan man gå til gang 4
 
-        room.setExit("north", corridor4); //fra roomt kan man gå til gang 4
+        room.setExit("north", corridor4); //fra room kan man gå til gang 4
 
-        //add to inventory ÆNDRER SCOREIMPACT TIL REALISTISKE
+        //add to inventory
         store.addToInventory(new Item("Vaskemaskine A+", 2400, 65, WASHINGMACHINE)); // færdig
         store.addToInventory(new Item("Vaskemaskine A++", 3000, 49, WASHINGMACHINE)); // færdig
         store.addToInventory(new Item("Vaskemaskine A+++", 4000, 43, WASHINGMACHINE)); // færdig
@@ -115,9 +114,9 @@ public class Game {
         store.addToInventory(new Item("Isolering", 10000, 9300, ISOLATION)); //færdig
         store.addToInventory(new Item("Solceller", 30000, 8000, SOLARCELLS)); //færdig
 
-        utlity.addToInventory(new Item("Vaskemaskine D", 0, 0, WASHINGMACHINE));
-        utlity.addToInventory(new Item("Tørretumbler D", 0, 0, DRYER));
-        utlity.addToInventory(new Item("Oliefyr", 0, 0, HEATING));
+        utility.addToInventory(new Item("Vaskemaskine D", 0, 0, WASHINGMACHINE));
+        utility.addToInventory(new Item("Tørretumbler D", 0, 0, DRYER));
+        utility.addToInventory(new Item("Oliefyr", 0, 0, HEATING));
 
         kitchen.addToInventory(new Item("Køleskab D", 0, 0, FRIDGE)); // færdig
         kitchen.addToInventory(new Item("Komfur C", 0, 0, STOVE));
@@ -184,13 +183,8 @@ public class Game {
             finished = processCommand(command);
         }
 
-        // print exit
-        System.out.println("Tak for, at du spillede vores spil\n");
-        System.out.println("Du har sparet " + player.getScore() + " kr. om året i energiforbedringer");
-        System.out.println("Og har brugt " + (player.getStartAmount() - player.getWallet()) + " kr,-");
-        System.out.println("Du startede med energimærke: " + EnergyLabel.createEnergyLabel(0,player.getStartValue()));
-        System.out.println("Du er nu på energimærke " + EnergyLabel.createEnergyLabel(player.getScore(), player.getStartValue()));
-        System.out.println("Lavet af: Yusuf Bayoz, Victor Poulsen, Emil Spangenberg, Theis Langlands & Nicolaj Hansen");
+        printExit();
+
     }
 
     private void printWelcome() // velkomst hilsen udskrift
@@ -199,6 +193,15 @@ public class Game {
         System.out.println("Der er mange ting der kan forbedres, så du sparer mange penge, og udnytter energien bedre");
         System.out.println("Skriv '" + CommandWord.HELP + "' hvis du har brug for hjælp.\n");
         System.out.println(currentRoom.getLongDescription()); // skriver beskrivelsen af første rum
+    }
+
+    private void printExit(){
+        System.out.println("Tak for, at du spillede vores spil\n");
+        System.out.println("Du har sparet " + player.getScore() + " kr. om året i energiforbedringer");
+        System.out.println("Og har brugt " + (player.getStartAmount() - player.getWallet()) + " kr,-");
+        System.out.println("Du startede med energimærke " + EnergyLabel.createEnergyLabel(0,player.getStartValue()));
+        System.out.println("Du er nu på energimærke " + EnergyLabel.createEnergyLabel(player.getScore(), player.getStartValue()));
+        System.out.println("Lavet af: Yusuf Bayoz, Victor Poulsen, Emil Spangenberg, Theis Langlands & Nicolaj Hansen");
     }
 
     private boolean processCommand(Command command) {
@@ -395,7 +398,6 @@ public class Game {
     }
 
     private void delete(Command command) {
-        // her skal være delete kode
 
         // undersøger om kommandoen har et andet ord
         if (!command.hasSecondWord()) {

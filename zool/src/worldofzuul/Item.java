@@ -4,7 +4,6 @@ public class Item {
 
     // attributes:
     private String name;
-    // private EnergyLabel energyLabel; evt?
     private int price;
     private int scoreImpact;
     private int itemType; // fridge, window etc:
@@ -17,9 +16,7 @@ public class Item {
         this.itemType = itemType;
     }
 
-    // methods
-
-    // Getters
+    // Getters & Methods
     public String getName() {
         return name;
     }
@@ -39,9 +36,5 @@ public class Item {
     @Override
     public String toString() {
         return "Name: " + name + ", Price: " + price + ", Årlig besparelse: " + scoreImpact;
-    }
-
-    public String returnName(){
-        return name;
     }
 }
