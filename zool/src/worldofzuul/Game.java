@@ -20,7 +20,7 @@ public class Game {
     private Parser parser;
     private Player player;
     private Room currentRoom; // holder styr på det rum man befinder sig i
-    Room store, outside, utlity, bathroom, bedroom, kidsRoom, room, kitchen, livingRoom, corrridor1, corridor2, corridor3, corridor4; // liste over rum
+    Room store, outside, utility, bathroom, bedroom, kidsRoom, room, kitchen, livingRoom, corrridor1, corridor2, corridor3, corridor4; // liste over rum
 
     public Game() // opretter nyt spil
     {
@@ -34,15 +34,15 @@ public class Game {
     private void createRooms() {
 
         // create room and description
-        // translate from danish to english
+        // translate from Danish to English
 
-        store = new Room("nu i Super Duper Byg, her kan du købe tingene til huset", true);
+        store = new Room("nu i Super Duper Byg, her kan du købe nye ting til dit hus", true);
         outside = new Room("ude foran huset", false);
-        utlity = new Room("i bryggerset", false);
+        utility = new Room("i bryggerset", false);
         bathroom = new Room("i badeværelset", false);
-        bedroom = new Room("i badeværelse", false);
+        bedroom = new Room("i soveværelset", false);
         kidsRoom = new Room("i børneværelset", false);
-        room = new Room("i værelset", false);
+        room =200 new Room("i værelset", false);
         kitchen = new Room("i køkkenet", false);
         livingRoom = new Room("i stuen", false);
         corrridor1 = new Room("i første del af gangen", false);
@@ -51,44 +51,44 @@ public class Game {
         corridor4 = new Room("i fjerde del af gangen", false);
 
         // opretter udgange
-        store.setExit("east", outside); //Fra butikken kan man gå outside
+        store.setExit("øst", outside); //Fra butikken kan man gå outside
 
-        outside.setExit("west", store); //fra outside kan man gå i butikken og gang 1
-        outside.setExit("east", corrridor1);
+        outside.setExit("vest", store); //fra outside kan man gå i butikken og gang 1
+        outside.setExit("øst", corrridor1);
 
-        corrridor1.setExit("north", utlity); //fra gang 1 kan man gå i utlityet, kitchenet, gang 2 og outside
-        corrridor1.setExit("south", kitchen);
-        corrridor1.setExit("east", corridor2);
-        corrridor1.setExit("west", outside);
+        corrridor1.setExit("nord", utility); //fra gang 1 kan man gå i utilityet, kitchenet, gang 2 og outside
+        corrridor1.setExit("syd", kitchen);
+        corrridor1.setExit("øst", corridor2);
+        corrridor1.setExit("vest", outside);
 
-        utlity.setExit("south", corrridor1); //fra utlityet kan man gå i gang 1
+        utility.setExit("syd", corrridor1); //fra utilityet kan man gå i gang 1
 
-        kitchen.setExit("north", corrridor1); //fra kitchenet kan man gå til gang 1 og livingRoomn
-        kitchen.setExit("east", livingRoom);
+        kitchen.setExit("nord", corrridor1); //fra kitchenet kan man gå til gang 1 og livingRoom
+        kitchen.setExit("øst", livingRoom);
 
-        livingRoom.setExit("west", kitchen); //fra livingRoomn kan man gå til kitchenet og gang 3
-        livingRoom.setExit("north", corridor3);
+        livingRoom.setExit("vest", kitchen); //fra livingRoom kan man gå til kitchenet og gang 3
+        livingRoom.setExit("nord", corridor3);
 
-        corridor2.setExit("north", bathroom); //fra gang 2 kan man gå til gang 1, gang 3 og bathroom
-        corridor2.setExit("east", corridor3);
-        corridor2.setExit("west", corrridor1);
+        corridor2.setExit("nord", bathroom); //fra gang 2 kan man gå til gang 1, gang 3 og bathroom
+        corridor2.setExit("øst", corridor3);
+        corridor2.setExit("vest", corrridor1);
 
-        bathroom.setExit("south", corridor2); //fra bathroomt kan man gå til gang 2
+        bathroom.setExit("syd", corridor2); //fra bathroom kan man gå til gang 2
 
-        corridor3.setExit("north", bedroom); //fra gang 3 kan man gå til gangn 2, gang 4, bedroom og livingRoomn
-        corridor3.setExit("south", livingRoom);
-        corridor3.setExit("east", corridor4);
-        corridor3.setExit("west", corridor2);
+        corridor3.setExit("nord", bedroom); //fra gang 3 kan man gå til gangn 2, gang 4, bedroom og livingRoom
+        corridor3.setExit("syd", livingRoom);
+        corridor3.setExit("øst", corridor4);
+        corridor3.setExit("vest", corridor2);
 
-        bedroom.setExit("south", corridor3); //fra bedroom kan man gå til gang 3
+        bedroom.setExit("syd", corridor3); //fra bedroom kan man gå til gang 3
 
-        corridor4.setExit("north", kidsRoom); //fra gang 4 kan man gå til gang 3, kidsRoom og roomt
-        corridor4.setExit("south", room);
-        corridor4.setExit("west", corridor3);
+        corridor4.setExit("nord", kidsRoom); //fra gang 4 kan man gå til gang 3, kidsRoom og room
+        corridor4.setExit("syd", room);
+        corridor4.setExit("vest", corridor3);
 
-        kidsRoom.setExit("south", corridor4); //fra kidsRoomt kan man gå til gang 4
+        kidsRoom.setExit("syd", corridor4); //fra kidsRoom kan man gå til gang 4
 
-        room.setExit("north", corridor4); //fra roomt kan man gå til gang 4
+        room.setExit("nord", corridor4); //fra room kan man gå til gang 4
 
         //add to inventory ÆNDRER SCOREIMPACT TIL REALISTISKE
         store.addToInventory(new Item("Vaskemaskine", 2000, 1000, WASHINGMACHINE));
@@ -132,8 +132,9 @@ public class Game {
     private void printWelcome() // velkomst hilsen udskrift
     {
         System.out.println();
-        System.out.println("Dette er dit hus");
-        System.out.println("Der er mange ting der kan forbedres, så du sparer mange penge, og udnytter energien bedre");
+        System.out.println("Dette er dit hus!");
+        System.out.println("Der er mange gamle hvidevarer som kan udskiftes, og ting der kan forbedreds,");
+        System.out.println("som vil spare mere på energien... Og dine penge! Optimer dit hus og se hvor meget du kan spare.");
         System.out.println("Skriv '" + CommandWord.HELP + "' hvis du har brug for hjælp.");
         System.out.println();
         System.out.println(currentRoom.getLongDescription()); // skriver beskrivelsen af første rum
@@ -145,7 +146,7 @@ public class Game {
         CommandWord commandWord = command.getCommandWord();
 
         if (commandWord == CommandWord.UNKNOWN) {
-            System.out.println("I don't know what you mean...");
+            System.out.println("Det forstod jeg ikke helt... Prøv noget andet eller skriv 'hjælp' for commands!");
             return false;
         }
 
@@ -170,7 +171,7 @@ public class Game {
 
     private void goRoom(Command command) {
         if (!command.hasSecondWord()) {
-            System.out.println("Go where?");
+            System.out.println("Hvilken vej vil du gå?");
             return;
         }
 
@@ -179,7 +180,7 @@ public class Game {
         Room nextRoom = currentRoom.getExit(direction);
 
         if (nextRoom == null) {
-            System.out.println("There is no door!");
+            System.out.println("Du kan ikke gå den vej!");
         } else {
             currentRoom = nextRoom;
             System.out.println(currentRoom.getLongDescription());
@@ -189,7 +190,7 @@ public class Game {
 
     private boolean quit(Command command) {
         if (command.hasSecondWord()) {
-            System.out.println("Quit what?");
+            System.out.println("Slut hvad?");
             return false;
         } else {
             return true;
@@ -205,7 +206,7 @@ public class Game {
 
         // undersøger om kommandoen har et andet ord
         if (!command.hasSecondWord()) {
-            System.out.println("Køb Hvad?");
+            System.out.println("Køb hvad?");
             return;
         }
 
