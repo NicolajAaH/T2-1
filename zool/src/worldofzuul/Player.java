@@ -6,9 +6,15 @@ public class Player {
     int score;
     private Inventory inventory = new Inventory();
 
-    public int viewScore(){
+    public int getScore(){
         return score;
     }
+
+    public void setScore(int score) {
+        this.score = score;
+    }
+
+
 
     public int viewWallet(){
         return wallet;

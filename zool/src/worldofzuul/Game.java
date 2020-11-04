@@ -157,6 +157,8 @@ public class Game {
             wantToQuit = quit(command);
         } else if (commandWord == CommandWord.BUY) {
             buy(command);
+        } else if (commandWord == CommandWord.REPLACE) {
+            replace(command);
         } else if (commandWord == CommandWord.WALLET){
             wallet();
         }
@@ -252,9 +254,79 @@ public class Game {
         player.getInventory().printInventory();
     }
 
+    private void replace(Command command) {
+        // Undersøger om du er i butikken
+        if (inShop()) {
+            System.out.println("fejl: du kan kun handle i butikken!");
+            return;
+        }
+
+        // undersøger om kommandoen har et andet ord
+        if (!command.hasSecondWord()) {
+            System.out.println("Udskift hvad?");
+            return;
+        }
+
+        // Tjekker at det andet ord (string) kan parses til en Integer
+        if (!isInt(command.getSecondWord())) {
+            System.out.println("fejl: ikke gyldigt nummer!");
+            return;
+        }
+
+        // laver kommandoword om til int og finder index af det der skal udskiftes
+        int index = Integer.parseInt(command.getSecondWord()) - 1;
+
+        // Tjekker om index er mellem 0 og rummets max antal items
+        if (0 > index || index + 1 > currentRoom.getRoomInv().getSize()) {
+            System.out.println("fejl: ikke gyldigt nummer!");
+            return;
+        }
+
+        // Tjekker om players inventory har et Item af samme type. (kunne være metode!)
+        boolean inInventory = false;
+        int playerInvIndex = 0;
+
+        for (int i = 0; i < player.getInventory().getSize(); i++) {
+
+            int itemTypeRoom = currentRoom.getRoomInv().getItem(index).getItemType();
+
+            if (player.getInventory().getItem(i).getItemType() == itemTypeRoom) {
+                inInventory = true;
+                playerInvIndex = i;
+            }
+        }
+
+        if (!inInventory) {
+            System.out.println("du har ikke den type i dit inventory, gå i Super Byg!");
+            return;
+        }
+
+        // Indsætter Item i room inventory fra player inventory
+
+        // Fjerner gammelt Item fra Room
+
+        currentRoom.getRoomInv().removeItem(currentRoom.getRoomInv().getItem(index));
+
+        // Kopierer item fra player index til room
+        copyItem(player.getInventory(), playerInvIndex, currentRoom.getRoomInv());
+
+        // Opdaterer score
+        int nyScore = player.getScore() + player.getInventory().getItem(playerInvIndex).getScoreImpact();
+        player.setScore(nyScore);
+
+        // Sletter item fra player index
+        player.getInventory().removeItem(player.getInventory().getItem(playerInvIndex));
+
+        // Udskriver inventory fra player og Room
+        System.out.print("player ");
+        player.getInventory().printInventory();
+        System.out.print("room ");
+        currentRoom.getRoomInv().printInventory();
+        System.out.println("score er nu: " + player.getScore());
+    }
+
     private boolean isInt(String s) {
         for (int i = 0; i < s.length(); i++) {
-      //      if(i==0 && s.charAt(i) == '-') continue;
             if( !Character.isDigit(s.charAt(i)) ) return false;
         }
         return true;
