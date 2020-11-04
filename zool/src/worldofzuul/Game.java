@@ -126,7 +126,11 @@ public class Game {
             Command command = parser.getCommand();
             finished = processCommand(command);
         }
-        System.out.println("Tak for, at du spillede vores spil");
+
+        System.out.println("Tak for, at du spillede vores spil\n");
+        System.out.println("Du har sparet " + player.getScore() + " kr. om året i energiforbedringer");
+        System.out.println("Og har brugt ???? penge");
+        System.out.println("Energimærke ??");
     }
 
     private void printWelcome() // velkomst hilsen udskrift
@@ -186,6 +190,7 @@ public class Game {
             currentRoom = nextRoom;
             System.out.println(currentRoom.getLongDescription());
         }
+        System.out.print("Rummmet indeholder ");
         currentRoom.printRoomInv();
     }
 
