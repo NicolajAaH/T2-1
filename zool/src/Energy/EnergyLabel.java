@@ -1,4 +1,4 @@
-package worldofzuul;
+package Energy;
 
 public class EnergyLabel {
     private static final int A = 0;

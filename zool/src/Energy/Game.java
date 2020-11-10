@@ -1,6 +1,5 @@
-package worldofzuul;
+package Energy;
 
-import java.util.InputMismatchException;
 import java.util.Scanner;
 
 public class Game {
@@ -52,67 +51,67 @@ public class Game {
         corridor4 = new Room("i fjerde del af gangen");
 
         // opretter udgange
-        store.setExit("east", outside); //Fra butikken kan man gå outside
+        store.setExit("øst", outside); //Fra butikken kan man gå outside
 
-        outside.setExit("west", store); //fra outside kan man gå i butikken og gang 1
-        outside.setExit("east", corrridor1);
+        outside.setExit("vest", store); //fra outside kan man gå i butikken og gang 1
+        outside.setExit("øst", corrridor1);
 
-        corrridor1.setExit("north", utility); //fra gang 1 kan man gå i utility, kitchen, gang 2 og outside
-        corrridor1.setExit("south", kitchen);
-        corrridor1.setExit("east", corridor2);
-        corrridor1.setExit("west", outside);
+        corrridor1.setExit("nord", utility); //fra gang 1 kan man gå i utility, kitchen, gang 2 og outside
+        corrridor1.setExit("syd", kitchen);
+        corrridor1.setExit("øst", corridor2);
+        corrridor1.setExit("vest", outside);
 
-        utility.setExit("south", corrridor1); //fra utility kan man gå i gang 1
+        utility.setExit("syd", corrridor1); //fra utility kan man gå i gang 1
 
-        kitchen.setExit("north", corrridor1); //fra kitchen kan man gå til gang 1 og livingRoom
-        kitchen.setExit("east", livingRoom);
+        kitchen.setExit("nord", corrridor1); //fra kitchen kan man gå til gang 1 og livingRoom
+        kitchen.setExit("øst", livingRoom);
 
-        livingRoom.setExit("west", kitchen); //fra livingRoom kan man gå til kitchen og gang 3
-        livingRoom.setExit("north", corridor3);
+        livingRoom.setExit("vest", kitchen); //fra livingRoom kan man gå til kitchen og gang 3
+        livingRoom.setExit("nord", corridor3);
 
-        corridor2.setExit("north", bathroom); //fra gang 2 kan man gå til gang 1, gang 3 og bathroom
-        corridor2.setExit("east", corridor3);
-        corridor2.setExit("west", corrridor1);
+        corridor2.setExit("nord", bathroom); //fra gang 2 kan man gå til gang 1, gang 3 og bathroom
+        corridor2.setExit("øst", corridor3);
+        corridor2.setExit("vest", corrridor1);
 
-        bathroom.setExit("south", corridor2); //fra bathroom kan man gå til gang 2
+        bathroom.setExit("syd", corridor2); //fra bathroom kan man gå til gang 2
 
-        corridor3.setExit("north", bedroom); //fra gang 3 kan man gå til gang 2, gang 4, bedroom og livingRoom
-        corridor3.setExit("south", livingRoom);
-        corridor3.setExit("east", corridor4);
-        corridor3.setExit("west", corridor2);
+        corridor3.setExit("nord", bedroom); //fra gang 3 kan man gå til gang 2, gang 4, bedroom og livingRoom
+        corridor3.setExit("syd", livingRoom);
+        corridor3.setExit("øst", corridor4);
+        corridor3.setExit("vest", corridor2);
 
-        bedroom.setExit("south", corridor3); //fra bedroom kan man gå til gang 3
+        bedroom.setExit("syd", corridor3); //fra bedroom kan man gå til gang 3
 
-        corridor4.setExit("north", kidsRoom); //fra gang 4 kan man gå til gang 3, kidsRoom og room
-        corridor4.setExit("south", room);
-        corridor4.setExit("west", corridor3);
+        corridor4.setExit("nord", kidsRoom); //fra gang 4 kan man gå til gang 3, kidsRoom og room
+        corridor4.setExit("syd", room);
+        corridor4.setExit("vest", corridor3);
 
-        kidsRoom.setExit("south", corridor4); //fra kidsRoom kan man gå til gang 4
+        kidsRoom.setExit("syd", corridor4); //fra kidsRoom kan man gå til gang 4
 
-        room.setExit("north", corridor4); //fra room kan man gå til gang 4
+        room.setExit("nord", corridor4); //fra room kan man gå til gang 4
 
         //add to inventory
-        store.addToInventory(new Item("Vaskemaskine A+", 2400, 65, WASHINGMACHINE)); // færdig
-        store.addToInventory(new Item("Vaskemaskine A++", 3000, 49, WASHINGMACHINE)); // færdig
-        store.addToInventory(new Item("Vaskemaskine A+++", 4000, 43, WASHINGMACHINE)); // færdig
-        store.addToInventory(new Item("Tørretumbler A+", 2887, 850, DRYER)); //færdig
-        store.addToInventory(new Item("Tørretumbler A++", 3499, 1039, DRYER)); //færdig
-        store.addToInventory(new Item("Tørretumbler A+++", 4318, 1180, DRYER)); //færdig
-        store.addToInventory(new Item("Pillefyr (varmeanlæg)", 45000, 10057, HEATING)); //færdig
-        store.addToInventory(new Item("Gas (varmeanlæg)", 50000, 12240, HEATING)); // færdig
-        store.addToInventory(new Item("Energibesparende komfur", 4500, 1250, STOVE)); // færdig
-        store.addToInventory(new Item("Køleskab A+++", 8000, 470, FRIDGE)); // færdig
-        store.addToInventory(new Item("Køleskab A++", 6500, 400, FRIDGE)); // færdig
-        store.addToInventory(new Item("Køleskab A+", 4500, 350, FRIDGE)); // færdig
+        store.addToInventory(new Item("Vaskemaskine A+", 2400, 65, WASHINGMACHINE));
+        store.addToInventory(new Item("Vaskemaskine A++", 3000, 49, WASHINGMACHINE));
+        store.addToInventory(new Item("Vaskemaskine A+++", 4000, 43, WASHINGMACHINE)); 
+        store.addToInventory(new Item("Tørretumbler A+", 2887, 850, DRYER));
+        store.addToInventory(new Item("Tørretumbler A++", 3499, 1039, DRYER));
+        store.addToInventory(new Item("Tørretumbler A+++", 4318, 1180, DRYER));
+        store.addToInventory(new Item("Pillefyr (varmeanlæg)", 45000, 10057, HEATING));
+        store.addToInventory(new Item("Gas (varmeanlæg)", 50000, 12240, HEATING));
+        store.addToInventory(new Item("Energibesparende komfur", 4500, 1250, STOVE));
+        store.addToInventory(new Item("Køleskab A+++", 8000, 470, FRIDGE));
+        store.addToInventory(new Item("Køleskab A++", 6500, 400, FRIDGE));
+        store.addToInventory(new Item("Køleskab A+", 4500, 350, FRIDGE));
         store.addToInventory(new Item("Opvaskemaskine A++", 3300, 400, DISHWASHER));
         store.addToInventory(new Item("Opvaskemaskine A", 2500, 300, DISHWASHER));
-        store.addToInventory(new Item("Termorude (2 lag)", 1000, 375, WINDOW)); // færdig
-        store.addToInventory(new Item("Sparepære", 20, 230, LIGHTS)); // færdig
-        store.addToInventory(new Item("LED-pære", 60, 350, LIGHTS)); // færdig
-        store.addToInventory(new Item("Energisparende TV", 5900, 520, TV)); //færdig
-        store.addToInventory(new Item("Hul-fikser-kit", 150, 500, WALLFIXER)); //færdig
-        store.addToInventory(new Item("Isolering", 10000, 9300, ISOLATION)); //færdig
-        store.addToInventory(new Item("Solceller", 30000, 8000, SOLARCELLS)); //færdig
+        store.addToInventory(new Item("Termorude (2 lag)", 1000, 375, WINDOW));
+        store.addToInventory(new Item("Sparepære", 20, 230, LIGHTS));
+        store.addToInventory(new Item("LED-pære", 60, 350, LIGHTS));
+        store.addToInventory(new Item("Energisparende TV", 5900, 520, TV));
+        store.addToInventory(new Item("Hul-fikser-kit", 150, 500, WALLFIXER));
+        store.addToInventory(new Item("Isolering", 10000, 9300, ISOLATION));
+        store.addToInventory(new Item("Solceller", 30000, 8000, SOLARCELLS));
 
         utility.addToInventory(new Item("Vaskemaskine D", 0, 0, WASHINGMACHINE));
         utility.addToInventory(new Item("Tørretumbler D", 0, 0, DRYER));
@@ -150,7 +149,8 @@ public class Game {
 
     public void play() {
         Scanner s = new Scanner(System.in);
-        System.out.print("Indtast startbeløb: ");
+        System.out.println("Du befinder dig i et dejligt dansk parcelhus på 160 m2 med energimærke F - din mission er at forbedre huset så godt som muligt");
+        System.out.print("Indtast dit budget: ");
         while(true) {
             String value = s.nextLine();
             if (isInt(value)) {
@@ -228,15 +228,14 @@ public class Game {
             buy(command);
         } else if (commandWord == CommandWord.REPLACE) {
             replace(command);
-        } else if (commandWord == CommandWord.WALLET){
-            wallet();
-        } else if (commandWord == CommandWord.SCORE){
-            System.out.println("Din score er: " + player.getScore());
+        } else if (commandWord == CommandWord.STATUS){
+            System.out.println("Din score er: " + player.getScore() + " og du har " + player.getWallet() + "kr. i pungen");
         }
         return wantToQuit;
     }
 
     private void printHelp() {
+        System.out.println("Du skal opgradere dit hus mest muligt.");
         System.out.println("Dine kommandoer er:");
         parser.showCommands();
     }
@@ -257,8 +256,14 @@ public class Game {
             currentRoom = nextRoom;
             System.out.println(currentRoom.getLongDescription());
         }
-        System.out.print("Rummmet indeholder ");
-        currentRoom.printRoomInv();
+        if(currentRoom == outside){
+            System.out.println("Dit hus har");
+            currentRoom.printRoomInv();
+        }
+        else {
+            System.out.print("Rummmet indeholder ");
+            currentRoom.printRoomInv();
+        }
     }
 
     private boolean quit(Command command) {
