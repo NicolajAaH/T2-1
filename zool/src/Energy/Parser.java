@@ -1,7 +1,6 @@
-package worldofzuul;
+package Energy;
 
 import java.util.Scanner;
-import java.util.StringTokenizer; // splits string in separate Tokens (words)
 
 public class Parser 
 {

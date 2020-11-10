@@ -1,8 +1,8 @@
-package worldofzuul;
+package Energy;
 
 public enum CommandWord
 {
-    GO("go"), QUIT("quit"), HELP("help"), UNKNOWN("?"), BUY("buy"), WALLET("wallet"),REPLACE("replace"),DELETE("delete"),INVENTORY("inventory"),SCORE("score");
+    GO("gå"), QUIT("afslut"), HELP("hjælp"), UNKNOWN("?"), BUY("køb"), STATUS("status"),REPLACE("udskift"),DELETE("skrot"),INVENTORY("inventar"),;
     
     private String commandString;
     
