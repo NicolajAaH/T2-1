@@ -1,4 +1,4 @@
-package worldofzuul;
+package Energy;
 
 public class Player {
     private int wallet = 0;
