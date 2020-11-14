@@ -234,7 +234,7 @@ public class Game {
         } else if (commandWord == CommandWord.REPLACE) {
             replace(command);
         } else if (commandWord == CommandWord.STATUS){
-            System.out.println("Din score er: " + player.getScore() + " og du har " + player.getWallet() + "kr. i pungen");
+            status();
         }
         return wantToQuit;
     }
@@ -426,6 +426,9 @@ public class Game {
         System.out.println("score er nu: " + player.getScore());
     }
 
+    private void status() {
+    System.out.println("Din har opnået årlig besparelse på: " + player.getScore() + ", og du har " + player.getWallet() + "kr. tilbage på budgettet");
+    }
     private void delete(Command command) {
 
         // undersøger om kommandoen har et andet ord
