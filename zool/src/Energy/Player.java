@@ -13,11 +13,11 @@ public class Player {
 
     // holder styr på skift imellem rum
     private int moves = 0;
-    private int movesPerRound = 50;
+    private int movesPerRound = 2;
 
     // holder styr på runder (år)
     private int round = 0;
-    private int maxNumberOfRounds = 10;
+    private int maxNumberOfRounds = 3;
     private int[] roundScore = new int[maxNumberOfRounds];
 
     // Metoeder

@@ -154,10 +154,11 @@ public class Game {
 
         printWelcome(); // opstart af spil
 
-        boolean finished = false;
-        while (!finished) {
+        boolean gameFinished = false;
+
+        while (!gameFinished) {
             Command command = parser.getCommand();
-            finished = processCommand(command);
+            gameFinished = processCommand(command);
         }
 
         printExit();
@@ -221,7 +222,7 @@ public class Game {
         if (commandWord == CommandWord.HELP) {
             printHelp();
         } else if (commandWord == CommandWord.GO) {
-            goRoom(command);
+            wantToQuit = goRoom(command);
         } else if (commandWord == CommandWord.INVENTORY) {
             inventory();
         } else if (commandWord == CommandWord.DELETE) {
@@ -260,7 +261,13 @@ public class Game {
             return false;
         }
 
-            player.addMove(); // lægger en til move!
+        // lægger en til move og tjekker om vi er på max
+        player.addMove();
+        if (player.getMoves() == player.getMovesPerRound()) {
+            System.out.println("Du har nået max antal bevægelser i dette år.");
+            return nextRound();
+        }
+
             currentRoom = nextRoom;   
             System.out.println(currentRoom.getLongDescription());
 
@@ -476,29 +483,27 @@ public class Game {
     }
 
     private boolean nextRound() {
-        System.out.println("Du har nu afsluttet " + (player.getRounds() +1 ) + ". år");
+        System.out.println("\nDu har nu afsluttet " + (player.getRounds() +1 ) + ". år");
         printStatus();
 
         // checker om vi har nået max antal runder
         if (player.getRounds() == (player.getMaxNumberOfRounds() -1 ) ) {
             System.out.println("Du har spillet max antal år\n");
-            return true; // spillet er slut
+            return true; // spillet er slut - sætter want to quit til True
         }
 
         player.saveRoundScore(); // gemmer scoren for runden
-        player.setRounds(player.getRounds()+1); // opdatere rounds
+        player.setRounds(player.getRounds()+1); // opdatere runde count
 
         player.setWallet(player.getStartAmount() + player.getScore()); // nyt årsbudget!
-        System.out.println("Velkommen til år " + player.getRounds());
+        player.setMoves(0); // resetter moves
+        System.out.println("\n --- Velkommen til år " + (player.getRounds() + 1) + " ---");
         System.out.println("Dit nye årsbudget er " + player.getWallet());
         System.out.println();
 
         currentRoom = outside;
 
         return false;
-
-
-
     }
 
     private void printStatus() {
