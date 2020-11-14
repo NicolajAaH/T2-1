@@ -4,6 +4,13 @@ import java.util.Scanner;
 
 public class Game {
 
+
+    private Parser parser;
+    private Player player;
+    private Room currentRoom; // holder styr på det rum man befinder sig i
+    Room store, outside, utility, bathroom, bedroom, kidsRoom, room, kitchen, livingRoom, corrridor1, corridor2, corridor3, corridor4; // liste over rum
+
+    // kategorier af Items der kan oprettes
     private final int WASHINGMACHINE = 1;
     private final int DRYER = 2;
     private final int HEATING = 3;
@@ -18,14 +25,10 @@ public class Game {
     private final int SOLARCELLS = 12;
     private final int BATH = 13;
 
-    private Parser parser;
-    private Player player;
-    private Room currentRoom; // holder styr på det rum man befinder sig i
-    Room store, outside, utility, bathroom, bedroom, kidsRoom, room, kitchen, livingRoom, corrridor1, corridor2, corridor3, corridor4; // liste over rum
 
     public Game() // opretter nyt spil
     {
-        createRooms(); // kalder createRooms() sætter rum og udgange
+        createRooms(); // sætter rum og udgange
         parser = new Parser();
         player = new Player();
         // max kapacitet i player inventory
@@ -148,9 +151,27 @@ public class Game {
     }
 
     public void play() {
+
+        printWelcome(); // velkomst hilsen
+        boolean finished = false;
+        while (!finished) {
+            Command command = parser.getCommand();
+            finished = processCommand(command);
+        }
+
+        printExit();
+
+    }
+
+    private void printWelcome() // opstart af spil
+    {
+        System.out.println("Du befinder dig i et dejligt dansk parcelhus på 160 m2 med energimærke F ");
+        System.out.println("- din mission er at forbedre huset så godt som muligt, så du sparer mange penge, og udnytter energien bedre");
+        System.out.println("Du kan handle i Super Byg og udskifte ting i dit hus\n");
+        System.out.print("Indtast dit årlige renoverings budget: ");
+
+        // Henter budget fra bruger
         Scanner s = new Scanner(System.in);
-        System.out.println("Du befinder dig i et dejligt dansk parcelhus på 160 m2 med energimærke F - din mission er at forbedre huset så godt som muligt");
-        System.out.print("Indtast dit budget: ");
         while(true) {
             String value = s.nextLine();
             if (isInt(value)) {
@@ -170,28 +191,9 @@ public class Game {
             } else {
                 System.out.println("Der må ikke stå bogstaver i beløbet og værdien skal være mellem 0 og 100.000kr. \nIndtast nyt beløb: ");
             }
-
         }
 
-
-        printWelcome(); // velkomst hilsen
-
-
-        boolean finished = false;
-        while (!finished) {
-            Command command = parser.getCommand();
-            finished = processCommand(command);
-        }
-
-        printExit();
-
-    }
-
-    private void printWelcome() // velkomst hilsen udskrift
-    {
-        System.out.println("\nDette er dit hus");
-        System.out.println("Der er mange ting der kan forbedres, så du sparer mange penge, og udnytter energien bedre");
-        System.out.println("Skriv '" + CommandWord.HELP + "' hvis du har brug for hjælp.\n");
+        System.out.println("\nSkriv '" + CommandWord.HELP + "' hvis du har brug for hjælp.\n");
         System.out.println(currentRoom.getLongDescription()); // skriver beskrivelsen af første rum
     }
 
@@ -202,7 +204,7 @@ public class Game {
         System.out.println("Du startede med energimærke " + EnergyLabel.createEnergyLabel(0,player.getStartValue()));
         System.out.println("Du er nu på energimærke " + EnergyLabel.createEnergyLabel(player.getScore(), player.getStartValue()));
         System.out.println("Lavet af: Yusuf Bayoz, Victor Poulsen, Emil Spangenberg, Theis Langlands & Nicolaj Hansen");
-    }
+    } // afslutning af spil
 
     private boolean processCommand(Command command) {
         boolean wantToQuit = false;
