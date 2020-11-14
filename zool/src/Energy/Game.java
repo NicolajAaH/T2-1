@@ -327,14 +327,14 @@ public class Game {
 
         // udskriver køb og spiller inventory
         System.out.println("Du har købt " + store.getRoomInv().getItem(index).getName() + "\n");
-        System.out.print("Spiller ");
+        System.out.print("Du har nu: ");
         player.getInventory().printInventory();
     }
 
     private void replace(Command command) {
         // Undersøger om du er i butikken
         if (inShop()) {
-            System.out.println("fejl: du kan kun handle i butikken!");
+            System.out.println("fejl: du kan kun handle når du er i butikken!");
             return;
         }
 
