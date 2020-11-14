@@ -160,7 +160,6 @@ public class Game {
         }
 
         printExit();
-
     }
 
     private void printWelcome() // opstart af spil
@@ -436,7 +435,7 @@ public class Game {
     }
 
     private void status() {
-    System.out.println("Din har opnået årlig besparelse på: " + player.getScore() + ", og du har " + player.getWallet() + "kr. tilbage på budgettet");
+    System.out.println("Du har opnået samlet årlig besparelse på: " + player.getScore() + ", og du har " + player.getWallet() + "kr. tilbage på budgettet i år");
     }
 
     private void delete(Command command) {
@@ -526,8 +525,12 @@ public class Game {
     }
 
     private void printStatus() {
-        System.out.println("Du har brugt " + player.getTotalUsedAmount() + " kr,-");
-        System.out.println("Du har samlet sparet " + player.getScore() + " kr. om året i energiforbedringer");
+        System.out.println("Du har samlet brugt " + player.getTotalUsedAmount() + " kr,-\n");
+        System.out.println(" - Energibesparelse -");
+        for (int i=0; i<=player.getRounds(); i++) {
+            System.out.println("år " + (i+1) + ": " + player.getRoundScore(i) );
+        }
+        System.out.println("Total " + player.getScore() + " kr. om året i energiforbedringer");
         System.out.println("\nDu startede med energimærke " + EnergyLabel.createEnergyLabel(0,player.getStartValue()));
         System.out.println("og er nu på energimærke " + EnergyLabel.createEnergyLabel(player.getScore(), player.getStartValue()));
     }
