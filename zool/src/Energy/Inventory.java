@@ -29,6 +29,10 @@ public class Inventory {
         }
     }
 
+    public boolean isEmpty(){
+    return items.size() == 0;
+    }
+
     public int getSize() {
         return items.size();
     }
@@ -44,4 +48,21 @@ public class Inventory {
     public Item getItem(int i) {
         return items.get(i);
     }
+
+    public int chepestItem() {
+        // checker oom inventory er tomt
+        if (this.items.size() == 0) {
+            return 0;
+        }
+        // finder mindste pris
+        int min = this.items.get(0).getPrice();
+
+        for (Item i : items) {
+            if (i.getPrice() < min) {
+                min = i.getPrice();
+            }
+        }
+
+        return min;
+    } // Returnerer billigste Item i inventory
 }

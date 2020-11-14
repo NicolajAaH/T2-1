@@ -5,7 +5,7 @@ public class Player {
     // Attributes
     private int wallet = 0;
     private int startAmount = 0; // årligt renoverings budget - start Wallet
-    private int startValue = 0; // start forbrug (til Energimærkeberegning)
+    private int startValue = 36000; // start forbrug (til Energimærkeberegning)
 
     private int score = 0;
     private Inventory inventory = new Inventory();
@@ -13,11 +13,11 @@ public class Player {
 
     // holder styr på skift imellem rum
     private int moves = 0;
-    private int movesPerRound = 2;
+    private int movesPerRound = 100;
 
     // holder styr på runder (år)
     private int round = 0;
-    private int maxNumberOfRounds = 3;
+    private int maxNumberOfRounds = 5;
     private int[] roundScore = new int[maxNumberOfRounds];
 
     // Metoeder

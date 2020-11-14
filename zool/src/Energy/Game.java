@@ -4,13 +4,12 @@ import java.util.Scanner;
 
 public class Game {
 
-
     private Parser parser;
     private Player player;
     private Room currentRoom; // holder styr på det rum man befinder sig i
     Room store, outside, utility, bathroom, bedroom, kidsRoom, room, kitchen, livingRoom, corrridor1, corridor2, corridor3, corridor4; // liste over rum
 
-    // kategorier af Items der kan oprettes
+    // kategorier af Items der kan oprettes (skal de måske flyttes til Create Room?)
     private final int WASHINGMACHINE = 1;
     private final int DRYER = 2;
     private final int HEATING = 3;
@@ -24,7 +23,6 @@ public class Game {
     private final int ISOLATION = 11;
     private final int SOLARCELLS = 12;
     private final int BATH = 13;
-
 
     public Game() // opretter nyt spil
     {
@@ -208,14 +206,13 @@ public class Game {
         System.out.println("Lavet af: Yusuf Bayoz, Victor Poulsen, Emil Spangenberg, Theis Langlands & Nicolaj Hansen");
     } // afslutning af spil
 
-
     private boolean processCommand(Command command) {
         boolean wantToQuit = false;
 
         CommandWord commandWord = command.getCommandWord();
 
         if (commandWord == CommandWord.UNKNOWN) {
-            System.out.println("Jeg ved ikke hvad du mener...");
+            System.out.println("Jeg ved ikke, hvad du mener...");
             return false;
         }
 
@@ -232,7 +229,7 @@ public class Game {
         } else if (commandWord == CommandWord.BUY) {
             buy(command);
         } else if (commandWord == CommandWord.REPLACE) {
-            replace(command);
+            wantToQuit = replace(command);
         } else if (commandWord == CommandWord.STATUS){
             status();
         }
@@ -355,23 +352,23 @@ public class Game {
         player.getInventory().printInventory();
     }
 
-    private void replace(Command command) {
+    private boolean replace(Command command) {
         // Undersøger om du er i butikken
         if (inShop()) {
             System.out.println("fejl: du kan kun handle når du er i butikken!");
-            return;
+            return false;
         }
 
         // undersøger om kommandoen har et andet ord
         if (!command.hasSecondWord()) {
             System.out.println("Udskift hvad?");
-            return;
+            return false;
         }
 
         // Tjekker at det andet ord (string) kan parses til en Integer
         if (!isInt(command.getSecondWord())) {
             System.out.println("fejl: ikke gyldigt nummer!");
-            return;
+            return false;
         }
 
         // laver kommandoword om til int og finder index af det der skal udskiftes
@@ -380,7 +377,7 @@ public class Game {
         // Tjekker om index er mellem 0 og rummets max antal items
         if (0 > index || index + 1 > currentRoom.getRoomInv().getSize()) {
             System.out.println("fejl: ikke gyldigt nummer!");
-            return;
+            return false;
         }
 
         // Tjekker om players inventory har et Item af samme type. (kunne være metode!)
@@ -399,7 +396,7 @@ public class Game {
 
         if (!inInventory) {
             System.out.println("du har ikke den type i dit inventory, gå i Super Byg!");
-            return;
+            return false;
         }
 
         // Indsætter Item i room inventory fra player inventory
@@ -419,16 +416,25 @@ public class Game {
         player.getInventory().removeItem(player.getInventory().getItem(playerInvIndex));
 
         // Udskriver inventory fra player og Room
-        System.out.print("player ");
+        System.out.print("Du har: ");
         player.getInventory().printInventory();
-        System.out.print("room ");
+        System.out.print("Rummet indeholder: ");
         currentRoom.getRoomInv().printInventory();
-        System.out.println("score er nu: " + player.getScore());
+        System.out.println("Du har nu opnået en årlig besparelse på: " + player.getScore());
+
+        // Tjekker om spiller har råd til at købe flere item - ellers gåes videre til næste runde!
+        if (    (player.getInventory().isEmpty()) &&
+                (player.getWallet() < store.getRoomInv().chepestItem()) ) {
+            System.out.println("Du har brugt dette år budget og har ikke råd til mere i butikken");
+            return nextRound();
+        }
+        return false;
     }
 
     private void status() {
     System.out.println("Din har opnået årlig besparelse på: " + player.getScore() + ", og du har " + player.getWallet() + "kr. tilbage på budgettet");
     }
+
     private void delete(Command command) {
 
         // undersøger om kommandoen har et andet ord
