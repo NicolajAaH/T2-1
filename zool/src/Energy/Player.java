@@ -4,8 +4,8 @@ public class Player {
 
     // Attributes
     private int wallet = 0;
-    private int startAmount = 0;
-    private int startValue = 0; // remember start wallet??
+    private int startAmount = 0; // årligt renoverings budget - start Wallet
+    private int startValue = 0; // start forbrug (til Energimærkeberegning)
 
     private int score = 0;
     private Inventory inventory = new Inventory();
@@ -16,12 +16,18 @@ public class Player {
     private int movesPerRound = 50;
 
     // holder styr på runder (år)
-    private int rounds = 0;
+    private int round = 0;
     private int maxNumberOfRounds = 10;
     private int[] roundScore = new int[maxNumberOfRounds];
 
-
     // Metoeder
+    public void saveRoundScore() {
+        roundScore[round] = score;
+    }
+
+    public void addMove() {
+        moves++;
+    }
 
     // Getters & setteres
     public int getWallet() {
@@ -52,14 +58,36 @@ public class Player {
         this.startAmount = startAmount;
     }
 
+    public int getRounds() {
+        return round;
+    }
 
+    public void setRounds(int rounds) {
+        this.round = rounds;
+    }
+
+    public int getMaxNumberOfRounds() {
+        return maxNumberOfRounds;
+    }
 
     public Inventory getInventory() {
         return inventory;
     }
 
+    public int getMoves() {
+        return moves;
+    }
 
+    public void setMoves(int moves) {
+        this.moves = moves;
+    }
 
+    public int getMovesPerRound() {
+        return movesPerRound;
+    }
 
+    public void setMovesPerRound(int movesPerRound) {
+        this.movesPerRound = movesPerRound;
+    }
 }
 

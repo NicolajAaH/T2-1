@@ -152,7 +152,8 @@ public class Game {
 
     public void play() {
 
-        printWelcome(); // velkomst hilsen
+        printWelcome(); // opstart af spil
+
         boolean finished = false;
         while (!finished) {
             Command command = parser.getCommand();
@@ -206,6 +207,7 @@ public class Game {
         System.out.println("Lavet af: Yusuf Bayoz, Victor Poulsen, Emil Spangenberg, Theis Langlands & Nicolaj Hansen");
     } // afslutning af spil
 
+
     private boolean processCommand(Command command) {
         boolean wantToQuit = false;
 
@@ -237,15 +239,15 @@ public class Game {
     }
 
     private void printHelp() {
-        System.out.println("Du skal opgradere dit hus mest muligt.");
+        System.out.println("");
         System.out.println("Dine kommandoer er:");
         parser.showCommands();
     }
 
-    private void goRoom(Command command) {
+    private boolean goRoom(Command command) {
         if (!command.hasSecondWord()) {
             System.out.println("Hvilken retning?");
-            return;
+            return false;
         }
 
         String direction = command.getSecondWord();
@@ -255,17 +257,24 @@ public class Game {
         if (nextRoom == null) {
             System.out.println("Der er ingen udgang den vej!");
         } else {
-            currentRoom = nextRoom;
+
+            player.addMove(); // lægger en til move!
+            currentRoom = nextRoom;   
             System.out.println(currentRoom.getLongDescription());
         }
-        if(currentRoom == outside){
-            System.out.println("Dit hus har");
-            currentRoom.printRoomInv();
+
+        // printer inventory tekst afhængig af rum
+        if (currentRoom == outside) {
+            System.out.println("Dit hus har:");
+        } else if (currentRoom == store) {
+            System.out.println("Du kan købe:");
+        } else {
+            System.out.println("Rummmet indeholder:");
         }
-        else {
-            System.out.print("Rummmet indeholder ");
-            currentRoom.printRoomInv();
-        }
+
+        currentRoom.printRoomInv();
+
+        return false;
     }
 
     private boolean quit(Command command) {
@@ -329,7 +338,7 @@ public class Game {
 
         // udskriver køb og spiller inventory
         System.out.println("Du har købt " + store.getRoomInv().getItem(index).getName() + "\n");
-        System.out.print("Du har nu: ");
+        System.out.println("Du har nu: ");
         player.getInventory().printInventory();
     }
 
@@ -436,7 +445,6 @@ public class Game {
 
     }
 
-
     private boolean isInt(String s) {
         for (int i = 0; i < s.length(); i++) {
             if( !Character.isDigit(s.charAt(i)) ) return false;
@@ -456,7 +464,42 @@ public class Game {
         System.out.print("Spiller ");
         player.getInventory().printInventory();
     }
+
     private void copyItem(Inventory sourceInventory, int itemIndex, Inventory destInventory) {
         destInventory.addItem(sourceInventory.getItem(itemIndex));
+    }
+
+    private boolean nextRound() {
+        System.out.println("Du har nu afsluttet " + (player.getRounds() +1 ) + ". år");
+        printStatus();
+
+        // checker om vi har nået max antal runder
+        if (player.getRounds() == (player.getMaxNumberOfRounds() -1 ) ) {
+            System.out.println("Du har spillet max antal år\n");
+            return true; // spillet er slut
+        }
+
+        player.saveRoundScore(); // gemmer scoren for runden
+        player.setRounds(player.getRounds()+1); // opdatere rounds
+
+        player.setWallet(player.getStartAmount() + player.getScore()); // nyt årsbudget!
+        System.out.println("Velkommen til år " + player.getRounds());
+        System.out.println("Dit nye årsbudget er " + player.getWallet());
+        System.out.println();
+
+        currentRoom = outside;
+
+        return false;
+
+
+
+    }
+
+    private void printStatus() {
+        System.out.println("Du har samlet sparet " + player.getScore() + " kr. om året i energiforbedringer");
+        System.out.println("Og har brugt " + (player.getStartAmount() - player.getWallet()) + " kr,-");
+        System.out.println("Du startede med energimærke " + EnergyLabel.createEnergyLabel(0,player.getStartValue()));
+        System.out.println("Du er nu på energimærke " + EnergyLabel.createEnergyLabel(player.getScore(), player.getStartValue()));
+
     }
 }
