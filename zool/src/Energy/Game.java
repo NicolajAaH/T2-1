@@ -254,13 +254,19 @@ public class Game {
 
         Room nextRoom = currentRoom.getExit(direction);
 
+        // tjekker om der er et rum i den retning
         if (nextRoom == null) {
             System.out.println("Der er ingen udgang den vej!");
-        } else {
+            return false;
+        }
 
             player.addMove(); // lægger en til move!
             currentRoom = nextRoom;   
             System.out.println(currentRoom.getLongDescription());
+
+        // tjekker om der er noget i rummets inventory
+        if (currentRoom.getRoomInv().getSize() == 0) {
+            return false;
         }
 
         // printer inventory tekst afhængig af rum
