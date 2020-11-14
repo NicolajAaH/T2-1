@@ -3,26 +3,10 @@ package Energy;
 import java.util.Scanner;
 
 public class Game {
-
     private Parser parser;
     private Player player;
     private Room currentRoom; // holder styr på det rum man befinder sig i
     Room store, outside, utility, bathroom, bedroom, kidsRoom, room, kitchen, livingRoom, corrridor1, corridor2, corridor3, corridor4; // liste over rum
-
-    // kategorier af Items der kan oprettes (skal de måske flyttes til Create Room?)
-    private final int WASHINGMACHINE = 1;
-    private final int DRYER = 2;
-    private final int HEATING = 3;
-    private final int STOVE = 4;
-    private final int FRIDGE = 5;
-    private final int DISHWASHER = 6;
-    private final int WINDOW = 7;
-    private final int LIGHTS = 8;
-    private final int TV = 9;
-    private final int WALLFIXER = 10;
-    private final int ISOLATION = 11;
-    private final int SOLARCELLS = 12;
-    private final int BATH = 13;
 
     public Game() // opretter nyt spil
     {
@@ -37,7 +21,7 @@ public class Game {
 
         // create room and description
 
-        store = new Room("nu i Super Duper Byg, her kan du købe tingene til huset");
+        store = new Room("nu i Super Byg, her kan du købe tingene til huset");
         outside = new Room("ude foran huset");
         utility = new Room("i bryggerset");
         bathroom = new Room("i badeværelset");
@@ -91,7 +75,22 @@ public class Game {
 
         room.setExit("nord", corridor4); //fra room kan man gå til gang 4
 
-        //add to inventory
+        // Variable
+        int WASHINGMACHINE = 1;
+        int DRYER = 2;
+        int HEATING = 3;
+        int STOVE = 4;
+        int FRIDGE = 5;
+        int DISHWASHER = 6;
+        int WINDOW = 7;
+        int LIGHTS = 8;
+        int TV = 9;
+        int WALLFIXER = 10;
+        int ISOLATION = 11;
+        int SOLARCELLS = 12;
+        int BATH = 13;
+
+        // tilføj til inventory
         store.addToInventory(new Item("Vaskemaskine A+", 2400, 65, WASHINGMACHINE));
         store.addToInventory(new Item("Vaskemaskine A++", 3000, 49, WASHINGMACHINE));
         store.addToInventory(new Item("Vaskemaskine A+++", 4000, 43, WASHINGMACHINE)); 
@@ -141,8 +140,6 @@ public class Game {
 
         outside.addToInventory(new Item("Tag uden solceller", 0, 0, SOLARCELLS));
         outside.addToInventory(new Item("Tyndt isolering", 0, 0, ISOLATION));
-        
-
 
         // sætter startrummet til outside
         currentRoom = outside;
@@ -208,7 +205,7 @@ public class Game {
         CommandWord commandWord = command.getCommandWord();
 
         if (commandWord == CommandWord.UNKNOWN) {
-            System.out.println("Jeg ved ikke, hvad du mener...");
+            System.out.println("Jeg ved ikke, hvad du mener. Skriv 'hjælp' for at se dine kommandoer.");
             return false;
         }
 
@@ -242,6 +239,15 @@ public class Game {
         System.out.println("");
         System.out.println("Dine kommandoer er:");
         parser.showCommands();
+        System.out.println("Kommandoen: 'nytår' starter et nyt år.");
+        System.out.println("Kommandoen: 'afslut' afslutter spillet.");
+        System.out.println("Kommandoen: 'køb' NUMMER køber en ting fra butikken.");
+        System.out.println("Kommandoen: 'udskift' NUMMER udskifter en ting i rummet eller udenfor.");
+        System.out.println("Kommandoen: 'hjælp' printer dette igen.");
+        System.out.println("Kommandoen: 'skrot' NUMMER skrotter og fjerner en ting fra dit inventar.");
+        System.out.println("Kommandoen: 'inventar' viser dit inventar.");
+        System.out.println("Kommandoen: 'gå' RETNING bevæger dig rundt.");
+        System.out.println("Kommandoen: 'status' fortæller din årlige besparelse, og dit budget for året.");
     }
 
     private boolean goRoom(Command command) {
@@ -291,7 +297,7 @@ public class Game {
 
     private boolean quit(Command command) {
         if (command.hasSecondWord()) {
-            System.out.println("Quit hvad?");
+            System.out.println("Afslut hvad?");
             return false;
         } else {
             return true;
@@ -301,7 +307,7 @@ public class Game {
     private void buy(Command command) {
         // Undersøger om du er i butikken
         if (!inShop()) {
-            System.out.println("du kan kun handle i butikken!");
+            System.out.println("Du kan kun handle i butikken!");
             return;
         }
 
@@ -313,7 +319,7 @@ public class Game {
 
         // Tjekker at det andet ord (string) kan parses til en Integer
        if (!isInt(command.getSecondWord())) {
-           System.out.println("fejl: ikke gyldigt nummer!");
+           System.out.println("Dette er ikke et gyldigt nummer!");
            return;
        }
 
@@ -322,7 +328,7 @@ public class Game {
 
         // Tjekker om index er mellem 0 og butikkens max antal varer
         if (0 > index || index+1 > store.getRoomInv().getSize() ) {
-            System.out.println("fejl: ikke gyldigt nummer!");
+            System.out.println("Dette er ikke et gyldigt nummer!");
             return;
         }
 
@@ -331,13 +337,13 @@ public class Game {
 
         // tjekker om spiller har råd
         if (player.getWallet() < price) {
-            System.out.println("du har ikke råd!");
+            System.out.println("Du har ikke råd!");
             return;
         }
 
         // Undersøger om spillers inventory er fyldt
         if (player.getInventory().getSize() == player.getInventory().getMaxSize()) {
-            System.out.println("Inventory er fyldt!");
+            System.out.println("Inventar er fyldt!");
             return;
         }
 
@@ -358,7 +364,7 @@ public class Game {
     private boolean replace(Command command) {
         // Undersøger om du er i butikken
         if (inShop()) {
-            System.out.println("fejl: du kan kun handle når du er i butikken!");
+            System.out.println("Du kan kun handle når du er i butikken!");
             return false;
         }
 
@@ -370,7 +376,7 @@ public class Game {
 
         // Tjekker at det andet ord (string) kan parses til en Integer
         if (!isInt(command.getSecondWord())) {
-            System.out.println("fejl: ikke gyldigt nummer!");
+            System.out.println("Dette er ikke et gyldigt nummer!");
             return false;
         }
 
@@ -379,7 +385,7 @@ public class Game {
 
         // Tjekker om index er mellem 0 og rummets max antal items
         if (0 > index || index + 1 > currentRoom.getRoomInv().getSize()) {
-            System.out.println("fejl: ikke gyldigt nummer!");
+            System.out.println("Dette er ikke et gyldigt nummer!");
             return false;
         }
 
@@ -398,7 +404,7 @@ public class Game {
         }
 
         if (!inInventory) {
-            System.out.println("du har ikke den type i dit inventory, gå i Super Byg!");
+            System.out.println("Du har ikke den type i dit inventar, gå i Super Byg!");
             return false;
         }
 
@@ -427,15 +433,15 @@ public class Game {
 
         // Tjekker om spiller har råd til at købe flere item - ellers gåes videre til næste runde!
         if (    (player.getInventory().isEmpty()) &&
-                (player.getWallet() < store.getRoomInv().chepestItem()) ) {
-            System.out.println("Du har brugt dette år budget og har ikke råd til mere i butikken");
+                (player.getWallet() < store.getRoomInv().cheapestItem()) ) {
+            System.out.println("Du har brugt dette års budget, og har ikke råd til mere i butikken");
             return nextRound();
         }
         return false;
     }
 
     private void status() {
-    System.out.println("Du har opnået samlet årlig besparelse på: " + player.getScore() + ", og du har " + player.getWallet() + "kr. tilbage på budgettet i år");
+    System.out.println("Du har opnået en samlet årlig besparelse på: " + player.getScore() + ", og du har " + player.getWallet() + "kr. tilbage på budgettet i år");
     }
 
     private void delete(Command command) {
@@ -448,7 +454,7 @@ public class Game {
 
         // Tjekker at det andet ord (string) kan parses til en Integer
         if (!isInt(command.getSecondWord())) {
-            System.out.println("fejl: ikke gyldigt nummer!");
+            System.out.println("Dette er ikke et gyldigt nummer!");
             return;
         }
 
@@ -457,7 +463,7 @@ public class Game {
 
         // Tjekker om index er mellem 0 og player items
         if (0 > index || index + 1 > player.getInventory().getSize()) {
-            System.out.println("fejl: ikke gyldigt nummer!");
+            System.out.println("Dette er ikke et gyldigt nummer!");
             return;
         }
 
@@ -465,7 +471,7 @@ public class Game {
         player.getInventory().removeItem(player.getInventory().getItem(index));
 
         // printer ny inventory
-        System.out.println("ny inventory");
+        System.out.println("Nyt inventar:");
         player.getInventory().printInventory();
 
     }
@@ -528,7 +534,7 @@ public class Game {
         System.out.println("Du har samlet brugt " + player.getTotalUsedAmount() + " kr,-\n");
         System.out.println(" - Energibesparelse -");
         for (int i=0; i<=player.getRounds(); i++) {
-            System.out.println("år " + (i+1) + ": " + player.getRoundScore(i) );
+            System.out.println("År " + (i+1) + ": " + player.getRoundScore(i) );
         }
         System.out.println("Total " + player.getScore() + " kr. om året i energiforbedringer");
         System.out.println("\nDu startede med energimærke " + EnergyLabel.createEnergyLabel(0,player.getStartValue()));

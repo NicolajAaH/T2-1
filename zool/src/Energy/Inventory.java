@@ -49,7 +49,7 @@ public class Inventory {
         return items.get(i);
     }
 
-    public int chepestItem() {
+    public int cheapestItem() {
         // checker oom inventory er tomt
         if (this.items.size() == 0) {
             return 0;

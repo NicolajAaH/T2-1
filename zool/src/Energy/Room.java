@@ -8,7 +8,7 @@ public class Room
 {
     private String description;
     private HashMap<String, Room> exits;
-    private Inventory roomInv = new Inventory(); // refactor til getInventory
+    private Inventory roomInv = new Inventory();
 
     public Room(String description)
     {
@@ -56,6 +56,6 @@ public class Room
 
     public Inventory getRoomInv() {
         return roomInv;
-    } // REFACTOR til getInventory
+    }
 }
 
