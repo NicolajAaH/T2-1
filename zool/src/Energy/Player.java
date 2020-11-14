@@ -19,6 +19,7 @@ public class Player {
     private int round = 0;
     private int maxNumberOfRounds = 5;
     private int[] roundScore = new int[maxNumberOfRounds];
+    private int totalUsedAmount = 0;
 
     // Metoeder
     public void saveRoundScore() {
@@ -29,9 +30,18 @@ public class Player {
         moves++;
     }
 
+    public void addAmountToTotal(int amount){
+        totalUsedAmount += amount;
+    }
+
+
     // Getters & setteres
     public int getWallet() {
         return wallet;
+    }
+
+    public int getTotalUsedAmount() {
+        return totalUsedAmount;
     }
 
     public void setWallet(int wallet) {

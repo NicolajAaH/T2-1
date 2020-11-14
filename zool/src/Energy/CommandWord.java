@@ -2,7 +2,8 @@ package Energy;
 
 public enum CommandWord
 {
-    GO("gå"), QUIT("afslut"), HELP("hjælp"), UNKNOWN("?"), BUY("køb"), STATUS("status"),REPLACE("udskift"),DELETE("skrot"),INVENTORY("inventar"),;
+    GO("gå"), QUIT("afslut"), HELP("hjælp"), UNKNOWN("?"), BUY("køb"), STATUS("status"),
+    REPLACE("udskift"),DELETE("skrot"),INVENTORY("inventar"),NEWROUND("nytår"),;
     
     private String commandString;
     

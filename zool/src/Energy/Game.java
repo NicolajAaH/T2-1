@@ -198,12 +198,9 @@ public class Game {
     }
 
     private void printExit(){
-        System.out.println("Tak for, at du spillede vores spil\n");
-        System.out.println("Du har sparet " + player.getScore() + " kr. om året i energiforbedringer");
-        System.out.println("Og har brugt " + (player.getStartAmount() - player.getWallet()) + " kr,-");
-        System.out.println("Du startede med energimærke " + EnergyLabel.createEnergyLabel(0,player.getStartValue()));
-        System.out.println("Du er nu på energimærke " + EnergyLabel.createEnergyLabel(player.getScore(), player.getStartValue()));
-        System.out.println("Lavet af: Yusuf Bayoz, Victor Poulsen, Emil Spangenberg, Theis Langlands & Nicolaj Hansen");
+        System.out.println("--- Tak for, at du spillede vores spil ---\n");
+        printStatus();
+        System.out.println("\nLavet af: Yusuf Bayoz, Victor Poulsen, Emil Spangenberg, Theis Langlands & Nicolaj Hansen");
     } // afslutning af spil
 
     private boolean processCommand(Command command) {
@@ -220,6 +217,8 @@ public class Game {
             printHelp();
         } else if (commandWord == CommandWord.GO) {
             wantToQuit = goRoom(command);
+        } else if (commandWord == CommandWord.NEWROUND) {
+            wantToQuit = newRound();
         } else if (commandWord == CommandWord.INVENTORY) {
             inventory();
         } else if (commandWord == CommandWord.DELETE) {
@@ -234,6 +233,10 @@ public class Game {
             status();
         }
         return wantToQuit;
+    }
+
+    private boolean newRound() {
+        return nextRound();
     }
 
     private void printHelp() {
@@ -342,9 +345,10 @@ public class Game {
         // kopierer fra butikkens inventory (index) til players inventory
         copyItem(store.getRoomInv(), index, player.getInventory());
 
-        // fratrækker købet fra players wallet
+        // fratrækker købet fra players wallet og tilføjer til totalforbrug
         int amount = player.getWallet() - price;
         player.setWallet(amount);
+        player.addAmountToTotal(price);
 
         // udskriver køb og spiller inventory
         System.out.println("Du har købt " + store.getRoomInv().getItem(index).getName() + "\n");
@@ -493,7 +497,6 @@ public class Game {
 
     private boolean nextRound() {
         System.out.println("\nDu har nu afsluttet " + (player.getRounds() +1 ) + ". år");
-        printStatus();
 
         // checker om vi har nået max antal runder
         if (player.getRounds() == (player.getMaxNumberOfRounds() -1 ) ) {
@@ -501,11 +504,18 @@ public class Game {
             return true; // spillet er slut - sætter want to quit til True
         }
 
-        player.saveRoundScore(); // gemmer scoren for runden
-        player.setRounds(player.getRounds()+1); // opdatere runde count
+        // Udskriver status
+        printStatus();
 
+        // gemmer score og opdatere runde count
+        player.saveRoundScore();
+        player.setRounds(player.getRounds()+1);
+
+        // intialiserer nyt år
         player.setWallet(player.getStartAmount() + player.getScore()); // nyt årsbudget!
         player.setMoves(0); // resetter moves
+
+        // Udskriver velkommen til nyt år
         System.out.println("\n --- Velkommen til år " + (player.getRounds() + 1) + " ---");
         System.out.println("Dit nye årsbudget er " + player.getWallet());
         System.out.println();
@@ -516,10 +526,9 @@ public class Game {
     }
 
     private void printStatus() {
+        System.out.println("Du har brugt " + player.getTotalUsedAmount() + " kr,-");
         System.out.println("Du har samlet sparet " + player.getScore() + " kr. om året i energiforbedringer");
-        System.out.println("Og har brugt " + (player.getStartAmount() - player.getWallet()) + " kr,-");
-        System.out.println("Du startede med energimærke " + EnergyLabel.createEnergyLabel(0,player.getStartValue()));
-        System.out.println("Du er nu på energimærke " + EnergyLabel.createEnergyLabel(player.getScore(), player.getStartValue()));
-
+        System.out.println("\nDu startede med energimærke " + EnergyLabel.createEnergyLabel(0,player.getStartValue()));
+        System.out.println("og er nu på energimærke " + EnergyLabel.createEnergyLabel(player.getScore(), player.getStartValue()));
     }
 }
