@@ -35,6 +35,6 @@ public class Item {
 
     @Override
     public String toString() {
-        return "Name: " + name + ", Price: " + price + ", Årlig besparelse: " + scoreImpact;
+        return "" + name + ", Pris: " + price + ", Årlig besparelse: " + scoreImpact;
     }
 }
