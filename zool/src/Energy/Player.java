@@ -36,8 +36,6 @@ public class Player {
 
 
     // Getters & setteres
-
-
     public int getRoundScore(int roundNr) {
         return roundScore[roundNr];
     }

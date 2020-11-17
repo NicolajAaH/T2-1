@@ -339,10 +339,8 @@ public class Game {
         player.setWallet(amount);
         player.addAmountToTotal(price);
 
-        // udskriver køb og spiller inventory
+        // udskriver køb
         System.out.println("Du har købt " + store.getRoomInv().getItem(index).getName() + "\n");
-        System.out.println("Du har nu: ");
-        player.getInventory().printInventory();
     }
 
     private boolean replace(Command command) {
@@ -477,8 +475,12 @@ public class Game {
     }
 
     private void inventory() {
-        System.out.print("Spiller ");
-        player.getInventory().printInventory();
+        if (player.getInventory().isEmpty()) {
+            System.out.println("Du har ikke nogle ting, tag en tur i Superbyg");
+        } else {
+            System.out.print("Du har: \n");
+            System.out.println(player.getInventory().printInventory());
+        }
     }
 
     private void copyItem(Inventory sourceInventory, int itemIndex, Inventory destInventory) {

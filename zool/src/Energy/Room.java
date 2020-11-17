@@ -3,7 +3,6 @@ package Energy;
 import java.util.Set;
 import java.util.HashMap;
 
-
 public class Room
 {
     // Attributes
@@ -41,7 +40,9 @@ public class Room
     public String getLongDescription()
     {
         String returnString;
-        returnString = " - Du er " + description + " -\n" + getExitString()+"\n";
+        // returnerer rum og udgange
+        returnString = " - Du er " + description + " -\n\n" + getExitString()+"\n\n";
+        // returnerer inventory hvis der er noget i den!
         if (!roomInv.isEmpty()) {
             returnString += getInvDescriptionString();
             returnString += getRoomInvString();

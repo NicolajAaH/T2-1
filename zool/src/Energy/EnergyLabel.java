@@ -30,6 +30,5 @@ public class EnergyLabel {
             return "F";
         }
         return "G";
-
     }
 }
