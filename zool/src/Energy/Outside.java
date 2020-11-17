@@ -8,7 +8,6 @@ public class Outside extends Room {
     }
 
     // Methods
-
     @Override
     public String getInvDescriptionString() {
         return "Dit hus har:\n";
