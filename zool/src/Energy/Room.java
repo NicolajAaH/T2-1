@@ -41,7 +41,7 @@ public class Room
     {
         String returnString;
         // returnerer rum og udgange
-        returnString = " - Du er " + description + " -\n\n" + getExitString()+"\n\n";
+        returnString = " - Du er " + description + " -\n" + getExitString()+"\n\n";
         // returnerer inventory hvis der er noget i den!
         if (!roomInv.isEmpty()) {
             returnString += getInvDescriptionString();
