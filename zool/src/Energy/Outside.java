@@ -11,8 +11,7 @@ public class Outside extends Room {
     // Methods
 
     @Override
-    public String toString() {
-        String result;
-        return super.toString();
+    public String getInvDescriptionString() {
+        return "Dit hus har:\n";
     }
 }

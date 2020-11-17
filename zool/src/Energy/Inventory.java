@@ -23,10 +23,16 @@ public class Inventory {
         items.remove(item);
     }
 
-    public void printInventory() {
+    public String printInventory() {
+
+        String result = "";
+
         for (int i = 0; i < items.size(); i++) {
-            System.out.println(i+1 + ". " + items.get(i).toString());
+            result += (i+1) + ". " + items.get(i).toString() + "\n";
         }
+
+        //System.out.println(result);
+        return result;
     }
 
     public boolean isEmpty(){

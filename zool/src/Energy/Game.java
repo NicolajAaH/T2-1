@@ -20,8 +20,7 @@ public class Game {
     private void createRooms() {
 
         // create room and description
-
-        store = new Shop("nu i Super Byg, her kan du købe tingene til huset");
+        store = new Store("nu i Super Byg, her kan du købe tingene til huset");
         outside = new Outside("ude foran huset");
         utility = new Room("i bryggerset");
         bathroom = new Room("i badeværelset");
@@ -274,24 +273,8 @@ public class Game {
             return nextRound();
         }
 
-            currentRoom = nextRoom;   
+            currentRoom = nextRoom;
             System.out.println(currentRoom.getLongDescription());
-
-        // tjekker om der er noget i rummets inventory
-        if (currentRoom.getRoomInv().getSize() == 0) {
-            return false;
-        }
-
-        // printer inventory tekst afhængig af rum
-        if (currentRoom == outside) {
-            System.out.println("Dit hus har:");
-        } else if (currentRoom == store) {
-            System.out.println("Du kan købe:");
-        } else {
-            System.out.println("Rummmet indeholder:");
-        }
-
-        currentRoom.printRoomInv();
 
         return false;
     }
@@ -488,6 +471,7 @@ public class Game {
         return currentRoom == store;
     }
 
+    // skal den ikke slettes - indeholdt i status?
     private void wallet(){
         System.out.println(player.getWallet());
     }

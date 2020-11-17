@@ -4,7 +4,7 @@ import java.util.Set;
 import java.util.HashMap;
 
 
-public class Room 
+public class Room
 {
     private String description;
     private HashMap<String, Room> exits;
@@ -28,7 +28,14 @@ public class Room
 
     public String getLongDescription()
     {
-        return "Du er " + description + ".\n" + getExitString();
+        String returnString;
+        returnString = " - Du er " + description + " -\n" + getExitString()+"\n";
+        if (!roomInv.isEmpty()) {
+            returnString += getInvDescriptionString();
+            returnString += getRoomInvString();
+        }
+
+        return returnString;
     }
 
     private String getExitString() // henter mulige udgange (keys i hashmap) og returnerer dem i en streng.
@@ -41,6 +48,11 @@ public class Room
         return returnString;
     }
 
+    public String getInvDescriptionString() {
+        return "Rummet indeholder:\n";
+    }
+
+
     public void addToInventory(Item item){
         roomInv.addItem(item);
     }
@@ -50,8 +62,8 @@ public class Room
         return exits.get(direction);
     }
 
-    public void printRoomInv() {
-        roomInv.printInventory();
+    public String getRoomInvString() {
+        return roomInv.printInventory();
     }
 
     public Inventory getRoomInv() {
