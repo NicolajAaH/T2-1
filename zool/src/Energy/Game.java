@@ -20,9 +20,8 @@ public class Game {
     private void createRooms() {
 
         // create room and description
-
-        store = new Room("nu i Super Byg, her kan du købe tingene til huset");
-        outside = new Room("ude foran huset");
+        store = new Store("nu i Super Byg, her kan du købe tingene til huset");
+        outside = new Outside("ude foran huset");
         utility = new Room("i bryggerset");
         bathroom = new Room("i badeværelset");
         bedroom = new Room("i soveværelsen");
@@ -238,9 +237,9 @@ public class Game {
 
     private void printHelp() {
         System.out.println("");
-        System.out.println("Dine kommandoer er:");
+        System.out.println("Dine kommandoer er:\n");
         parser.showCommands();
-        System.out.println("Kommandoen: 'nytår' starter et nyt år.");
+        System.out.println("\nKommandoen: 'nytår' starter et nyt år.");
         System.out.println("Kommandoen: 'afslut' afslutter spillet.");
         System.out.println("Kommandoen: 'køb' NUMMER køber en ting fra butikken.");
         System.out.println("Kommandoen: 'udskift' NUMMER udskifter en ting i rummet eller udenfor.");
@@ -274,24 +273,8 @@ public class Game {
             return nextRound();
         }
 
-            currentRoom = nextRoom;   
+            currentRoom = nextRoom;
             System.out.println(currentRoom.getLongDescription());
-
-        // tjekker om der er noget i rummets inventory
-        if (currentRoom.getRoomInv().getSize() == 0) {
-            return false;
-        }
-
-        // printer inventory tekst afhængig af rum
-        if (currentRoom == outside) {
-            System.out.println("Dit hus har:");
-        } else if (currentRoom == store) {
-            System.out.println("Du kan købe:");
-        } else {
-            System.out.println("Rummmet indeholder:");
-        }
-
-        currentRoom.printRoomInv();
 
         return false;
     }
@@ -356,10 +339,8 @@ public class Game {
         player.setWallet(amount);
         player.addAmountToTotal(price);
 
-        // udskriver køb og spiller inventory
+        // udskriver køb
         System.out.println("Du har købt " + store.getRoomInv().getItem(index).getName() + "\n");
-        System.out.println("Du har nu: ");
-        player.getInventory().printInventory();
     }
 
     private boolean replace(Command command) {
@@ -488,13 +469,18 @@ public class Game {
         return currentRoom == store;
     }
 
+    // skal den ikke slettes - indeholdt i status? - måske skal den bruges i GUI?
     private void wallet(){
         System.out.println(player.getWallet());
     }
 
     private void inventory() {
-        System.out.print("Spiller ");
-        player.getInventory().printInventory();
+        if (player.getInventory().isEmpty()) {
+            System.out.println("Du har ikke nogle ting, tag en tur i Superbyg");
+        } else {
+            System.out.print("Du har: \n");
+            System.out.println(player.getInventory().printInventory());
+        }
     }
 
     private void copyItem(Inventory sourceInventory, int itemIndex, Inventory destInventory) {

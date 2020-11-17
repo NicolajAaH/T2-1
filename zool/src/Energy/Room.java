@@ -3,32 +3,57 @@ package Energy;
 import java.util.Set;
 import java.util.HashMap;
 
-
-public class Room 
+public class Room
 {
+    // Attributes
     private String description;
     private HashMap<String, Room> exits;
     private Inventory roomInv = new Inventory();
 
+    // Constructor
     public Room(String description)
     {
         this.description = description;
         exits = new HashMap<String, Room>();
     }
 
+    // Methods
     public void setExit(String direction, Room neighbor) 
     {
         exits.put(direction, neighbor);
     }
 
+    public Room getExit(String direction)
+    {
+        return exits.get(direction);
+    }
+
+    public void addToInventory(Item item){
+        roomInv.addItem(item);
+    }
+
+    public Inventory getRoomInv() {
+        return roomInv;
+    }
+
+    // String methods
+    public String getLongDescription()
+    {
+        String returnString;
+        // returnerer rum og udgange
+        returnString = " - Du er " + description + " -\n" + getExitString()+"\n\n";
+        // returnerer inventory hvis der er noget i den!
+        if (!roomInv.isEmpty()) {
+            returnString += getInvDescriptionString();
+            returnString += getRoomInvString();
+        }
+
+        return returnString;
+    }
+
     public String getShortDescription()
     {
         return description;
-    }
-
-    public String getLongDescription()
-    {
-        return "Du er " + description + ".\n" + getExitString();
     }
 
     private String getExitString() // henter mulige udgange (keys i hashmap) og returnerer dem i en streng.
@@ -41,21 +66,12 @@ public class Room
         return returnString;
     }
 
-    public void addToInventory(Item item){
-        roomInv.addItem(item);
+    public String getRoomInvString() {
+        return roomInv.printInventory();
     }
 
-    public Room getExit(String direction) 
-    {
-        return exits.get(direction);
-    }
-
-    public void printRoomInv() {
-        roomInv.printInventory();
-    }
-
-    public Inventory getRoomInv() {
-        return roomInv;
+    public String getInvDescriptionString() {
+        return "Rummet indeholder:\n";
     }
 }
 
