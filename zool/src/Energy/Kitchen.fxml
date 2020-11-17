@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Energy.KitchenController">
+   <children>
+      <ImageView fitHeight="400.0" fitWidth="600.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../../../Images/Kitchen_picture.png" />
+         </image>
+      </ImageView>
+      <Label layoutX="435.0" layoutY="14.0" prefHeight="10.0" prefWidth="48.0" text="Status: " />
+      <ImageView fitHeight="85.0" fitWidth="200.0" layoutX="202.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../../../Images/Kitchen_minimap.jpg" />
+         </image>
+      </ImageView>
+      <Label layoutX="24.0" layoutY="359.0" text="Inventar: ">
+         <font>
+            <Font size="16.0" />
+         </font>
+      </Label>
+      <ImageView fx:id="item0" fitHeight="48.0" fitWidth="48.0" layoutX="95.0" layoutY="345.0" pickOnBounds="true" preserveRatio="true" />
+      <ImageView fx:id="item1" fitHeight="48.0" fitWidth="48.0" layoutX="150.0" layoutY="345.0" pickOnBounds="true" preserveRatio="true" />
+      <ImageView fx:id="item2" fitHeight="48.0" fitWidth="48.0" layoutX="205.0" layoutY="345.0" pickOnBounds="true" preserveRatio="true" />
+      <ImageView fx:id="item3" fitHeight="48.0" fitWidth="48.0" layoutX="260.0" layoutY="345.0" pickOnBounds="true" preserveRatio="true" />
+      <ImageView fx:id="item4" fitHeight="48.0" fitWidth="48.0" layoutX="315.0" layoutY="345.0" pickOnBounds="true" preserveRatio="true" />
+      <Label fx:id="fridge_label" layoutX="89.0" layoutY="190.0" prefHeight="20.0" prefWidth="61.0" textAlignment="CENTER" />
+      <Label fx:id="oven_label" layoutX="285.0" layoutY="268.0" prefHeight="11.0" prefWidth="61.0" textFill="#f8f5f5" textAlignment="CENTER" />
+      <Label fx:id="dishwasher_label" layoutX="471.0" layoutY="234.0" prefHeight="18.0" prefWidth="48.0" textAlignment="CENTER" />
+   </children>
+</AnchorPane>
