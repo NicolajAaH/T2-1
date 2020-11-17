@@ -21,8 +21,8 @@ public class Game {
 
         // create room and description
 
-        store = new Room("nu i Super Byg, her kan du købe tingene til huset");
-        outside = new Room("ude foran huset");
+        store = new Shop("nu i Super Byg, her kan du købe tingene til huset");
+        outside = new Outside("ude foran huset");
         utility = new Room("i bryggerset");
         bathroom = new Room("i badeværelset");
         bedroom = new Room("i soveværelsen");
