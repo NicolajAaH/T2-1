@@ -237,9 +237,9 @@ public class Game {
 
     private void printHelp() {
         System.out.println("");
-        System.out.println("Dine kommandoer er:");
+        System.out.println("Dine kommandoer er:\n");
         parser.showCommands();
-        System.out.println("Kommandoen: 'nytår' starter et nyt år.");
+        System.out.println("\nKommandoen: 'nytår' starter et nyt år.");
         System.out.println("Kommandoen: 'afslut' afslutter spillet.");
         System.out.println("Kommandoen: 'køb' NUMMER køber en ting fra butikken.");
         System.out.println("Kommandoen: 'udskift' NUMMER udskifter en ting i rummet eller udenfor.");
@@ -471,7 +471,7 @@ public class Game {
         return currentRoom == store;
     }
 
-    // skal den ikke slettes - indeholdt i status?
+    // skal den ikke slettes - indeholdt i status? - måske skal den bruges i GUI?
     private void wallet(){
         System.out.println(player.getWallet());
     }
