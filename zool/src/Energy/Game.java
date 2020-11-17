@@ -91,27 +91,28 @@ public class Game {
         int BATH = 13;
 
         // tilføj til inventory
+        //add to inventory
+        store.addToInventory(new Item("Opvaskemaskine A", 2500, 150, DISHWASHER));
+        store.addToInventory(new Item("Opvaskemaskine A++", 3300, 200, DISHWASHER));
         store.addToInventory(new Item("Vaskemaskine A+", 2400, 65, WASHINGMACHINE));
-        store.addToInventory(new Item("Vaskemaskine A++", 3000, 49, WASHINGMACHINE));
-        store.addToInventory(new Item("Vaskemaskine A+++", 4000, 43, WASHINGMACHINE)); 
-        store.addToInventory(new Item("Tørretumbler A+", 2887, 850, DRYER));
-        store.addToInventory(new Item("Tørretumbler A++", 3499, 1039, DRYER));
-        store.addToInventory(new Item("Tørretumbler A+++", 4318, 1180, DRYER));
-        store.addToInventory(new Item("Pillefyr (varmeanlæg)", 45000, 10057, HEATING));
-        store.addToInventory(new Item("Gas (varmeanlæg)", 50000, 12240, HEATING));
-        store.addToInventory(new Item("Energibesparende komfur", 4500, 1250, STOVE));
-        store.addToInventory(new Item("Køleskab A+++", 8000, 470, FRIDGE));
-        store.addToInventory(new Item("Køleskab A++", 6500, 400, FRIDGE));
-        store.addToInventory(new Item("Køleskab A+", 4500, 350, FRIDGE));
-        store.addToInventory(new Item("Opvaskemaskine A++", 3300, 400, DISHWASHER));
-        store.addToInventory(new Item("Opvaskemaskine A", 2500, 300, DISHWASHER));
-        store.addToInventory(new Item("Termorude (2 lag)", 1000, 375, WINDOW));
-        store.addToInventory(new Item("Sparepære", 20, 230, LIGHTS));
-        store.addToInventory(new Item("LED-pære", 60, 350, LIGHTS));
-        store.addToInventory(new Item("Energisparende TV", 5900, 520, TV));
-        store.addToInventory(new Item("Hul-fikser-kit", 150, 500, WALLFIXER));
-        store.addToInventory(new Item("Isolering", 10000, 9300, ISOLATION));
-        store.addToInventory(new Item("Solceller", 30000, 8000, SOLARCELLS));
+        store.addToInventory(new Item("Vaskemaskine A++", 3000, 114, WASHINGMACHINE));
+        store.addToInventory(new Item("Vaskemaskine A+++", 3850, 157, WASHINGMACHINE));
+        store.addToInventory(new Item("Tørretumbler A+", 2887, 145, DRYER));
+        store.addToInventory(new Item("Tørretumbler A++", 3499, 189, DRYER));
+        store.addToInventory(new Item("Tørretumbler A+++", 4318, 243, DRYER));
+        store.addToInventory(new Item("Køleskab A+", 3375, 221, FRIDGE));
+        store.addToInventory(new Item("Køleskab A++", 4875, 308, FRIDGE));
+        store.addToInventory(new Item("Køleskab A+++", 6000, 394, FRIDGE));
+        store.addToInventory(new Item("Energibesparende komfur", 4500, 284, STOVE));
+        store.addToInventory(new Item("Energisparende TV", 5900, 375, TV));
+        store.addToInventory(new Item("Termorude (2 lag)", 1250, 175, WINDOW));
+        store.addToInventory(new Item("Sparepære", 200, 50, LIGHTS));
+        store.addToInventory(new Item("LED-pære", 600, 170, LIGHTS));
+        store.addToInventory(new Item("Pillefyr (varmeanlæg)", 22500, 2500, HEATING));
+        store.addToInventory(new Item("Gas (varmeanlæg)", 25000, 3000, HEATING));
+        store.addToInventory(new Item("Hul-fikser-kit", 1500, 1500, WALLFIXER));
+        store.addToInventory(new Item("Isolering", 10000, 750, ISOLATION));
+        store.addToInventory(new Item("Solceller", 30000, 3500, SOLARCELLS));
 
         utility.addToInventory(new Item("Vaskemaskine D", 0, 0, WASHINGMACHINE));
         utility.addToInventory(new Item("Tørretumbler D", 0, 0, DRYER));
