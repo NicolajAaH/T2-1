@@ -105,8 +105,8 @@ public class Game {
         store.addToInventory(new Item("Energibesparende komfur", 4500, 284, STOVE));
         store.addToInventory(new Item("Energisparende TV", 5900, 375, TV));
         store.addToInventory(new Item("Termorude (2 lag)", 1250, 175, WINDOW));
-        store.addToInventory(new Item("Sparepære", 200, 50, LIGHTS));
-        store.addToInventory(new Item("LED-pære", 600, 170, LIGHTS));
+        store.addToInventory(new Item("Lampe med sparepære", 200, 50, LIGHTS));
+        store.addToInventory(new Item("Lampe med LED-pære", 600, 170, LIGHTS));
         store.addToInventory(new Item("Pillefyr (varmeanlæg)", 22500, 2500, HEATING));
         store.addToInventory(new Item("Gas (varmeanlæg)", 25000, 3000, HEATING));
         store.addToInventory(new Item("Hul-fikser-kit", 1500, 1500, WALLFIXER));
