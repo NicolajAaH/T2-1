@@ -1,4 +1,4 @@
-package Energy;
+package Energy.domain;
 
 public class Command
 {

@@ -1,4 +1,4 @@
-package Energy;
+package Energy.domain;
 
 import java.util.Set;
 import java.util.HashMap;

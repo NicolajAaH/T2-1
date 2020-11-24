@@ -1,9 +1,9 @@
-package Energy;
+package Energy.domain;
 
 public class PlayGame {
 
     public static void main(String[] args) {
-        Energy.Game playGame = new Energy.Game();
+        Game playGame = new Game();
         playGame.play();
     }
 }

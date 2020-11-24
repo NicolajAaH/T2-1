@@ -1,4 +1,4 @@
-package Energy;
+package Energy.domain;
 
 public class EnergyLabel {
     private static final int A = 0;
