@@ -10,13 +10,13 @@
    <children>
       <ImageView fitHeight="400.0" fitWidth="600.0" pickOnBounds="true" preserveRatio="true">
          <image>
-            <Image url="@../../../../Images/Kitchen_picture.png" />
+            <Image url="@/Images/Kitchen_picture.png" />
          </image>
       </ImageView>
       <Label layoutX="435.0" layoutY="14.0" prefHeight="10.0" prefWidth="48.0" text="Status: " />
       <ImageView fitHeight="85.0" fitWidth="200.0" layoutX="202.0" pickOnBounds="true" preserveRatio="true">
          <image>
-            <Image url="@../../../../Images/Kitchen_minimap.jpg" />
+            <Image url="@/Images/Kitchen_minimap.jpg" />
          </image>
       </ImageView>
       <Label layoutX="24.0" layoutY="359.0" text="Inventar: ">

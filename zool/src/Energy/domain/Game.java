@@ -1,5 +1,7 @@
 package Energy.domain;
 
+import javafx.scene.image.Image;
+
 import java.util.Scanner;
 
 public class Game {
@@ -8,6 +10,20 @@ public class Game {
     private Room currentRoom; // holder styr på det rum man befinder sig i
     Room store, outside, utility, bathroom, bedroom, kidsRoom, room, kitchen, livingRoom, corrridor1, corridor2, corridor3, corridor4; // liste over rum
 
+    public final int WASHINGMACHINE = 1;
+    public final int DRYER = 2;
+    public final int HEATING = 3;
+    public final int STOVE = 4;
+    public final int FRIDGE = 5;
+    public final int DISHWASHER = 6;
+    public final int WINDOW = 7;
+    public final int LIGHTS = 8;
+    public final int TV = 9;
+    public final int WALLFIXER = 10;
+    public final int ISOLATION = 11;
+    public final int SOLARCELLS = 12;
+    public final int BATH = 13;
+
     public Game() // opretter nyt spil
     {
         createRooms(); // sætter rum og udgange
@@ -15,6 +31,10 @@ public class Game {
         player = new Player();
         // max kapacitet i player inventory
         player.getInventory().setMaxSize(5);
+    }
+
+    public Player getPlayer() {
+        return player;
     }
 
     private void createRooms() {
@@ -74,72 +94,57 @@ public class Game {
 
         room.setExit("nord", corridor4); //fra room kan man gå til gang 4
 
-        // Variable
-        int WASHINGMACHINE = 1;
-        int DRYER = 2;
-        int HEATING = 3;
-        int STOVE = 4;
-        int FRIDGE = 5;
-        int DISHWASHER = 6;
-        int WINDOW = 7;
-        int LIGHTS = 8;
-        int TV = 9;
-        int WALLFIXER = 10;
-        int ISOLATION = 11;
-        int SOLARCELLS = 12;
-        int BATH = 13;
-
         // tilføj til inventory
         //add to inventory
-        store.addToInventory(new Item("Opvaskemaskine A", 2500, 150, DISHWASHER));
-        store.addToInventory(new Item("Opvaskemaskine A++", 3300, 200, DISHWASHER));
-        store.addToInventory(new Item("Vaskemaskine A+", 2400, 65, WASHINGMACHINE));
-        store.addToInventory(new Item("Vaskemaskine A++", 3000, 114, WASHINGMACHINE));
-        store.addToInventory(new Item("Vaskemaskine A+++", 3850, 157, WASHINGMACHINE));
-        store.addToInventory(new Item("Tørretumbler A+", 2887, 145, DRYER));
-        store.addToInventory(new Item("Tørretumbler A++", 3499, 189, DRYER));
-        store.addToInventory(new Item("Tørretumbler A+++", 4318, 243, DRYER));
-        store.addToInventory(new Item("Køleskab A+", 3375, 221, FRIDGE));
-        store.addToInventory(new Item("Køleskab A++", 4875, 308, FRIDGE));
-        store.addToInventory(new Item("Køleskab A+++", 6000, 394, FRIDGE));
-        store.addToInventory(new Item("Energibesparende komfur", 4500, 284, STOVE));
-        store.addToInventory(new Item("Energisparende TV", 5900, 375, TV));
-        store.addToInventory(new Item("Termorude (2 lag)", 1250, 175, WINDOW));
-        store.addToInventory(new Item("Sparepære", 200, 50, LIGHTS));
-        store.addToInventory(new Item("LED-pære", 600, 170, LIGHTS));
-        store.addToInventory(new Item("Pillefyr (varmeanlæg)", 22500, 2500, HEATING));
-        store.addToInventory(new Item("Gas (varmeanlæg)", 25000, 3000, HEATING));
-        store.addToInventory(new Item("Hul-fikser-kit", 1500, 1500, WALLFIXER));
-        store.addToInventory(new Item("Isolering", 10000, 750, ISOLATION));
-        store.addToInventory(new Item("Solceller", 30000, 3500, SOLARCELLS));
+        store.addToInventory(new Item("Opvaskemaskine A", 2500, 150, DISHWASHER, "A"));
+        store.addToInventory(new Item("Opvaskemaskine A++", 3300, 200, DISHWASHER, "A++"));
+        store.addToInventory(new Item("Vaskemaskine A+", 2400, 65, WASHINGMACHINE, "A+"));
+        store.addToInventory(new Item("Vaskemaskine A++", 3000, 114, WASHINGMACHINE, "A++"));
+        store.addToInventory(new Item("Vaskemaskine A+++", 3850, 157, WASHINGMACHINE, "A+++"));
+        store.addToInventory(new Item("Tørretumbler A+", 2887, 145, DRYER, "A+"));
+        store.addToInventory(new Item("Tørretumbler A++", 3499, 189, DRYER, "A++"));
+        store.addToInventory(new Item("Tørretumbler A+++", 4318, 243, DRYER, "A+++"));
+        store.addToInventory(new Item("Køleskab A+", 3375, 221, FRIDGE, "A+"));
+        store.addToInventory(new Item("Køleskab A++", 4875, 308, FRIDGE, "A++"));
+        store.addToInventory(new Item("Køleskab A+++", 6000, 394, FRIDGE, "A+++"));
+        store.addToInventory(new Item("Energibesparende komfur", 4500, 284, STOVE, null));
+        store.addToInventory(new Item("Energisparende TV", 5900, 375, TV, null));
+        store.addToInventory(new Item("Termorude (2 lag)", 1250, 175, WINDOW, null));
+        store.addToInventory(new Item("Sparepære", 200, 50, LIGHTS, null));
+        store.addToInventory(new Item("LED-pære", 600, 170, LIGHTS, null));
+        store.addToInventory(new Item("Pillefyr (varmeanlæg)", 22500, 2500, HEATING, null));
+        store.addToInventory(new Item("Gas (varmeanlæg)", 25000, 3000, HEATING, null));
+        store.addToInventory(new Item("Hul-fikser-kit", 1500, 1500, WALLFIXER, null));
+        store.addToInventory(new Item("Isolering", 10000, 750, ISOLATION, null));
+        store.addToInventory(new Item("Solceller", 30000, 3500, SOLARCELLS, null));
 
-        utility.addToInventory(new Item("Vaskemaskine D", 0, 0, WASHINGMACHINE));
-        utility.addToInventory(new Item("Tørretumbler D", 0, 0, DRYER));
-        utility.addToInventory(new Item("Oliefyr", 0, 0, HEATING));
+        utility.addToInventory(new Item("Vaskemaskine D", 0, 0, WASHINGMACHINE, "D"));
+        utility.addToInventory(new Item("Tørretumbler D", 0, 0, DRYER, "D"));
+        utility.addToInventory(new Item("Oliefyr", 0, 0, HEATING, null));
 
-        kitchen.addToInventory(new Item("Køleskab D", 0, 0, FRIDGE)); // færdig
-        kitchen.addToInventory(new Item("Komfur C", 0, 0, STOVE));
-        kitchen.addToInventory(new Item("Opvaskemaskine D", 0, 0, DISHWASHER));
+        kitchen.addToInventory(new Item("Køleskab D", 0, 0, FRIDGE, "D")); // færdig
+        kitchen.addToInventory(new Item("Komfur C", 0, 0, STOVE, "C"));
+        kitchen.addToInventory(new Item("Opvaskemaskine D", 0, 0, DISHWASHER, "D"));
 
-        livingRoom.addToInventory(new Item("Enkeltlags vindue", 0, 0, WINDOW));
-        livingRoom.addToInventory(new Item("Glødepære", 0, 0, LIGHTS));
-        livingRoom.addToInventory(new Item("TV D", 0, 0, TV));
+        livingRoom.addToInventory(new Item("Enkeltlags vindue", 0, 0, WINDOW, null));
+        livingRoom.addToInventory(new Item("Glødepære", 0, 0, LIGHTS, null));
+        livingRoom.addToInventory(new Item("TV D", 0, 0, TV, "D"));
 
-        bedroom.addToInventory(new Item("Glødepære", 0, 0, LIGHTS));
-        bedroom.addToInventory(new Item("Enkeltlags vindue", 0, 0, WINDOW));
-        bedroom.addToInventory(new Item("Hul i væggen", 0, 0, WALLFIXER));
+        bedroom.addToInventory(new Item("Glødepære", 0, 0, LIGHTS, null));
+        bedroom.addToInventory(new Item("Enkeltlags vindue", 0, 0, WINDOW, null));
+        bedroom.addToInventory(new Item("Hul i væggen", 0, 0, WALLFIXER, null));
 
-        room.addToInventory(new Item("Glødepære", 0, 0, LIGHTS));
-        room.addToInventory(new Item("Enkeltlags vindue", 0, 0, WINDOW));
+        room.addToInventory(new Item("Glødepære", 0, 0, LIGHTS, null));
+        room.addToInventory(new Item("Enkeltlags vindue", 0, 0, WINDOW, null));
 
-        kidsRoom.addToInventory(new Item("Glødepære", 0, 0, LIGHTS));
-        kidsRoom.addToInventory(new Item("Enkeltlags vindue", 0, 0, WINDOW));
-        kidsRoom.addToInventory(new Item("Hul i væggen", 0, 0, WALLFIXER));
+        kidsRoom.addToInventory(new Item("Glødepære", 0, 0, LIGHTS, null));
+        kidsRoom.addToInventory(new Item("Enkeltlags vindue", 0, 0, WINDOW, null));
+        kidsRoom.addToInventory(new Item("Hul i væggen", 0, 0, WALLFIXER, null));
 
-        bathroom.addToInventory(new Item("Bruser D", 0, 0, BATH));
+        bathroom.addToInventory(new Item("Bruser D", 0, 0, BATH, "D"));
 
-        outside.addToInventory(new Item("Tag uden solceller", 0, 0, SOLARCELLS));
-        outside.addToInventory(new Item("Tyndt isolering", 0, 0, ISOLATION));
+        outside.addToInventory(new Item("Tag uden solceller", 0, 0, SOLARCELLS, null));
+        outside.addToInventory(new Item("Tyndt isolering", 0, 0, ISOLATION, null));
 
         // sætter startrummet til outside
         currentRoom = outside;
