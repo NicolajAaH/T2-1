@@ -45,11 +45,11 @@ public class Controller {
     @FXML
     private Label printStatus;
     @FXML
-    private ImageView arrowUp;
+    private ImageView arrowNorth;
     @FXML
-    private ImageView arrowDown;
+    private ImageView arrowSouth;
     @FXML
-    private ImageView arrowLeft;
+    private ImageView arrowEast;
     @FXML
     private ImageView arrowRight;
 
@@ -71,7 +71,7 @@ public class Controller {
         if (domainI.getPlayerInventory().getSize() > 1 && domainI.getPlayerInventory().getItem(1) != null) {
             item1.setImage(findImage(domainI.getPlayerInventory().getItem(1).getItemType()));
         } else {
-            item0.setImage(null);
+            item1.setImage(null);
         }
 
         if (domainI.getPlayerInventory().getSize() > 2 && domainI.getPlayerInventory().getItem(2) != null) {
@@ -81,15 +81,15 @@ public class Controller {
         }
 
         if (domainI.getPlayerInventory().getSize() > 3 && domainI.getPlayerInventory().getItem(3) != null) {
-            item0.setImage(findImage(domainI.getPlayerInventory().getItem(3).getItemType()));
+            item3.setImage(findImage(domainI.getPlayerInventory().getItem(3).getItemType()));
         } else {
-            item0.setImage(null);
+            item3.setImage(null);
         }
 
         if (domainI.getPlayerInventory().getSize() > 4 && domainI.getPlayerInventory().getItem(4) != null) {
-            item0.setImage(findImage(domainI.getPlayerInventory().getItem(4).getItemType()));
+            item4.setImage(findImage(domainI.getPlayerInventory().getItem(4).getItemType()));
         } else {
-            item0.setImage(null);
+            item4.setImage(null);
         }
     }
 
@@ -98,6 +98,17 @@ public class Controller {
     }
 
     public void showExits(){
-        if(getDomainI().)
+        if(domainI.hasEastExit()){
+            arrowEast.setImage(new Image("/Images/east_arrow.png"));
+        }
+        if(domainI.hasNorthExit()){
+            arrowEast.setImage(new Image("/Images/north_arrow.png"));
+        }
+        if(domainI.hasSouthExit()){
+            arrowEast.setImage(new Image("/Images/south_arrow.png"));
+        }
+        if(domainI.hasWestExit()){
+            arrowEast.setImage(new Image("/Images/west_arrow.png"));
+        }
     }
 }
