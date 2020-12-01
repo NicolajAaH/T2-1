@@ -28,6 +28,10 @@ public class Room
         return exits.get(direction);
     }
 
+    public HashMap<String, Room> getExits() {
+        return exits;
+    }
+
     public void addToInventory(Item item){
         roomInv.addItem(item);
     }

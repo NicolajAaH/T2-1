@@ -1,7 +1,5 @@
 package Energy.domain;
 
-import javafx.scene.image.Image;
-
 import java.util.Scanner;
 
 public class Game {
@@ -531,5 +529,9 @@ public class Game {
         System.out.println("Total " + player.getScore() + " kr. om året i energiforbedringer");
         System.out.println("\nDu startede med energimærke " + EnergyLabel.createEnergyLabel(0,player.getStartValue()));
         System.out.println("og er nu på energimærke " + EnergyLabel.createEnergyLabel(player.getScore(), player.getStartValue()));
+    }
+
+    public Room getCurrentRoom() {
+        return currentRoom;
     }
 }

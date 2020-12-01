@@ -6,4 +6,10 @@ public interface DomainI {
 
     Inventory getPlayerInventory();
 
+    boolean hasNorthExit();
+    boolean hasSouthExit();
+    boolean hasEastExit();
+    boolean hasWestExit();
+
+
 }
