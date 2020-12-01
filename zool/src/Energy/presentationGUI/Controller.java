@@ -1,13 +1,31 @@
 package Energy.presentationGUI;
 
+import Energy.Interface.DomainI;
+import Energy.domain.DomainConnect;
 import Energy.domain.Game;
+import Energy.domain.Inventory;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 
 public class Controller {
-    private Game game = new Game();
+    public final int WASHINGMACHINE = 1;
+    public final int DRYER = 2;
+    public final int HEATING = 3;
+    public final int STOVE = 4;
+    public final int FRIDGE = 5;
+    public final int DISHWASHER = 6;
+    public final int WINDOW = 7;
+    public final int LIGHTS = 8;
+    public final int TV = 9;
+    public final int WALLFIXER = 10;
+    public final int ISOLATION = 11;
+    public final int SOLARCELLS = 12;
+    public final int BATH = 13;
+
+    private DomainI domainI = new DomainConnect();
+
     @FXML
     private ImageView item0;
     @FXML
@@ -29,54 +47,45 @@ public class Controller {
 
 
     public Image findImage(int itemType) {
-        if (itemType == game.WASHINGMACHINE) {
+        if (itemType == WASHINGMACHINE) {
             return new Image("/Images/washing-machine_icon.png");
         }
         return null;
     }
 
     public void updateInventory() {
-        /*if (game.getPlayer().getInventory().isEmpty() == false) {
-            for (int i = 0; i < 5; i++) {
-                if (game.getPlayer().getInventory().getItem(i) != null && game.getPlayer().getInventory().getSize() > i) {
-                    items[i].setImage(findImage(game.getPlayer().getInventory().getItem(i).getItemType()));
-                } else {
-                    items[i].setImage(null);
-                }
-            }
-        }*/
-        if (game.getPlayer().getInventory().getSize() > 0 && game.getPlayer().getInventory().getItem(0) != null) {
-            item0.setImage(findImage(game.getPlayer().getInventory().getItem(0).getItemType()));
+        if (domainI.getPlayerInventory().getSize() > 0 && domainI.getPlayerInventory().getItem(0) != null) {
+            item0.setImage(findImage(domainI.getPlayerInventory().getItem(0).getItemType()));
         } else {
             item0.setImage(null);
         }
 
-        if (game.getPlayer().getInventory().getSize() > 1 && game.getPlayer().getInventory().getItem(1) != null) {
-            item1.setImage(findImage(game.getPlayer().getInventory().getItem(1).getItemType()));
+        if (domainI.getPlayerInventory().getSize() > 1 && domainI.getPlayerInventory().getItem(1) != null) {
+            item1.setImage(findImage(domainI.getPlayerInventory().getItem(1).getItemType()));
         } else {
-            item1.setImage(null);
+            item0.setImage(null);
         }
 
-        if (game.getPlayer().getInventory().getSize() > 2 && game.getPlayer().getInventory().getItem(2) != null) {
-            item2.setImage(findImage(game.getPlayer().getInventory().getItem(2).getItemType()));
+        if (domainI.getPlayerInventory().getSize() > 2 && domainI.getPlayerInventory().getItem(2) != null) {
+            item2.setImage(findImage(domainI.getPlayerInventory().getItem(2).getItemType()));
         } else {
             item2.setImage(null);
         }
 
-        if (game.getPlayer().getInventory().getSize() > 3 && game.getPlayer().getInventory().getItem(3) != null) {
-            item3.setImage(findImage(game.getPlayer().getInventory().getItem(3).getItemType()));
+        if (domainI.getPlayerInventory().getSize() > 3 && domainI.getPlayerInventory().getItem(3) != null) {
+            item0.setImage(findImage(domainI.getPlayerInventory().getItem(3).getItemType()));
         } else {
-            item3.setImage(null);
+            item0.setImage(null);
         }
 
-        if (game.getPlayer().getInventory().getSize() > 4 && game.getPlayer().getInventory().getItem(4) != null) {
-            item4.setImage(findImage(game.getPlayer().getInventory().getItem(4).getItemType()));
+        if (domainI.getPlayerInventory().getSize() > 4 && domainI.getPlayerInventory().getItem(4) != null) {
+            item0.setImage(findImage(domainI.getPlayerInventory().getItem(4).getItemType()));
         } else {
-            item4.setImage(null);
+            item0.setImage(null);
         }
     }
 
-    public Game getGame() {
-        return game;
+    public DomainI getDomainI() {
+        return domainI;
     }
 }

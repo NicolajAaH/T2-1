@@ -1,5 +1,7 @@
 package Energy.presentationGUI;
 
+import Energy.Interface.DomainI;
+import Energy.domain.DomainConnect;
 import Energy.domain.Game;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
@@ -10,8 +12,9 @@ import javafx.scene.layout.GridPane;
 import javafx.stage.Stage;
 
 public class runGui extends Application{
-        private Game game;
-        static KitchenController myControllerHandle;
+
+
+        //static KitchenController myControllerHandle;
 
         @Override
         public void start(Stage stage) throws Exception {

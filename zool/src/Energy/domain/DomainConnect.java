@@ -6,15 +6,13 @@ public class DomainConnect implements DomainI {
 
     private Game game;
 
-    public DomainConnect(Game game) {
-        this.game = game;
+    public DomainConnect() {
+        this.game = new Game();
     }
 
     @Override
     public Inventory getPlayerInventory() {
         return game.getPlayer().getInventory();
     }
-
-    
 
 }

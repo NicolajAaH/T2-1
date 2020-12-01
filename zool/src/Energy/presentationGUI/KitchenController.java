@@ -12,11 +12,13 @@ import javafx.scene.image.ImageView;
 public class KitchenController extends Controller{
 
     public void initialize(){
-        getGame().getPlayer().getInventory().addItem(new Item("Vaskemaskine A+", 2400, 65, getGame().WASHINGMACHINE, "A+"));
-        getGame().getPlayer().getInventory().addItem(new Item("Vaskemaskine A+", 2400, 65, getGame().WASHINGMACHINE, "A+"));
-        getGame().getPlayer().getInventory().addItem(new Item("Vaskemaskine A+", 2400, 65, getGame().WASHINGMACHINE, "A+"));
+        getDomainI().getPlayerInventory().addItem(new Item("Vaskemaskine A+", 2400, 65, WASHINGMACHINE, "A+"));
+        getDomainI().getPlayerInventory().addItem(new Item("Vaskemaskine A+", 2400, 65, WASHINGMACHINE, "A+"));
+        getDomainI().getPlayerInventory().addItem(new Item("Vaskemaskine A+", 2400, 65, WASHINGMACHINE, "A+"));
         updateInventory();
+
     }
+
 
 
 }

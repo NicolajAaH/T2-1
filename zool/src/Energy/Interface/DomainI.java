@@ -6,5 +6,4 @@ public interface DomainI {
 
     Inventory getPlayerInventory();
 
-
 }
