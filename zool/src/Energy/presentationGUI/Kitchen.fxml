@@ -34,5 +34,9 @@
       <Label fx:id="dishwasher_label" layoutX="471.0" layoutY="234.0" prefHeight="18.0" prefWidth="48.0" textAlignment="CENTER" />
       <Label fx:id="printStatus" layoutX="480.0" layoutY="15.0" prefHeight="40.0" prefWidth="113.0" />
       <ImageView fitHeight="57.0" fitWidth="61.0" layoutX="410.0" layoutY="182.0" pickOnBounds="true" preserveRatio="true" />
+      <ImageView fx:id="arrowDown" fitHeight="57.0" fitWidth="61.0" layoutX="370.0" layoutY="487.0" pickOnBounds="true" preserveRatio="true" />
+      <ImageView fx:id="arrowUp" fitHeight="57.0" fitWidth="61.0" layoutX="370.0" layoutY="27.0" pickOnBounds="true" preserveRatio="true" />
+      <ImageView fx:id="arrowLeft" fitHeight="57.0" fitWidth="61.0" layoutX="24.0" layoutY="272.0" pickOnBounds="true" preserveRatio="true" />
+      <ImageView fx:id="arrowRight" fitHeight="57.0" fitWidth="61.0" layoutX="725.0" layoutY="272.0" pickOnBounds="true" preserveRatio="true" />
    </children>
 </AnchorPane>

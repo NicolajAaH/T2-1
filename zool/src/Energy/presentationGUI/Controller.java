@@ -44,6 +44,14 @@ public class Controller {
     private Label dishwasher_label;
     @FXML
     private Label printStatus;
+    @FXML
+    private ImageView arrowUp;
+    @FXML
+    private ImageView arrowDown;
+    @FXML
+    private ImageView arrowLeft;
+    @FXML
+    private ImageView arrowRight;
 
 
     public Image findImage(int itemType) {
@@ -87,5 +95,9 @@ public class Controller {
 
     public DomainI getDomainI() {
         return domainI;
+    }
+
+    public void showExits(){
+        if(getDomainI().)
     }
 }
