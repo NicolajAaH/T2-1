@@ -294,6 +294,9 @@ public class Game {
     }
 
     private void buy(Command command) {
+
+        // Tjekker CLI conditions?
+
         // Undersøger om du er i butikken
         if (!inShop()) {
             System.out.println("Du kan kun handle i butikken!");
@@ -321,6 +324,8 @@ public class Game {
             return;
         }
 
+
+        // TJEKKER BETINGELSER FOR KØB
         // finder pris på det der skal købes
         int price = store.getRoomInv().getItem(index).getPrice();
 

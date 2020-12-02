@@ -17,7 +17,7 @@
         <Label fx:id="wallet" layoutX="593.0" layoutY="547.0" prefHeight="17.0" prefWidth="141.0" text="Penge:" />
         <ImageView fitHeight="125.0" fitWidth="251.0" layoutX="549.0" pickOnBounds="true" preserveRatio="true">
             <image>
-                <Image url="@/Images/Hall1_minimap.jpg" />
+                <Image url="@/Images/Hall2_minimap.jpg" />
             </image>
         </ImageView>
         <Label layoutX="24.0" layoutY="552.0" text="Inventar: ">

@@ -14,7 +14,7 @@
             <Image url="@/Images/Kitchen_picture.png" />
          </image>
       </ImageView>
-      <Label layoutX="593.0" layoutY="554.0" prefHeight="10.0" prefWidth="48.0" text="Status: " />
+      <Label fx:id="wallet" layoutX="593.0" layoutY="547.0" prefHeight="17.0" prefWidth="141.0" text="Penge:" />
       <ImageView fitHeight="125.0" fitWidth="251.0" layoutX="549.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@/Images/Kitchen_minimap.jpg" />
@@ -33,13 +33,12 @@
       <Label fx:id="fridge_label" layoutX="89.0" layoutY="190.0" prefHeight="20.0" prefWidth="61.0" textAlignment="CENTER" />
       <Label fx:id="oven_label" layoutX="285.0" layoutY="268.0" prefHeight="11.0" prefWidth="61.0" textAlignment="CENTER" textFill="#f8f5f5" />
       <Label fx:id="dishwasher_label" layoutX="471.0" layoutY="234.0" prefHeight="18.0" prefWidth="48.0" textAlignment="CENTER" />
-      <Label fx:id="printStatus" layoutX="480.0" layoutY="15.0" prefHeight="40.0" prefWidth="113.0" />
-      <ImageView fitHeight="57.0" fitWidth="61.0" layoutX="410.0" layoutY="182.0" pickOnBounds="true" preserveRatio="true" />
       <ImageView fx:id="arrowDown" fitHeight="57.0" fitWidth="61.0" layoutX="400.0" layoutY="470.0" onMouseClicked="#goSouth" pickOnBounds="true" preserveRatio="true" />
       <ImageView fx:id="arrowUp" fitHeight="57.0" fitWidth="61.0" layoutX="400.0" layoutY="27.0" onMouseClicked="#goNorth" pickOnBounds="true" preserveRatio="true" />
       <ImageView fx:id="arrowLeft" fitHeight="57.0" fitWidth="61.0" layoutX="24.0" layoutY="300.0" onMouseClicked="#goWest" pickOnBounds="true" preserveRatio="true" />
       <ImageView fx:id="arrowRight" fitHeight="57.0" fitWidth="61.0" layoutX="725.0" layoutY="300.0" onMouseClicked="#goEast" pickOnBounds="true" preserveRatio="true" />
       <Button fx:id="endYear" layoutX="413.0" layoutY="549.0" mnemonicParsing="false" text="Afslut år" />
       <Button fx:id="endGame" layoutX="495.0" layoutY="549.0" mnemonicParsing="false" text="Afslut spillet" />
+      <Label fx:id="savings" layoutX="593.0" layoutY="564.0" prefHeight="17.0" prefWidth="141.0" text="Årlig besparelse:" />
    </children>
 </AnchorPane>
