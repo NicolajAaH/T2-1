@@ -2,8 +2,6 @@ package Energy.presentationGUI;
 
 import Energy.Interface.DomainI;
 import Energy.domain.DomainConnect;
-import Energy.domain.Game;
-import Energy.domain.Inventory;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
@@ -46,13 +44,13 @@ public class Controller {
     @FXML
     private Label printStatus;
     @FXML
-    private ImageView arrowNorth = new ImageView("/Images/north_arrow.png");
+    private ImageView arrowUp = new ImageView("/Images/north_arrow.png");
     @FXML
-    private ImageView arrowSouth = new ImageView("/Images/south_arrow.png");
+    private ImageView arrowDown = new ImageView("/Images/south_arrow.png");
     @FXML
-    private ImageView arrowEast = new ImageView("/Images/east_arrow.png");
+    private ImageView arrowRight = new ImageView("/Images/east_arrow.png");
     @FXML
-    private ImageView arrowWest = new ImageView("/Images/west_arrow.png");
+    private ImageView arrowLeft = new ImageView("/Images/west_arrow.png");
     @FXML
     private Button endYear;
     @FXML
@@ -104,28 +102,28 @@ public class Controller {
 
     public void showExits(){
         if(domainI.hasEastExit()){
-            arrowEast.setVisible(true);
+            arrowRight.setVisible(true);
         }
         else{
-            arrowEast.setVisible(false);
+            arrowRight.setVisible(false);
         }
         if(domainI.hasNorthExit()){
-            arrowNorth.setVisible(true);
+            arrowUp.setVisible(true);
         }
         else{
-            arrowNorth.setVisible(false);
+            arrowUp.setVisible(false);
         }
         if(domainI.hasSouthExit()){
-            arrowSouth.setVisible(true);
+            arrowDown.setVisible(true);
         }
         else{
-            arrowEast.setVisible(false);
+            arrowRight.setVisible(false);
         }
         if(domainI.hasWestExit()){
-            arrowWest.setVisible(true);
+            arrowLeft.setVisible(true);
         }
         else{
-            arrowEast.setVisible(false);
+            arrowRight.setVisible(false);
         }
     }
 }
