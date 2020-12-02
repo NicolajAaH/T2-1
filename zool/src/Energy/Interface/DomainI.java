@@ -35,5 +35,5 @@ public interface DomainI {
 */
     // metoder til butikken
     Inventory getStoreInventory();
-//    String buyItem(int ItemIndex);
+    String buyItem(int ItemIndex);
 }
