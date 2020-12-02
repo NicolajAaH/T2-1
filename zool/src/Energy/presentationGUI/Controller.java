@@ -59,6 +59,8 @@ public class Controller {
     private Button endYear;
     @FXML
     private Button endGame;
+    @FXML
+    ImageView heatingSystem;
 
     public void initialize(){
         showExits();

@@ -7,17 +7,17 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="600.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Energy.presentationGUI.CorridorController">
+<AnchorPane prefHeight="600.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Energy.presentationGUI.OutsideController">
     <children>
         <ImageView fitHeight="600.0" fitWidth="800.0" pickOnBounds="true" preserveRatio="true">
             <image>
-                <Image url="@/Images/Hallway_picture.jpg" />
+                <Image url="@/Images/Outside_noSolar_picture.jpg" />
             </image>
         </ImageView>
         <Label fx:id="wallet" layoutX="593.0" layoutY="547.0" prefHeight="17.0" prefWidth="141.0" text="Penge:" />
         <ImageView fitHeight="125.0" fitWidth="251.0" layoutX="549.0" pickOnBounds="true" preserveRatio="true">
             <image>
-                <Image url="@/Images/Hall1_minimap.jpg" />
+                <Image url="@/Images/Outside_minimap.jpg" />
             </image>
         </ImageView>
         <Label layoutX="24.0" layoutY="552.0" text="Inventar: ">
@@ -30,6 +30,7 @@
         <ImageView fx:id="item2" fitHeight="48.0" fitWidth="48.0" layoutX="205.0" layoutY="538.0" pickOnBounds="true" preserveRatio="true" />
         <ImageView fx:id="item3" fitHeight="48.0" fitWidth="48.0" layoutX="260.0" layoutY="538.0" pickOnBounds="true" preserveRatio="true" />
         <ImageView fx:id="item4" fitHeight="48.0" fitWidth="48.0" layoutX="315.0" layoutY="538.0" pickOnBounds="true" preserveRatio="true" />
+
         <ImageView fx:id="arrowDown" fitHeight="57.0" fitWidth="61.0" layoutX="400.0" layoutY="470.0" onMouseClicked="#goSouth" pickOnBounds="true" preserveRatio="true" />
         <ImageView fx:id="arrowUp" fitHeight="57.0" fitWidth="61.0" layoutX="400.0" layoutY="27.0" onMouseClicked="#goNorth" pickOnBounds="true" preserveRatio="true" />
         <ImageView fx:id="arrowLeft" fitHeight="57.0" fitWidth="61.0" layoutX="24.0" layoutY="300.0" onMouseClicked="#goWest" pickOnBounds="true" preserveRatio="true" />
