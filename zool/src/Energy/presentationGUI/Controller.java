@@ -74,6 +74,8 @@ public class Controller {
 
     @FXML
     ListView<Item> storeList;
+    @FXML
+    Button buyButton;
 
 
     public void initialize(){
