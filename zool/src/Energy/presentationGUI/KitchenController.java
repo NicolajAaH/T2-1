@@ -19,7 +19,6 @@ public class KitchenController extends Controller{
         getDomainI().getPlayerInventory().addItem(new Item("Vaskemaskine A+", 2400, 65, WASHINGMACHINE, "A+"));
         updateInventory();
         showExits();
-
     }
 
 

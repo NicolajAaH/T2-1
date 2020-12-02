@@ -22,7 +22,7 @@ public class DomainConnect implements DomainI {
             Set<String> keys = game.getCurrentRoom().getExits().keySet();
 
             for(String exit : keys) {
-                if (exit.equals("north") ) return true;
+                if (exit.equals("nord") ) return true;
             }
 
         return false;
@@ -33,7 +33,7 @@ public class DomainConnect implements DomainI {
         Set<String> keys = game.getCurrentRoom().getExits().keySet();
 
         for(String exit : keys) {
-            if (exit.equals("south") ) return true;
+            if (exit.equals("syd") ) return true;
         }
 
         return false;
@@ -45,7 +45,7 @@ public class DomainConnect implements DomainI {
         Set<String> keys = game.getCurrentRoom().getExits().keySet();
 
         for(String exit : keys) {
-            if (exit.equals("east") ) return true;
+            if (exit.equals("øst") ) return true;
         }
 
         return false;
@@ -56,7 +56,7 @@ public class DomainConnect implements DomainI {
         Set<String> keys = game.getCurrentRoom().getExits().keySet();
 
         for(String exit : keys) {
-            if (exit.equals("west") ) return true;
+            if (exit.equals("vest") ) return true;
         }
 
         return false;

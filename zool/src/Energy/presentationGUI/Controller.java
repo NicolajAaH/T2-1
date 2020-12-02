@@ -5,6 +5,7 @@ import Energy.domain.DomainConnect;
 import Energy.domain.Game;
 import Energy.domain.Inventory;
 import javafx.fxml.FXML;
+import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
@@ -52,6 +53,10 @@ public class Controller {
     private ImageView arrowEast;
     @FXML
     private ImageView arrowRight;
+    @FXML
+    private Button endYear;
+    @FXML
+    private Button endGame;
 
 
     public Image findImage(int itemType) {
