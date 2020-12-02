@@ -44,13 +44,13 @@ public class Controller {
     @FXML
     private Label printStatus;
     @FXML
-    private ImageView arrowUp = new ImageView("/Images/north_arrow.png");
+    private ImageView arrowUp;
     @FXML
-    private ImageView arrowDown = new ImageView("/Images/south_arrow.png");
+    private ImageView arrowDown;
     @FXML
-    private ImageView arrowRight = new ImageView("/Images/east_arrow.png");
+    private ImageView arrowRight;
     @FXML
-    private ImageView arrowLeft = new ImageView("/Images/west_arrow.png");
+    private ImageView arrowLeft;
     @FXML
     private Button endYear;
     @FXML
@@ -101,6 +101,10 @@ public class Controller {
     }
 
     public void showExits(){
+        arrowUp.setImage(new Image("/Images/north_arrow.png"));
+        arrowDown.setImage(new Image("/Images/south_arrow.png"));
+        arrowLeft.setImage(new Image("/Images/west_arrow.png"));
+        arrowRight.setImage(new Image("/Images/east_arrow.png"));
         if(domainI.hasEastExit()){
             arrowRight.setVisible(true);
         }
