@@ -32,9 +32,8 @@ public interface DomainI {
 
     // metoder til rum / udenfor
     void Replace(Item rumItem, Item playerItem);
-
-    // metoder til butikken
-    void getShopInventory();
-    void buyItem(Item item);
 */
+    // metoder til butikken
+    Inventory getStoreInventory();
+//    String buyItem(int ItemIndex);
 }

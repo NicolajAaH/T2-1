@@ -17,6 +17,8 @@ public class DomainConnect implements DomainI {
         return game.getPlayer().getInventory();
     }
 
+
+    // Metorder der ruturnerer om currentroom har en udgang i en retning
     @Override
     public boolean hasNorthExit() {
             Set<String> keys = game.getCurrentRoom().getExits().keySet();
@@ -62,11 +64,13 @@ public class DomainConnect implements DomainI {
         return false;
     }
 
+    // Returnerer navnet på current room
     @Override
     public String getCurrentRoom() {
         return game.getCurrentRoom().getName();
     }
 
+    // Getters til statuslinie
     @Override
     public int getWallet() {
         return game.getPlayer().getWallet();
@@ -77,6 +81,7 @@ public class DomainConnect implements DomainI {
         return game.getPlayer().getScore();
     }
 
+    // Metoder til at skifte rum
     @Override
     public void goNorth() {
         game.setCurrentRoom(game.getCurrentRoom().getExit("nord"));
@@ -96,5 +101,23 @@ public class DomainConnect implements DomainI {
     public void goWest() {
         game.setCurrentRoom(game.getCurrentRoom().getExit("vest"));
     }
+
+    // Metoder til butikken
+    @Override
+    public Inventory getStoreInventory() {
+        return game.store.getRoomInv();
+    }
+/*
+    @Override
+    public String buyItem(int itemIndex) {
+        game.parser.getCommand().getCommandWord()
+        Command command = new Command(commandWord, String.valueOf(itemIndex));
+
+        return null;
+    }
+
+ */
+
+
 }
 
