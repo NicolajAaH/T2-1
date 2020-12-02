@@ -293,26 +293,26 @@ public class Game {
         }
     }
 
-    private void buy(Command command) {
+    String buy(Command command) {
 
         // Tjekker CLI conditions?
 
         // Undersøger om du er i butikken
         if (!inShop()) {
             System.out.println("Du kan kun handle i butikken!");
-            return;
+            return null;
         }
 
         // undersøger om kommandoen har et andet ord
         if (!command.hasSecondWord()) {
             System.out.println("Køb Hvad?");
-            return;
+            return null;
         }
 
         // Tjekker at det andet ord (string) kan parses til en Integer
        if (!isInt(command.getSecondWord())) {
            System.out.println("Dette er ikke et gyldigt nummer!");
-           return;
+           return null;
        }
 
         // laver kommandoword om til int og finder index af det der skal købes
@@ -321,7 +321,7 @@ public class Game {
         // Tjekker om index er mellem 0 og butikkens max antal varer
         if (0 > index || index+1 > store.getRoomInv().getSize() ) {
             System.out.println("Dette er ikke et gyldigt nummer!");
-            return;
+            return null;
         }
 
 
@@ -332,13 +332,13 @@ public class Game {
         // tjekker om spiller har råd
         if (player.getWallet() < price) {
             System.out.println("Du har ikke råd!");
-            return;
+            return "Det har du ikke råd til!";
         }
 
         // Undersøger om spillers inventory er fyldt
         if (player.getInventory().getSize() == player.getInventory().getMaxSize()) {
             System.out.println("Inventar er fyldt!");
-            return;
+            return "Du har ikke plads til mere!";
         }
 
         // kopierer fra butikkens inventory (index) til players inventory
@@ -351,6 +351,7 @@ public class Game {
 
         // udskriver køb
         System.out.println("Du har købt " + store.getRoomInv().getItem(index).getName() + "\n");
+        return "Du har købt " + store.getRoomInv().getItem(index).getName();
     }
 
     private boolean replace(Command command) {

@@ -107,17 +107,12 @@ public class DomainConnect implements DomainI {
     public Inventory getStoreInventory() {
         return game.store.getRoomInv();
     }
-/*
+
     @Override
     public String buyItem(int itemIndex) {
-        game.parser.getCommand().getCommandWord()
-        Command command = new Command(commandWord, String.valueOf(itemIndex));
-
-        return null;
+        CommandWords cvs = new CommandWords();
+        CommandWord cv = cvs.getCommandWord("køb");
+        Command cmd = new Command(cv,String.valueOf(itemIndex));
+        return game.buy(cmd);
     }
-
- */
-
-
 }
-
