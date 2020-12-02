@@ -29,11 +29,12 @@ public interface DomainI {
     // Metoder til flow i spil (ikke implementeret)
     // void newRound();
     // void exitGame();
-
-    // metoder til rum / udenfor
-    void Replace(Item rumItem, Item playerItem);
 */
+    // metoder til rum / udenfor - klik på ting i billedet og skift ud fra player inventory
+//    String ReplaceInRoom(int itemIndex);
+
     // metoder til butikken
     Inventory getStoreInventory();
+    // Returnere streng med status
     String buyItem(int ItemIndex);
 }

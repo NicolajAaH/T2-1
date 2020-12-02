@@ -81,6 +81,7 @@ public class DomainConnect implements DomainI {
         return game.getPlayer().getScore();
     }
 
+
     // Metoder til at skifte rum
     @Override
     public void goNorth() {
@@ -102,6 +103,7 @@ public class DomainConnect implements DomainI {
         game.setCurrentRoom(game.getCurrentRoom().getExit("vest"));
     }
 
+
     // Metoder til butikken
     @Override
     public Inventory getStoreInventory() {
@@ -109,10 +111,20 @@ public class DomainConnect implements DomainI {
     }
 
     @Override
+    // returnerer status om købet lykkedes eller fejlrapport til print på statuslabel i butik
     public String buyItem(int itemIndex) {
         CommandWords cvs = new CommandWords();
         CommandWord cv = cvs.getCommandWord("køb");
         Command cmd = new Command(cv,String.valueOf(itemIndex));
         return game.buy(cmd);
     }
+/*
+    @Override
+    public String ReplaceInRoom(int itemIndex) {
+        CommandWords cvs = new CommandWords();
+        CommandWord cv = cvs.getCommandWord("udskift");
+        Command cmd = new Command(cv,String.valueOf(itemIndex));
+        return game.replace
+    }
+ */
 }
