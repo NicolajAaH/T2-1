@@ -87,6 +87,12 @@ public class Controller {
         if (itemType == WASHINGMACHINE) {
             return new Image("/Images/washing-machine_icon.png");
         }
+        if (itemType == DRYER) {
+            return new Image("/Images/tumble_dryer_icon.png");
+        }
+        if (itemType == HEATING) {
+            return new Image("/Images/washing-machine_icon.png");
+        }
         return null;
     }
 

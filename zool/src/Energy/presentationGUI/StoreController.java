@@ -21,8 +21,10 @@ public class StoreController extends Controller {
         buyButton.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent actionEvent) {
-                Item selectedItem = storeList.getSelectionModel().getSelectedItem();
-                
+                int selectedItem = storeList.getSelectionModel().getSelectedIndex()+1;
+                getDomainI().buyItem(selectedItem);
+                updateInventory();
+                System.out.println(getDomainI().getPlayerInventory().printInventory());
             }
         });
     }
