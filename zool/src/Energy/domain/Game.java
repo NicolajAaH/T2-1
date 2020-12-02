@@ -6,7 +6,7 @@ public class Game {
     private Parser parser;
     private Player player;
     private Room currentRoom; // holder styr på det rum man befinder sig i
-    Room store, outside, utility, bathroom, bedroom, kidsRoom, room, kitchen, livingRoom, corrridor1, corridor2, corridor3, corridor4; // liste over rum
+    Room store, outside, utility, bathroom, bedroom, kidsRoom, room, kitchen, livingRoom, corridor1, corridor2, corridor3, corridor4; // liste over rum
 
     public final int WASHINGMACHINE = 1;
     public final int DRYER = 2;
@@ -38,34 +38,34 @@ public class Game {
     private void createRooms() {
 
         // create room and description
-        store = new Store("nu i Super Byg, her kan du købe tingene til huset");
-        outside = new Outside("ude foran huset");
-        utility = new Room("i bryggerset");
-        bathroom = new Room("i badeværelset");
-        bedroom = new Room("i soveværelsen");
-        kidsRoom = new Room("i børneværelset");
-        room = new Room("i værelset");
-        kitchen = new Room("i køkkenet");
-        livingRoom = new Room("i stuen");
-        corrridor1 = new Room("i første del af gangen");
-        corridor2 = new Room("i anden del af gangen");
-        corridor3 = new Room("i tredje del af gangen");
-        corridor4 = new Room("i fjerde del af gangen");
+        store = new Store("nu i Super Byg, her kan du købe tingene til huset", "Store");
+        outside = new Outside("ude foran huset", "Outside");
+        utility = new Room("i bryggerset", "Utility");
+        bathroom = new Room("i badeværelset", "Bathroom");
+        bedroom = new Room("i soveværelsen","Bedroom");
+        kidsRoom = new Room("i børneværelset", "KidsRoom");
+        room = new Room("i værelset", "Room");
+        kitchen = new Room("i køkkenet","Kitchen");
+        livingRoom = new Room("i stuen","LivingRoom");
+        corridor1 = new Room("i første del af gangen", "Corridor1");
+        corridor2 = new Room("i anden del af gangen", "Corridor2");
+        corridor3 = new Room("i tredje del af gangen","Corridor3");
+        corridor4 = new Room("i fjerde del af gangen","Corridor4");
 
         // opretter udgange
         store.setExit("øst", outside); //Fra butikken kan man gå outside
 
         outside.setExit("vest", store); //fra outside kan man gå i butikken og gang 1
-        outside.setExit("øst", corrridor1);
+        outside.setExit("øst", corridor1);
 
-        corrridor1.setExit("nord", utility); //fra gang 1 kan man gå i utility, kitchen, gang 2 og outside
-        corrridor1.setExit("syd", kitchen);
-        corrridor1.setExit("øst", corridor2);
-        corrridor1.setExit("vest", outside);
+        corridor1.setExit("nord", utility); //fra gang 1 kan man gå i utility, kitchen, gang 2 og outside
+        corridor1.setExit("syd", kitchen);
+        corridor1.setExit("øst", corridor2);
+        corridor1.setExit("vest", outside);
 
-        utility.setExit("syd", corrridor1); //fra utility kan man gå i gang 1
+        utility.setExit("syd", corridor1); //fra utility kan man gå i gang 1
 
-        kitchen.setExit("nord", corrridor1); //fra kitchen kan man gå til gang 1 og livingRoom
+        kitchen.setExit("nord", corridor1); //fra kitchen kan man gå til gang 1 og livingRoom
         kitchen.setExit("øst", livingRoom);
 
         livingRoom.setExit("vest", kitchen); //fra livingRoom kan man gå til kitchen og gang 3
@@ -73,7 +73,7 @@ public class Game {
 
         corridor2.setExit("nord", bathroom); //fra gang 2 kan man gå til gang 1, gang 3 og bathroom
         corridor2.setExit("øst", corridor3);
-        corridor2.setExit("vest", corrridor1);
+        corridor2.setExit("vest", corridor1);
 
         bathroom.setExit("syd", corridor2); //fra bathroom kan man gå til gang 2
 

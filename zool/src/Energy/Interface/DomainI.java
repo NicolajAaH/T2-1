@@ -1,14 +1,13 @@
 package Energy.Interface;
 
 import Energy.domain.Inventory;
-import Energy.domain.Room;
 
 public interface DomainI {
 
     // Metoder til parent Controller
 
     Inventory getPlayerInventory();
-    Room getCurrentRoom();
+    String getCurrentRoom();
 
     // Metorder der ruturnerer om currentroom har en udgang i en retning
     boolean hasNorthExit();
@@ -26,12 +25,16 @@ public interface DomainI {
     void goSouth();
     void goEast();
     void goWest();
-
+/*
     // Metoder til flow i spil (ikke implementeret)
     // void newRound();
     // void exitGame();
 
     // metoder til rum / udenfor
+    void Replace(Item rumItem, Item playerItem);
 
     // metoder til butikken
+    void getShopInventory();
+    void buyItem(Item item);
+*/
 }

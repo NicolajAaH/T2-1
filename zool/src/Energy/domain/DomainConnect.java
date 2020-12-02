@@ -63,8 +63,8 @@ public class DomainConnect implements DomainI {
     }
 
     @Override
-    public Room getCurrentRoom() {
-        return game.getCurrentRoom();
+    public String getCurrentRoom() {
+        return game.getCurrentRoom().getName();
     }
 
     @Override
