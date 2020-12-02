@@ -6,6 +6,7 @@ import Energy.domain.Room;
 public interface DomainI {
 
     // Metoder til parent Controller
+
     Inventory getPlayerInventory();
     Room getCurrentRoom();
 
@@ -20,11 +21,11 @@ public interface DomainI {
     int getWallet();
     int getScore();
 
-    // Metoder til at skifte rum (ikke implementeret)
-    // void goNorth();
-    // void goSouth();
-    // void goEast();
-    // void goWest();
+    // Metoder til at skifte rum
+    void goNorth();
+    void goSouth();
+    void goEast();
+    void goWest();
 
     // Metoder til flow i spil (ikke implementeret)
     // void newRound();

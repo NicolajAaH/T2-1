@@ -76,5 +76,25 @@ public class DomainConnect implements DomainI {
     public int getScore() {
         return game.getPlayer().getScore();
     }
+
+    @Override
+    public void goNorth() {
+        game.setCurrentRoom(game.getCurrentRoom().getExit("nord"));
+    }
+
+    @Override
+    public void goSouth() {
+        game.setCurrentRoom(game.getCurrentRoom().getExit("syd"));
+    }
+
+    @Override
+    public void goEast() {
+        game.setCurrentRoom(game.getCurrentRoom().getExit("øst"));
+    }
+
+    @Override
+    public void goWest() {
+        game.setCurrentRoom(game.getCurrentRoom().getExit("vest"));
+    }
 }
 
