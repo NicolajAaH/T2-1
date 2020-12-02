@@ -13,9 +13,11 @@ import javafx.stage.Stage;
 
 public class runGui extends Application{
         private static FXMLLoader fxmlLoader = new FXMLLoader();
+        private static Stage stage;
 
         @Override
         public void start(Stage stage) throws Exception {
+            this.stage = stage;
             Parent root = fxmlLoader.load(getClass().getResource("Kitchen.fxml"));
             stage.setTitle("FXML Welcome");
             stage.setScene(new Scene(root));
@@ -29,6 +31,10 @@ public class runGui extends Application{
 
     public static FXMLLoader getFxmlLoader() {
         return fxmlLoader;
+    }
+
+    public static Stage getStage() {
+        return stage;
     }
 }
 

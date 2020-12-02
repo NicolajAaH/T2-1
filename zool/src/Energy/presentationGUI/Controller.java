@@ -3,6 +3,8 @@ package Energy.presentationGUI;
 import Energy.Interface.DomainI;
 import Energy.domain.DomainConnect;
 import javafx.fxml.FXML;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
@@ -25,7 +27,7 @@ public class Controller {
     public final int SOLARCELLS = 12;
     public final int BATH = 13;
 
-    private DomainI domainI = new DomainConnect();
+    private static DomainI domainI = new DomainConnect();
 
     @FXML
     private ImageView item0;
@@ -58,6 +60,10 @@ public class Controller {
     @FXML
     private Button endGame;
 
+    public void initialize(){
+        showExits();
+        updateInventory();
+    }
 
     public Image findImage(int itemType) {
         if (itemType == WASHINGMACHINE) {
@@ -123,29 +129,48 @@ public class Controller {
             arrowDown.setVisible(true);
         }
         else{
-            arrowRight.setVisible(false);
+            arrowDown.setVisible(false);
         }
         if(domainI.hasWestExit()){
             arrowLeft.setVisible(true);
         }
         else{
-            arrowRight.setVisible(false);
+            arrowLeft.setVisible(false);
         }
     }
 
     public void goNorth() throws IOException {
         domainI.goNorth();
-        runGui.getFxmlLoader().load(getClass().getResource(getDomainI().getCurrentRoom().));
+        String resource = getDomainI().getCurrentRoom() + ".fxml";
+        runGui.getFxmlLoader().load(getClass().getResource(resource));
+        Parent newRoot = runGui.getFxmlLoader().load(getClass().getResource(resource));
+        runGui.getStage().setScene(new Scene(newRoot));
+        runGui.getStage().show();
     }
 
-    public void goSouth(){
+    public void goSouth() throws IOException {
         domainI.goSouth();
+        String resource = getDomainI().getCurrentRoom() + ".fxml";
+        runGui.getFxmlLoader().load(getClass().getResource(resource));
+        Parent newRoot = runGui.getFxmlLoader().load(getClass().getResource(resource));
+        runGui.getStage().setScene(new Scene(newRoot));
+        runGui.getStage().show();
     }
-    public void goWest(){
+    public void goWest() throws IOException {
         domainI.goWest();
+        String resource = getDomainI().getCurrentRoom() + ".fxml";
+        runGui.getFxmlLoader().load(getClass().getResource(resource));
+        Parent newRoot = runGui.getFxmlLoader().load(getClass().getResource(resource));
+        runGui.getStage().setScene(new Scene(newRoot));
+        runGui.getStage().show();
     }
-    public void goEast(){
+    public void goEast() throws IOException {
         domainI.goEast();
+        String resource = getDomainI().getCurrentRoom() + ".fxml";
+        runGui.getFxmlLoader().load(getClass().getResource(resource));
+        Parent newRoot = runGui.getFxmlLoader().load(getClass().getResource(resource));
+        runGui.getStage().setScene(new Scene(newRoot));
+        runGui.getStage().show();
     }
 
 }

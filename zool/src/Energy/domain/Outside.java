@@ -3,8 +3,8 @@ package Energy.domain;
 public class Outside extends Room {
 
     // Constructor
-    public Outside(String description) {
-        super(description);
+    public Outside(String description, String name) {
+        super(description, name);
     }
 
     // Methods
