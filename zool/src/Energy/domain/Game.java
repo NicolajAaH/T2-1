@@ -145,7 +145,7 @@ public class Game {
         outside.addToInventory(new Item("Tyndt isolering", 0, 0, ISOLATION, null));
 
         // sætter startrummet til outside
-        currentRoom = outside;
+        currentRoom = kitchen;
     }
 
     public void play() {
@@ -254,6 +254,8 @@ public class Game {
     }
 
     private boolean goRoom(Command command) {
+
+        // Tjekker om der er et ord efter go i kommando
         if (!command.hasSecondWord()) {
             System.out.println("Hvilken retning?");
             return false;
@@ -533,5 +535,9 @@ public class Game {
 
     public Room getCurrentRoom() {
         return currentRoom;
+    }
+
+    public void setCurrentRoom(Room newCurrentRoom) {
+        this.currentRoom = newCurrentRoom;
     }
 }
