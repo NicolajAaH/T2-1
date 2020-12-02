@@ -8,6 +8,7 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.MouseEvent;
 
 public class KitchenController extends Controller{
 
@@ -20,7 +21,4 @@ public class KitchenController extends Controller{
         getDomainI().getPlayerInventory().addItem(new Item("Vaskemaskine A+", 2400, 65, WASHINGMACHINE, "A+"));
         updateInventory();
     }
-
-
-
 }

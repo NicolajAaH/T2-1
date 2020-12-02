@@ -8,6 +8,8 @@ import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 
+import java.io.IOException;
+
 public class Controller {
     public final int WASHINGMACHINE = 1;
     public final int DRYER = 2;
@@ -130,4 +132,20 @@ public class Controller {
             arrowRight.setVisible(false);
         }
     }
+
+    public void goNorth() throws IOException {
+        domainI.goNorth();
+        runGui.getFxmlLoader().load(getClass().getResource(getDomainI().getCurrentRoom().));
+    }
+
+    public void goSouth(){
+        domainI.goSouth();
+    }
+    public void goWest(){
+        domainI.goWest();
+    }
+    public void goEast(){
+        domainI.goEast();
+    }
+
 }

@@ -12,16 +12,11 @@ import javafx.scene.layout.GridPane;
 import javafx.stage.Stage;
 
 public class runGui extends Application{
-
-
-        //static KitchenController myControllerHandle;
+        private static FXMLLoader fxmlLoader = new FXMLLoader();
 
         @Override
         public void start(Stage stage) throws Exception {
-            Parent root = FXMLLoader.load(getClass().getResource("Kitchen.fxml"));
-            //FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("Kitchen.fxml"));
-            //myControllerHandle = (KitchenController) fxmlLoader.getController();
-
+            Parent root = fxmlLoader.load(getClass().getResource("Kitchen.fxml"));
             stage.setTitle("FXML Welcome");
             stage.setScene(new Scene(root));
             stage.show();
@@ -32,5 +27,8 @@ public class runGui extends Application{
             launch(args);
         }
 
+    public static FXMLLoader getFxmlLoader() {
+        return fxmlLoader;
+    }
 }
 
