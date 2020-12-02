@@ -9,12 +9,15 @@ public class Room
     private String description;
     private HashMap<String, Room> exits;
     private Inventory roomInv = new Inventory();
+    private String name;
 
     // Constructor
-    public Room(String description)
+    public Room(String description, String name)
     {
+        this.name = name;
         this.description = description;
         exits = new HashMap<String, Room>();
+
     }
 
     // Methods
@@ -76,6 +79,14 @@ public class Room
 
     public String getInvDescriptionString() {
         return "Rummet indeholder:\n";
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
     }
 }
 
