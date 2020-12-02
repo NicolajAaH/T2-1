@@ -2,15 +2,25 @@ package Energy.presentationGUI;
 
 import Energy.Interface.DomainI;
 import Energy.domain.DomainConnect;
+import Energy.domain.Item;
+import javafx.beans.InvalidationListener;
+import javafx.collections.FXCollections;
+import javafx.collections.ListChangeListener;
+import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.control.ListView;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 
 import java.io.IOException;
+import java.util.Collection;
+import java.util.Iterator;
+import java.util.List;
+import java.util.ListIterator;
 
 public class Controller {
     public final int WASHINGMACHINE = 1;
@@ -62,6 +72,12 @@ public class Controller {
     @FXML
     ImageView heatingSystem;
 
+    @FXML
+    ListView<Item> storeList;
+    @FXML
+    Button buyButton;
+
+
     public void initialize(){
         showExits();
         updateInventory();
@@ -69,6 +85,12 @@ public class Controller {
 
     public Image findImage(int itemType) {
         if (itemType == WASHINGMACHINE) {
+            return new Image("/Images/washing-machine_icon.png");
+        }
+        if (itemType == DRYER) {
+            return new Image("/Images/tumble_dryer_icon.png");
+        }
+        if (itemType == HEATING) {
             return new Image("/Images/washing-machine_icon.png");
         }
         return null;

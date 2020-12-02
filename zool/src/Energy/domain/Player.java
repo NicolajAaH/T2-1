@@ -3,8 +3,8 @@ package Energy.domain;
 public class Player {
 
     // Attributes
-    private int wallet = 0;
-    private int startAmount = 0; // årligt renoverings budget - start Wallet
+    private int wallet = 10000;
+    private int startAmount = 10000; // årligt renoverings budget - start Wallet
     private int totalUsedAmount = 0;
     private int startValue = 36000; // start forbrug (til Energimærkeberegning)
 
