@@ -38,5 +38,16 @@
         <Button fx:id="endYear" layoutX="413.0" layoutY="549.0" mnemonicParsing="false" text="Afslut år" />
         <Button fx:id="endGame" layoutX="495.0" layoutY="549.0" mnemonicParsing="false" text="Afslut spillet" />
         <Label fx:id="savings" layoutX="593.0" layoutY="564.0" prefHeight="17.0" prefWidth="141.0" text="Årlig besparelse:" />
+      <Label fx:id="tvLabel" alignment="CENTER" layoutX="70.0" layoutY="139.0" prefHeight="177.0" prefWidth="288.0" text="TV D" textAlignment="CENTER" textFill="WHITE">
+         <font>
+            <Font size="90.0" />
+         </font>
+      </Label>
+      <Label fx:id="windowLabelLiving" layoutX="437.0" layoutY="125.0" prefHeight="149.0" prefWidth="137.0" text="Enkeltlags vindue">
+         <font>
+            <Font size="17.0" />
+         </font>
+      </Label>
+      <Label fx:id="lightLiving" layoutX="638.0" layoutY="113.0" prefHeight="59.0" prefWidth="70.0" text="Glødepære" />
     </children>
 </AnchorPane>

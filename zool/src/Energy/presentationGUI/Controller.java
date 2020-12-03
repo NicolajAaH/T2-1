@@ -3,6 +3,7 @@ package Energy.presentationGUI;
 import Energy.Interface.DomainI;
 import Energy.domain.DomainConnect;
 import Energy.domain.Item;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
@@ -11,6 +12,7 @@ import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.DragEvent;
 
 import java.io.IOException;
 
@@ -42,12 +44,6 @@ public class Controller {
     @FXML
     private ImageView item4;
     @FXML
-    private Label fridge_label;
-    @FXML
-    private Label oven_label;
-    @FXML
-    private Label dishwasher_label;
-    @FXML
     private Label wallet;
     @FXML
     private Label savings;
@@ -63,15 +59,6 @@ public class Controller {
     private Button endYear;
     @FXML
     private Button endGame;
-    @FXML
-    ImageView heatingSystem;
-
-    @FXML
-    ListView<Item> storeList;
-    @FXML
-    Button buyButton;
-    @FXML
-    Label textStore;
 
 
     public void initialize(){
@@ -252,5 +239,4 @@ public class Controller {
         runGui.getStage().setScene(new Scene(newRoot));
         runGui.getStage().show();
     }
-
 }

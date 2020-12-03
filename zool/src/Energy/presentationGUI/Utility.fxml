@@ -39,7 +39,13 @@
         <Button fx:id="endGame" layoutX="495.0" layoutY="549.0" mnemonicParsing="false" text="Afslut spillet" />
         <Label fx:id="savings" layoutX="593.0" layoutY="564.0" prefHeight="17.0" prefWidth="141.0" text="Årlig besparelse:" />
       <ImageView fx:id="heatingSystem" fitHeight="332.0" fitWidth="236.0" layoutX="48.0" layoutY="176.0" pickOnBounds="true" preserveRatio="true" />
-      <Label fx:id="tumbleDryerLabel" layoutX="368.0" layoutY="212.0" opacity="0.0" prefHeight="271.0" prefWidth="186.0" />
-      <Label fx:id="washingMachineLabel" layoutX="610.0" layoutY="205.0" opacity="0.0" prefHeight="258.0" prefWidth="175.0" />
+      <Label fx:id="tumbleDryerLabel" alignment="CENTER" layoutX="368.0" layoutY="212.0" prefHeight="271.0" prefWidth="186.0" text="Tørretumbler D">
+         <font>
+            <Font size="27.0" />
+         </font></Label>
+      <Label fx:id="washingMachineLabel" alignment="CENTER" layoutX="610.0" layoutY="205.0" onMouseClicked="#replaceGUI" prefHeight="258.0" prefWidth="175.0" text="Vaskemaskine D">
+         <font>
+            <Font size="24.0" />
+         </font></Label>
     </children>
 </AnchorPane>
