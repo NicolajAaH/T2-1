@@ -120,6 +120,23 @@ public class DomainConnect implements DomainI {
     }
 
     @Override
+    public String replaceStaticGUI(int indexRoom) {
+        // finder index i player's inventory
+        int indexPlayer = game.getPlayerInvIndex(indexRoom);
+        if (indexPlayer == -1) return null; // findes ikke i player inventory
+
+        // henter energimærke på det der indsættes: null=ingen mærkning
+        String returnEnergylabel = game.getPlayer().getInventory().getItem(indexPlayer).getEnergyLabel();
+
+        // indsætter item og opdaterer status & inventory
+        game.insertItem(indexRoom, indexPlayer);
+
+        // returnerer streng med energimærke
+        return returnEnergylabel;
+    }
+
+    /*
+    @Override
     public boolean replaceGUI(int indexRoom, int indexPlayer){
         // tjekker om player index og room index er samme type,
         // returnerer true hvis det lykkedes og false hvis ikke
@@ -131,5 +148,5 @@ public class DomainConnect implements DomainI {
         game.insertItem(indexRoom, indexPlayer);
         return true;
     }
-
+*/
 }

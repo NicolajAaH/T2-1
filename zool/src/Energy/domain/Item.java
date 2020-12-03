@@ -1,7 +1,5 @@
 package Energy.domain;
 
-import java.awt.*;
-
 public class Item {
 
     // attributes:
@@ -9,7 +7,7 @@ public class Item {
     private int price;
     private int scoreImpact;
     private int itemType;
-    private String energyLabel;
+    private String energyLabel = null;
     // fridge, window etc:
 
     // constructor
@@ -21,7 +19,7 @@ public class Item {
         this.energyLabel = energyLabel;
     }
 
-    // Getters & Methods
+    // Getters & Setters
     public String getName() {
         return name;
     }
@@ -36,6 +34,10 @@ public class Item {
 
     public int getItemType() {
         return itemType;
+    }
+
+    public String getEnergyLabel() {
+        return energyLabel;
     }
 
     @Override
