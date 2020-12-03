@@ -33,6 +33,7 @@ public interface DomainI {
     // metoder til rum / udenfor
     // Indsætter ting fra player index i room index og returnerer String med Energimærke
     public String replaceStaticGUI(int indexRoom);
+    public String replaceDynamicGUI(int indexRoom);
 
     // metoder til butikken
     Inventory getStoreInventory();

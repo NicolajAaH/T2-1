@@ -121,6 +121,8 @@ public class DomainConnect implements DomainI {
 
     @Override
     public String replaceStaticGUI(int indexRoom) {
+        // METODE til at replace faste ting i baggrundsbilledet der skal have en label
+
         // finder index i player's inventory
         int indexPlayer = game.getPlayerInvIndex(indexRoom);
         if (indexPlayer == -1) return null; // findes ikke i player inventory
@@ -134,6 +136,24 @@ public class DomainConnect implements DomainI {
         // returnerer streng med energimærke
         return returnEnergylabel;
     }
+
+    public String replaceDynamicGUI(int indexRoom) {
+        // METODE til at replace faste ting i baggrundsbilledet der skal have en label
+
+        // finder index i player's inventory
+        int indexPlayer = game.getPlayerInvIndex(indexRoom);
+        if (indexPlayer == -1) return null; // findes ikke i player inventory
+
+        // henter navn på det der indsættes: null=ingen mærkning
+        String returnName = game.getPlayer().getInventory().getItem(indexPlayer).getName();
+
+        // indsætter item og opdaterer status & inventory
+        game.insertItem(indexRoom, indexPlayer);
+
+        // returnerer streng med energimærke
+        return returnName;
+    }
+
 
     /*
     @Override

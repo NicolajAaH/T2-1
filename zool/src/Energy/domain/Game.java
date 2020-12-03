@@ -388,7 +388,7 @@ public class Game {
         System.out.print("Rummet indeholder: ");
         currentRoom.getRoomInv().printInventory();
         System.out.println("Du har nu opnået en årlig besparelse på: " + player.getScore());
-        
+
         // Tjekker om spiller har råd til at købe flere item - ellers gåes videre til næste runde!
         if (!canAffordMore()) {
             System.out.println("Du har brugt dette års budget, og har ikke råd til mere i butikken");
