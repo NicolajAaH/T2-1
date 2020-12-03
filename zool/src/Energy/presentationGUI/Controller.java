@@ -239,4 +239,7 @@ public class Controller {
         runGui.getStage().setScene(new Scene(newRoot));
         runGui.getStage().show();
     }
+    public String replace(int index){
+        return getDomainI().replaceStaticGUI(index);
+    }
 }
