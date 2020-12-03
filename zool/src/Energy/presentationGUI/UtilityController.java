@@ -21,25 +21,33 @@ public class UtilityController extends Controller{
         washingMachineLabel.setOnMouseClicked(new EventHandler<MouseEvent>() {
             @Override
             public void handle(MouseEvent mouseEvent) {
-                washingMachineLabel.setText(getDomainI().replaceStaticGUI(0));
+                String energyLabel = getDomainI().replaceStaticGUI(0);
+                if(energyLabel != null){
+                washingMachineLabel.setText(energyLabel);
                 updateInventory();
                 updateStatus();
-            }
+            }}
         });
         tumbleDryerLabel.setOnMouseClicked(new EventHandler<MouseEvent>() {
             @Override
             public void handle(MouseEvent mouseEvent) {
-                tumbleDryerLabel.setText(getDomainI().replaceStaticGUI(1));
+                String energyLabel = getDomainI().replaceStaticGUI(1);
+                if(energyLabel != null){
+                tumbleDryerLabel.setText(energyLabel);
                 updateInventory();
-                updateStatus();
+                updateStatus();}
+
             }
         });
         heatingSystem.setOnMouseClicked(new EventHandler<MouseEvent>() {
             @Override
             public void handle(MouseEvent mouseEvent) {
-                getDomainI().replaceStaticGUI(3);
-                //heatingSystem.setImage(findImage(""))
-            }
+                String name = getDomainI().replaceDynamicGUI(2);
+                if(name != null){
+                heatingSystem.setImage(findImage(name));
+                updateInventory();
+                updateStatus();
+            }}
         });
     }
 
