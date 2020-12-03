@@ -154,6 +154,9 @@ public class DomainConnect implements DomainI {
         return returnName;
     }
 
+    public String setStartAmountGUI(String value){
+        return game.setStartAmountGUI(value);
+    }
 
     /*
     @Override

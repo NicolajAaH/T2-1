@@ -8,6 +8,8 @@ public class Game {
     private Room currentRoom; // holder styr på det rum man befinder sig i
     Room store, outside, utility, bathroom, bedroom, kidsRoom, room, kitchen, livingRoom, corridor1, corridor2, corridor3, corridor4; // liste over rum
 
+    private final int maxStartAmount = 100000;
+
     public final int WASHINGMACHINE = 1;
     public final int DRYER = 2;
     public final int HEATING = 3;
@@ -172,28 +174,30 @@ public class Game {
         printExit();
     }
 
-    public String inputWallet(){
-        Scanner s = new Scanner(System.in);
-        while(true) {
-            String value = s.nextLine();
-            if (isInt(value)) {
-                int value2 = 0;
-                try{
-                    value2 = Integer.parseInt(value);
-                }catch(NumberFormatException e){
-                    return "Værdien er for høj!";
-                }
-                if (value2 > 0 && value2 <= 100000) {
-                    player.setWallet(value2);
-                    player.setStartAmount(value2);
-                    break;
-                } else {
-                    return "Der må ikke stå bogstaver i beløbet og værdien skal være mellem 0 og 100.000kr. \nIndtast nyt beløb: ";
-                }
-            } else {
-                return "Der må ikke stå bogstaver i beløbet og værdien skal være mellem 0 og 100.000kr. \nIndtast nyt beløb: ";
-            }
+    String setStartAmountGUI(String value) {
+        // metode til GUI input af start amount
+
+        int result = 0;
+        // Tjekker om input er et heltal
+        if (!isInt(value)) {
+            return "Fejl: indtast et heltal imellem 0 og " + maxStartAmount;
         }
+
+        // Laver string til integer
+        try {
+            result = Integer.parseInt(value);
+        } catch (NumberFormatException e) {
+            return "Fejl: Værdien skal være mellem 0 og " + maxStartAmount + " kr.";
+        }
+
+        // Tjekker om beløbet er inden for max grænsen
+        if (result > 0 && result <= maxStartAmount) {
+            player.setWallet(result);
+            player.setStartAmount(result);
+        } else {
+            return "Fejl: Værdien skal være mellem 0 og " + maxStartAmount + " kr.";
+        }
+
         return null;
     }
 
@@ -215,15 +219,15 @@ public class Game {
                 }catch(NumberFormatException e){
                     System.out.println("Værdien er for høj!");
                 }
-                if (value2 > 0 && value2 <= 100000) {
+                if (value2 > 0 && value2 <= maxStartAmount) {
                     player.setWallet(value2);
                     player.setStartAmount(value2);
                     break;
                 } else {
-                    System.out.println("Der må ikke stå bogstaver i beløbet og værdien skal være mellem 0 og 100.000kr. \nIndtast nyt beløb: ");
+                    System.out.println("Der må ikke stå bogstaver i beløbet og værdien skal være mellem 0 og "+maxStartAmount+" kr. \nIndtast nyt beløb: ");
                 }
             } else {
-                System.out.println("Der må ikke stå bogstaver i beløbet og værdien skal være mellem 0 og 100.000kr. \nIndtast nyt beløb: ");
+                System.out.println("Der må ikke stå bogstaver i beløbet og værdien skal være mellem 0 og "+maxStartAmount+" kr. \nIndtast nyt beløb: ");
             }
         }
 
