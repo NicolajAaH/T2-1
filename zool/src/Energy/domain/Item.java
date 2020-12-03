@@ -6,17 +6,20 @@ public class Item {
     private String name;
     private int price;
     private int scoreImpact;
-    private int itemType; // fridge, window etc:
+    private int itemType;
+    private String energyLabel = null;
+    // fridge, window etc:
 
     // constructor
-    public Item(String name, int price, int scoreImpact, int itemType) {
+    public Item(String name, int price, int scoreImpact, int itemType, String energyLabel) {
         this.name = name;
         this.price = price;
         this.scoreImpact = scoreImpact;
         this.itemType = itemType;
+        this.energyLabel = energyLabel;
     }
 
-    // Getters & Methods
+    // Getters & Setters
     public String getName() {
         return name;
     }
@@ -33,8 +36,13 @@ public class Item {
         return itemType;
     }
 
+    public String getEnergyLabel() {
+        return energyLabel;
+    }
+
     @Override
     public String toString() {
         return "" + name + ", Pris: " + price + ", Årlig besparelse: " + scoreImpact;
     }
+
 }

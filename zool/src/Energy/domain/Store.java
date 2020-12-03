@@ -2,8 +2,8 @@ package Energy.domain;
 
 public class Store extends Room {
 
-    public Store(String description) {
-        super(description);
+    public Store(String description, String name) {
+        super(description, name);
     }
 
     @Override

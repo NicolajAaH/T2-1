@@ -71,4 +71,8 @@ public class Inventory {
 
         return min;
     } // Returnerer billigste Item i inventory
+
+    public ArrayList<Item> getItems() {
+        return items;
+    }
 }
