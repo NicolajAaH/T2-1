@@ -511,7 +511,6 @@ public class Game {
         return currentRoom == store;
     }
 
-
     private void status() {
     System.out.println("Du har opnået en samlet årlig besparelse på: " + player.getScore() +
             ", og du har " + player.getWallet() + "kr. tilbage på budgettet i år");
