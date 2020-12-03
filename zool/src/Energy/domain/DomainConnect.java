@@ -123,7 +123,7 @@ public class DomainConnect implements DomainI {
     public String replaceStaticGUI(int indexRoom) {
         // finder index i player's inventory
         int indexPlayer = game.getPlayerInvIndex(indexRoom);
-        if (indexPlayer == -1) return null; // findes ikke i inventory
+        if (indexPlayer == -1) return null; // findes ikke i player inventory
 
         // henter energimærke på det der indsættes: null=ingen mærkning
         String returnEnergylabel = game.getPlayer().getInventory().getItem(indexPlayer).getEnergyLabel();

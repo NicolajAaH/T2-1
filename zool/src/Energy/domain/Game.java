@@ -388,14 +388,22 @@ public class Game {
         System.out.print("Rummet indeholder: ");
         currentRoom.getRoomInv().printInventory();
         System.out.println("Du har nu opnået en årlig besparelse på: " + player.getScore());
-
+        
         // Tjekker om spiller har råd til at købe flere item - ellers gåes videre til næste runde!
-        if (    (player.getInventory().isEmpty()) &&
-                (player.getWallet() < store.getRoomInv().cheapestItem()) ) {
+        if (!canAffordMore()) {
             System.out.println("Du har brugt dette års budget, og har ikke råd til mere i butikken");
             return nextRound();
         }
         return false;
+    }
+
+    boolean canAffordMore(){
+        // tjekker om spiller har råd til den billigste ting i butikken
+        if ((player.getInventory().isEmpty()) &&
+                (player.getWallet() < store.getRoomInv().cheapestItem())) {
+            return false;
+        }
+        return true;
     }
 
     void insertItem(int roomInvIndex, int playerInvIndex) {
