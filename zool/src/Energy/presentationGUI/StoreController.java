@@ -7,11 +7,9 @@ import javafx.collections.ListChangeListener;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
+import javafx.scene.text.TextAlignment;
 
-import java.util.Collection;
-import java.util.Iterator;
-import java.util.List;
-import java.util.ListIterator;
+import java.util.*;
 
 public class StoreController extends Controller {
     public void initialize() {
@@ -22,7 +20,7 @@ public class StoreController extends Controller {
             @Override
             public void handle(ActionEvent actionEvent) {
                 int selectedItem = storeList.getSelectionModel().getSelectedIndex()+1;
-                getDomainI().buyItem(selectedItem);
+                textStore.setText(getDomainI().buyItem(selectedItem));
                 updateInventory();
                 updateStatus();
             }

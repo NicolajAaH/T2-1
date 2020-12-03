@@ -3,10 +3,6 @@ package Energy.presentationGUI;
 import Energy.Interface.DomainI;
 import Energy.domain.DomainConnect;
 import Energy.domain.Item;
-import javafx.beans.InvalidationListener;
-import javafx.collections.FXCollections;
-import javafx.collections.ListChangeListener;
-import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
@@ -17,10 +13,6 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 
 import java.io.IOException;
-import java.util.Collection;
-import java.util.Iterator;
-import java.util.List;
-import java.util.ListIterator;
 
 public class Controller {
     public final int WASHINGMACHINE = 1;
@@ -78,6 +70,8 @@ public class Controller {
     ListView<Item> storeList;
     @FXML
     Button buyButton;
+    @FXML
+    Label textStore;
 
 
     public void initialize(){
@@ -86,46 +80,100 @@ public class Controller {
         updateStatus();
     }
 
-    public Image findImage(int itemType) {
-        if (itemType == WASHINGMACHINE) {
-            return new Image("/Images/washing-machine_icon.png");
+    public Image findImage(String itemName) {
+        if (itemName.equals("Opvaskemaskine A")) {
+            return new Image("/Images/dishwasher_A_icon.png");
         }
-        if (itemType == DRYER) {
-            return new Image("/Images/tumble_dryer_icon.png");
+        if (itemName.equals("Opvaskemaskine A++")) {
+            return new Image("/Images/dishwasher_A++_icon.png");
         }
-        if (itemType == HEATING) {
-            return new Image("/Images/washing-machine_icon.png");
+        if (itemName.equals("Vaskemaskine A+")) {
+            return new Image("/Images/washing-machine_A+_icon.png");
+        }
+        if (itemName.equals("Vaskemaskine A++")) {
+            return new Image("/Images/washing-machine_A++_icon.png");
+        }
+        if (itemName.equals("Vaskemaskine A+++")) {
+            return new Image("/Images/washing-machine_A+++_icon.png");
+        }
+        if (itemName.equals("Tørretumbler A+")) {
+            return new Image("/Images/tumble_dryer_A+_icon.png");
+        }
+        if (itemName.equals("Tørretumbler A++")) {
+            return new Image("/Images/tumble_dryer_A++_icon.png");
+        }
+        if (itemName.equals("Tørretumbler A+++")) {
+            return new Image("/Images/tumble_dryer_A+++_icon.png");
+        }
+        if (itemName.equals("Køleskab A+")) {
+            return new Image("/Images/fridge_A+_icon.png");
+        }
+        if (itemName.equals("Køleskab A++")) {
+            return new Image("/Images/fridge_A++_icon.png");
+        }
+        if (itemName.equals("Køleskab A+++")) {
+            return new Image("/Images/fridge_A+++_icon.png");
+        }
+        if (itemName.equals("Energibesparende komfur")) {
+            return new Image("/Images/cooker_icon.png");
+        }
+        if (itemName.equals("Energibesparende TV")) {
+            return new Image("/Images/TV_icon.png");
+        }
+        if (itemName.equals("Termorude (2 lag)")) {
+            return new Image("/Images/window_icon.png");
+        }
+        if (itemName.equals("Sparepære")) {
+            return new Image("/Images/Spare_bulb_icon.png");
+        }
+        if (itemName.equals("LED-pære")) {
+            return new Image("/Images/LED_bulb_icon.png");
+        }
+        if (itemName.equals("Pillefyr (varmeanlæg)")) {
+            return new Image("/Images/pellet_heater_icon.png");
+        }
+        if (itemName.equals("Gas (varmeanlæg)")) {
+            return new Image("/Images/gasboiler_icon.png");
+        }
+        if (itemName.equals("Hul-fikser-kit")) {
+            return new Image("/Images/wallfixer-kit_icon.png");
+        }
+        if (itemName.equals("Isolering")) {
+            return new Image("/Images/insulation_icon.png");
+        }
+        if (itemName.equals("Solceller")) {
+            return new Image("/Images/solar_panels_icon.png");
         }
         return null;
     }
 
     public void updateInventory() {
         if (domainI.getPlayerInventory().getSize() > 0 && domainI.getPlayerInventory().getItem(0) != null) {
-            item0.setImage(findImage(domainI.getPlayerInventory().getItem(0).getItemType()));
+            item0.setImage(findImage(domainI.getPlayerInventory().getItem(0).getName()));
         } else {
             item0.setImage(null);
         }
 
         if (domainI.getPlayerInventory().getSize() > 1 && domainI.getPlayerInventory().getItem(1) != null) {
-            item1.setImage(findImage(domainI.getPlayerInventory().getItem(1).getItemType()));
+            item1.setImage(findImage(domainI.getPlayerInventory().getItem(1).getName()));
         } else {
             item1.setImage(null);
         }
 
         if (domainI.getPlayerInventory().getSize() > 2 && domainI.getPlayerInventory().getItem(2) != null) {
-            item2.setImage(findImage(domainI.getPlayerInventory().getItem(2).getItemType()));
+            item2.setImage(findImage(domainI.getPlayerInventory().getItem(2).getName()));
         } else {
             item2.setImage(null);
         }
 
         if (domainI.getPlayerInventory().getSize() > 3 && domainI.getPlayerInventory().getItem(3) != null) {
-            item3.setImage(findImage(domainI.getPlayerInventory().getItem(3).getItemType()));
+            item3.setImage(findImage(domainI.getPlayerInventory().getItem(3).getName()));
         } else {
             item3.setImage(null);
         }
 
         if (domainI.getPlayerInventory().getSize() > 4 && domainI.getPlayerInventory().getItem(4) != null) {
-            item4.setImage(findImage(domainI.getPlayerInventory().getItem(4).getItemType()));
+            item4.setImage(findImage(domainI.getPlayerInventory().getItem(4).getName()));
         } else {
             item4.setImage(null);
         }
