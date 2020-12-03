@@ -24,7 +24,7 @@ public class StoreController extends Controller {
                 int selectedItem = storeList.getSelectionModel().getSelectedIndex()+1;
                 getDomainI().buyItem(selectedItem);
                 updateInventory();
-                System.out.println(getDomainI().getPlayerInventory().printInventory());
+                updateStatus();
             }
         });
     }

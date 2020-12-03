@@ -56,7 +56,9 @@ public class Controller {
     @FXML
     private Label dishwasher_label;
     @FXML
-    private Label printStatus;
+    private Label wallet;
+    @FXML
+    private Label savings;
     @FXML
     private ImageView arrowUp;
     @FXML
@@ -81,6 +83,7 @@ public class Controller {
     public void initialize(){
         showExits();
         updateInventory();
+        updateStatus();
     }
 
     public Image findImage(int itemType) {
@@ -126,6 +129,11 @@ public class Controller {
         } else {
             item4.setImage(null);
         }
+    }
+
+    public void updateStatus(){
+        wallet.setText("Penge tilbage: " + getDomainI().getWallet());
+        savings.setText("Årlig besparelse: " + getDomainI().getScore());
     }
 
     public DomainI getDomainI() {
