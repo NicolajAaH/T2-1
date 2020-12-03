@@ -356,43 +356,19 @@ public class Game {
 
     private boolean replace(Command command) {
 
-        Integer index = checkReplaceConditions(command);
-        if (index == null) return false;
+        Integer roomInvIndex = checkReplaceConditions(command);
+        if (roomInvIndex == null) return false;
 
-        // Tjekker om players inventory har et Item af samme type. (kunne være metode!)
-        boolean inInventory = false;
-        int playerInvIndex = 0;
+        // Finder index i players inventory.
+        int playerInvIndex = getPlayerInvIndex(roomInvIndex);
 
-        for (int i = 0; i < player.getInventory().getSize(); i++) {
-
-            int itemTypeRoom = currentRoom.getRoomInv().getItem(index).getItemType();
-
-            if (player.getInventory().getItem(i).getItemType() == itemTypeRoom) {
-                inInventory = true;
-                playerInvIndex = i;
-            }
-        }
-
-        if (!inInventory) {
+        // tjekker om spiller har item i inventar
+        if (playerInvIndex==-1) {
             System.out.println("Du har ikke den type i dit inventar, gå i Super Byg!");
             return false;
         }
 
-        // Indsætter Item i room inventory fra player inventory
-
-        // Fjerner gammelt Item fra Room
-
-        currentRoom.getRoomInv().removeItem(currentRoom.getRoomInv().getItem(index));
-
-        // Kopierer item fra player index til room
-        copyItem(player.getInventory(), playerInvIndex, currentRoom.getRoomInv());
-
-        // Opdaterer score
-        int nyScore = player.getScore() + player.getInventory().getItem(playerInvIndex).getScoreImpact();
-        player.setScore(nyScore);
-
-        // Sletter item fra player index
-        player.getInventory().removeItem(player.getInventory().getItem(playerInvIndex));
+        insertItem(roomInvIndex, playerInvIndex);
 
         // Udskriver inventory fra player og Room
         System.out.print("Du har: ");
@@ -408,6 +384,37 @@ public class Game {
             return nextRound();
         }
         return false;
+    }
+
+    private void insertItem(Integer roomInvIndex, int playerInvIndex) {
+        // Indsætter Item i room inventory fra player inventory
+
+        // Fjerner gammelt Item fra Room
+        currentRoom.getRoomInv().removeItem(currentRoom.getRoomInv().getItem(roomInvIndex));
+
+        // Kopierer item fra player index til room
+        copyItem(player.getInventory(), playerInvIndex, currentRoom.getRoomInv());
+
+        // Opdaterer score
+        int nyScore = player.getScore() + player.getInventory().getItem(playerInvIndex).getScoreImpact();
+        player.setScore(nyScore);
+
+        // Sletter item fra player index
+        player.getInventory().removeItem(player.getInventory().getItem(playerInvIndex));
+    }
+
+    private int getPlayerInvIndex(int roomInvIndex) {
+        // Finder index i players inventory returnere -1 hvis der ikke er Item af samme type.)
+
+        int playerInvIndex = -1;
+        int itemTypeRoom = currentRoom.getRoomInv().getItem(roomInvIndex).getItemType();
+
+        for (int i = 0; i < player.getInventory().getSize(); i++) {
+            if (player.getInventory().getItem(i).getItemType() == itemTypeRoom) {
+                playerInvIndex = i;
+            }
+        }
+        return playerInvIndex;
     }
 
     private Integer checkReplaceConditions(Command command) {
