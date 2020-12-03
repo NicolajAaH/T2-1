@@ -31,6 +31,20 @@ public class Game {
         player.getInventory().setMaxSize(5);
     }
 
+    // GETTERS & SETTERS
+    public Room getCurrentRoom() {
+        return currentRoom;
+    }
+
+    public void setCurrentRoom(Room newCurrentRoom) {
+        this.currentRoom = newCurrentRoom;
+    }
+
+    public Player getPlayer() {
+        return player;
+    }
+
+    // METHODS
     private void createRooms() {
 
         // create room and description
@@ -194,7 +208,7 @@ public class Game {
 
     private void printExit(){
         System.out.println("--- Tak for, at du spillede vores spil ---\n");
-        printStatus();
+        printEndStatus();
         System.out.println("\nLavet af: Yusuf Bayoz, Victor Poulsen, Emil Spangenberg, Theis Langlands & Nicolaj Hansen");
     } // afslutning af spil
 
@@ -215,7 +229,7 @@ public class Game {
         } else if (commandWord == CommandWord.NEWROUND) {
             wantToQuit = newRound();
         } else if (commandWord == CommandWord.INVENTORY) {
-            inventory();
+            printInventory();
         } else if (commandWord == CommandWord.DELETE) {
             delete(command);
         } else if (commandWord == CommandWord.QUIT) {
@@ -352,14 +366,16 @@ public class Game {
 
     private boolean replace(Command command) {
 
-        Integer roomInvIndex = checkReplaceConditions(command);
-        if (roomInvIndex == null) return false;
+        // tjekker input og returnerer index:
+        // -1 = ugyldigt input
+        int roomInvIndex = checkReplaceConditions(command);
+        if (roomInvIndex == -1) return false;
 
         // Finder index i players inventory.
         int playerInvIndex = getPlayerInvIndex(roomInvIndex);
 
         // tjekker om spiller har item i inventar
-        if (playerInvIndex==-1) {
+        if (playerInvIndex == -1) {
             System.out.println("Du har ikke den type i dit inventar, gå i Super Byg!");
             return false;
         }
@@ -382,7 +398,7 @@ public class Game {
         return false;
     }
 
-    void insertItem(Integer roomInvIndex, int playerInvIndex) {
+    void insertItem(int roomInvIndex, int playerInvIndex) {
         // Indsætter Item i room inventory fra player inventory
 
         // Fjerner gammelt Item fra Room
@@ -399,6 +415,10 @@ public class Game {
         player.getInventory().removeItem(player.getInventory().getItem(playerInvIndex));
     }
 
+    private void copyItem(Inventory sourceInventory, int itemIndex, Inventory destInventory) {
+        destInventory.addItem(sourceInventory.getItem(itemIndex));
+    }
+
     int getPlayerInvIndex(int roomInvIndex) {
         // Finder index i players inventory returnere -1 hvis der ikke er Item af samme type.)
 
@@ -413,23 +433,23 @@ public class Game {
         return playerInvIndex;
     }
 
-    private Integer checkReplaceConditions(Command command) {
+    private int checkReplaceConditions(Command command) {
         // Undersøger om du er i butikken
         if (inShop()) {
             System.out.println("Du kan kun handle når du er i butikken!");
-            return null;
+            return -1;
         }
 
         // undersøger om kommandoen har et andet ord
         if (!command.hasSecondWord()) {
             System.out.println("Udskift hvad?");
-            return null;
+            return -1;
         }
 
         // Tjekker at det andet ord (string) kan parses til en Integer
         if (!isInt(command.getSecondWord())) {
             System.out.println("Dette er ikke et gyldigt nummer!");
-            return null;
+            return -1;
         }
 
         // laver kommandoword om til int og finder index af det der skal udskiftes
@@ -438,7 +458,7 @@ public class Game {
         // Tjekker om index er mellem 0 og rummets max antal items
         if (0 > index || index + 1 > currentRoom.getRoomInv().getSize()) {
             System.out.println("Dette er ikke et gyldigt nummer!");
-            return null;
+            return -1;
         }
         return index;
     }
@@ -454,8 +474,10 @@ public class Game {
         return currentRoom == store;
     }
 
+
     private void status() {
-    System.out.println("Du har opnået en samlet årlig besparelse på: " + player.getScore() + ", og du har " + player.getWallet() + "kr. tilbage på budgettet i år");
+    System.out.println("Du har opnået en samlet årlig besparelse på: " + player.getScore() +
+            ", og du har " + player.getWallet() + "kr. tilbage på budgettet i år");
     }
 
     private void delete(Command command) {
@@ -490,22 +512,13 @@ public class Game {
 
     }
 
-    // skal den ikke slettes - indeholdt i status? - måske skal den bruges i GUI?
-    private void wallet(){
-        System.out.println(player.getWallet());
-    }
-
-    private void inventory() {
+    private void printInventory() {
         if (player.getInventory().isEmpty()) {
             System.out.println("Du har ikke nogle ting, tag en tur i Superbyg");
         } else {
             System.out.print("Du har: \n");
             System.out.println(player.getInventory().printInventory());
         }
-    }
-
-    private void copyItem(Inventory sourceInventory, int itemIndex, Inventory destInventory) {
-        destInventory.addItem(sourceInventory.getItem(itemIndex));
     }
 
     private boolean nextRound() {
@@ -518,7 +531,7 @@ public class Game {
         }
 
         // Udskriver status
-        printStatus();
+        printEndStatus();
 
         // gemmer score og opdatere runde count
         player.saveRoundScore();
@@ -538,7 +551,7 @@ public class Game {
         return false;
     }
 
-    private void printStatus() {
+    private void printEndStatus() {
         System.out.println("Du har samlet brugt " + player.getTotalUsedAmount() + " kr,-\n");
         System.out.println(" - Energibesparelse -");
         for (int i=0; i<=player.getRounds(); i++) {
@@ -549,16 +562,4 @@ public class Game {
         System.out.println("og er nu på energimærke " + EnergyLabel.createEnergyLabel(player.getScore(), player.getStartValue()));
     }
 
-    // GETTERS & SETTERS
-    public Room getCurrentRoom() {
-        return currentRoom;
-    }
-
-    public void setCurrentRoom(Room newCurrentRoom) {
-        this.currentRoom = newCurrentRoom;
-    }
-
-    public Player getPlayer() {
-        return player;
-    }
 }
