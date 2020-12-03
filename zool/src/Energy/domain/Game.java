@@ -155,7 +155,7 @@ public class Game {
         outside.addToInventory(new Item("Tyndt isolering", 0, 0, ISOLATION, null));
 
         // sætter startrummet til outside
-        currentRoom = kitchen;
+        currentRoom = outside;
     }
 
     public void play() {
@@ -170,6 +170,30 @@ public class Game {
         }
 
         printExit();
+    }
+
+    public String inputWallet(){
+        Scanner s = new Scanner(System.in);
+        while(true) {
+            String value = s.nextLine();
+            if (isInt(value)) {
+                int value2 = 0;
+                try{
+                    value2 = Integer.parseInt(value);
+                }catch(NumberFormatException e){
+                    return "Værdien er for høj!";
+                }
+                if (value2 > 0 && value2 <= 100000) {
+                    player.setWallet(value2);
+                    player.setStartAmount(value2);
+                    break;
+                } else {
+                    return "Der må ikke stå bogstaver i beløbet og værdien skal være mellem 0 og 100.000kr. \nIndtast nyt beløb: ";
+                }
+            } else {
+                return "Der må ikke stå bogstaver i beløbet og værdien skal være mellem 0 og 100.000kr. \nIndtast nyt beløb: ";
+            }
+        }
     }
 
     private void printWelcome() // opstart af spil
