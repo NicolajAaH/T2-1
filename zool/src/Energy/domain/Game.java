@@ -117,8 +117,8 @@ public class Game {
         store.addToInventory(new Item("Køleskab A+", 3375, 221, FRIDGE, "A+"));
         store.addToInventory(new Item("Køleskab A++", 4875, 308, FRIDGE, "A++"));
         store.addToInventory(new Item("Køleskab A+++", 6000, 394, FRIDGE, "A+++"));
-        store.addToInventory(new Item("Energibesparende komfur", 4500, 284, STOVE, null));
-        store.addToInventory(new Item("Energibesparende TV", 5900, 375, TV, null));
+        store.addToInventory(new Item("Komfur A+", 4500, 284, STOVE, "A+"));
+        store.addToInventory(new Item("TV A+", 5900, 375, TV, "A+"));
         store.addToInventory(new Item("Termorude (2 lag)", 1250, 175, WINDOW, null));
         store.addToInventory(new Item("Sparepære", 200, 50, LIGHTS, null));
         store.addToInventory(new Item("LED-pære", 600, 170, LIGHTS, null));

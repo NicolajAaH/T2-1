@@ -101,11 +101,11 @@ public class Controller {
         if (itemName.equals("Køleskab A+++")) {
             return new Image("/Images/fridge_A+++_icon.png");
         }
-        if (itemName.equals("Energibesparende komfur")) {
-            return new Image("/Images/cooker_icon.png");
+        if (itemName.equals("Komfur A+")) {
+            return new Image("/Images/cooker_A+_icon.png");
         }
-        if (itemName.equals("Energibesparende TV")) {
-            return new Image("/Images/TV_icon.png");
+        if (itemName.equals("TV A+")) {
+            return new Image("/Images/TV_A+_icon.png");
         }
         if (itemName.equals("Termorude (2 lag)")) {
             return new Image("/Images/window_icon.png");
