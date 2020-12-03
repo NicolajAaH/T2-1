@@ -194,6 +194,7 @@ public class Game {
                 return "Der må ikke stå bogstaver i beløbet og værdien skal være mellem 0 og 100.000kr. \nIndtast nyt beløb: ";
             }
         }
+        return null;
     }
 
     private void printWelcome() // opstart af spil
