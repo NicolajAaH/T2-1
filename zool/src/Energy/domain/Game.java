@@ -31,10 +31,6 @@ public class Game {
         player.getInventory().setMaxSize(5);
     }
 
-    public Player getPlayer() {
-        return player;
-    }
-
     private void createRooms() {
 
         // create room and description
@@ -386,7 +382,7 @@ public class Game {
         return false;
     }
 
-    private void insertItem(Integer roomInvIndex, int playerInvIndex) {
+    void insertItem(Integer roomInvIndex, int playerInvIndex) {
         // Indsætter Item i room inventory fra player inventory
 
         // Fjerner gammelt Item fra Room
@@ -403,7 +399,7 @@ public class Game {
         player.getInventory().removeItem(player.getInventory().getItem(playerInvIndex));
     }
 
-    private int getPlayerInvIndex(int roomInvIndex) {
+    int getPlayerInvIndex(int roomInvIndex) {
         // Finder index i players inventory returnere -1 hvis der ikke er Item af samme type.)
 
         int playerInvIndex = -1;
@@ -447,6 +443,17 @@ public class Game {
         return index;
     }
 
+    private boolean isInt(String s) {
+        for (int i = 0; i < s.length(); i++) {
+            if( !Character.isDigit(s.charAt(i)) ) return false;
+        }
+        return true;
+    }
+
+    private boolean inShop() {
+        return currentRoom == store;
+    }
+
     private void status() {
     System.out.println("Du har opnået en samlet årlig besparelse på: " + player.getScore() + ", og du har " + player.getWallet() + "kr. tilbage på budgettet i år");
     }
@@ -481,17 +488,6 @@ public class Game {
         System.out.println("Nyt inventar:");
         player.getInventory().printInventory();
 
-    }
-
-    private boolean isInt(String s) {
-        for (int i = 0; i < s.length(); i++) {
-            if( !Character.isDigit(s.charAt(i)) ) return false;
-        }
-        return true;
-    }
-
-    private boolean inShop() {
-        return currentRoom == store;
     }
 
     // skal den ikke slettes - indeholdt i status? - måske skal den bruges i GUI?
@@ -553,11 +549,16 @@ public class Game {
         System.out.println("og er nu på energimærke " + EnergyLabel.createEnergyLabel(player.getScore(), player.getStartValue()));
     }
 
+    // GETTERS & SETTERS
     public Room getCurrentRoom() {
         return currentRoom;
     }
 
     public void setCurrentRoom(Room newCurrentRoom) {
         this.currentRoom = newCurrentRoom;
+    }
+
+    public Player getPlayer() {
+        return player;
     }
 }

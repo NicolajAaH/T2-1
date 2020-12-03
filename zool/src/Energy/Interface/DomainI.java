@@ -31,12 +31,11 @@ public interface DomainI {
     // void exitGame();
 */
     // metoder til rum / udenfor
-    // Indsætte ting fra player index i room index
-    // returnerer false hvis det ikke er samme type
-    public boolean replaceGUI(int indexRoom, int indexPlayer);
+    // Indsætter ting fra player index i room index og returnerer String med Energimærke
+    public String replaceStaticGUI(int indexRoom);
 
     // metoder til butikken
     Inventory getStoreInventory();
-    // Returnere streng med status
+    // Returnere streng med status på køb
     String buyItem(int ItemIndex);
 }
