@@ -118,7 +118,7 @@ public class DomainConnect implements DomainI {
         Command cmd = new Command(cv,String.valueOf(itemIndex));
         return game.buy(cmd);
     }
-
+    
     @Override
     public String replaceStaticGUI(int indexRoom) {
         // METODE til at replace faste ting i baggrundsbilledet der skal have en label
