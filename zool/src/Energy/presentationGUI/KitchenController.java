@@ -11,6 +11,12 @@ import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 
 public class KitchenController extends Controller{
+    @FXML
+    private Label fridge_label;
+    @FXML
+    private Label oven_label;
+    @FXML
+    private Label dishwasher_label;
 
     public void initialize(){
         //getDomainI().getPlayerInventory().addItem(new Item("Vaskemaskine A+", 2400, 65, WASHINGMACHINE, "A+"));
