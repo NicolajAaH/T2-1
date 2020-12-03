@@ -30,8 +30,10 @@ public interface DomainI {
     // void newRound();
     // void exitGame();
 */
-    // metoder til rum / udenfor - klik på ting i billedet og skift ud fra player inventory
-//    String ReplaceInRoom(int itemIndex);
+    // metoder til rum / udenfor
+    // Indsætte ting fra player index i room index
+    // returnerer false hvis det ikke er samme type
+    public boolean replaceGUI(int indexRoom, int indexPlayer);
 
     // metoder til butikken
     Inventory getStoreInventory();
