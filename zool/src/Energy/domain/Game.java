@@ -436,14 +436,20 @@ public class Game {
     }
 
     void insertItem(int roomInvIndex, int playerInvIndex) {
-        // Indsætter Item i room inventory fra player inventory
 
+        // Erstatter Item i room inventory med et item fra player inventory
+        currentRoom.getRoomInv().replaceItem(roomInvIndex, player.getInventory().getItem(playerInvIndex));
+
+        // Fjerner Item fra player inventory
+        player.getInventory().removeItem(playerInvIndex);
+
+        /*
         // Fjerner gammelt Item fra Room
         currentRoom.getRoomInv().removeItem(currentRoom.getRoomInv().getItem(roomInvIndex));
 
         // Kopierer item fra player index til room
         copyItem(player.getInventory(), playerInvIndex, currentRoom.getRoomInv());
-
+*/
         // Opdaterer score
         int nyScore = player.getScore() + player.getInventory().getItem(playerInvIndex).getScoreImpact();
         player.setScore(nyScore);

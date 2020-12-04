@@ -23,6 +23,14 @@ public class Inventory {
         items.remove(item);
     }
 
+    public void removeItem(int index) {
+        items.remove(index);
+    }
+
+    public void replaceItem(int replaceIndex, Item withItem) {
+        items.set(replaceIndex, withItem);
+    }
+
     public String printInventory() {
 
         String result = "";
