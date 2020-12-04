@@ -43,6 +43,8 @@ public interface DomainI {
     // Indsætter ting fra player index i room index og returnerer String med navn på indsat item
     public String replaceDynamicGUI(int indexRoom);
 
+    public Inventory getRoomInventory();
+
     // metoder til butikken
     Inventory getStoreInventory();
     // Returnere streng med status på køb

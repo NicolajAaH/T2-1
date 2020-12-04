@@ -17,7 +17,6 @@ public class DomainConnect implements DomainI {
         return game.getPlayer().getInventory();
     }
 
-
     // Metorder der ruturnerer om currentroom har en udgang i en retning
     @Override
     public boolean hasNorthExit() {
@@ -118,7 +117,13 @@ public class DomainConnect implements DomainI {
         Command cmd = new Command(cv,String.valueOf(itemIndex));
         return game.buy(cmd);
     }
-    
+
+
+    @Override
+    public Inventory getRoomInventory() {
+        return game.getCurrentRoom().getRoomInv();
+    }
+
     @Override
     public String replaceStaticGUI(int indexRoom) {
         // METODE til at replace faste ting i baggrundsbilledet der skal have en label
