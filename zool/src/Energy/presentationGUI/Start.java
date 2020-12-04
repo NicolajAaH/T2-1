@@ -32,11 +32,6 @@ public class Start extends Controller{
                     String error = getDomainI().setStartAmountGUI(input.getText());
                     errorLabel.setText(error);
                     if(error == null){
-                        try {
-                            runGui.getFxmlLoader().load(getClass().getResource("Outside.fxml"));
-                        } catch (IOException e) {
-                            e.printStackTrace();
-                        }
                         Parent newRoot = null;
                         try {
                             newRoot = runGui.getFxmlLoader().load(getClass().getResource("Outside.fxml"));
