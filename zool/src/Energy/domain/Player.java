@@ -26,10 +26,6 @@ public class Player {
         roundScore[round] = score;
     }
 
-    public void addMove() {
-        moves++;
-    }
-
     public void addAmountToTotal(int amount){
         totalUsedAmount += amount;
     }
@@ -88,6 +84,10 @@ public class Player {
         return inventory;
     }
 
+    public void addMove() {
+        moves++;
+    }
+
     public int getMoves() {
         return moves;
     }
@@ -98,10 +98,6 @@ public class Player {
 
     public int getMovesPerRound() {
         return movesPerRound;
-    }
-
-    public int addMove(){
-
     }
 
     public void setMovesPerRound(int movesPerRound) {

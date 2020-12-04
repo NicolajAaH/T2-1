@@ -25,6 +25,8 @@ public interface DomainI {
     void goEast();
     void goWest();
 
+    void addMove();
+
     // INFOSKÆRME (START; NYRUNDE; EXIT;)
 
     // STARTSKÆRM

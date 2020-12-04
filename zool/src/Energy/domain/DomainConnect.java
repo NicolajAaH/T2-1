@@ -211,5 +211,8 @@ public class DomainConnect implements DomainI {
         return result;
     }
 
-
+    @Override
+    public void addMove() {
+        game.getPlayer().addMove();
+    }
 }
