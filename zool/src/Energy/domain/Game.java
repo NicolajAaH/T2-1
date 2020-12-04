@@ -439,10 +439,10 @@ public class Game {
 
         // Erstatter Item i room inventory med et item fra player inventory
         currentRoom.getRoomInv().replaceItem(roomInvIndex, player.getInventory().getItem(playerInvIndex));
-
+/*
         // Fjerner Item fra player inventory
         player.getInventory().removeItem(playerInvIndex);
-
+*/
         /*
         // Fjerner gammelt Item fra Room
         currentRoom.getRoomInv().removeItem(currentRoom.getRoomInv().getItem(roomInvIndex));
