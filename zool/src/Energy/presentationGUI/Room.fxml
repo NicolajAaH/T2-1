@@ -38,10 +38,10 @@
         <Button fx:id="endYear" layoutX="413.0" layoutY="549.0" mnemonicParsing="false" text="Afslut år" />
         <Button fx:id="endGame" layoutX="495.0" layoutY="549.0" mnemonicParsing="false" text="Afslut spillet" />
         <Label fx:id="savings" layoutX="593.0" layoutY="564.0" prefHeight="17.0" prefWidth="141.0" text="Årlig besparelse:" />
-      <Label fx:id="roomWindow" alignment="CENTER" layoutX="55.0" layoutY="143.0" prefHeight="132.0" prefWidth="134.0" text="Enkeltlags vindue" textFill="#46eb0a" wrapText="true">
+      <Label fx:id="roomWindow" alignment="CENTER" layoutX="55.0" layoutY="143.0" prefHeight="132.0" prefWidth="134.0" textFill="#46eb0a" wrapText="true">
          <font>
             <Font size="17.0" />
          </font></Label>
-      <Label fx:id="roomBulb" layoutX="619.0" layoutY="154.0" prefHeight="48.0" prefWidth="63.0" text="Glødepære" textFill="#34eb1c" wrapText="true" />
+      <Label fx:id="roomBulb" layoutX="619.0" layoutY="154.0" prefHeight="48.0" prefWidth="63.0" textFill="#34eb1c" wrapText="true" />
     </children>
 </AnchorPane>

@@ -15,7 +15,9 @@ public class LivingRoomController extends Controller{
 
     public void initialize(){
         super.initialize();
-        tvLabel.setText("DER SKAL BRUGES EN METODE");
+        lightLiving.setText(getDomainI().getRoomInventory().getItem(1).getName());
+        windowLabelLiving.setText(getDomainI().getRoomInventory().getItem(0).getName());
+        tvLabel.setText(getDomainI().getRoomInventory().getItem(2).getEnergyLabel());
 
         windowLabelLiving.setOnMouseClicked(new EventHandler<MouseEvent>() {
             @Override

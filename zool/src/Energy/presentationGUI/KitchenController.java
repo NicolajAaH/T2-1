@@ -21,6 +21,9 @@ public class KitchenController extends Controller{
 
     public void initialize(){
         super.initialize();
+        fridge_label.setText(getDomainI().getRoomInventory().getItem(0).getEnergyLabel());
+        oven_label.setText(getDomainI().getRoomInventory().getItem(1).getEnergyLabel());
+        dishwasher_label.setText(getDomainI().getRoomInventory().getItem(2).getEnergyLabel());
 
         fridge_label.setOnMouseClicked(new EventHandler<MouseEvent>() {
             @Override

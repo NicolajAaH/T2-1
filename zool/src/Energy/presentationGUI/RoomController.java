@@ -13,6 +13,8 @@ public class RoomController extends Controller {
 
     public void initialize() {
         super.initialize();
+        roomBulb.setText(getDomainI().getRoomInventory().getItem(0).getName());
+        roomWindow.setText(getDomainI().getRoomInventory().getItem(1).getName());
 
         roomBulb.setOnMouseClicked(new EventHandler<MouseEvent>() {
             @Override
