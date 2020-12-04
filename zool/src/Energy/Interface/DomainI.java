@@ -26,18 +26,23 @@ public interface DomainI {
     void goEast();
     void goWest();
 
-    // Metoder til flow i spil
+    // INFOSKÆRME (START; NYRUNDE; EXIT;)
 
-    // Til start skærm
-    // konverter string til int og sættter startbeløb, returnerer string ved fejl-meddelelse
+    // STARTSKÆRM
+    // konverter string til int og sættter startbeløb, returnerer string ved fejl-meddelelse.
+    // Returnerer null hvis ingen fejl
     public String setStartAmountGUI(String value);
 
+    // velkomst tekst
     public String welcomeText();
 
-    /*
-    // void newRound();
+    // NY RUNDE SKÆRM
+    String newRoundText();
+    public boolean newRound(); // returnerer false ved max antal runder!
+
+
     // void exitGame();
-    */
+    
 
     // metoder til rum / udenfor
     // Indsætter ting fra player index i room index og returnerer String med Energimærke

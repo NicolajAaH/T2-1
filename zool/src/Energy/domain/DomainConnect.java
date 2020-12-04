@@ -161,6 +161,7 @@ public class DomainConnect implements DomainI {
 
     // METODER TIL SPIL FLOW
 
+    // START SKÆRM
     // returnerer velkomst tekst
     @Override
     public String welcomeText() {
@@ -171,5 +172,36 @@ public class DomainConnect implements DomainI {
         return game.setStartAmountGUI(value);
     }
 
+    // RUNDE SKÆRM
+
+    @Override
+    public String newRoundText() {
+        String result;
+
+        result = "\nDu har nu afsluttet " + game.getPlayer().getRounds() + 1  + ". år\n";
+        result += game.endStatusText();
+
+        return result;
+    }
+
+    // starter ny runde, returnerer false hvis max runder er udført!
+    public boolean newRound() {
+        // tjekker om vi er nået max antal runder
+        if (game.getPlayer().getRounds() == (game.getPlayer().getMaxNumberOfRounds() -1 ) ) {
+            return false;
+        }
+        // intialiser ny runde
+        game.initNewRound();
+        return true;
+    }
+/*
+    public String endGameText(boolean endFromMaxRounds) {
+        String result;
+
+        if (endFromMaxRounds) {
+            result += " - Du har spillet max antal år\n\n");
+        }
+    }
+*/
 
 }

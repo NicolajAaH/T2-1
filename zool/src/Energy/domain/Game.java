@@ -205,7 +205,6 @@ public class Game {
     private void printWelcome() // opstart af spil
     {
         System.out.println(welcomeText());
-        welcomeText();
 
         setStartAmountCLI();
 
@@ -220,7 +219,7 @@ public class Game {
                 "udskifte ting i dit hus med mere energivenlige produkter\n" +
                 "du finder hvad du skal bruge i Super Byg\n\n" +
                 "Det gælder at opnå den størst mulige forbedring med dit tilgængelige budget\n" +
-                "Du får en status efter hvert år";
+                "Du får en status efter hvert år\n";
         return result;
     }
 
@@ -249,12 +248,6 @@ public class Game {
             }
         }
     }
-
-    private void printExit(){
-        System.out.println("--- Tak for, at du spillede vores spil ---\n");
-        printEndStatus();
-        System.out.println("\nLavet af: Yusuf Bayoz, Victor Poulsen, Emil Spangenberg, Theis Langlands & Nicolaj Hansen");
-    } // afslutning af spil
 
     private boolean processCommand(Command command) {
         boolean wantToQuit = false;
@@ -588,8 +581,19 @@ public class Game {
         }
 
         // Udskriver status
-        printEndStatus();
+        System.out.println(endStatusText());
 
+        initNewRound();
+
+        // Udskriver velkommen til nyt år
+        System.out.println("\n --- Velkommen til år " + (player.getRounds() + 1) + " ---");
+        System.out.println("Dit nye årsbudget er " + player.getWallet());
+        System.out.println();
+
+        return false;
+    }
+
+    void initNewRound() {
         // gemmer score og opdatere runde count
         player.saveRoundScore();
         player.setRounds(player.getRounds()+1);
@@ -597,26 +601,29 @@ public class Game {
         // intialiserer nyt år
         player.setWallet(player.getStartAmount() + player.getScore()); // nyt årsbudget!
         player.setMoves(0); // resetter moves
-
-        // Udskriver velkommen til nyt år
-        System.out.println("\n --- Velkommen til år " + (player.getRounds() + 1) + " ---");
-        System.out.println("Dit nye årsbudget er " + player.getWallet());
-        System.out.println();
-
         currentRoom = outside;
-
-        return false;
     }
 
-    private void printEndStatus() {
-        System.out.println("Du har samlet brugt " + player.getTotalUsedAmount() + " kr,-\n");
-        System.out.println(" - Energibesparelse -");
+    String endStatusText() {
+        String result;
+        result = "Du har samlet brugt " + player.getTotalUsedAmount() + " kr,-\n" +
+               " - Energibesparelse -";
+
         for (int i=0; i<=player.getRounds(); i++) {
-            System.out.println("År " + (i+1) + ": " + player.getRoundScore(i) );
+            result += "År " + (i+1) + ": " + player.getRoundScore(i) + "\n";
         }
-        System.out.println("Total " + player.getScore() + " kr. om året i energiforbedringer");
-        System.out.println("\nDu startede med energimærke " + EnergyLabel.createEnergyLabel(0,player.getStartValue()));
-        System.out.println("og er nu på energimærke " + EnergyLabel.createEnergyLabel(player.getScore(), player.getStartValue()));
+
+        result += "Total " + player.getScore() + " kr. om året i energiforbedringer\n" +
+                "\nDu startede med energimærke " + EnergyLabel.createEnergyLabel(0,player.getStartValue()) + "\n" +
+                "og er nu på energimærke " + EnergyLabel.createEnergyLabel(player.getScore(), player.getStartValue());
+
+        return result;
     }
+
+    private void printExit(){
+        System.out.println("--- Tak for, at du spillede vores spil ---\n");
+        System.out.println(endStatusText());
+        System.out.println("\nLavet af: Yusuf Bayoz, Victor Poulsen, Emil Spangenberg, Theis Langlands & Nicolaj Hansen");
+    } // afslutning af spil
 
 }
