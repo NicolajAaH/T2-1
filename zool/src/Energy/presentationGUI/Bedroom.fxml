@@ -39,7 +39,7 @@
         <Button fx:id="endGame" layoutX="495.0" layoutY="549.0" mnemonicParsing="false" text="Afslut spillet" />
         <Label fx:id="savings" layoutX="593.0" layoutY="564.0" prefHeight="17.0" prefWidth="141.0" text="Årlig besparelse:" />
       <Label fx:id="bulbBedroom" layoutX="571.0" layoutY="137.0" prefHeight="67.0" prefWidth="85.0" textFill="#036b13" />
-      <Label fx:id="windowBedroom" alignment="TOP_CENTER" layoutX="40.0" layoutY="137.0" prefHeight="125.0" prefWidth="116.0" textFill="#2e8a0c">
+      <Label fx:id="windowBedroom" alignment="CENTER" layoutX="40.0" layoutY="137.0" prefHeight="125.0" prefWidth="116.0" textFill="#2e8a0c">
          <font>
             <Font size="14.0" />
          </font>
