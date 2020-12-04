@@ -204,12 +204,29 @@ public class Game {
 
     private void printWelcome() // opstart af spil
     {
-        System.out.println("Du befinder dig i et dejligt dansk parcelhus på 160 m2 med energimærke F ");
-        System.out.println("- din mission er at forbedre huset så godt som muligt, så du sparer mange penge, og udnytter energien bedre");
-        System.out.println("Du kan handle i Super Byg og udskifte ting i dit hus\n");
-        System.out.print("Indtast dit årlige renoverings budget: ");
+        System.out.println(welcomeText());
+        welcomeText();
 
+        setStartAmountCLI();
+
+        System.out.println("\nSkriv '" + CommandWord.HELP + "' hvis du har brug for hjælp.\n");
+        System.out.println(currentRoom.getLongDescription());
+    }
+
+    String welcomeText() {
+        String result;
+        result = "Du befinder dig i et dejligt dansk parcelhus på 160 m2 med energimærke F\n\n" +
+                "- din mission er at forbedre din boligs energiforbrug ved at" +
+                "udskifte ting i dit hus med mere energivenlige produkter\n" +
+                "du finder hvad du skal bruge i Super Byg\n\n" +
+                "Det gælder at opnå den størst mulige forbedring med dit tilgængelige budget\n" +
+                "Du får en status efter hvert år";
+        return result;
+    }
+
+    private void setStartAmountCLI() {
         // Henter budget fra bruger
+        System.out.print("Indtast dit årlige renoverings budget: ");
         Scanner s = new Scanner(System.in);
         while(true) {
             String value = s.nextLine();
@@ -231,9 +248,6 @@ public class Game {
                 System.out.println("Der må ikke stå bogstaver i beløbet og værdien skal være mellem 0 og "+maxStartAmount+" kr. \nIndtast nyt beløb: ");
             }
         }
-
-        System.out.println("\nSkriv '" + CommandWord.HELP + "' hvis du har brug for hjælp.\n");
-        System.out.println(currentRoom.getLongDescription()); // skriver beskrivelsen af første rum
     }
 
     private void printExit(){

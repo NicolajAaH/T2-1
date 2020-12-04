@@ -118,7 +118,6 @@ public class DomainConnect implements DomainI {
         return game.buy(cmd);
     }
 
-
     @Override
     public Inventory getRoomInventory() {
         return game.getCurrentRoom().getRoomInv();
@@ -159,22 +158,18 @@ public class DomainConnect implements DomainI {
         return returnName;
     }
 
+
+    // METODER TIL SPIL FLOW
+
+    // returnerer velkomst tekst
+    @Override
+    public String welcomeText() {
+        return game.welcomeText();
+    }
+
     public String setStartAmountGUI(String value){
         return game.setStartAmountGUI(value);
     }
 
-    /*
-    @Override
-    public boolean replaceGUI(int indexRoom, int indexPlayer){
-        // tjekker om player index og room index er samme type,
-        // returnerer true hvis det lykkedes og false hvis ikke
-        int itemRoomType = game.getCurrentRoom().getRoomInv().getItem(indexRoom).getItemType();
-        int itemPlayerType = game.getPlayer().getInventory().getItem(indexPlayer).getItemType();
-        if (itemRoomType != itemPlayerType) return false;
 
-        // indsætter opbjekt & opdaterer score & inventory
-        game.insertItem(indexRoom, indexPlayer);
-        return true;
-    }
-*/
 }

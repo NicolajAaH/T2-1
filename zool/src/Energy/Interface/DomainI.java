@@ -33,7 +33,7 @@ public interface DomainI {
     public String setStartAmountGUI(String value);
 
     public String welcomeText();
-    
+
     /*
     // void newRound();
     // void exitGame();
