@@ -37,7 +37,7 @@ public interface DomainI {
     boolean newRound(); // returnerer false ved max antal runder!
 
     // void exitGame();
-    String endGameText(boolean endFromMaxRounds);
+    String endGameText();
 
     // metoder til rum / udenfor
     // Indsætter ting fra player index i room index og returnerer String med Energimærke

@@ -188,6 +188,7 @@ public class DomainConnect implements DomainI {
     public boolean newRound() {
         // tjekker om vi er nået max antal runder
         if (game.getPlayer().getRounds() == (game.getPlayer().getMaxNumberOfRounds() -1 ) ) {
+            game.getPlayer().setRounds((game.getPlayer().getRounds()) + 1);
             return false;
         }
         // intialiser ny runde
@@ -195,16 +196,17 @@ public class DomainConnect implements DomainI {
         return true;
     }
 
-    public String endGameText(boolean endFromMaxRounds) {
+    public String endGameText() {
         String result ="";
 
         // Tilføjer tekst hvis slutskærmen vises pga max antal år
-        if (endFromMaxRounds) {
+        if (game.getPlayer().getRounds() == game.getPlayer().getMaxNumberOfRounds()) {
             result += " - Du har spillet max antal år - \n\n";
-            result += game.endStatusText();
-            result += "\n\n\n\n\n--- Tak for, at du spillede vores spil ---\n" +
-                    "\nLavet af: Yusuf Bayoz, Victor Poulsen, Emil Spangenberg, Theis Langlands & Nicolaj Hansen";
         }
+        result += "\n\n--- Tak for, at du spillede vores spil ---\n";
+        result += game.endStatusText();
+        result += "\n\n\n\n\nLavet af: Yusuf Bayoz, Victor Poulsen, Emil Spangenberg, Theis Langlands & Nicolaj Hansen";
+
         return result;
     }
 
