@@ -3,8 +3,8 @@ package Energy.domain;
 public class Player {
 
     // Attributes
-    private int wallet = 1000000;
-    private int startAmount = 1000000; // årligt renoverings budget - start Wallet
+    private int wallet = 0;
+    private int startAmount = 0; // årligt renoverings budget - start Wallet
     private int totalUsedAmount = 0;
     private int startValue = 36000; // start forbrug (til Energimærkeberegning)
 
@@ -13,7 +13,7 @@ public class Player {
 
     // holder styr på skift imellem rum
     private int moves = 0;
-    private int movesPerRound = 100;
+    private int movesPerRound = 50;
 
     // holder styr på runder (år)
     private int round = 0;
@@ -24,10 +24,6 @@ public class Player {
     // Metoder
     public void saveRoundScore() {
         roundScore[round] = score;
-    }
-
-    public void addMove() {
-        moves++;
     }
 
     public void addAmountToTotal(int amount){
@@ -86,6 +82,10 @@ public class Player {
 
     public Inventory getInventory() {
         return inventory;
+    }
+
+    public void addMove() {
+        moves++;
     }
 
     public int getMoves() {

@@ -17,7 +17,6 @@ public class Room
         this.name = name;
         this.description = description;
         exits = new HashMap<String, Room>();
-
     }
 
     // Methods

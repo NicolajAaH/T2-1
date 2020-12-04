@@ -8,6 +8,8 @@ public class Game {
     private Room currentRoom; // holder styr på det rum man befinder sig i
     Room store, outside, utility, bathroom, bedroom, kidsRoom, room, kitchen, livingRoom, corridor1, corridor2, corridor3, corridor4; // liste over rum
 
+    private final int maxStartAmount = 100000;
+
     public final int WASHINGMACHINE = 1;
     public final int DRYER = 2;
     public final int HEATING = 3;
@@ -115,8 +117,8 @@ public class Game {
         store.addToInventory(new Item("Køleskab A+", 3375, 221, FRIDGE, "A+"));
         store.addToInventory(new Item("Køleskab A++", 4875, 308, FRIDGE, "A++"));
         store.addToInventory(new Item("Køleskab A+++", 6000, 394, FRIDGE, "A+++"));
-        store.addToInventory(new Item("Energibesparende komfur", 4500, 284, STOVE, null));
-        store.addToInventory(new Item("Energibesparende TV", 5900, 375, TV, null));
+        store.addToInventory(new Item("Komfur A+", 4500, 284, STOVE, "A+"));
+        store.addToInventory(new Item("TV A+", 5900, 375, TV, "A+"));
         store.addToInventory(new Item("Termorude (2 lag)", 1250, 175, WINDOW, null));
         store.addToInventory(new Item("Sparepære", 200, 50, LIGHTS, null));
         store.addToInventory(new Item("LED-pære", 600, 170, LIGHTS, null));
@@ -125,6 +127,7 @@ public class Game {
         store.addToInventory(new Item("Hul-fikser-kit", 1500, 1500, WALLFIXER, null));
         store.addToInventory(new Item("Isolering", 10000, 750, ISOLATION, null));
         store.addToInventory(new Item("Solceller", 30000, 3500, SOLARCELLS, null));
+        store.addToInventory(new Item("Bruser A+", 2000, 300, BATH, "A+"));
 
         utility.addToInventory(new Item("Vaskemaskine D", 0, 0, WASHINGMACHINE, "D"));
         utility.addToInventory(new Item("Tørretumbler D", 0, 0, DRYER, "D"));
@@ -155,7 +158,7 @@ public class Game {
         outside.addToInventory(new Item("Tyndt isolering", 0, 0, ISOLATION, null));
 
         // sætter startrummet til outside
-        currentRoom = kitchen;
+        currentRoom = outside;
     }
 
     public void play() {
@@ -172,14 +175,58 @@ public class Game {
         printExit();
     }
 
+    String setStartAmountGUI(String value) {
+        // metode til GUI input af start amount
+
+        int result = 0;
+        // Tjekker om input er et heltal
+        if (!isInt(value)) {
+            return "Fejl: indtast et heltal imellem 0 og " + maxStartAmount;
+        }
+
+        // Laver string til integer
+        try {
+            result = Integer.parseInt(value);
+        } catch (NumberFormatException e) {
+            return "Fejl: Værdien skal være mellem 0 og " + maxStartAmount + " kr.";
+        }
+
+        // Tjekker om beløbet er inden for max grænsen
+        if (result > 0 && result <= maxStartAmount) {
+            player.setWallet(result);
+            player.setStartAmount(result);
+        } else {
+            return "Fejl: Værdien skal være mellem 0 og " + maxStartAmount + " kr.";
+        }
+
+        return null;
+    }
+
     private void printWelcome() // opstart af spil
     {
-        System.out.println("Du befinder dig i et dejligt dansk parcelhus på 160 m2 med energimærke F ");
-        System.out.println("- din mission er at forbedre huset så godt som muligt, så du sparer mange penge, og udnytter energien bedre");
-        System.out.println("Du kan handle i Super Byg og udskifte ting i dit hus\n");
-        System.out.print("Indtast dit årlige renoverings budget: ");
+        System.out.println(welcomeText());
 
+        setStartAmountCLI();
+
+        System.out.println("\nSkriv '" + CommandWord.HELP + "' hvis du har brug for hjælp.\n");
+        System.out.println(currentRoom.getLongDescription());
+    }
+
+    String welcomeText() {
+        String result;
+        result = "Du befinder dig i et dejligt dansk parcelhus på 160 m2 med energimærke F\n\n" +
+                "din mission er at forbedre din boligs energiforbrug\n\n" +
+                "Du kan udskifte ting i dit hus med mere energivenlige produkter\n" +
+                "Du finder hvad du skal bruge i Super Byg\n\n" +
+                "Det skal opnå den størst mulige forbedring med dit tilgængelige budget\n" +
+                "Du kan bevæge dig " + player.getMovesPerRound() + " gange hvert år\n" +
+                "Du får en status efter hvert år\n";
+        return result;
+    }
+
+    private void setStartAmountCLI() {
         // Henter budget fra bruger
+        System.out.print("Indtast dit årlige renoverings budget: ");
         Scanner s = new Scanner(System.in);
         while(true) {
             String value = s.nextLine();
@@ -190,27 +237,18 @@ public class Game {
                 }catch(NumberFormatException e){
                     System.out.println("Værdien er for høj!");
                 }
-                if (value2 > 0 && value2 <= 100000) {
+                if (value2 > 0 && value2 <= maxStartAmount) {
                     player.setWallet(value2);
                     player.setStartAmount(value2);
                     break;
                 } else {
-                    System.out.println("Der må ikke stå bogstaver i beløbet og værdien skal være mellem 0 og 100.000kr. \nIndtast nyt beløb: ");
+                    System.out.println("Der må ikke stå bogstaver i beløbet og værdien skal være mellem 0 og "+maxStartAmount+" kr. \nIndtast nyt beløb: ");
                 }
             } else {
-                System.out.println("Der må ikke stå bogstaver i beløbet og værdien skal være mellem 0 og 100.000kr. \nIndtast nyt beløb: ");
+                System.out.println("Der må ikke stå bogstaver i beløbet og værdien skal være mellem 0 og "+maxStartAmount+" kr. \nIndtast nyt beløb: ");
             }
         }
-
-        System.out.println("\nSkriv '" + CommandWord.HELP + "' hvis du har brug for hjælp.\n");
-        System.out.println(currentRoom.getLongDescription()); // skriver beskrivelsen af første rum
     }
-
-    private void printExit(){
-        System.out.println("--- Tak for, at du spillede vores spil ---\n");
-        printEndStatus();
-        System.out.println("\nLavet af: Yusuf Bayoz, Victor Poulsen, Emil Spangenberg, Theis Langlands & Nicolaj Hansen");
-    } // afslutning af spil
 
     private boolean processCommand(Command command) {
         boolean wantToQuit = false;
@@ -407,14 +445,20 @@ public class Game {
     }
 
     void insertItem(int roomInvIndex, int playerInvIndex) {
-        // Indsætter Item i room inventory fra player inventory
 
+        // Erstatter Item i room inventory med et item fra player inventory
+        currentRoom.getRoomInv().replaceItem(roomInvIndex, player.getInventory().getItem(playerInvIndex));
+/*
+        // Fjerner Item fra player inventory
+        player.getInventory().removeItem(playerInvIndex);
+*/
+        /*
         // Fjerner gammelt Item fra Room
         currentRoom.getRoomInv().removeItem(currentRoom.getRoomInv().getItem(roomInvIndex));
 
         // Kopierer item fra player index til room
         copyItem(player.getInventory(), playerInvIndex, currentRoom.getRoomInv());
-
+*/
         // Opdaterer score
         int nyScore = player.getScore() + player.getInventory().getItem(playerInvIndex).getScoreImpact();
         player.setScore(nyScore);
@@ -482,7 +526,6 @@ public class Game {
         return currentRoom == store;
     }
 
-
     private void status() {
     System.out.println("Du har opnået en samlet årlig besparelse på: " + player.getScore() +
             ", og du har " + player.getWallet() + "kr. tilbage på budgettet i år");
@@ -539,35 +582,49 @@ public class Game {
         }
 
         // Udskriver status
-        printEndStatus();
+        System.out.println(endStatusText());
 
-        // gemmer score og opdatere runde count
-        player.saveRoundScore();
-        player.setRounds(player.getRounds()+1);
-
-        // intialiserer nyt år
-        player.setWallet(player.getStartAmount() + player.getScore()); // nyt årsbudget!
-        player.setMoves(0); // resetter moves
+        initNewRound();
 
         // Udskriver velkommen til nyt år
         System.out.println("\n --- Velkommen til år " + (player.getRounds() + 1) + " ---");
         System.out.println("Dit nye årsbudget er " + player.getWallet());
         System.out.println();
 
-        currentRoom = outside;
-
         return false;
     }
 
-    private void printEndStatus() {
-        System.out.println("Du har samlet brugt " + player.getTotalUsedAmount() + " kr,-\n");
-        System.out.println(" - Energibesparelse -");
-        for (int i=0; i<=player.getRounds(); i++) {
-            System.out.println("År " + (i+1) + ": " + player.getRoundScore(i) );
-        }
-        System.out.println("Total " + player.getScore() + " kr. om året i energiforbedringer");
-        System.out.println("\nDu startede med energimærke " + EnergyLabel.createEnergyLabel(0,player.getStartValue()));
-        System.out.println("og er nu på energimærke " + EnergyLabel.createEnergyLabel(player.getScore(), player.getStartValue()));
+    void initNewRound() {
+        // gemmer score og opdatere runde count
+        player.saveRoundScore();
+        player.setRounds(player.getRounds()+1);
+
+        // intialiserer nyt år
+        player.setWallet(player.getWallet()+ player.getStartAmount() + player.getScore()); // nyt årsbudget!
+        player.setMoves(0); // resetter moves
+        currentRoom = outside;
     }
+
+    String endStatusText() {
+        String result;
+        result = "Du har samlet brugt " + player.getTotalUsedAmount() + " kr,-\n" +
+               " - Energibesparelse -\n";
+
+        for (int i=0; i<=player.getRounds(); i++) {
+            result += " År " + (i+1) + ": " + player.getRoundScore(i) + "\n";
+        }
+
+        result += "Total " + player.getScore() + " kr. om året i energiforbedringer\n" +
+                "\nDu startede med energimærke " + EnergyLabel.createEnergyLabel(0,player.getStartValue()) + "\n" +
+                "og er nu på energimærke " + EnergyLabel.createEnergyLabel(player.getScore(), player.getStartValue());
+
+        return result;
+    }
+
+    private void printExit(){
+        System.out.println("--- Tak for, at du spillede vores spil ---\n");
+        System.out.println(endStatusText());
+        System.out.println("\nLavet af: Yusuf Bayoz, Victor Poulsen, Emil Spangenberg, Theis Langlands & Nicolaj Hansen");
+    } // afslutning af spil
 
 }

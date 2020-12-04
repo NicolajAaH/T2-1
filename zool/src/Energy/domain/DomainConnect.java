@@ -17,7 +17,6 @@ public class DomainConnect implements DomainI {
         return game.getPlayer().getInventory();
     }
 
-
     // Metorder der ruturnerer om currentroom har en udgang i en retning
     @Override
     public boolean hasNorthExit() {
@@ -120,6 +119,11 @@ public class DomainConnect implements DomainI {
     }
 
     @Override
+    public Inventory getRoomInventory() {
+        return game.getCurrentRoom().getRoomInv();
+    }
+
+    @Override
     public String replaceStaticGUI(int indexRoom) {
         // METODE til at replace faste ting i baggrundsbilledet der skal have en label
 
@@ -155,18 +159,62 @@ public class DomainConnect implements DomainI {
     }
 
 
-    /*
-    @Override
-    public boolean replaceGUI(int indexRoom, int indexPlayer){
-        // tjekker om player index og room index er samme type,
-        // returnerer true hvis det lykkedes og false hvis ikke
-        int itemRoomType = game.getCurrentRoom().getRoomInv().getItem(indexRoom).getItemType();
-        int itemPlayerType = game.getPlayer().getInventory().getItem(indexPlayer).getItemType();
-        if (itemRoomType != itemPlayerType) return false;
+    // METODER TIL SPIL FLOW
 
-        // indsætter opbjekt & opdaterer score & inventory
-        game.insertItem(indexRoom, indexPlayer);
+    // START SKÆRM
+    // returnerer velkomst tekst
+    @Override
+    public String welcomeText() {
+        return game.welcomeText();
+    }
+
+    public String setStartAmountGUI(String value){
+        return game.setStartAmountGUI(value);
+    }
+
+    // RUNDE SKÆRM
+
+    @Override
+    public String newRoundText() {
+        String result;
+
+        result = "\nDu har nu afsluttet " + ((game.getPlayer().getRounds()) + 1)  + ". år\n";
+        result += game.endStatusText();
+
+        return result;
+    }
+
+    // starter ny runde, returnerer false hvis max runder er udført!
+    public boolean newRound() {
+        // tjekker om vi er nået max antal runder
+        if (game.getPlayer().getRounds() == (game.getPlayer().getMaxNumberOfRounds() -1 ) ) {
+            game.getPlayer().setRounds((game.getPlayer().getRounds()) + 1);
+            return false;
+        }
+        // intialiser ny runde
+        game.initNewRound();
         return true;
     }
-*/
+
+    public String endGameText() {
+        String result ="";
+
+        // Tilføjer tekst hvis slutskærmen vises pga max antal år
+        if (game.getPlayer().getRounds() == game.getPlayer().getMaxNumberOfRounds()) {
+            result += " - Du har spillet max antal år - \n\n";
+            game.getPlayer().setRounds((game.getPlayer().getRounds()) - 1);
+        }
+        result += "\n\n--- Tak for, at du spillede vores spil ---\n";
+        result += game.endStatusText();
+        result += "\n\nLavet af: Yusuf Bayoz, Victor Poulsen, Emil Spangenberg, Theis Langlands & Nicolaj Hansen";
+
+        return result;
+    }
+
+    @Override
+    // false = gå til næste år
+    public boolean addMove() {
+        game.getPlayer().addMove();
+        return game.getPlayer().getMoves() != game.getPlayer().getMovesPerRound();
+    }
 }

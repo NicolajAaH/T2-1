@@ -11,7 +11,7 @@
    <children>
       <ImageView fitHeight="600.0" fitWidth="800.0" pickOnBounds="true" preserveRatio="true">
          <image>
-            <Image url="@/Images/Kitchen_picture.png" />
+            <Image url="@/Images/Kitchen_picture.jpg" />
          </image>
       </ImageView>
       <Label fx:id="wallet" layoutX="593.0" layoutY="547.0" prefHeight="17.0" prefWidth="141.0" text="Penge:" />
@@ -30,9 +30,18 @@
       <ImageView fx:id="item2" fitHeight="48.0" fitWidth="48.0" layoutX="205.0" layoutY="538.0" pickOnBounds="true" preserveRatio="true" />
       <ImageView fx:id="item3" fitHeight="48.0" fitWidth="48.0" layoutX="260.0" layoutY="538.0" pickOnBounds="true" preserveRatio="true" />
       <ImageView fx:id="item4" fitHeight="48.0" fitWidth="48.0" layoutX="315.0" layoutY="538.0" pickOnBounds="true" preserveRatio="true" />
-      <Label fx:id="fridge_label" layoutX="89.0" layoutY="190.0" prefHeight="20.0" prefWidth="61.0" textAlignment="CENTER" />
-      <Label fx:id="oven_label" layoutX="285.0" layoutY="268.0" prefHeight="11.0" prefWidth="61.0" textAlignment="CENTER" textFill="#f8f5f5" />
-      <Label fx:id="dishwasher_label" layoutX="471.0" layoutY="234.0" prefHeight="18.0" prefWidth="48.0" textAlignment="CENTER" />
+      <Label fx:id="fridge_label" alignment="CENTER" layoutX="48.0" layoutY="36.0" prefHeight="415.0" prefWidth="216.0" textAlignment="CENTER">
+         <font>
+            <Font size="77.0" />
+         </font></Label>
+      <Label fx:id="oven_label" alignment="CENTER" layoutX="323.0" layoutY="166.0" prefHeight="290.0" prefWidth="191.0" textAlignment="CENTER" textFill="#f8f5f5">
+         <font>
+            <Font size="78.0" />
+         </font></Label>
+      <Label fx:id="dishwasher_label" alignment="CENTER" layoutX="556.0" layoutY="199.0" prefHeight="262.0" prefWidth="202.0" textAlignment="CENTER">
+         <font>
+            <Font size="72.0" />
+         </font></Label>
       <ImageView fx:id="arrowDown" fitHeight="57.0" fitWidth="61.0" layoutX="400.0" layoutY="470.0" onMouseClicked="#goSouth" pickOnBounds="true" preserveRatio="true" />
       <ImageView fx:id="arrowUp" fitHeight="57.0" fitWidth="61.0" layoutX="400.0" layoutY="27.0" onMouseClicked="#goNorth" pickOnBounds="true" preserveRatio="true" />
       <ImageView fx:id="arrowLeft" fitHeight="57.0" fitWidth="61.0" layoutX="24.0" layoutY="300.0" onMouseClicked="#goWest" pickOnBounds="true" preserveRatio="true" />

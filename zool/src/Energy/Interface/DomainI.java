@@ -5,7 +5,6 @@ import Energy.domain.Inventory;
 public interface DomainI {
 
     // Metoder til parent Controller
-
     Inventory getPlayerInventory();
     String getCurrentRoom();
 
@@ -25,15 +24,30 @@ public interface DomainI {
     void goSouth();
     void goEast();
     void goWest();
-/*
-    // Metoder til flow i spil (ikke implementeret)
-    // void newRound();
+
+    public boolean addMove();
+
+    // INFOSKÆRME (START; NYRUNDE; EXIT;)
+
+    // STARTSKÆRM
+    // konverter string til int og sættter startbeløb, returnerer string ved fejl-meddelelse, null hvis ingen fejl
+    public String setStartAmountGUI(String value);
+    public String welcomeText();
+
+    // NY RUNDE SKÆRM
+    String newRoundText();
+    boolean newRound(); // returnerer false ved max antal runder!
+
     // void exitGame();
-*/
+    String endGameText();
+
     // metoder til rum / udenfor
     // Indsætter ting fra player index i room index og returnerer String med Energimærke
     public String replaceStaticGUI(int indexRoom);
+    // Indsætter ting fra player index i room index og returnerer String med navn på indsat item
     public String replaceDynamicGUI(int indexRoom);
+
+    public Inventory getRoomInventory();
 
     // metoder til butikken
     Inventory getStoreInventory();

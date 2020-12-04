@@ -3,6 +3,7 @@ package Energy.presentationGUI;
 import Energy.Interface.DomainI;
 import Energy.domain.DomainConnect;
 import Energy.domain.Item;
+import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.scene.Parent;
@@ -65,6 +66,33 @@ public class Controller {
         showExits();
         updateInventory();
         updateStatus();
+        endGame.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent actionEvent) {
+                Parent newRoot = null;
+                try {
+                    newRoot = runGui.getFxmlLoader().load(getClass().getResource("Exit.fxml"));
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+                runGui.getStage().setScene(new Scene(newRoot));
+                runGui.getStage().show();
+            }
+        });
+
+        endYear.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent actionEvent) {
+                Parent newRoot = null;
+                try {
+                    newRoot = runGui.getFxmlLoader().load(getClass().getResource("NewRound.fxml"));
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+                runGui.getStage().setScene(new Scene(newRoot));
+                runGui.getStage().show();
+            }
+        });
     }
 
     public Image findImage(String itemName) {
@@ -101,11 +129,11 @@ public class Controller {
         if (itemName.equals("Køleskab A+++")) {
             return new Image("/Images/fridge_A+++_icon.png");
         }
-        if (itemName.equals("Energibesparende komfur")) {
-            return new Image("/Images/cooker_icon.png");
+        if (itemName.equals("Komfur A+")) {
+            return new Image("/Images/cooker_A+_icon.png");
         }
-        if (itemName.equals("Energibesparende TV")) {
-            return new Image("/Images/TV_icon.png");
+        if (itemName.equals("TV A+")) {
+            return new Image("/Images/TV_A+_icon.png");
         }
         if (itemName.equals("Termorude (2 lag)")) {
             return new Image("/Images/window_icon.png");
@@ -130,6 +158,12 @@ public class Controller {
         }
         if (itemName.equals("Solceller")) {
             return new Image("/Images/solar_panels_icon.png");
+        }
+        if (itemName.equals("Bruser A+")) {
+            return new Image("/Images/showerhead_icon.png");
+        }
+        if (itemName.equals("Oliefyr")) {
+            return new Image("/Images/oliefyr.png");
         }
         return null;
     }
@@ -206,38 +240,58 @@ public class Controller {
         }
     }
 
+    public boolean moves(){
+        if(domainI.addMove() == false){
+            Parent newRoot = null;
+            try {
+                newRoot = runGui.getFxmlLoader().load(getClass().getResource("NewRound.fxml"));
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+            runGui.getStage().setScene(new Scene(newRoot));
+            runGui.getStage().show();
+            return false;
+        }else{
+            return true;
+        }
+    }
+
     public void goNorth() throws IOException {
         domainI.goNorth();
-        String resource = getDomainI().getCurrentRoom() + ".fxml";
-        runGui.getFxmlLoader().load(getClass().getResource(resource));
-        Parent newRoot = runGui.getFxmlLoader().load(getClass().getResource(resource));
-        runGui.getStage().setScene(new Scene(newRoot));
-        runGui.getStage().show();
+        if(moves()) {
+            String resource = getDomainI().getCurrentRoom() + ".fxml";
+            Parent newRoot = runGui.getFxmlLoader().load(getClass().getResource(resource));
+            runGui.getStage().setScene(new Scene(newRoot));
+            runGui.getStage().show();
+        }
     }
 
     public void goSouth() throws IOException {
         domainI.goSouth();
-        String resource = getDomainI().getCurrentRoom() + ".fxml";
-        runGui.getFxmlLoader().load(getClass().getResource(resource));
-        Parent newRoot = runGui.getFxmlLoader().load(getClass().getResource(resource));
-        runGui.getStage().setScene(new Scene(newRoot));
-        runGui.getStage().show();
+        if(moves()) {
+            String resource = getDomainI().getCurrentRoom() + ".fxml";
+            Parent newRoot = runGui.getFxmlLoader().load(getClass().getResource(resource));
+            runGui.getStage().setScene(new Scene(newRoot));
+            runGui.getStage().show();
+        }
     }
     public void goWest() throws IOException {
         domainI.goWest();
-        String resource = getDomainI().getCurrentRoom() + ".fxml";
-        runGui.getFxmlLoader().load(getClass().getResource(resource));
-        Parent newRoot = runGui.getFxmlLoader().load(getClass().getResource(resource));
-        runGui.getStage().setScene(new Scene(newRoot));
-        runGui.getStage().show();
+        if(moves()) {
+            String resource = getDomainI().getCurrentRoom() + ".fxml";
+            Parent newRoot = runGui.getFxmlLoader().load(getClass().getResource(resource));
+            runGui.getStage().setScene(new Scene(newRoot));
+            runGui.getStage().show();
+        }
     }
     public void goEast() throws IOException {
         domainI.goEast();
-        String resource = getDomainI().getCurrentRoom() + ".fxml";
-        runGui.getFxmlLoader().load(getClass().getResource(resource));
-        Parent newRoot = runGui.getFxmlLoader().load(getClass().getResource(resource));
-        runGui.getStage().setScene(new Scene(newRoot));
-        runGui.getStage().show();
+        if(moves()) {
+            String resource = getDomainI().getCurrentRoom() + ".fxml";
+            Parent newRoot = runGui.getFxmlLoader().load(getClass().getResource(resource));
+            runGui.getStage().setScene(new Scene(newRoot));
+            runGui.getStage().show();
+        }
     }
     public String replace(int index){
         return getDomainI().replaceStaticGUI(index);
