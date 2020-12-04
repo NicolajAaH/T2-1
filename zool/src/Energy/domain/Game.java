@@ -607,10 +607,10 @@ public class Game {
     String endStatusText() {
         String result;
         result = "Du har samlet brugt " + player.getTotalUsedAmount() + " kr,-\n" +
-               " - Energibesparelse -";
+               " - Energibesparelse -\n";
 
         for (int i=0; i<=player.getRounds(); i++) {
-            result += "År " + (i+1) + ": " + player.getRoundScore(i) + "\n";
+            result += " År " + (i+1) + ": " + player.getRoundScore(i) + "\n";
         }
 
         result += "Total " + player.getScore() + " kr. om året i energiforbedringer\n" +
