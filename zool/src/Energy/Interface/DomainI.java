@@ -25,7 +25,7 @@ public interface DomainI {
     void goEast();
     void goWest();
 
-    void addMove();
+    public boolean addMove();
 
     // INFOSKÆRME (START; NYRUNDE; EXIT;)
 

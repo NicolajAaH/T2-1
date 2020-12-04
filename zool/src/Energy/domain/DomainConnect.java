@@ -212,7 +212,9 @@ public class DomainConnect implements DomainI {
     }
 
     @Override
-    public void addMove() {
+    // false = gå til næste år
+    public boolean addMove() {
         game.getPlayer().addMove();
+        return game.getPlayer().getMoves() != game.getPlayer().getMovesPerRound();
     }
 }
