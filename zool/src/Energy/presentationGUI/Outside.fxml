@@ -38,5 +38,11 @@
         <Button fx:id="endYear" layoutX="413.0" layoutY="549.0" mnemonicParsing="false" text="Afslut år" />
         <Button fx:id="endGame" layoutX="495.0" layoutY="549.0" mnemonicParsing="false" text="Afslut spillet" />
         <Label fx:id="savings" layoutX="593.0" layoutY="564.0" prefHeight="17.0" prefWidth="141.0" text="Årlig besparelse:" />
+      <ImageView fx:id="sunCatcher" fitHeight="57.0" fitWidth="94.0" layoutX="533.0" layoutY="172.0" pickOnBounds="true" preserveRatio="true" />
+      <Label fx:id="insulation" layoutX="113.0" layoutY="258.0" prefHeight="74.0" prefWidth="122.0" wrapText="true">
+         <font>
+            <Font size="25.0" />
+         </font>
+      </Label>
     </children>
 </AnchorPane>

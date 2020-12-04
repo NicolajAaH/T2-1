@@ -41,8 +41,9 @@
       <Label fx:id="bulbBedroom" layoutX="586.0" layoutY="137.0" prefHeight="67.0" prefWidth="36.0" />
       <Label fx:id="windowBedroom" layoutX="40.0" layoutY="137.0" prefHeight="125.0" prefWidth="116.0" textFill="#41ff01">
          <font>
-            <Font size="17.0" />
+            <Font size="14.0" />
          </font>
       </Label>
+      <ImageView fx:id="holeWallBedroom" fitHeight="125.0" fitWidth="160.0" layoutX="229.0" layoutY="125.0" pickOnBounds="true" preserveRatio="true" />
     </children>
 </AnchorPane>

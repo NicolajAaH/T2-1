@@ -131,6 +131,9 @@ public class Controller {
         if (itemName.equals("Solceller")) {
             return new Image("/Images/solar_panels_icon.png");
         }
+        if (itemName.equals("Bruser A+")) {
+            return new Image("/Images/showerhead_icon.png");
+        }
         return null;
     }
 
