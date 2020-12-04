@@ -215,10 +215,10 @@ public class Game {
     String welcomeText() {
         String result;
         result = "Du befinder dig i et dejligt dansk parcelhus på 160 m2 med energimærke F\n\n" +
-                "- din mission er at forbedre din boligs energiforbrug ved at" +
-                "udskifte ting i dit hus med mere energivenlige produkter\n" +
-                "du finder hvad du skal bruge i Super Byg\n\n" +
-                "Det gælder at opnå den størst mulige forbedring med dit tilgængelige budget\n" +
+                "din mission er at forbedre din boligs energiforbrug\n\n" +
+                "Du kan udskifte ting i dit hus med mere energivenlige produkter\n" +
+                "Du finder hvad du skal bruge i Super Byg\n\n" +
+                "Det skal opnå den størst mulige forbedring med dit tilgængelige budget\n" +
                 "Du får en status efter hvert år\n";
         return result;
     }
@@ -599,7 +599,7 @@ public class Game {
         player.setRounds(player.getRounds()+1);
 
         // intialiserer nyt år
-        player.setWallet(player.getStartAmount() + player.getScore()); // nyt årsbudget!
+        player.setWallet(player.getWallet()+ player.getStartAmount() + player.getScore()); // nyt årsbudget!
         player.setMoves(0); // resetter moves
         currentRoom = outside;
     }
