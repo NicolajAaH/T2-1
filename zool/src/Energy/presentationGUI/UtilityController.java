@@ -20,7 +20,6 @@ public class UtilityController extends Controller{
         heatingSystem.setImage(findImage(getDomainI().getRoomInventory().getItem(2).getName()));
         tumbleDryerLabel.setText(getDomainI().getRoomInventory().getItem(1).getEnergyLabel());
         washingMachineLabel.setText(getDomainI().getRoomInventory().getItem(0).getEnergyLabel());
-        System.out.println(getDomainI().getRoomInventory().printInventory());
         washingMachineLabel.setOnMouseClicked(new EventHandler<MouseEvent>() {
             @Override
             public void handle(MouseEvent mouseEvent) {

@@ -127,6 +127,7 @@ public class Game {
         store.addToInventory(new Item("Hul-fikser-kit", 1500, 1500, WALLFIXER, null));
         store.addToInventory(new Item("Isolering", 10000, 750, ISOLATION, null));
         store.addToInventory(new Item("Solceller", 30000, 3500, SOLARCELLS, null));
+        store.addToInventory(new Item("Bruser A+", 2000, 300, BATH, "A+"));
 
         utility.addToInventory(new Item("Vaskemaskine D", 0, 0, WASHINGMACHINE, "D"));
         utility.addToInventory(new Item("Tørretumbler D", 0, 0, DRYER, "D"));
