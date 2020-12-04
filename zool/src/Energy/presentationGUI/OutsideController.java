@@ -29,7 +29,6 @@ public class OutsideController extends Controller{
             @Override
             public void handle(MouseEvent mouseEvent) {
                 String name = getDomainI().replaceDynamicGUI(0);
-                System.out.println(name);
                 if (name != null) {
                     sunCatcher.setImage(new Image("/Images/solar_panels_addToBackground.png"));
                     sunCatcher.setVisible(true);

@@ -43,11 +43,11 @@
             <Font size="90.0" />
          </font>
       </Label>
-      <Label fx:id="windowLabelLiving" layoutX="437.0" layoutY="125.0" prefHeight="149.0" prefWidth="137.0" textFill="#26f80a">
+      <Label fx:id="windowLabelLiving" alignment="CENTER" layoutX="437.0" layoutY="125.0" prefHeight="149.0" prefWidth="137.0" textFill="#e0b54f">
          <font>
             <Font size="17.0" />
          </font>
       </Label>
-      <Label fx:id="lightLiving" layoutX="638.0" layoutY="113.0" prefHeight="59.0" prefWidth="70.0" textFill="#55ee02" />
+      <Label fx:id="lightLiving" layoutX="638.0" layoutY="113.0" prefHeight="59.0" prefWidth="70.0" textFill="#2e8a0c" />
     </children>
 </AnchorPane>

@@ -18,7 +18,7 @@ public class runGui extends Application{
         @Override
         public void start(Stage stage) throws Exception {
             this.stage = stage;
-            Parent root = fxmlLoader.load(getClass().getResource("Outside.fxml"));
+            Parent root = fxmlLoader.load(getClass().getResource("Start.fxml"));
             stage.setTitle("Energi Optimering");
             stage.setScene(new Scene(root));
             stage.show();

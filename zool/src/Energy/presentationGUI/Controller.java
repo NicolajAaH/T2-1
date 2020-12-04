@@ -3,6 +3,7 @@ package Energy.presentationGUI;
 import Energy.Interface.DomainI;
 import Energy.domain.DomainConnect;
 import Energy.domain.Item;
+import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.scene.Parent;
@@ -65,6 +66,12 @@ public class Controller {
         showExits();
         updateInventory();
         updateStatus();
+        endGame.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent actionEvent) {
+
+            }
+        });
     }
 
     public Image findImage(String itemName) {
