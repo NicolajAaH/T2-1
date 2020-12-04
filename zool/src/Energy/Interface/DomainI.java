@@ -32,6 +32,8 @@ public interface DomainI {
     // konverter string til int og sættter startbeløb, returnerer string ved fejl-meddelelse
     public String setStartAmountGUI(String value);
 
+    public String welcomeText();
+    
     /*
     // void newRound();
     // void exitGame();
