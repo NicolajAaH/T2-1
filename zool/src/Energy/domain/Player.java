@@ -100,6 +100,10 @@ public class Player {
         return movesPerRound;
     }
 
+    public int addMove(){
+
+    }
+
     public void setMovesPerRound(int movesPerRound) {
         this.movesPerRound = movesPerRound;
     }

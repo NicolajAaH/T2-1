@@ -202,6 +202,7 @@ public class DomainConnect implements DomainI {
         // Tilføjer tekst hvis slutskærmen vises pga max antal år
         if (game.getPlayer().getRounds() == game.getPlayer().getMaxNumberOfRounds()) {
             result += " - Du har spillet max antal år - \n\n";
+            game.getPlayer().setRounds((game.getPlayer().getRounds()) - 1);
         }
         result += "\n\n--- Tak for, at du spillede vores spil ---\n";
         result += game.endStatusText();
