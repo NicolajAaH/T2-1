@@ -196,7 +196,7 @@ public class DomainConnect implements DomainI {
     }
 
     public String endGameText(boolean endFromMaxRounds) {
-        String result;
+        String result ="";
 
         // Tilføjer tekst hvis slutskærmen vises pga max antal år
         if (endFromMaxRounds) {
