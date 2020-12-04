@@ -219,6 +219,7 @@ public class Game {
                 "Du kan udskifte ting i dit hus med mere energivenlige produkter\n" +
                 "Du finder hvad du skal bruge i Super Byg\n\n" +
                 "Det skal opnå den størst mulige forbedring med dit tilgængelige budget\n" +
+                "Du kan bevæge dig " + player.getMovesPerRound() + " gange hvert år\n" +
                 "Du får en status efter hvert år\n";
         return result;
     }

@@ -13,7 +13,7 @@ public class Player {
 
     // holder styr på skift imellem rum
     private int moves = 0;
-    private int movesPerRound = 100;
+    private int movesPerRound = 50;
 
     // holder styr på runder (år)
     private int round = 0;
