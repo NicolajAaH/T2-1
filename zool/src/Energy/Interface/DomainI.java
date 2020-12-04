@@ -8,7 +8,7 @@ public interface DomainI {
     Inventory getPlayerInventory();
     String getCurrentRoom();
 
-    // Metorder der ruturnerer om currentroom har en udgang i en retning
+    // Metorder der returnerer om currentroom har en udgang i en retning
     boolean hasNorthExit();
     boolean hasSouthExit();
     boolean hasEastExit();

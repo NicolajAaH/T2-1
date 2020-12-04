@@ -1,6 +1,6 @@
 package Energy.domain;
 
-public class Player {
+class Player {
 
     // Attributes
     private int wallet = 0;

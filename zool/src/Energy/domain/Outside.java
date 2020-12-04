@@ -1,6 +1,6 @@
 package Energy.domain;
 
-public class Outside extends Room {
+class Outside extends Room {
 
     // Constructor
     public Outside(String description, String name) {

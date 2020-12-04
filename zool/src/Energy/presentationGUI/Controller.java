@@ -18,6 +18,7 @@ import javafx.scene.input.DragEvent;
 import java.io.IOException;
 
 public class Controller {
+    //variable
     public final int WASHINGMACHINE = 1;
     public final int DRYER = 2;
     public final int HEATING = 3;
@@ -32,8 +33,10 @@ public class Controller {
     public final int SOLARCELLS = 12;
     public final int BATH = 13;
 
+    //vores 'spil'
     private static DomainI domainI = new DomainConnect();
 
+    //Variablene fra FXML filerne
     @FXML
     private ImageView item0;
     @FXML
@@ -61,7 +64,7 @@ public class Controller {
     @FXML
     private Button endGame;
 
-
+    //køres når der skiftes fxml
     public void initialize(){
         showExits();
         updateInventory();

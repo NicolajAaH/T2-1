@@ -1,6 +1,6 @@
 package Energy.domain;
 
-public class EnergyLabel {
+class EnergyLabel {
     private static final int A = 0;
     private static final int B = 11000;
     private static final int C = 14000;

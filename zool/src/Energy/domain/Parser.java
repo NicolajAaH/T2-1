@@ -2,7 +2,7 @@ package Energy.domain;
 
 import java.util.Scanner;
 
-public class Parser 
+class Parser
 {
     private CommandWords commands;
     private Scanner reader;

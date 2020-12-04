@@ -1,6 +1,6 @@
 package Energy.domain;
 
-public class Command
+class Command
 {
     private CommandWord commandWord;
     private String secondWord;

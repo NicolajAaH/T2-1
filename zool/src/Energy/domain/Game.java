@@ -2,7 +2,7 @@ package Energy.domain;
 
 import java.util.Scanner;
 
-public class Game {
+class Game {
     private Parser parser;
     private Player player;
     private Room currentRoom; // holder styr på det rum man befinder sig i

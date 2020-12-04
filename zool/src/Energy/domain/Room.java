@@ -3,7 +3,7 @@ package Energy.domain;
 import java.util.Set;
 import java.util.HashMap;
 
-public class Room
+class Room
 {
     // Attributes
     private String description;
