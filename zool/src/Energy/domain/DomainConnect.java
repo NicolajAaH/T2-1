@@ -178,7 +178,7 @@ public class DomainConnect implements DomainI {
     public String newRoundText() {
         String result;
 
-        result = "\nDu har nu afsluttet " + game.getPlayer().getRounds() + 1  + ". år\n";
+        result = "\nDu har nu afsluttet " + ((game.getPlayer().getRounds()) + 1)  + ". år\n";
         result += game.endStatusText();
 
         return result;
@@ -194,14 +194,19 @@ public class DomainConnect implements DomainI {
         game.initNewRound();
         return true;
     }
-/*
+
     public String endGameText(boolean endFromMaxRounds) {
         String result;
 
+        // Tilføjer tekst hvis slutskærmen vises pga max antal år
         if (endFromMaxRounds) {
-            result += " - Du har spillet max antal år\n\n");
+            result += " - Du har spillet max antal år - \n\n";
+            result += game.endStatusText();
+            result += "\n\n\n\n\n--- Tak for, at du spillede vores spil ---\n" +
+                    "\nLavet af: Yusuf Bayoz, Victor Poulsen, Emil Spangenberg, Theis Langlands & Nicolaj Hansen";
         }
+        return result;
     }
-*/
+
 
 }
