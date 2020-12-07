@@ -54,15 +54,15 @@ class Game {
         outside = new Outside("ude foran huset", "Outside");
         utility = new Room("i bryggerset", "Utility");
         bathroom = new Room("i badeværelset", "Bathroom");
-        bedroom = new Room("i soveværelsen","Bedroom");
+        bedroom = new Room("i soveværelsen", "Bedroom");
         kidsRoom = new Room("i børneværelset", "KidsRoom");
         room = new Room("i værelset", "Room");
-        kitchen = new Room("i køkkenet","Kitchen");
-        livingRoom = new Room("i stuen","LivingRoom");
+        kitchen = new Room("i køkkenet", "Kitchen");
+        livingRoom = new Room("i stuen", "LivingRoom");
         corridor1 = new Room("i første del af gangen", "Corridor1");
         corridor2 = new Room("i anden del af gangen", "Corridor2");
-        corridor3 = new Room("i tredje del af gangen","Corridor3");
-        corridor4 = new Room("i fjerde del af gangen","Corridor4");
+        corridor3 = new Room("i tredje del af gangen", "Corridor3");
+        corridor4 = new Room("i fjerde del af gangen", "Corridor4");
 
         // opretter udgange
         store.setExit("øst", outside); //Fra butikken kan man gå outside
@@ -183,31 +183,6 @@ class Game {
         return null;
     }
 
-    private void printWelcome() {
-    // velkomst tekst til CLI
-
-        System.out.println(welcomeText());
-
-        setStartAmountCLI();
-
-        System.out.println("\nSkriv '" + CommandWord.HELP + "' hvis du har brug for hjælp.\n");
-        System.out.println(currentRoom.getLongDescription());
-    }
-
-    String welcomeText() {
-        String result;
-        result = "Du befinder dig i et dansk parcelhus på 160 m2\n" +
-                " Dit årlige forbrug er på " + player.getStartValue() +
-                " som giver huset energimærke " + EnergyLabel.createEnergyLabel(player.getScore(), player.getStartValue()) + "\n\n" +
-                "Din mission er at forbedre din boligs energiforbrug\n\n" +
-                "Du kan udskifte ting i dit hus med mere energivenlige produkter, " +
-                "som du kan købe i Super Byg\n\n" +
-                "Du skal opnå de størst mulige forbedringer med det tilgængelige budget\n\n" +
-                "Spillet løber over en årrække, når du har brugt dit budget,\n" +
-                "eller efter " + player.getMovesPerRound() + " bevægelser skiftes til nyt år\n";
-        return result;
-    }
-
     private void setStartAmountCLI() {
         // Henter budget fra bruger
         System.out.print("Indtast dit årlige renoverings budget: ");
@@ -232,6 +207,31 @@ class Game {
                 System.out.println("Der må ikke stå bogstaver i beløbet og værdien skal være mellem 0 og "+maxStartAmount+" kr. \nIndtast nyt beløb: ");
             }
         }
+    }
+
+    private void printWelcome() {
+    // velkomst tekst til CLI
+
+        System.out.println(welcomeText());
+
+        setStartAmountCLI();
+
+        System.out.println("\nSkriv '" + CommandWord.HELP + "' hvis du har brug for hjælp.\n");
+        System.out.println(currentRoom.getLongDescription());
+    }
+
+    String welcomeText() {
+        String result;
+        result = "Du befinder dig i et dansk parcelhus på 160 m2\n" +
+                " Dit årlige forbrug er på " + player.getStartValue() +
+                " som giver huset energimærke " + EnergyLabel.createEnergyLabel(player.getScore(), player.getStartValue()) + "\n\n" +
+                "Din mission er at forbedre din boligs energiforbrug\n\n" +
+                "Du kan udskifte ting i dit hus med mere energivenlige produkter, " +
+                "som du kan købe i Super Byg\n\n" +
+                "Du skal opnå de størst mulige forbedringer med det tilgængelige budget\n\n" +
+                "Spillet løber over en årrække, når du har brugt dit budget,\n" +
+                "eller efter " + player.getMovesPerRound() + " bevægelser skiftes til nyt år\n";
+        return result;
     }
 
     private boolean processCommand(Command command) {
@@ -310,8 +310,8 @@ class Game {
             return nextRound();
         }
 
-            currentRoom = nextRoom;
-            System.out.println(currentRoom.getLongDescription());
+        currentRoom = nextRoom;
+        System.out.println(currentRoom.getLongDescription());
 
         return false;
     }
@@ -320,14 +320,13 @@ class Game {
         if (command.hasSecondWord()) {
             System.out.println("Afslut hvad?");
             return false;
-        } else {
-            return true;
         }
+            return true;
     }
 
     String buy(Command command) {
 
-        // Tjekker CLI conditions?
+        // Tjekker CLI conditions
 
         // Undersøger om du er i butikken
         if (!inShop()) {
@@ -342,22 +341,23 @@ class Game {
         }
 
         // Tjekker at det andet ord (string) kan parses til en Integer
-       if (!isInt(command.getSecondWord())) {
-           System.out.println("Dette er ikke et gyldigt nummer!");
-           return null;
-       }
+        if (!isInt(command.getSecondWord())) {
+            System.out.println("Dette er ikke et gyldigt nummer!");
+            return null;
+        }
 
         // laver kommandoword om til int og finder index af det der skal købes
         int index = Integer.parseInt(command.getSecondWord()) - 1;
 
         // Tjekker om index er mellem 0 og butikkens max antal varer
-        if (0 > index || index+1 > store.getRoomInv().getSize() ) {
+        if (0 > index || index + 1 > store.getRoomInv().getSize()) {
             System.out.println("Dette er ikke et gyldigt nummer!");
             return null;
         }
 
 
         // TJEKKER BETINGELSER FOR KØB
+
         // finder pris på det der skal købes
         int price = store.getRoomInv().getItem(index).getPrice();
 
@@ -387,6 +387,7 @@ class Game {
     }
 
     private boolean replace(Command command) {
+        // Udskift funktion til CLI
 
         // tjekker input og returnerer index: eller -1 = ugyldigt input
         int roomInvIndex = checkReplaceConditions(command);
@@ -418,7 +419,7 @@ class Game {
         return false;
     }
 
-    boolean canAffordMore(){
+    boolean canAffordMore() {
         // tjekker om spiller inventroy er tomt og om spiller har råd til den billigste ting i butikken
         if ((player.getInventory().isEmpty()) &&
                 (player.getWallet() < store.getRoomInv().cheapestItem())) {
@@ -429,23 +430,15 @@ class Game {
 
     void insertItem(int roomInvIndex, int playerInvIndex) {
 
-        // old_score = scoren af det item der skiftes, new_score = scoren på det item der sættes ind
+        // Gemmer scoren af items
+        // old_score = scoren af det item der skiftes,
+        // new_score = scoren på det item der sættes ind
         int old_score = currentRoom.getRoomInv().getItem(roomInvIndex).getScoreImpact();
         int new_score = player.getInventory().getItem(playerInvIndex).getScoreImpact();
 
         // Erstatter Item i room inventory med et item fra player inventory
         currentRoom.getRoomInv().replaceItem(roomInvIndex, player.getInventory().getItem(playerInvIndex));
-/*
-        // Fjerner Item fra player inventory
-        player.getInventory().removeItem(playerInvIndex);
-*/
-/*
-        // Fjerner gammelt Item fra Room
-        currentRoom.getRoomInv().removeItem(currentRoom.getRoomInv().getItem(roomInvIndex));
 
-        // Kopierer item fra player index til room
-        copyItem(player.getInventory(), playerInvIndex, currentRoom.getRoomInv());
-*/
         // Opdaterer score
         int nyScore = player.getScore() + (new_score - old_score);
         player.setScore(nyScore);
@@ -460,7 +453,6 @@ class Game {
 
     int getPlayerInvIndex(int roomInvIndex) {
         // Finder index i players inventory returnere -1 hvis der ikke er Item af samme type.)
-
         int playerInvIndex = -1;
         int itemTypeRoom = currentRoom.getRoomInv().getItem(roomInvIndex).getItemType();
 
@@ -504,7 +496,7 @@ class Game {
 
     private boolean isInt(String s) {
         for (int i = 0; i < s.length(); i++) {
-            if( !Character.isDigit(s.charAt(i)) ) return false;
+            if (!Character.isDigit(s.charAt(i))) return false;
         }
         return true;
     }
@@ -514,8 +506,8 @@ class Game {
     }
 
     private void status() {
-    System.out.println("Du har opnået en samlet årlig besparelse på: " + player.getScore() +
-            ", og du har " + player.getWallet() + "kr. tilbage på budgettet i år");
+        System.out.println("Du har opnået en samlet årlig besparelse på: " + player.getScore() +
+                ", og du har " + player.getWallet() + "kr. tilbage på budgettet i år");
     }
 
     private void delete(Command command) {
@@ -547,7 +539,6 @@ class Game {
         // printer ny inventory
         System.out.println("Nyt inventar:");
         player.getInventory().printInventory();
-
     }
 
     private void printInventory() {
@@ -560,10 +551,10 @@ class Game {
     }
 
     private boolean nextRound() {
-        System.out.println("\nDu har nu afsluttet " + (player.getRounds() +1 ) + ". år");
+        System.out.println("\nDu har nu afsluttet " + (player.getRounds() + 1) + ". år");
 
         // checker om vi har nået max antal runder
-        if (player.getRounds() == (player.getMaxNumberOfRounds() -1 ) ) {
+        if (player.getRounds() == (player.getMaxNumberOfRounds() - 1)) {
             System.out.println("Du har spillet max antal år\n");
             return true; // spillet er slut - sætter want to quit til True
         }
@@ -584,10 +575,10 @@ class Game {
     void initNewRound() {
         // gemmer score og opdatere runde count
         player.saveRoundScore();
-        player.setRounds(player.getRounds()+1);
+        player.setRounds(player.getRounds() + 1);
 
         // intialiserer nyt år
-        player.setWallet(player.getWallet()+ player.getStartAmount() + player.getScore()); // nyt årsbudget!
+        player.setWallet(player.getWallet() + player.getStartAmount() + player.getScore()); // nyt årsbudget!
         player.setMoves(0); // resetter moves
         currentRoom = outside;
     }
@@ -595,14 +586,14 @@ class Game {
     String endStatusText() {
         String result;
         result = "Du har samlet brugt " + player.getTotalUsedAmount() + " kr,-\n" +
-               " - Energibesparelse -\n";
+                " - Energibesparelse -\n";
 
-        for (int i=0; i<=player.getRounds(); i++) {
-            result += " År " + (i+1) + ": " + player.getRoundScore(i) + "\n";
+        for (int i = 0; i <= player.getRounds(); i++) {
+            result += " År " + (i + 1) + ": " + player.getRoundScore(i) + "\n";
         }
 
         result += "Total " + player.getScore() + " kr. om året i energiforbedringer\n" +
-                "\nDu startede med energimærke " + EnergyLabel.createEnergyLabel(0,player.getStartValue()) + "\n" +
+                "\nDu startede med energimærke " + EnergyLabel.createEnergyLabel(0, player.getStartValue()) + "\n" +
                 "og er nu på energimærke " + EnergyLabel.createEnergyLabel(player.getScore(), player.getStartValue());
 
         return result;
@@ -613,5 +604,5 @@ class Game {
         System.out.println("--- Tak for, at du spillede vores spil ---\n");
         System.out.println(endStatusText());
         System.out.println("\nLavet af: Yusuf Baysoz, Victor Poulsen, Emil Spangenberg, Theis Langlands & Nicolaj Hansen");
-    } // afslutning af spil
+    } 
 }
