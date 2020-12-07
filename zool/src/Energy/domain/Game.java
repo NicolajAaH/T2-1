@@ -422,10 +422,10 @@ class Game {
         insertItem(roomInvIndex, playerInvIndex);
 
         // Udskriver inventory fra player og Room
-        System.out.print("Du har: ");
-        player.getInventory().printInventory();
-        System.out.print("Rummet indeholder: ");
-        currentRoom.getRoomInv().printInventory();
+        System.out.println("Du har nu: ");
+        System.out.println(player.getInventory().printInventory());
+        System.out.println("Rummet indeholder: ");
+        System.out.println(currentRoom.getRoomInv().printInventory());
         System.out.println("Du har nu opnået en årlig besparelse på: " + player.getScore());
 
         // Tjekker om spiller har råd til at købe flere item - ellers gåes videre til næste runde!
