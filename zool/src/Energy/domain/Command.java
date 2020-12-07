@@ -1,7 +1,6 @@
 package Energy.domain;
 
-class Command
-{
+class Command {
     private CommandWord commandWord;
     private String secondWord;
     //setter
@@ -16,18 +15,15 @@ class Command
         return commandWord;
     }
 
-    public String getSecondWord()
-    {
+    public String getSecondWord() {
         return secondWord;
     }
 
-    public boolean isUnknown()
-    {
+    public boolean isUnknown() {
         return (commandWord == CommandWord.UNKNOWN);
     }
 
-    public boolean hasSecondWord()
-    {
+    public boolean hasSecondWord() {
         return (secondWord != null);
     }
 }

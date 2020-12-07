@@ -6,20 +6,19 @@ class Player {
     private int wallet = 0;
     private int startAmount = 0; // årligt renoverings budget - start Wallet
     private int totalUsedAmount = 0;
-    private int startValue = 36000; // start forbrug (til Energimærkeberegning)
+    private int startValue = 29000; // start forbrug (til Energimærkeberegning)
 
     private int score = 0;
     private Inventory inventory = new Inventory();
 
     // holder styr på skift imellem rum
     private int moves = 0;
-    private int movesPerRound = 50;
+    private int movesPerRound = 40;
 
     // holder styr på runder (år)
     private int round = 0;
     private int maxNumberOfRounds = 5;
     private int[] roundScore = new int[maxNumberOfRounds];
-
 
     // Metoder
     public void saveRoundScore() {
