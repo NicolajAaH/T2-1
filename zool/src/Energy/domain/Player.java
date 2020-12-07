@@ -20,7 +20,6 @@ class Player {
     private int maxNumberOfRounds = 5;
     private int[] roundScore = new int[maxNumberOfRounds];
 
-
     // Metoder
     public void saveRoundScore() {
         roundScore[round] = score;
