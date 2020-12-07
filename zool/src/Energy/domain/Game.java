@@ -629,7 +629,7 @@ class Game {
     private void printExit(){
         System.out.println("--- Tak for, at du spillede vores spil ---\n");
         System.out.println(endStatusText());
-        System.out.println("\nLavet af: Yusuf Bayoz, Victor Poulsen, Emil Spangenberg, Theis Langlands & Nicolaj Hansen");
+        System.out.println("\nLavet af: Yusuf Baysoz, Victor Poulsen, Emil Spangenberg, Theis Langlands & Nicolaj Hansen");
     } // afslutning af spil
 
 }
