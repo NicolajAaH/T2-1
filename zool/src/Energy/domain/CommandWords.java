@@ -4,6 +4,7 @@ import java.util.HashMap;
 
 class CommandWords
 {
+    //opretter et hashmap fra String og commandWord
     private HashMap<String, CommandWord> validCommands;
 
     public CommandWords() // opretter commandwords i valid commands

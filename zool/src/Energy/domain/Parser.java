@@ -7,6 +7,7 @@ class Parser
     private CommandWords commands;
     private Scanner reader;
 
+    //constructor
     public Parser() 
     {
         commands = new CommandWords();
@@ -33,7 +34,7 @@ class Parser
 
         return new Command(commands.getCommandWord(word1), word2);
     }
-
+    //viser alle kommandoer
     public void showCommands()
     {
         commands.showAll();
