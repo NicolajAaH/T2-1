@@ -41,11 +41,11 @@
       <ImageView fx:id="heatingSystem" fitHeight="332.0" fitWidth="236.0" layoutX="48.0" layoutY="176.0" pickOnBounds="true" preserveRatio="true" />
       <Label fx:id="tumbleDryerLabel" alignment="BOTTOM_CENTER" layoutX="368.0" layoutY="212.0" prefHeight="271.0" prefWidth="186.0" textFill="#06ab06">
          <font>
-            <Font size="76.0" />
+            <Font size="60.0" />
          </font></Label>
       <Label fx:id="washingMachineLabel" alignment="BOTTOM_CENTER" layoutX="610.0" layoutY="205.0" prefHeight="258.0" prefWidth="175.0" textFill="#06ab06">
          <font>
-            <Font size="76.0" />
+            <Font size="60.0" />
          </font></Label>
     </children>
 </AnchorPane>
