@@ -33,7 +33,7 @@ class Game {
         player.getInventory().setMaxSize(5);
     }
 
-    // GETTERS & SETTERS
+    // GETTERS & SETTER METHODS
     public Room getCurrentRoom() {
         return currentRoom;
     }
@@ -49,7 +49,7 @@ class Game {
     // METHODS
     private void createRooms() {
 
-        // create room and description
+        // Opretter rum og beskrivelser
         store = new Store("nu i Super Byg, her kan du købe tingene til huset", "Store");
         outside = new Outside("ude foran huset", "Outside");
         utility = new Room("i bryggerset", "Utility");
@@ -66,46 +66,33 @@ class Game {
 
         // opretter udgange
         store.setExit("øst", outside); //Fra butikken kan man gå outside
-
         outside.setExit("vest", store); //fra outside kan man gå i butikken og gang 1
         outside.setExit("øst", corridor1);
-
         corridor1.setExit("nord", utility); //fra gang 1 kan man gå i utility, kitchen, gang 2 og outside
         corridor1.setExit("syd", kitchen);
         corridor1.setExit("øst", corridor2);
         corridor1.setExit("vest", outside);
-
         utility.setExit("syd", corridor1); //fra utility kan man gå i gang 1
-
         kitchen.setExit("nord", corridor1); //fra kitchen kan man gå til gang 1 og livingRoom
         kitchen.setExit("øst", livingRoom);
-
         livingRoom.setExit("vest", kitchen); //fra livingRoom kan man gå til kitchen og gang 3
         livingRoom.setExit("nord", corridor3);
-
         corridor2.setExit("nord", bathroom); //fra gang 2 kan man gå til gang 1, gang 3 og bathroom
         corridor2.setExit("øst", corridor3);
         corridor2.setExit("vest", corridor1);
-
         bathroom.setExit("syd", corridor2); //fra bathroom kan man gå til gang 2
-
         corridor3.setExit("nord", bedroom); //fra gang 3 kan man gå til gang 2, gang 4, bedroom og livingRoom
         corridor3.setExit("syd", livingRoom);
         corridor3.setExit("øst", corridor4);
         corridor3.setExit("vest", corridor2);
-
         bedroom.setExit("syd", corridor3); //fra bedroom kan man gå til gang 3
-
         corridor4.setExit("nord", kidsRoom); //fra gang 4 kan man gå til gang 3, kidsRoom og room
         corridor4.setExit("syd", room);
         corridor4.setExit("vest", corridor3);
-
         kidsRoom.setExit("syd", corridor4); //fra kidsRoom kan man gå til gang 4
-
         room.setExit("nord", corridor4); //fra room kan man gå til gang 4
 
-        // tilføj til inventory
-        //add to inventory
+        // tilføjer varer til butikken
         store.addToInventory(new Item("Opvaskemaskine A", 2500, 150, DISHWASHER, "A"));
         store.addToInventory(new Item("Opvaskemaskine A++", 3300, 200, DISHWASHER, "A++"));
         store.addToInventory(new Item("Vaskemaskine A+", 2400, 65, WASHINGMACHINE, "A+"));
@@ -129,35 +116,29 @@ class Game {
         store.addToInventory(new Item("Solceller", 30000, 3500, SOLARCELLS, null));
         store.addToInventory(new Item("Bruser A+", 2000, 300, BATH, "A+"));
 
+        // tilføjer ting i rum
         utility.addToInventory(new Item("Vaskemaskine D", 0, 0, WASHINGMACHINE, "D"));
         utility.addToInventory(new Item("Tørretumbler D", 0, 0, DRYER, "D"));
         utility.addToInventory(new Item("Oliefyr", 0, 0, HEATING, null));
-
         kitchen.addToInventory(new Item("Køleskab D", 0, 0, FRIDGE, "D")); // færdig
         kitchen.addToInventory(new Item("Komfur C", 0, 0, STOVE, "C"));
         kitchen.addToInventory(new Item("Opvaskemaskine D", 0, 0, DISHWASHER, "D"));
-
         livingRoom.addToInventory(new Item("Enkeltlags vindue", 0, 0, WINDOW, null));
         livingRoom.addToInventory(new Item("Glødepære", 0, 0, LIGHTS, null));
         livingRoom.addToInventory(new Item("TV D", 0, 0, TV, "D"));
-
         bedroom.addToInventory(new Item("Glødepære", 0, 0, LIGHTS, null));
         bedroom.addToInventory(new Item("Enkeltlags vindue", 0, 0, WINDOW, null));
         bedroom.addToInventory(new Item("Hul i væggen", 0, 0, WALLFIXER, null));
-
         room.addToInventory(new Item("Glødepære", 0, 0, LIGHTS, null));
         room.addToInventory(new Item("Enkeltlags vindue", 0, 0, WINDOW, null));
-
         kidsRoom.addToInventory(new Item("Glødepære", 0, 0, LIGHTS, null));
         kidsRoom.addToInventory(new Item("Enkeltlags vindue", 0, 0, WINDOW, null));
         kidsRoom.addToInventory(new Item("Hul i væggen", 0, 0, WALLFIXER, null));
-
         bathroom.addToInventory(new Item("Bruser D", 0, 0, BATH, "D"));
-
         outside.addToInventory(new Item("Tag uden solceller", 0, 0, SOLARCELLS, null));
         outside.addToInventory(new Item("Tyndt isolering", 0, 0, ISOLATION, null));
 
-        // sætter startrummet til outside
+        // sætter startrummet
         currentRoom = outside;
     }
 
@@ -166,7 +147,6 @@ class Game {
         printWelcome(); // opstart af spil
 
         boolean gameFinished = false;
-
         while (!gameFinished) {
             Command command = parser.getCommand();
             gameFinished = processCommand(command);
@@ -176,9 +156,10 @@ class Game {
     }
 
     String setStartAmountGUI(String value) {
-        // metode til GUI input af start amount
+        // metode til GUI input af start amount, returnerer streng med fejlmeddelelse og null ved succes
 
         int result = 0;
+
         // Tjekker om input er et heltal
         if (!isInt(value)) {
             return "Fejl: indtast et heltal imellem 0 og " + maxStartAmount;
@@ -191,19 +172,20 @@ class Game {
             return "Fejl: Værdien skal være mellem 0 og " + maxStartAmount + " kr.";
         }
 
-        // Tjekker om beløbet er inden for max grænsen
-        if (result > 0 && result <= maxStartAmount) {
-            player.setWallet(result);
-            player.setStartAmount(result);
-        } else {
+        // Tjekker om beløbet er mellem og max grænsen.
+        if (!(result > 0 && result <= maxStartAmount)) {
             return "Fejl: Værdien skal være mellem 0 og " + maxStartAmount + " kr.";
         }
 
+        // Sætter startbeløb og husker årlige budget budget
+        player.setWallet(result);
+        player.setStartAmount(result);
         return null;
     }
 
-    private void printWelcome() // opstart af spil
-    {
+    private void printWelcome() {
+    // velkomst tekst til CLI
+
         System.out.println(welcomeText());
 
         setStartAmountCLI();
@@ -214,7 +196,7 @@ class Game {
 
     String welcomeText() {
         String result;
-        result = "Du befinder dig i et dejligt dansk parcelhus på 160 m2\n" +
+        result = "Du befinder dig i et dansk parcelhus på 160 m2\n" +
                 " Dit årlige forbrug er på " + player.getStartValue() +
                 " som giver huset energimærke " + EnergyLabel.createEnergyLabel(player.getScore(), player.getStartValue()) + "\n\n" +
                 "Din mission er at forbedre din boligs energiforbrug\n\n" +
@@ -437,7 +419,7 @@ class Game {
     }
 
     boolean canAffordMore(){
-        // tjekker om spiller har råd til den billigste ting i butikken
+        // tjekker om spiller inventroy er tomt og om spiller har råd til den billigste ting i butikken
         if ((player.getInventory().isEmpty()) &&
                 (player.getWallet() < store.getRoomInv().cheapestItem())) {
             return false;
@@ -626,10 +608,10 @@ class Game {
         return result;
     }
 
-    private void printExit(){
+    private void printExit() {
+        // Udskriver sluttekst - CLI
         System.out.println("--- Tak for, at du spillede vores spil ---\n");
         System.out.println(endStatusText());
         System.out.println("\nLavet af: Yusuf Bayoz, Victor Poulsen, Emil Spangenberg, Theis Langlands & Nicolaj Hansen");
     } // afslutning af spil
-
 }

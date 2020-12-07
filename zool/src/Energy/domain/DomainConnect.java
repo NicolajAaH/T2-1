@@ -204,10 +204,10 @@ public class DomainConnect implements DomainI {
 
         // Tilføjer tekst hvis slutskærmen vises pga max antal år
         if (game.getPlayer().getRounds() == game.getPlayer().getMaxNumberOfRounds()) {
-            result += " - Du har spillet max antal år - \n\n";
+            result += " - Du har spillet max antal år - \n";
             game.getPlayer().setRounds((game.getPlayer().getRounds()) - 1);
         }
-        result += "\n\n--- Tak for, at du spillede vores spil ---\n";
+        result += "\n--- Tak for, at du spillede vores spil ---\n";
         result += game.endStatusText();
         result += "\n\nLavet af: Yusuf Bayoz, Victor Poulsen, Emil Spangenberg, Theis Langlands & Nicolaj Hansen";
 
@@ -219,5 +219,9 @@ public class DomainConnect implements DomainI {
     public boolean addMove() {
         game.getPlayer().addMove();
         return game.getPlayer().getMoves() != game.getPlayer().getMovesPerRound();
+    }
+
+    public int getMovesRemaing() {
+        return game.getPlayer().getMovesPerRound() - game.getPlayer().getMoves();
     }
 }

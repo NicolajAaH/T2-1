@@ -48,11 +48,13 @@ public interface DomainI {
     public String replaceDynamicGUI(int indexRoom);
 
     public boolean canAffordMore();
-    
+
     public Inventory getRoomInventory();
 
     // metoder til butikken
     Inventory getStoreInventory();
     // Returnere streng med status på køb
     String buyItem(int ItemIndex);
+
+    int getMovesRemaing();
 }
