@@ -47,7 +47,6 @@ class Player {
         return totalUsedAmount;
     }
 
-
     public int getStartValue() {
         return startValue;
     }

@@ -9,6 +9,8 @@ class EnergyLabel {
     private static final int F = 36000;
     private static final int G = 46000;
 
+    // returnere en streng med energimærke baseret ens aktuelle forbrug
+    // start = start forbrug, score = opnået besparelse
     public static String createEnergyLabel(int score, int start) {
         int mark = start - score;
         if(mark<B){

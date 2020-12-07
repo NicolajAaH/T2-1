@@ -214,13 +214,15 @@ class Game {
 
     String welcomeText() {
         String result;
-        result = "Du befinder dig i et dejligt dansk parcelhus på 160 m2 med energimærke F\n\n" +
-                "din mission er at forbedre din boligs energiforbrug\n\n" +
-                "Du kan udskifte ting i dit hus med mere energivenlige produkter\n" +
-                "Du finder hvad du skal bruge i Super Byg\n\n" +
-                "Det skal opnå den størst mulige forbedring med dit tilgængelige budget\n" +
-                "Du kan bevæge dig " + player.getMovesPerRound() + " gange hvert år\n" +
-                "Du får en status efter hvert år\n";
+        result = "Du befinder dig i et dejligt dansk parcelhus på 160 m2\n" +
+                " Dit årlige forbrug er på " + player.getStartValue() +
+                " som giver huset energimærke " + EnergyLabel.createEnergyLabel(player.getScore(), player.getStartValue()) + "\n\n" +
+                "Din mission er at forbedre din boligs energiforbrug\n\n" +
+                "Du kan udskifte ting i dit hus med mere energivenlige produkter, " +
+                "som du kan købe i Super Byg\n\n" +
+                "Du skal opnå de størst mulige forbedringer med det tilgængelige budget\n\n" +
+                "Spillet løber over en årrække, når du har brugt dit budget,\n" +
+                "eller efter " + player.getMovesPerRound() + " bevægelser skiftes til nyt år\n";
         return result;
     }
 
