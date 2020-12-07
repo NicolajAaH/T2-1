@@ -158,6 +158,9 @@ public class DomainConnect implements DomainI {
         return returnName;
     }
 
+    public boolean canAffordMore() {
+        return game.canAffordMore();
+    }
 
     // METODER TIL SPIL FLOW
 
