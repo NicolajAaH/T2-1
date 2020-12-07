@@ -24,8 +24,9 @@ class Game {
     public final int SOLARCELLS = 12;
     public final int BATH = 13;
 
-    public Game() // opretter nyt spil
+    public Game()
     {
+        // opretter nyt spil
         createRooms(); // sætter rum og udgange
         parser = new Parser();
         player = new Player();
