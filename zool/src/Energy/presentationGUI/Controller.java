@@ -60,6 +60,8 @@ public class Controller {
     private Button endYear;
     @FXML
     private Button endGame;
+    @FXML
+    private Label movesLeft;
 
     //køres når der skiftes fxml.Eventhandlers til at afslutte spillet, som loader en anden FXML fil.
     public void initialize(){
@@ -203,6 +205,7 @@ public class Controller {
     public void updateStatus(){
         wallet.setText("Penge tilbage: " + getDomainI().getWallet());
         savings.setText("Årlig besparelse: " + getDomainI().getScore());
+        movesLeft.setText("Bevægelser tilbage: " + domainI.getMovesRemaing());
         AffordMore();
     }
 
