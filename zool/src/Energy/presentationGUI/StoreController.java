@@ -19,10 +19,14 @@ public class StoreController extends Controller {
     @FXML
     Label textStore;
 
+    //initialize fra superklassen, og opdaterer labels på tingene når man kommer ind i rummet.
     public void initialize() {
         super.initialize();
+        //opretter en observableList af Items som bruges i listen ved store
         ObservableList<Item> items = FXCollections.observableArrayList(getDomainI().getStoreInventory().getItems());
         storeList.setItems(items);
+
+        //eventhandler for køb knappen
         buyButton.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent actionEvent) {
