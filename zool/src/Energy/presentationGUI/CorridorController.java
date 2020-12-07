@@ -1,9 +1,8 @@
 package Energy.presentationGUI;
 
-import Energy.domain.Item;
-
 public class CorridorController extends Controller{
 
+    //kører super-klassens initialize
     public void initialize(){
         super.initialize();
     }

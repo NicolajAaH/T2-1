@@ -12,6 +12,7 @@ import javafx.scene.control.TextField;
 import java.io.IOException;
 
 public class Start extends Controller{
+    //fxml variable
     @FXML
     private Button okButton;
     @FXML
@@ -21,10 +22,12 @@ public class Start extends Controller{
     @FXML
     private Label errorLabel;
 
+    //initialize fra superklassen, og opdaterer labels på tingene når man kommer ind i rummet.
     public void initialize(){
 
         welcomeText.setText(getDomainI().welcomeText());
 
+        //eventhandler for buttonclick, der sætter fxml til outside, da man derefter starter den nye runde
         okButton.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent actionEvent) {

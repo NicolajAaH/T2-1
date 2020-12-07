@@ -16,6 +16,7 @@ public class BedroomController extends Controller{
     @FXML
     private ImageView holeWallBedroom;
 
+    //initialize køres i starten. Der kaldes controllers initialize. Hullet skal enten skjules eller vises.
     public void initialize(){
         super.initialize();
         bulbBedroom.setText(getDomainI().getRoomInventory().getItem(0).getName());
@@ -29,6 +30,7 @@ public class BedroomController extends Controller{
             holeWallBedroom.setVisible(false);
         }
 
+        //eventhandlers, som skifter tingen ud, og opdaterer de forskellige ting.
         bulbBedroom.setOnMouseClicked(new EventHandler<MouseEvent>() {
             @Override
             public void handle(MouseEvent mouseEvent) {

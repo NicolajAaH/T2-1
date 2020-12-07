@@ -8,13 +8,14 @@
 
 <AnchorPane prefHeight="600.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Energy.presentationGUI.Start">
    <children>
-      <TextField fx:id="input" layoutX="293.0" layoutY="473.0" prefHeight="41.0" prefWidth="227.0" promptText="Indtast dit årlige renoveringsbudget" />
-      <Button fx:id="okButton" layoutX="367.0" layoutY="529.0" mnemonicParsing="false" prefHeight="43.0" prefWidth="73.0" text="OK" />
-      <Label fx:id="welcomeText" alignment="CENTER" layoutX="16.0" layoutY="20.0" prefHeight="442.0" prefWidth="769.0" textAlignment="CENTER" wrapText="true">
+      <TextField fx:id="input" layoutX="293.0" layoutY="473.0" prefHeight="41.0" prefWidth="227.0" />
+      <Button fx:id="okButton" layoutX="365.0" layoutY="528.0" mnemonicParsing="false" prefHeight="33.0" prefWidth="73.0" text="OK" />
+      <Label fx:id="welcomeText" alignment="CENTER" layoutX="16.0" layoutY="20.0" prefHeight="434.0" prefWidth="769.0" textAlignment="CENTER" wrapText="true">
          <font>
             <Font size="17.0" />
          </font>
       </Label>
-      <Label fx:id="errorLabel" alignment="CENTER" layoutX="47.0" layoutY="347.0" prefHeight="36.0" prefWidth="505.0" />
+      <Label fx:id="errorLabel" alignment="CENTER" layoutX="147.0" layoutY="564.0" prefHeight="25.0" prefWidth="505.0" />
+      <Label alignment="CENTER" layoutX="293.0" layoutY="456.0" prefHeight="17.0" prefWidth="227.0" text="Indtast dit årlige renoveringsbudget:" />
    </children>
 </AnchorPane>

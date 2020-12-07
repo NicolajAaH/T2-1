@@ -1,9 +1,7 @@
 package Energy.presentationGUI;
 
 import Energy.domain.Item;
-import javafx.beans.InvalidationListener;
 import javafx.collections.FXCollections;
-import javafx.collections.ListChangeListener;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
@@ -11,11 +9,9 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
-import javafx.scene.text.TextAlignment;
-
-import java.util.*;
 
 public class StoreController extends Controller {
+    //fxml variable
     @FXML
     ListView<Item> storeList;
     @FXML

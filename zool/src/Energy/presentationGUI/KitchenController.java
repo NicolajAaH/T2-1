@@ -3,11 +3,10 @@ package Energy.presentationGUI;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
-import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 
 public class KitchenController extends Controller{
+    //fxml variable
     @FXML
     private Label fridge_label;
     @FXML
@@ -15,12 +14,14 @@ public class KitchenController extends Controller{
     @FXML
     private Label dishwasher_label;
 
+    //initialize fra superklassen, og opdaterer labels på tingene når man kommer ind i rummet.
     public void initialize(){
         super.initialize();
         fridge_label.setText(getDomainI().getRoomInventory().getItem(0).getEnergyLabel());
         oven_label.setText(getDomainI().getRoomInventory().getItem(1).getEnergyLabel());
         dishwasher_label.setText(getDomainI().getRoomInventory().getItem(2).getEnergyLabel());
 
+        //eventhandlers som replacer
         fridge_label.setOnMouseClicked(new EventHandler<MouseEvent>() {
             @Override
             public void handle(MouseEvent mouseEvent) {
