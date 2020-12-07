@@ -209,7 +209,7 @@ public class DomainConnect implements DomainI {
         }
         result += "\n--- Tak for, at du spillede vores spil ---\n";
         result += game.endStatusText();
-        result += "\n\nLavet af: Yusuf Bayoz, Victor Poulsen, Emil Spangenberg, Theis Langlands & Nicolaj Hansen";
+        result += "\n\nLavet af: Yusuf Baysoz, Victor Poulsen, Emil Spangenberg, Theis Langlands & Nicolaj Hansen";
 
         return result;
     }
