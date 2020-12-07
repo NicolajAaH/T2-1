@@ -226,8 +226,8 @@ class Game {
                 " Dit årlige forbrug er på " + player.getStartValue() +
                 " som giver huset energimærke " + EnergyLabel.createEnergyLabel(player.getScore(), player.getStartValue()) + "\n\n" +
                 "Din mission er at forbedre din boligs energiforbrug\n\n" +
-                "Du kan udskifte ting i dit hus med mere energivenlige produkter, " +
-                "som du kan købe i Super Byg\n\n" +
+                "Du kan købe mere energivenlige produkter til dit hus i Super Byg, " +
+                "så din bolig bruger mindre energi, og dermed opnår bedre energimærke\n\n" +
                 "Du skal opnå de størst mulige forbedringer med det tilgængelige budget\n\n" +
                 "Spillet løber over en årrække, når du har brugt dit budget,\n" +
                 "eller efter " + player.getMovesPerRound() + " bevægelser skiftes til nyt år\n";
