@@ -136,7 +136,7 @@ class Game {
         kidsRoom.addToInventory(new Item("Hul i væggen", 0, 0, WALLFIXER, null));
         bathroom.addToInventory(new Item("Bruser D", 0, 0, BATH, "D"));
         outside.addToInventory(new Item("Tag uden solceller", 0, 0, SOLARCELLS, null));
-        outside.addToInventory(new Item("Tyndt isolering", 0, 0, ISOLATION, null));
+        outside.addToInventory(new Item("Tynd isolering", 0, 0, ISOLATION, null));
 
         // sætter startrummet
         currentRoom = outside;
