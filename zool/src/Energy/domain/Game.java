@@ -406,8 +406,7 @@ class Game {
 
     private boolean replace(Command command) {
 
-        // tjekker input og returnerer index:
-        // -1 = ugyldigt input
+        // tjekker input og returnerer index: eller -1 = ugyldigt input
         int roomInvIndex = checkReplaceConditions(command);
         if (roomInvIndex == -1) return false;
 
@@ -448,13 +447,17 @@ class Game {
 
     void insertItem(int roomInvIndex, int playerInvIndex) {
 
+        // old_score = scoren af det item der skiftes, new_score = scoren på det item der sættes ind
+        int old_score = currentRoom.getRoomInv().getItem(roomInvIndex).getScoreImpact();
+        int new_score = player.getInventory().getItem(playerInvIndex).getScoreImpact();
+
         // Erstatter Item i room inventory med et item fra player inventory
         currentRoom.getRoomInv().replaceItem(roomInvIndex, player.getInventory().getItem(playerInvIndex));
 /*
         // Fjerner Item fra player inventory
         player.getInventory().removeItem(playerInvIndex);
 */
-        /*
+/*
         // Fjerner gammelt Item fra Room
         currentRoom.getRoomInv().removeItem(currentRoom.getRoomInv().getItem(roomInvIndex));
 
@@ -462,7 +465,7 @@ class Game {
         copyItem(player.getInventory(), playerInvIndex, currentRoom.getRoomInv());
 */
         // Opdaterer score
-        int nyScore = player.getScore() + player.getInventory().getItem(playerInvIndex).getScoreImpact();
+        int nyScore = player.getScore() + (new_score - old_score);
         player.setScore(nyScore);
 
         // Sletter item fra player index
