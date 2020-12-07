@@ -1,9 +1,7 @@
 package Energy.presentationGUI;
 
 import Energy.domain.Item;
-import javafx.beans.InvalidationListener;
 import javafx.collections.FXCollections;
-import javafx.collections.ListChangeListener;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
@@ -11,11 +9,9 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
-import javafx.scene.text.TextAlignment;
-
-import java.util.*;
 
 public class StoreController extends Controller {
+    //fxml variable
     @FXML
     ListView<Item> storeList;
     @FXML
@@ -23,10 +19,14 @@ public class StoreController extends Controller {
     @FXML
     Label textStore;
 
+    //initialize fra superklassen, og opdaterer labels på tingene når man kommer ind i rummet.
     public void initialize() {
         super.initialize();
+        //opretter en observableList af Items som bruges i listen ved store
         ObservableList<Item> items = FXCollections.observableArrayList(getDomainI().getStoreInventory().getItems());
         storeList.setItems(items);
+
+        //eventhandler for køb knappen
         buyButton.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent actionEvent) {

@@ -2,7 +2,6 @@ package Energy.presentationGUI;
 
 import Energy.Interface.DomainI;
 import Energy.domain.DomainConnect;
-import Energy.domain.Item;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
@@ -10,14 +9,13 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
-import javafx.scene.control.ListView;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.scene.input.DragEvent;
 
 import java.io.IOException;
 
 public class Controller {
+    //variable
     public final int WASHINGMACHINE = 1;
     public final int DRYER = 2;
     public final int HEATING = 3;
@@ -32,8 +30,10 @@ public class Controller {
     public final int SOLARCELLS = 12;
     public final int BATH = 13;
 
+    //vores 'spil' og vores bindeled mellem domain og interface
     private static DomainI domainI = new DomainConnect();
 
+    //Variablene fra FXML filerne
     @FXML
     private ImageView item0;
     @FXML
@@ -60,8 +60,10 @@ public class Controller {
     private Button endYear;
     @FXML
     private Button endGame;
+    @FXML
+    private Label movesLeft;
 
-
+    //køres når der skiftes fxml.Eventhandlers til at afslutte spillet, som loader en anden FXML fil.
     public void initialize(){
         showExits();
         updateInventory();
@@ -94,7 +96,7 @@ public class Controller {
             }
         });
     }
-
+    //metode til at finde det rigtige icon ved items i inventory.
     public Image findImage(String itemName) {
         if (itemName.equals("Opvaskemaskine A")) {
             return new Image("/Images/dishwasher_A_icon.png");
@@ -167,7 +169,7 @@ public class Controller {
         }
         return null;
     }
-
+    //opdaterer alle pladsene i inventory. Den tjekker først om der er noget i inventory.
     public void updateInventory() {
         if (domainI.getPlayerInventory().getSize() > 0 && domainI.getPlayerInventory().getItem(0) != null) {
             item0.setImage(findImage(domainI.getPlayerInventory().getItem(0).getName()));
@@ -199,16 +201,20 @@ public class Controller {
             item4.setImage(null);
         }
     }
-
+    //opdaterer penge tilbage og årlig besparelse på skærmen
     public void updateStatus(){
         wallet.setText("Penge tilbage: " + getDomainI().getWallet());
         savings.setText("Årlig besparelse: " + getDomainI().getScore());
+        movesLeft.setText("Bevægelser tilbage: " + domainI.getMovesRemaing());
+        AffordMore();
     }
 
+    //getter til domainI
     public DomainI getDomainI() {
         return domainI;
     }
 
+    //giver pilene forskellige billeder, og skjuler eller viser dem i hvert rum, afhængig af om der er udveje.
     public void showExits(){
         arrowUp.setImage(new Image("/Images/north_arrow.png"));
         arrowDown.setImage(new Image("/Images/south_arrow.png"));
@@ -240,8 +246,9 @@ public class Controller {
         }
     }
 
+    //tilføjer et move, og hvis max antal moves er nået, skal der loades fxmlfilen "NewRound"
     public boolean moves(){
-        if(domainI.addMove() == false){
+        if(!domainI.addMove()){
             Parent newRoot = null;
             try {
                 newRoot = runGui.getFxmlLoader().load(getClass().getResource("NewRound.fxml"));
@@ -256,6 +263,7 @@ public class Controller {
         }
     }
 
+    //når man klikker på nord pilen, skal den loade den fxml fil der er i næste rum, osv. ved de andre.
     public void goNorth() throws IOException {
         domainI.goNorth();
         if(moves()) {
@@ -293,7 +301,17 @@ public class Controller {
             runGui.getStage().show();
         }
     }
-    public String replace(int index){
-        return getDomainI().replaceStaticGUI(index);
+
+    public void AffordMore(){
+        if(!domainI.canAffordMore()){
+            Parent newRoot = null;
+            try {
+                newRoot = runGui.getFxmlLoader().load(getClass().getResource("NewRound.fxml"));
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+            runGui.getStage().setScene(new Scene(newRoot));
+            runGui.getStage().show();
+        }
     }
 }

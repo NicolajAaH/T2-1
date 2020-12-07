@@ -30,7 +30,7 @@
         <ImageView fx:id="item2" fitHeight="48.0" fitWidth="48.0" layoutX="205.0" layoutY="538.0" pickOnBounds="true" preserveRatio="true" />
         <ImageView fx:id="item3" fitHeight="48.0" fitWidth="48.0" layoutX="260.0" layoutY="538.0" pickOnBounds="true" preserveRatio="true" />
         <ImageView fx:id="item4" fitHeight="48.0" fitWidth="48.0" layoutX="315.0" layoutY="538.0" pickOnBounds="true" preserveRatio="true" />
-
+        <Label fx:id="movesLeft" layoutX="593.0" layoutY="578.0" prefHeight="17.0" prefWidth="141.0" text="Træk tilbage:" />
         <ImageView fx:id="arrowDown" fitHeight="57.0" fitWidth="61.0" layoutX="400.0" layoutY="470.0" onMouseClicked="#goSouth" pickOnBounds="true" preserveRatio="true" />
         <ImageView fx:id="arrowUp" fitHeight="57.0" fitWidth="61.0" layoutX="400.0" layoutY="27.0" onMouseClicked="#goNorth" pickOnBounds="true" preserveRatio="true" />
         <ImageView fx:id="arrowLeft" fitHeight="57.0" fitWidth="61.0" layoutX="24.0" layoutY="300.0" onMouseClicked="#goWest" pickOnBounds="true" preserveRatio="true" />
@@ -39,9 +39,9 @@
         <Button fx:id="endGame" layoutX="495.0" layoutY="549.0" mnemonicParsing="false" text="Afslut spillet" />
         <Label fx:id="savings" layoutX="593.0" layoutY="564.0" prefHeight="17.0" prefWidth="141.0" text="Årlig besparelse:" />
       <Label fx:id="roomWindow" alignment="CENTER" layoutX="55.0" layoutY="128.0" prefHeight="147.0" prefWidth="134.0" textFill="#e0b54f" wrapText="true">
-         <font>
-            <Font size="17.0" />
-         </font></Label>
+          <font>
+              <Font size="17.0" />
+          </font></Label>
       <Label fx:id="roomBulb" layoutX="619.0" layoutY="154.0" prefHeight="48.0" prefWidth="63.0" textFill="#2e8a0c" wrapText="true" />
     </children>
 </AnchorPane>

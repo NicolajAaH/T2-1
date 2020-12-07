@@ -3,9 +3,9 @@ package Energy.domain;
 import java.util.Set;
 import java.util.HashMap;
 
-public class Room
+class Room
 {
-    // Attributes
+    // attributter
     private String description;
     private HashMap<String, Room> exits;
     private Inventory roomInv = new Inventory();
@@ -19,7 +19,7 @@ public class Room
         exits = new HashMap<String, Room>();
     }
 
-    // Methods
+    // Metoder
     public void setExit(String direction, Room neighbor) 
     {
         exits.put(direction, neighbor);
@@ -42,7 +42,7 @@ public class Room
         return roomInv;
     }
 
-    // String methods
+    // String metoder
     public String getLongDescription()
     {
         String returnString;
@@ -82,10 +82,6 @@ public class Room
 
     public String getName() {
         return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
     }
 }
 

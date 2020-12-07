@@ -8,11 +8,13 @@ import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 
 public class OutsideController extends Controller{
+    //fxml variable
     @FXML
     private Label insulation;
     @FXML
     private ImageView sunCatcher;
 
+    //initialize fra superklassen, og tjekker om solcellen skal være der.
     public void initialize(){
         super.initialize();
 
@@ -25,6 +27,7 @@ public class OutsideController extends Controller{
         }
         insulation.setText(getDomainI().getRoomInventory().getItem(1).getName());
 
+        //eventhandler for solcellen
         sunCatcher.setOnMouseClicked(new EventHandler<MouseEvent>() {
             @Override
             public void handle(MouseEvent mouseEvent) {
@@ -38,6 +41,7 @@ public class OutsideController extends Controller{
             }
         });
 
+        //eventhandler for isolering
         insulation.setOnMouseClicked(new EventHandler<MouseEvent>() {
             @Override
             public void handle(MouseEvent mouseEvent) {

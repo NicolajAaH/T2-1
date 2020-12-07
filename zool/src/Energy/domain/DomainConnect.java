@@ -12,55 +12,10 @@ public class DomainConnect implements DomainI {
         this.game = new Game();
     }
 
+    // Returnerer spillerens inventory
     @Override
     public Inventory getPlayerInventory() {
         return game.getPlayer().getInventory();
-    }
-
-    // Metorder der ruturnerer om currentroom har en udgang i en retning
-    @Override
-    public boolean hasNorthExit() {
-            Set<String> keys = game.getCurrentRoom().getExits().keySet();
-
-            for(String exit : keys) {
-                if (exit.equals("nord") ) return true;
-            }
-
-        return false;
-    }
-
-    @Override
-    public boolean hasSouthExit() {
-        Set<String> keys = game.getCurrentRoom().getExits().keySet();
-
-        for(String exit : keys) {
-            if (exit.equals("syd") ) return true;
-        }
-
-        return false;
-
-    }
-
-    @Override
-    public boolean hasEastExit() {
-        Set<String> keys = game.getCurrentRoom().getExits().keySet();
-
-        for(String exit : keys) {
-            if (exit.equals("øst") ) return true;
-        }
-
-        return false;
-    }
-
-    @Override
-    public boolean hasWestExit() {
-        Set<String> keys = game.getCurrentRoom().getExits().keySet();
-
-        for(String exit : keys) {
-            if (exit.equals("vest") ) return true;
-        }
-
-        return false;
     }
 
     // Returnerer navnet på current room
@@ -69,7 +24,14 @@ public class DomainConnect implements DomainI {
         return game.getCurrentRoom().getName();
     }
 
+    @Override
+    public boolean addMove() {
+        // hvis returner false = gå til næste år
+        game.getPlayer().addMove();
+        return game.getPlayer().getMoves() != game.getPlayer().getMovesPerRound();
+    }
     // Getters til statuslinie
+
     @Override
     public int getWallet() {
         return game.getPlayer().getWallet();
@@ -80,8 +42,57 @@ public class DomainConnect implements DomainI {
         return game.getPlayer().getScore();
     }
 
+    @Override
+    public int getMovesRemaing() {
+        return game.getPlayer().getMovesPerRound() - game.getPlayer().getMoves();
+    }
 
-    // Metoder til at skifte rum
+
+    // Metoder til tjek af udgange og skift af rum
+    @Override
+    public boolean hasNorthExit() {
+        Set<String> keys = game.getCurrentRoom().getExits().keySet();
+
+        for (String exit : keys) {
+            if (exit.equals("nord")) return true;
+        }
+
+        return false;
+    }
+
+    @Override
+    public boolean hasSouthExit() {
+        Set<String> keys = game.getCurrentRoom().getExits().keySet();
+
+        for (String exit : keys) {
+            if (exit.equals("syd")) return true;
+        }
+
+        return false;
+    }
+
+    @Override
+    public boolean hasEastExit() {
+        Set<String> keys = game.getCurrentRoom().getExits().keySet();
+
+        for (String exit : keys) {
+            if (exit.equals("øst")) return true;
+        }
+
+        return false;
+    }
+
+    @Override
+    public boolean hasWestExit() {
+        Set<String> keys = game.getCurrentRoom().getExits().keySet();
+
+        for (String exit : keys) {
+            if (exit.equals("vest")) return true;
+        }
+
+        return false;
+    }
+
     @Override
     public void goNorth() {
         game.setCurrentRoom(game.getCurrentRoom().getExit("nord"));
@@ -103,15 +114,15 @@ public class DomainConnect implements DomainI {
     }
 
 
-    // Metoder til butikken
+    // METODER TIL STORE
     @Override
     public Inventory getStoreInventory() {
         return game.store.getRoomInv();
     }
 
     @Override
-    // returnerer status om købet lykkedes eller fejlrapport til print på statuslabel i butik
     public String buyItem(int itemIndex) {
+        // returnerer status om købet lykkedes eller fejlrapport til print på statuslabel i butik
         CommandWords cvs = new CommandWords();
         CommandWord cv = cvs.getCommandWord("køb");
         Command cmd = new Command(cv,String.valueOf(itemIndex));
@@ -124,6 +135,7 @@ public class DomainConnect implements DomainI {
     }
 
     @Override
+    // METODER TIL AT REPLACE TING I RUM
     public String replaceStaticGUI(int indexRoom) {
         // METODE til at replace faste ting i baggrundsbilledet der skal have en label
 
@@ -158,63 +170,60 @@ public class DomainConnect implements DomainI {
         return returnName;
     }
 
+    public boolean canAffordMore() {
+        return game.canAffordMore();
+    }
 
     // METODER TIL SPIL FLOW
 
     // START SKÆRM
-    // returnerer velkomst tekst
     @Override
     public String welcomeText() {
         return game.welcomeText();
     }
 
-    public String setStartAmountGUI(String value){
+    public String setStartAmountGUI(String value) {
         return game.setStartAmountGUI(value);
     }
 
-    // RUNDE SKÆRM
-
+    // NY RUNDE SKÆRM
     @Override
     public String newRoundText() {
         String result;
-
-        result = "\nDu har nu afsluttet " + ((game.getPlayer().getRounds()) + 1)  + ". år\n";
+        result = "\nDu har nu afsluttet " + ((game.getPlayer().getRounds()) + 1) + ". år\n";
         result += game.endStatusText();
-
         return result;
     }
-
-    // starter ny runde, returnerer false hvis max runder er udført!
+    @Override
     public boolean newRound() {
+        // starter ny runde, returnerer false hvis max runder er udført!
+
         // tjekker om vi er nået max antal runder
-        if (game.getPlayer().getRounds() == (game.getPlayer().getMaxNumberOfRounds() -1 ) ) {
+        if (game.getPlayer().getRounds() == (game.getPlayer().getMaxNumberOfRounds() - 1)) {
             game.getPlayer().setRounds((game.getPlayer().getRounds()) + 1);
             return false;
         }
+
         // intialiser ny runde
         game.initNewRound();
         return true;
     }
 
+    // SLUT SKÆRM
+    @Override
     public String endGameText() {
-        String result ="";
+        String result = "";
 
-        // Tilføjer tekst hvis slutskærmen vises pga max antal år
+        // Tilføjer tekst, hvis slutskærmen vises pga max antal år
         if (game.getPlayer().getRounds() == game.getPlayer().getMaxNumberOfRounds()) {
-            result += " - Du har spillet max antal år - \n\n";
+            result += " - Du har spillet max antal år - \n";
             game.getPlayer().setRounds((game.getPlayer().getRounds()) - 1);
         }
-        result += "\n\n--- Tak for, at du spillede vores spil ---\n";
+        result += "\n--- Tak for, at du spillede vores spil ---\n";
         result += game.endStatusText();
-        result += "\n\nLavet af: Yusuf Bayoz, Victor Poulsen, Emil Spangenberg, Theis Langlands & Nicolaj Hansen";
+        result += "\n\nLavet af: Yusuf Baysoz, Victor Poulsen, Emil Spangenberg, Theis Langlands & Nicolaj Hansen";
 
         return result;
     }
 
-    @Override
-    // false = gå til næste år
-    public boolean addMove() {
-        game.getPlayer().addMove();
-        return game.getPlayer().getMoves() != game.getPlayer().getMovesPerRound();
-    }
 }

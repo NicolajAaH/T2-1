@@ -8,7 +8,7 @@ public interface DomainI {
     Inventory getPlayerInventory();
     String getCurrentRoom();
 
-    // Metorder der ruturnerer om currentroom har en udgang i en retning
+    // Metorder der returnerer om currentroom har en udgang i en retning
     boolean hasNorthExit();
     boolean hasSouthExit();
     boolean hasEastExit();
@@ -47,10 +47,14 @@ public interface DomainI {
     // Indsætter ting fra player index i room index og returnerer String med navn på indsat item
     public String replaceDynamicGUI(int indexRoom);
 
+    public boolean canAffordMore();
+
     public Inventory getRoomInventory();
 
     // metoder til butikken
     Inventory getStoreInventory();
     // Returnere streng med status på køb
     String buyItem(int ItemIndex);
+
+    int getMovesRemaing();
 }

@@ -31,7 +31,7 @@
         <ImageView fx:id="item2" fitHeight="48.0" fitWidth="48.0" layoutX="205.0" layoutY="538.0" pickOnBounds="true" preserveRatio="true" />
         <ImageView fx:id="item3" fitHeight="48.0" fitWidth="48.0" layoutX="260.0" layoutY="538.0" pickOnBounds="true" preserveRatio="true" />
         <ImageView fx:id="item4" fitHeight="48.0" fitWidth="48.0" layoutX="315.0" layoutY="538.0" pickOnBounds="true" preserveRatio="true" />
-
+        <Label fx:id="movesLeft" layoutX="593.0" layoutY="578.0" prefHeight="17.0" prefWidth="141.0" text="Træk tilbage:" />
         <ImageView fx:id="arrowDown" fitHeight="57.0" fitWidth="61.0" layoutX="400.0" layoutY="470.0" onMouseClicked="#goSouth" pickOnBounds="true" preserveRatio="true" />
         <ImageView fx:id="arrowUp" fitHeight="57.0" fitWidth="61.0" layoutX="400.0" layoutY="27.0" onMouseClicked="#goNorth" pickOnBounds="true" preserveRatio="true" />
         <ImageView fx:id="arrowLeft" fitHeight="57.0" fitWidth="61.0" layoutX="24.0" layoutY="300.0" onMouseClicked="#goWest" pickOnBounds="true" preserveRatio="true" />
@@ -40,8 +40,8 @@
         <Button fx:id="endGame" layoutX="495.0" layoutY="549.0" mnemonicParsing="false" text="Afslut spillet" />
         <Label fx:id="savings" layoutX="593.0" layoutY="564.0" prefHeight="17.0" prefWidth="141.0" text="Årlig besparelse:" />
       <ListView fx:id="storeList" layoutX="31.0" layoutY="70.0" prefHeight="457.0" prefWidth="375.0" />
-      <Button fx:id="buyButton" layoutX="593.0" layoutY="112.0" mnemonicParsing="false" text="Køb" />
-      <Label fx:id="textStore" layoutX="494.0" layoutY="357.0" prefHeight="160.0" prefWidth="206.0" textAlignment="CENTER" wrapText="true">
+      <Button fx:id="buyButton" layoutX="467.0" layoutY="287.0" mnemonicParsing="false" text="Køb" />
+      <Label fx:id="textStore" layoutX="498.0" layoutY="357.0" prefHeight="160.0" prefWidth="223.0" textAlignment="CENTER" wrapText="true">
          <font>
             <Font size="28.0" />
          </font></Label>

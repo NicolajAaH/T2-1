@@ -1,6 +1,6 @@
 package Energy.domain;
 
-public class Store extends Room {
+class Store extends Room {
 
     public Store(String description, String name) {
         super(description, name);

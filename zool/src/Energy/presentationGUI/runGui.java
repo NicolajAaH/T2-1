@@ -1,20 +1,17 @@
 package Energy.presentationGUI;
 
-import Energy.Interface.DomainI;
-import Energy.domain.DomainConnect;
-import Energy.domain.Game;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.layout.AnchorPane;
-import javafx.scene.layout.GridPane;
 import javafx.stage.Stage;
 
 public class runGui extends Application{
+        //FXMLLoader og stage gemmes i variable
         private static FXMLLoader fxmlLoader = new FXMLLoader();
         private static Stage stage;
 
+        //start metoden kører ved start af programmet, hvor start fxml filen loades og scenen sættes
         @Override
         public void start(Stage stage) throws Exception {
             this.stage = stage;
@@ -23,12 +20,12 @@ public class runGui extends Application{
             stage.setScene(new Scene(root));
             stage.show();
         }
-
+        //kører programmet
         public static void main(String[] args) {
 
             launch(args);
         }
-
+    //getters for fxmlloade rog stage
     public static FXMLLoader getFxmlLoader() {
         return fxmlLoader;
     }

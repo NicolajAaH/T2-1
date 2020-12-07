@@ -12,6 +12,7 @@ import java.io.IOException;
 
 public class NewRoundController extends Controller {
 
+    //fxml variable
     @FXML
     private Label textNewYear;
     @FXML
@@ -19,44 +20,46 @@ public class NewRoundController extends Controller {
     @FXML
     private Button newYear;
 
+    //køres når rummet loades
     public void initialize() {
         textNewYear.setText(getDomainI().newRoundText());
 
+        //eventhandler for knappen der skifter scene afhængigt af om man har nået max antal runder
         newYear.setOnAction(new EventHandler<ActionEvent>() {
-                                @Override
-                                public void handle(ActionEvent actionEvent) {
-                                    boolean status = getDomainI().newRound();
-                                    Parent newRoot = null;
-                                    if (status == true) {
-                                        try {
-                                            newRoot = runGui.getFxmlLoader().load(getClass().getResource("Outside.fxml"));
-                                        } catch (IOException e) {
-                                            e.printStackTrace();
-                                        }
-                                    }
-                                    else{
-                                        try {
-                                            newRoot = runGui.getFxmlLoader().load(getClass().getResource("Exit.fxml"));
-                                        } catch (IOException e) {
-                                            e.printStackTrace();
-                                        }
-                                    }
-                                    runGui.getStage().setScene(new Scene(newRoot));
-                                    runGui.getStage().show();
-                                }});
-
-                exitGame.setOnAction(new EventHandler<ActionEvent>() {
-                    @Override
-                    public void handle(ActionEvent actionEvent) {
-                        Parent newRoot = null;
-                        try {
-                            newRoot = runGui.getFxmlLoader().load(getClass().getResource("Exit.fxml"));
-                        } catch (IOException e) {
-                            e.printStackTrace();
-                        }
-                        runGui.getStage().setScene(new Scene(newRoot));
-                        runGui.getStage().show();
+            @Override
+            public void handle(ActionEvent actionEvent) {
+                boolean status = getDomainI().newRound();
+                Parent newRoot = null;
+                if (status == true) {
+                    try {
+                        newRoot = runGui.getFxmlLoader().load(getClass().getResource("Outside.fxml"));
+                    } catch (IOException e) {
+                        e.printStackTrace();
                     }
-                });
+                } else {
+                    try {
+                        newRoot = runGui.getFxmlLoader().load(getClass().getResource("Exit.fxml"));
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+                }
+                runGui.getStage().setScene(new Scene(newRoot));
+                runGui.getStage().show();
+            }
+        });
+        //eventhandler for knappen til at slutte spille, som loader exit skærmen
+        exitGame.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent actionEvent) {
+                Parent newRoot = null;
+                try {
+                    newRoot = runGui.getFxmlLoader().load(getClass().getResource("Exit.fxml"));
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+                runGui.getStage().setScene(new Scene(newRoot));
+                runGui.getStage().show();
+            }
+        });
     }
 }

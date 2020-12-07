@@ -2,11 +2,12 @@ package Energy.domain;
 
 import java.util.Scanner;
 
-public class Parser 
+class Parser
 {
     private CommandWords commands;
     private Scanner reader;
 
+    //constructor
     public Parser() 
     {
         commands = new CommandWords();
@@ -33,7 +34,7 @@ public class Parser
 
         return new Command(commands.getCommandWord(word1), word2);
     }
-
+    //viser alle kommandoer
     public void showCommands()
     {
         commands.showAll();

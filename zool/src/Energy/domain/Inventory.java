@@ -6,15 +6,7 @@ public class Inventory {
     private int maxSize;
     private ArrayList<Item> items = new ArrayList<>();
 
-    // Constructors
-    public Inventory(){
-    }
-
-    public Inventory(int maxSize) {
-        this.maxSize = maxSize;
-    }
-
-    // Methods
+    // METODER
     public void addItem(Item item) {
             items.add(item);
     }
@@ -39,7 +31,6 @@ public class Inventory {
             result += (i+1) + ". " + items.get(i).toString() + "\n";
         }
 
-        //System.out.println(result);
         return result;
     }
 
@@ -64,7 +55,7 @@ public class Inventory {
     }
 
     public int cheapestItem() {
-        // checker oom inventory er tomt
+        // checker om inventory er tomt
         if (this.items.size() == 0) {
             return 0;
         }

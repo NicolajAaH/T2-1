@@ -2,13 +2,12 @@ package Energy.domain;
 
 public class Item {
 
-    // attributes:
+    // attributter:
     private String name;
     private int price;
     private int scoreImpact;
     private int itemType;
     private String energyLabel = null;
-    // fridge, window etc:
 
     // constructor
     public Item(String name, int price, int scoreImpact, int itemType, String energyLabel) {

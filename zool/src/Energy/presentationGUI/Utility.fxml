@@ -30,7 +30,7 @@
         <ImageView fx:id="item2" fitHeight="48.0" fitWidth="48.0" layoutX="205.0" layoutY="538.0" pickOnBounds="true" preserveRatio="true" />
         <ImageView fx:id="item3" fitHeight="48.0" fitWidth="48.0" layoutX="260.0" layoutY="538.0" pickOnBounds="true" preserveRatio="true" />
         <ImageView fx:id="item4" fitHeight="48.0" fitWidth="48.0" layoutX="315.0" layoutY="538.0" pickOnBounds="true" preserveRatio="true" />
-
+        <Label fx:id="movesLeft" layoutX="593.0" layoutY="578.0" prefHeight="17.0" prefWidth="141.0" text="Træk tilbage:" />
         <ImageView fx:id="arrowDown" fitHeight="57.0" fitWidth="61.0" layoutX="400.0" layoutY="470.0" onMouseClicked="#goSouth" pickOnBounds="true" preserveRatio="true" />
         <ImageView fx:id="arrowUp" fitHeight="57.0" fitWidth="61.0" layoutX="400.0" layoutY="27.0" onMouseClicked="#goNorth" pickOnBounds="true" preserveRatio="true" />
         <ImageView fx:id="arrowLeft" fitHeight="57.0" fitWidth="61.0" layoutX="24.0" layoutY="300.0" onMouseClicked="#goWest" pickOnBounds="true" preserveRatio="true" />
@@ -41,11 +41,11 @@
       <ImageView fx:id="heatingSystem" fitHeight="332.0" fitWidth="236.0" layoutX="48.0" layoutY="176.0" pickOnBounds="true" preserveRatio="true" />
       <Label fx:id="tumbleDryerLabel" alignment="BOTTOM_CENTER" layoutX="368.0" layoutY="212.0" prefHeight="271.0" prefWidth="186.0" textFill="#06ab06">
          <font>
-            <Font size="76.0" />
+            <Font size="60.0" />
          </font></Label>
       <Label fx:id="washingMachineLabel" alignment="BOTTOM_CENTER" layoutX="610.0" layoutY="205.0" prefHeight="258.0" prefWidth="175.0" textFill="#06ab06">
          <font>
-            <Font size="76.0" />
+            <Font size="60.0" />
          </font></Label>
     </children>
 </AnchorPane>

@@ -1,6 +1,6 @@
 package Energy.domain;
 
-public class EnergyLabel {
+class EnergyLabel {
     private static final int A = 0;
     private static final int B = 11000;
     private static final int C = 14000;
@@ -9,24 +9,26 @@ public class EnergyLabel {
     private static final int F = 36000;
     private static final int G = 46000;
 
+    // returnere en streng med energimærke baseret ens aktuelle forbrug
+    // start = start forbrug, score = opnået besparelse
     public static String createEnergyLabel(int score, int start) {
         int mark = start - score;
-        if(mark<B){
+        if (mark < B) {
             return "A";
         }
-        if(mark<C){
+        if (mark < C) {
             return "B";
         }
-        if(mark<D){
+        if (mark < D) {
             return "C";
         }
-        if(mark<E){
+        if (mark < E) {
             return "D";
         }
-        if(mark<F){
+        if (mark < F) {
             return "E";
         }
-        if(mark<G){
+        if (mark < G) {
             return "F";
         }
         return "G";
