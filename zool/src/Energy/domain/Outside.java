@@ -7,7 +7,7 @@ class Outside extends Room {
         super(description, name);
     }
 
-    // Methods
+    // Metoder
     @Override
     public String getInvDescriptionString() {
         return "Dit hus har:\n";

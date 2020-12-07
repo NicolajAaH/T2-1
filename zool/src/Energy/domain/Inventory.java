@@ -39,7 +39,6 @@ public class Inventory {
             result += (i+1) + ". " + items.get(i).toString() + "\n";
         }
 
-        //System.out.println(result);
         return result;
     }
 

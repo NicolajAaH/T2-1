@@ -5,7 +5,7 @@ import java.util.HashMap;
 
 class Room
 {
-    // Attributes
+    // attributter
     private String description;
     private HashMap<String, Room> exits;
     private Inventory roomInv = new Inventory();
@@ -19,7 +19,7 @@ class Room
         exits = new HashMap<String, Room>();
     }
 
-    // Methods
+    // Metoder
     public void setExit(String direction, Room neighbor) 
     {
         exits.put(direction, neighbor);
@@ -42,7 +42,7 @@ class Room
         return roomInv;
     }
 
-    // String methods
+    // String metoder
     public String getLongDescription()
     {
         String returnString;

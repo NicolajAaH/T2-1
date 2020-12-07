@@ -2,7 +2,7 @@ package Energy.domain;
 
 class Player {
 
-    // Attributes
+    // Attributter
     private int wallet = 0;
     private int startAmount = 0; // årligt renoverings budget - start Wallet
     private int totalUsedAmount = 0;
