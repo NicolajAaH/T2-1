@@ -45,5 +45,6 @@
           </font>
       </Label>
       <ImageView fx:id="wallKidsroom" fitHeight="150.0" fitWidth="200.0" layoutX="564.0" layoutY="153.0" pickOnBounds="true" preserveRatio="true" />
+      <Label fx:id="movesLeft" layoutX="593.0" layoutY="578.0" prefHeight="17.0" prefWidth="141.0" text="Træk tilbage:" />
     </children>
 </AnchorPane>
