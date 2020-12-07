@@ -6,7 +6,7 @@ import javafx.scene.control.Label;
 import javafx.scene.input.MouseEvent;
 
 public class BathroomController extends Controller{
-    //forbinde variable med FXML
+    //forbinder variable med FXML
     @FXML
     private Label shower;
 

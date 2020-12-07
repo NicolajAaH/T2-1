@@ -40,9 +40,9 @@
         <Label fx:id="savings" layoutX="593.0" layoutY="564.0" prefHeight="17.0" prefWidth="141.0" text="Årlig besparelse:" />
       <Label fx:id="bulbKids" alignment="CENTER" layoutX="108.0" layoutY="136.0" prefHeight="65.0" prefWidth="71.0" textFill="#2e8a0c" wrapText="true" />
       <Label fx:id="windowKids" layoutX="333.0" layoutY="160.0" prefHeight="136.0" prefWidth="133.0" textFill="#e0b54f">
-         <font>
-            <Font size="15.0" />
-         </font>
+          <font>
+              <Font size="17.0" />
+          </font>
       </Label>
       <ImageView fx:id="wallKidsroom" fitHeight="150.0" fitWidth="200.0" layoutX="564.0" layoutY="153.0" pickOnBounds="true" preserveRatio="true" />
     </children>
