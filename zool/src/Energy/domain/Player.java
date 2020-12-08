@@ -17,7 +17,7 @@ class Player {
     private int moves = 0; // holder styr på antal skift imellem rum
     final private int movesPerRound = 40;
 
-    private Inventory inventory = new Inventory(5);
+    private Inventory inventory = new Inventory();
 
     // GETTERS & SETTERS
     public int getWallet() {
