@@ -7,7 +7,7 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 
-public class KidsRoomController extends Controller{
+public class KidsRoomController extends Controller {
     //fxml variable
     @FXML
     private Label bulbKids;
@@ -17,16 +17,15 @@ public class KidsRoomController extends Controller{
     private ImageView wallKidsroom;
 
     //initialize som køres hver gang, som kalder supers initialize, og sætter teksten på nogle af items i rummet
-    public void initialize(){
+    public void initialize() {
         super.initialize();
         //sætter teksten på item afhængig af hvilken type/energimærke det er
         bulbKids.setText(getDomainI().getRoomInventory().getItem(0).getName());
         windowKids.setText(getDomainI().getRoomInventory().getItem(1).getName());
         //finder ud af om hullet i væggen skal skjules
-        if(getDomainI().getRoomInventory().getItem(2).getName().equals("Hul i væggen")){
+        if (getDomainI().getRoomInventory().getItem(2).getName().equals("Hul i væggen")) {
             wallKidsroom.setImage(new Image("/Images/hole_in_wall.png"));
-        }
-        else{
+        } else {
             wallKidsroom.setImage(null);
             wallKidsroom.setVisible(false);
         }

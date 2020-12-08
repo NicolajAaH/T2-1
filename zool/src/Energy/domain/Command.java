@@ -1,17 +1,18 @@
 package Energy.domain;
 
 class Command {
+    // ATTRIBUTTER
     private CommandWord commandWord;
     private String secondWord;
-    //setter
-    public Command(CommandWord commandWord, String secondWord)
-    {
+
+    // CONSTRUCTOR
+    public Command(CommandWord commandWord, String secondWord) {
         this.commandWord = commandWord;
         this.secondWord = secondWord;
     }
-    //getters
-    public CommandWord getCommandWord()
-    {
+
+    // GETTERS
+    public CommandWord getCommandWord() {
         return commandWord;
     }
 
@@ -19,6 +20,7 @@ class Command {
         return secondWord;
     }
 
+    // METODER
     public boolean isUnknown() {
         return (commandWord == CommandWord.UNKNOWN);
     }

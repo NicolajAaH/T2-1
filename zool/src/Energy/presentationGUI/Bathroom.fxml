@@ -30,8 +30,7 @@
         <ImageView fx:id="item2" fitHeight="48.0" fitWidth="48.0" layoutX="205.0" layoutY="538.0" pickOnBounds="true" preserveRatio="true" />
         <ImageView fx:id="item3" fitHeight="48.0" fitWidth="48.0" layoutX="260.0" layoutY="538.0" pickOnBounds="true" preserveRatio="true" />
         <ImageView fx:id="item4" fitHeight="48.0" fitWidth="48.0" layoutX="315.0" layoutY="538.0" pickOnBounds="true" preserveRatio="true" />
-        <Label fx:id="movesLeft" layoutX="593.0" layoutY="578.0" prefHeight="17.0" prefWidth="141.0" text="Træk tilbage:" />
-        <ImageView fx:id="arrowDown" fitHeight="57.0" fitWidth="61.0" layoutX="400.0" layoutY="470.0" onMouseClicked="#goSouth" pickOnBounds="true" preserveRatio="true" />
+        <Label fx:id="movesLeft" layoutX="593.0" layoutY="578.0" prefHeight="17.0" prefWidth="183.0" text="Træk tilbage:" />        <ImageView fx:id="arrowDown" fitHeight="57.0" fitWidth="61.0" layoutX="400.0" layoutY="470.0" onMouseClicked="#goSouth" pickOnBounds="true" preserveRatio="true" />
         <ImageView fx:id="arrowUp" fitHeight="57.0" fitWidth="61.0" layoutX="400.0" layoutY="27.0" onMouseClicked="#goNorth" pickOnBounds="true" preserveRatio="true" />
         <ImageView fx:id="arrowLeft" fitHeight="57.0" fitWidth="61.0" layoutX="24.0" layoutY="300.0" onMouseClicked="#goWest" pickOnBounds="true" preserveRatio="true" />
         <ImageView fx:id="arrowRight" fitHeight="57.0" fitWidth="61.0" layoutX="725.0" layoutY="300.0" onMouseClicked="#goEast" pickOnBounds="true" preserveRatio="true" />

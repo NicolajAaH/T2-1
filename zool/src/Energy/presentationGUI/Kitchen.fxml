@@ -25,7 +25,7 @@
             <Font size="16.0" />
          </font>
       </Label>
-      <Label fx:id="movesLeft" layoutX="593.0" layoutY="578.0" prefHeight="17.0" prefWidth="141.0" text="Træk tilbage:" />
+      <Label fx:id="movesLeft" layoutX="593.0" layoutY="578.0" prefHeight="17.0" prefWidth="183.0" text="Træk tilbage:" />
       <ImageView fx:id="item0" fitHeight="48.0" fitWidth="48.0" layoutX="95.0" layoutY="538.0" pickOnBounds="true" preserveRatio="true" />
       <ImageView fx:id="item1" fitHeight="48.0" fitWidth="48.0" layoutX="150.0" layoutY="538.0" pickOnBounds="true" preserveRatio="true" />
       <ImageView fx:id="item2" fitHeight="48.0" fitWidth="48.0" layoutX="205.0" layoutY="538.0" pickOnBounds="true" preserveRatio="true" />

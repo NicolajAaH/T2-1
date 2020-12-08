@@ -6,55 +6,66 @@ public interface DomainI {
 
     // Metoder til parent Controller
     Inventory getPlayerInventory();
+
     String getCurrentRoom();
 
-    // Metorder der returnerer om currentroom har en udgang i en retning
-    boolean hasNorthExit();
-    boolean hasSouthExit();
-    boolean hasEastExit();
-    boolean hasWestExit();
-    // skal det måske bare være en metode der returnerer en Exit array, med mulige exits?
 
-    // Getters til statuslinie
-    int getWallet();
-    int getScore();
+    // Metoder der returnerer om currentroom har en udgang i en retning
+    boolean hasNorthExit();
+
+    boolean hasSouthExit();
+
+    boolean hasEastExit();
+
+    boolean hasWestExit();
+
 
     // Metoder til at skifte rum
     void goNorth();
+
     void goSouth();
+
     void goEast();
+
     void goWest();
 
-    public boolean addMove();
+    boolean addMove();
 
-    // INFOSKÆRME (START; NYRUNDE; EXIT;)
 
-    // STARTSKÆRM
-    // konverter string til int og sættter startbeløb, returnerer string ved fejl-meddelelse, null hvis ingen fejl
-    public String setStartAmountGUI(String value);
-    public String welcomeText();
+    // Statuslinie
+    int getWallet();
 
-    // NY RUNDE SKÆRM
-    String newRoundText();
-    boolean newRound(); // returnerer false ved max antal runder!
-
-    // void exitGame();
-    String endGameText();
-
-    // metoder til rum / udenfor
-    // Indsætter ting fra player index i room index og returnerer String med Energimærke
-    public String replaceStaticGUI(int indexRoom);
-    // Indsætter ting fra player index i room index og returnerer String med navn på indsat item
-    public String replaceDynamicGUI(int indexRoom);
-
-    public boolean canAffordMore();
-
-    public Inventory getRoomInventory();
-
-    // metoder til butikken
-    Inventory getStoreInventory();
-    // Returnere streng med status på køb
-    String buyItem(int ItemIndex);
+    int getScore();
 
     int getMovesRemaing();
+
+
+    // metoder til rum / udenfor
+    String replaceStaticGUI(int indexRoom);     // Indsætter Items fra player inventory i room inventory:  returnerer Energimærke
+
+    String replaceDynamicGUI(int indexRoom); // Indsætter Items fra player inventory i room inventory:  returnerer navn på indsat Item
+
+    boolean canAffordMore(); // checker om der er råd til den billigste ting i butikken
+
+    Inventory getRoomInventory(); // Returnerer rummets Inventory
+
+    // metoder til butikken
+    Inventory getStoreInventory();  // Returnerer butikkens Inventory
+
+    String buyItem(int ItemIndex);     // Returnere streng med status på køb
+
+
+    // INFOSKÆRME
+    // start
+    String setStartAmountGUI(String value); // ved fejl: Returnere meddelelse, ingen fejl: null
+
+    String welcomeText();
+
+    // ny runde
+    String newRoundText();
+
+    boolean newRound(); // returnerer false ved max antal runder!
+
+    // exit
+    String endGameText();
 }

@@ -7,7 +7,7 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 
-public class OutsideController extends Controller{
+public class OutsideController extends Controller {
     //fxml variable
     @FXML
     private Label insulation;
@@ -15,13 +15,12 @@ public class OutsideController extends Controller{
     private ImageView sunCatcher;
 
     //initialize fra superklassen, og tjekker om solcellen skal være der.
-    public void initialize(){
+    public void initialize() {
         super.initialize();
 
-        if(getDomainI().getRoomInventory().getItem(0).getName().equals("Tag uden solceller")){
+        if (getDomainI().getRoomInventory().getItem(0).getName().equals("Tag uden solceller")) {
             sunCatcher.setImage(null);
-        }
-        else{
+        } else {
             sunCatcher.setImage(new Image("/Images/solar_panels_addToBackground.png"));
             sunCatcher.setVisible(true);
         }

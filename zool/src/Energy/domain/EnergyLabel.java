@@ -1,6 +1,8 @@
 package Energy.domain;
 
 class EnergyLabel {
+    // ATTRIBUTTER
+    // intervaller for aktuelle energimærker nov 2020 baseret på 160m2 parcelhus med oliefyr
     private static final int A = 0;
     private static final int B = 11000;
     private static final int C = 14000;
@@ -9,7 +11,8 @@ class EnergyLabel {
     private static final int F = 36000;
     private static final int G = 46000;
 
-    // returnere en streng med energimærke baseret ens aktuelle forbrug
+    // METODER
+    // returnerer en streng med energimærke baseret på det aktuelle forbrug
     // start = start forbrug, score = opnået besparelse
     public static String createEnergyLabel(int score, int start) {
         int mark = start - score;

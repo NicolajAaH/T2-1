@@ -8,7 +8,7 @@ import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 
 
-public class BedroomController extends Controller{
+public class BedroomController extends Controller {
     @FXML
     private Label bulbBedroom;
     @FXML
@@ -17,15 +17,14 @@ public class BedroomController extends Controller{
     private ImageView holeWallBedroom;
 
     //initialize køres i starten. Der kaldes controllers initialize. Hullet skal enten skjules eller vises.
-    public void initialize(){
+    public void initialize() {
         super.initialize();
         bulbBedroom.setText(getDomainI().getRoomInventory().getItem(0).getName());
         windowBedroom.setText(getDomainI().getRoomInventory().getItem(1).getName());
 
-        if(getDomainI().getRoomInventory().getItem(2).getName().equals("Hul i væggen")){
+        if (getDomainI().getRoomInventory().getItem(2).getName().equals("Hul i væggen")) {
             holeWallBedroom.setImage(new Image("/Images/hole_in_wall.png"));
-        }
-        else{
+        } else {
             holeWallBedroom.setImage(null);
             holeWallBedroom.setVisible(false);
         }

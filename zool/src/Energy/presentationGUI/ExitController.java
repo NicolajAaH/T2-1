@@ -6,7 +6,7 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 
-public class ExitController extends Controller{
+public class ExitController extends Controller {
     //fxml variable
     @FXML
     private Button endProgram;
@@ -14,7 +14,7 @@ public class ExitController extends Controller{
     private Label exitLabel;
 
     //initialize hvor der sættes teksten til labels og en eventhandler der afslutter spillet
-    public void initialize(){
+    public void initialize() {
         exitLabel.setText(getDomainI().endGameText());
 
         endProgram.setOnAction(new EventHandler<ActionEvent>() {
