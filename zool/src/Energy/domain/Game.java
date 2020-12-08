@@ -34,7 +34,7 @@ class Game {
         player.getInventory().setMaxSize(5);
     }
 
-    // GETTERS & SETTER METHODS
+    // GETTERS & SETTER 
     public Room getCurrentRoom() {
         return currentRoom;
     }
@@ -47,7 +47,7 @@ class Game {
         return player;
     }
 
-    // METHODS
+    // Metoder
     private void createRooms() {
 
         // Opretter rum og beskrivelser

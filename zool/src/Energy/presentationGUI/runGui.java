@@ -18,6 +18,7 @@ public class runGui extends Application{
             Parent root = fxmlLoader.load(getClass().getResource("Start.fxml"));
             stage.setTitle("Energi Optimering");
             stage.setScene(new Scene(root));
+            stage.setResizable(false);
             stage.show();
         }
         //kører programmet
