@@ -406,10 +406,9 @@ class Game {
         insertItem(roomInvIndex, playerInvIndex);
 
         // Udskriver inventory fra player og Room
-        System.out.println("Du har nu: ");
-        System.out.println(player.getInventory().printInventory());
+        printInventory();
         System.out.println("Rummet indeholder: ");
-        System.out.println(currentRoom.getRoomInv().printInventory());
+        System.out.println(currentRoom.getRoomInv());
         System.out.println("Du har nu opnået en årlig besparelse på: " + player.getScore());
 
         // Tjekker om spiller har råd til at købe flere item - ellers gåes videre til næste runde!
@@ -539,7 +538,7 @@ class Game {
 
         // printer ny inventory
         System.out.println("Nyt inventar:");
-        player.getInventory().printInventory();
+        System.out.println(player.getInventory());
     }
 
     private void printInventory() {
@@ -547,7 +546,7 @@ class Game {
             System.out.println("Du har ikke nogle ting, tag en tur i Superbyg");
         } else {
             System.out.print("Du har: \n");
-            System.out.println(player.getInventory().printInventory());
+            System.out.println(player.getInventory());
         }
     }
 
