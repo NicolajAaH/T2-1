@@ -8,18 +8,17 @@ import javafx.stage.Stage;
 
 public class runGui extends Application {
 
+    //FXMLLoader og stage gemmes i variable
+    private static FXMLLoader fxmlLoader = new FXMLLoader();
+    private static Stage stage;
+
     //getters for fxmlloader og stage
     public static FXMLLoader getFxmlLoader() {
         return fxmlLoader;
     }
-
     public static Stage getStage() {
         return stage;
     }
-
-    //FXMLLoader og stage gemmes i variable
-    private static FXMLLoader fxmlLoader = new FXMLLoader();
-    private static Stage stage;
 
     //start metoden kører ved start af programmet, hvor start fxml filen loades og scenen sættes
     @Override
