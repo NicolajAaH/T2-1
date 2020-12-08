@@ -3,52 +3,19 @@ package Energy.domain;
 import java.util.ArrayList;
 
 public class Inventory {
+    // ATTRIBUTTER
     private int maxSize;
     private ArrayList<Item> items = new ArrayList<>();
+
+    // CONSTRUCTORS
+    public Inventory() {
+    }
 
     public Inventory(int maxSize) {
         this.maxSize = maxSize;
     }
 
-    public Inventory() {
-    }
-
-    // METODER
-    public void addItem(Item item) {
-            items.add(item);
-    }
-
-    public void removeItem(Item item) {
-        items.remove(item);
-    }
-
-    public void removeItem(int index) {
-        items.remove(index);
-    }
-
-    public void replaceItem(int replaceIndex, Item withItem) {
-        items.set(replaceIndex, withItem);
-    }
-
-    public String printInventory() {
-
-        String result = "";
-
-        for (int i = 0; i < items.size(); i++) {
-            result += (i+1) + ". " + items.get(i).toString() + "\n";
-        }
-
-        return result;
-    }
-
-    public boolean isEmpty(){
-    return items.size() == 0;
-    }
-
-    public int getSize() {
-        return items.size();
-    }
-
+    // GETTERS & SETTERS
     public int getMaxSize() {
         return maxSize;
     }
@@ -57,11 +24,31 @@ public class Inventory {
         this.maxSize = maxSize;
     }
 
+    public ArrayList<Item> getItems() {
+        return items;
+    }
+
+    // METODER
+    // - metoder til håndtering af Items
     public Item getItem(int i) {
         return items.get(i);
     }
 
+    public void addItem(Item item) {
+        items.add(item);
+    }
+
+    public void removeItem(Item item) {
+        items.remove(item);
+    }
+
+    public void replaceItem(int replaceIndex, Item withItem) {
+        items.set(replaceIndex, withItem);
+    }
+
     public int cheapestItem() {
+        // Returnerer prisen på billigste Item i inventory
+
         // checker om inventory er tomt
         if (this.items.size() == 0) {
             return 0;
@@ -76,9 +63,26 @@ public class Inventory {
         }
 
         return min;
-    } // Returnerer billigste Item i inventory
+    }
 
-    public ArrayList<Item> getItems() {
-        return items;
+    // - metoder relateret til størrelsen af inventory
+    public boolean isEmpty() {
+        return items.size() == 0;
+    }
+
+    public int getSize() {
+        return items.size();
+    }
+
+    // - metode til udskrift af inventory (kunne også være toString())
+    public String printInventory() {
+
+        String result = "";
+
+        for (int i = 0; i < items.size(); i++) {
+            result += (i + 1) + ". " + items.get(i).toString() + "\n";
+        }
+
+        return result;
     }
 }
