@@ -6,6 +6,13 @@ public class Inventory {
     private int maxSize;
     private ArrayList<Item> items = new ArrayList<>();
 
+    public Inventory(int maxSize) {
+        this.maxSize = maxSize;
+    }
+
+    public Inventory() {
+    }
+
     // METODER
     public void addItem(Item item) {
             items.add(item);

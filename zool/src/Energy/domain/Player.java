@@ -3,37 +3,23 @@ package Energy.domain;
 class Player {
 
     // Attributter
-    private int wallet = 0;
-    private int startAmount = 0; // årligt renoverings budget - start Wallet
-    private int totalUsedAmount = 0;
+    private int wallet = 0; // aktuel saldo
+    private int startAmount = 0; // årligt renoverings budget - start saldo
+    private int totalUsedAmount = 0; // summeret forbrug
     final private int startValue = 29000; // start forbrug (til Energimærkeberegning)
 
-    private int score = 0;
-    private Inventory inventory = new Inventory();
+    private int round = 0; // holder styr på runder (år)
+    final private int maxNumberOfRounds = 5;
 
-    // holder styr på skift imellem rum
-    private int moves = 0;
+    private int score = 0; // samlet energibesparelse
+    private int[] roundScore = new int[maxNumberOfRounds]; // score i de individuelle år
+
+    private int moves = 0; // holder styr på antal skift imellem rum
     final private int movesPerRound = 40;
 
-    // holder styr på runder (år)
-    private int round = 0;
-    final private int maxNumberOfRounds = 5;
-    private int[] roundScore = new int[maxNumberOfRounds];
+    private Inventory inventory = new Inventory(5);
 
-    // Metoder
-    public void saveRoundScore() {
-        roundScore[round] = score;
-    }
-
-    public void addAmountToTotal(int amount){
-        totalUsedAmount += amount;
-    }
-
-    // Getters & setteres
-    public int getRoundScore(int roundNr) {
-        return roundScore[roundNr];
-    }
-
+    // GETTERS & SETTERS
     public int getWallet() {
         return wallet;
     }
@@ -42,28 +28,20 @@ class Player {
         this.wallet = wallet;
     }
 
-    public int getTotalUsedAmount() {
-        return totalUsedAmount;
-    }
-
-    public int getStartValue() {
-        return startValue;
-    }
-
-    public int getScore(){
-        return score;
-    }
-
-    public void setScore(int score) {
-        this.score = score;
-    }
-
     public int getStartAmount() {
         return startAmount;
     }
 
     public void setStartAmount(int startAmount) {
         this.startAmount = startAmount;
+    }
+
+    public int getTotalUsedAmount() {
+        return totalUsedAmount;
+    }
+
+    public int getStartValue() {
+        return startValue;
     }
 
     public int getRounds() {
@@ -78,12 +56,16 @@ class Player {
         return maxNumberOfRounds;
     }
 
-    public Inventory getInventory() {
-        return inventory;
+    public int getScore() {
+        return score;
     }
 
-    public void addMove() {
-        moves++;
+    public void setScore(int score) {
+        this.score = score;
+    }
+
+    public int getRoundScore(int roundNr) {
+        return roundScore[roundNr];
     }
 
     public int getMoves() {
@@ -96,6 +78,23 @@ class Player {
 
     public int getMovesPerRound() {
         return movesPerRound;
+    }
+
+    public Inventory getInventory() {
+        return inventory;
+    }
+
+    // METODER
+    public void addMove() {
+        moves++;
+    }
+
+    public void saveRoundScore() {
+        roundScore[round] = score;
+    }
+
+    public void addAmountToTotal(int amount) {
+        totalUsedAmount += amount;
     }
 }
 
