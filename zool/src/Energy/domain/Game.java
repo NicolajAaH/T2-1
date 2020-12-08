@@ -559,12 +559,15 @@ class Game {
             System.out.println("Du har spillet max antal år\n");
             return true; // spillet er slut - sætter want to quit til True
         }
+        
+        // opdaterer runde sore
+        player.saveRoundScore();
+
 
         // Udskriver status
         System.out.println(endStatusText());
-
+        // opretter ny runde!
         initNewRound();
-
         // Udskriver velkommen til nyt år
         System.out.println("\n --- Velkommen til år " + (player.getRounds() + 1) + " ---");
         System.out.println("Dit nye årsbudget er " + player.getWallet());
@@ -575,7 +578,7 @@ class Game {
 
     void initNewRound() {
         // gemmer score og opdatere runde count
-        player.saveRoundScore();
+
         player.setRounds(player.getRounds() + 1);
 
         // intialiserer nyt år
