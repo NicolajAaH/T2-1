@@ -5,7 +5,7 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.input.MouseEvent;
 
-public class LivingRoomController extends Controller{
+public class LivingRoomController extends Controller {
     //fxml variable
     @FXML
     Label tvLabel;
@@ -15,7 +15,7 @@ public class LivingRoomController extends Controller{
     Label lightLiving;
 
     //initialize fra superklassen, og opdaterer labels på tingene når man kommer ind i rummet.
-    public void initialize(){
+    public void initialize() {
         super.initialize();
         lightLiving.setText(getDomainI().getRoomInventory().getItem(1).getName());
         windowLabelLiving.setText(getDomainI().getRoomInventory().getItem(0).getName());
@@ -50,11 +50,12 @@ public class LivingRoomController extends Controller{
             @Override
             public void handle(MouseEvent mouseEvent) {
                 String energyLabel = getDomainI().replaceStaticGUI(2);
-                if(energyLabel != null){
+                if (energyLabel != null) {
                     tvLabel.setText(energyLabel);
                     updateInventory();
                     updateStatus();
-                }}
+                }
+            }
         });
     }
 }

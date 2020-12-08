@@ -34,7 +34,7 @@ class Game {
         player.getInventory().setMaxSize(5);
     }
 
-    // GETTERS & SETTER 
+    // GETTERS & SETTER
     public Room getCurrentRoom() {
         return currentRoom;
     }

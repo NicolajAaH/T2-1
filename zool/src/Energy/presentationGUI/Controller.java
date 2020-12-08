@@ -15,23 +15,14 @@ import javafx.scene.image.ImageView;
 import java.io.IOException;
 
 public class Controller {
-    //variable
-    public final int WASHINGMACHINE = 1;
-    public final int DRYER = 2;
-    public final int HEATING = 3;
-    public final int STOVE = 4;
-    public final int FRIDGE = 5;
-    public final int DISHWASHER = 6;
-    public final int WINDOW = 7;
-    public final int LIGHTS = 8;
-    public final int TV = 9;
-    public final int WALLFIXER = 10;
-    public final int ISOLATION = 11;
-    public final int SOLARCELLS = 12;
-    public final int BATH = 13;
 
     //vores 'spil' og vores bindeled mellem domain og interface
     private static DomainI domainI = new DomainConnect();
+
+    //getter til domainI
+    public DomainI getDomainI() {
+        return domainI;
+    }
 
     //Variablene fra FXML filerne
     @FXML
@@ -63,8 +54,8 @@ public class Controller {
     @FXML
     private Label movesLeft;
 
-    //køres når der skiftes fxml.Eventhandlers til at afslutte spillet, som loader en anden FXML fil.
-    public void initialize(){
+    //køres når der skiftes fxml. Eventhandlers til at afslutte spillet, som loader en anden FXML fil.
+    public void initialize() {
         showExits();
         updateInventory();
         updateStatus();
@@ -96,6 +87,7 @@ public class Controller {
             }
         });
     }
+
     //metode til at finde det rigtige icon ved items i inventory.
     public Image findImage(String itemName) {
         if (itemName.equals("Opvaskemaskine A")) {
@@ -169,6 +161,7 @@ public class Controller {
         }
         return null;
     }
+
     //opdaterer alle pladsene i inventory. Den tjekker først om der er noget i inventory.
     public void updateInventory() {
         if (domainI.getPlayerInventory().getSize() > 0 && domainI.getPlayerInventory().getItem(0) != null) {
@@ -201,54 +194,46 @@ public class Controller {
             item4.setImage(null);
         }
     }
+
     //opdaterer penge tilbage og årlig besparelse på skærmen
-    public void updateStatus(){
+    public void updateStatus() {
         wallet.setText("Penge tilbage: " + getDomainI().getWallet());
         savings.setText("Årlig besparelse: " + getDomainI().getScore());
         movesLeft.setText("Bevægelser tilbage: " + domainI.getMovesRemaing());
         AffordMore();
     }
 
-    //getter til domainI
-    public DomainI getDomainI() {
-        return domainI;
-    }
-
     //giver pilene forskellige billeder, og skjuler eller viser dem i hvert rum, afhængig af om der er udveje.
-    public void showExits(){
+    public void showExits() {
         arrowUp.setImage(new Image("/Images/north_arrow.png"));
         arrowDown.setImage(new Image("/Images/south_arrow.png"));
         arrowLeft.setImage(new Image("/Images/west_arrow.png"));
         arrowRight.setImage(new Image("/Images/east_arrow.png"));
-        if(domainI.hasEastExit()){
+        if (domainI.hasEastExit()) {
             arrowRight.setVisible(true);
-        }
-        else{
+        } else {
             arrowRight.setVisible(false);
         }
-        if(domainI.hasNorthExit()){
+        if (domainI.hasNorthExit()) {
             arrowUp.setVisible(true);
-        }
-        else{
+        } else {
             arrowUp.setVisible(false);
         }
-        if(domainI.hasSouthExit()){
+        if (domainI.hasSouthExit()) {
             arrowDown.setVisible(true);
-        }
-        else{
+        } else {
             arrowDown.setVisible(false);
         }
-        if(domainI.hasWestExit()){
+        if (domainI.hasWestExit()) {
             arrowLeft.setVisible(true);
-        }
-        else{
+        } else {
             arrowLeft.setVisible(false);
         }
     }
 
     //tilføjer et move, og hvis max antal moves er nået, skal der loades fxmlfilen "NewRound"
-    public boolean moves(){
-        if(!domainI.addMove()){
+    public boolean moves() {
+        if (!domainI.addMove()) {
             Parent newRoot = null;
             try {
                 newRoot = runGui.getFxmlLoader().load(getClass().getResource("NewRound.fxml"));
@@ -258,7 +243,7 @@ public class Controller {
             runGui.getStage().setScene(new Scene(newRoot));
             runGui.getStage().show();
             return false;
-        }else{
+        } else {
             return true;
         }
     }
@@ -266,8 +251,8 @@ public class Controller {
     //når man klikker på nord pilen, skal den loade den fxml fil der er i næste rum, osv. ved de andre.
     public void goNorth() throws IOException {
         domainI.goNorth();
-        if(moves()) {
-            String resource = getDomainI().getCurrentRoom() + ".fxml";
+        if (moves()) {
+            String resource = domainI.getCurrentRoom() + ".fxml";
             Parent newRoot = runGui.getFxmlLoader().load(getClass().getResource(resource));
             runGui.getStage().setScene(new Scene(newRoot));
             runGui.getStage().show();
@@ -276,34 +261,36 @@ public class Controller {
 
     public void goSouth() throws IOException {
         domainI.goSouth();
-        if(moves()) {
-            String resource = getDomainI().getCurrentRoom() + ".fxml";
-            Parent newRoot = runGui.getFxmlLoader().load(getClass().getResource(resource));
-            runGui.getStage().setScene(new Scene(newRoot));
-            runGui.getStage().show();
-        }
-    }
-    public void goWest() throws IOException {
-        domainI.goWest();
-        if(moves()) {
-            String resource = getDomainI().getCurrentRoom() + ".fxml";
-            Parent newRoot = runGui.getFxmlLoader().load(getClass().getResource(resource));
-            runGui.getStage().setScene(new Scene(newRoot));
-            runGui.getStage().show();
-        }
-    }
-    public void goEast() throws IOException {
-        domainI.goEast();
-        if(moves()) {
-            String resource = getDomainI().getCurrentRoom() + ".fxml";
+        if (moves()) {
+            String resource = domainI.getCurrentRoom() + ".fxml";
             Parent newRoot = runGui.getFxmlLoader().load(getClass().getResource(resource));
             runGui.getStage().setScene(new Scene(newRoot));
             runGui.getStage().show();
         }
     }
 
-    public void AffordMore(){
-        if(!domainI.canAffordMore()){
+    public void goWest() throws IOException {
+        domainI.goWest();
+        if (moves()) {
+            String resource = domainI.getCurrentRoom() + ".fxml";
+            Parent newRoot = runGui.getFxmlLoader().load(getClass().getResource(resource));
+            runGui.getStage().setScene(new Scene(newRoot));
+            runGui.getStage().show();
+        }
+    }
+
+    public void goEast() throws IOException {
+        domainI.goEast();
+        if (moves()) {
+            String resource = domainI.getCurrentRoom() + ".fxml";
+            Parent newRoot = runGui.getFxmlLoader().load(getClass().getResource(resource));
+            runGui.getStage().setScene(new Scene(newRoot));
+            runGui.getStage().show();
+        }
+    }
+
+    public void AffordMore() {
+        if (!domainI.canAffordMore()) {
             Parent newRoot = null;
             try {
                 newRoot = runGui.getFxmlLoader().load(getClass().getResource("NewRound.fxml"));

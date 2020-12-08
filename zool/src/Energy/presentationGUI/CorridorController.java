@@ -1,9 +1,9 @@
 package Energy.presentationGUI;
 
-public class CorridorController extends Controller{
+public class CorridorController extends Controller {
 
     //kører super-klassens initialize
-    public void initialize(){
+    public void initialize() {
         super.initialize();
     }
 }
