@@ -7,14 +7,6 @@ public class Inventory {
     private int maxSize;
     private ArrayList<Item> items = new ArrayList<>();
 
-    // CONSTRUCTORS
-    public Inventory() {
-    }
-
-    public Inventory(int maxSize) {
-        this.maxSize = maxSize;
-    }
-
     // GETTERS & SETTERS
     public int getMaxSize() {
         return maxSize;
@@ -73,7 +65,8 @@ public class Inventory {
     public int getSize() {
         return items.size();
     }
-    
+
+    // - metoder til visning af inventory
     @Override
     public String toString() {
         String result = "";

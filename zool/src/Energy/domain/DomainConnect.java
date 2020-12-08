@@ -6,22 +6,23 @@ import java.util.Set;
 
 public class DomainConnect implements DomainI {
 
+    // ATTRIBUTTER
     private Game game;
 
+    // CONSTRUCTOR
     public DomainConnect() {
         this.game = new Game();
     }
 
-    // Returnerer spillerens inventory
+    // METODER
     @Override
     public Inventory getPlayerInventory() {
-        return game.getPlayer().getInventory();
+        return game.getPlayer().getInventory(); // Returnerer spillerens inventory
     }
 
-    // Returnerer navnet på current room
     @Override
     public String getCurrentRoom() {
-        return game.getCurrentRoom().getName();
+        return game.getCurrentRoom().getName(); // Returnerer navnet på current room
     }
 
     @Override
@@ -30,8 +31,8 @@ public class DomainConnect implements DomainI {
         game.getPlayer().addMove();
         return game.getPlayer().getMoves() != game.getPlayer().getMovesPerRound();
     }
-    // Getters til statuslinie
 
+    // Info til statuslinie
     @Override
     public int getWallet() {
         return game.getPlayer().getWallet();
@@ -125,7 +126,7 @@ public class DomainConnect implements DomainI {
         // returnerer status om købet lykkedes eller fejlrapport til print på statuslabel i butik
         CommandWords cvs = new CommandWords();
         CommandWord cv = cvs.getCommandWord("køb");
-        Command cmd = new Command(cv,String.valueOf(itemIndex));
+        Command cmd = new Command(cv, String.valueOf(itemIndex));
         return game.buy(cmd);
     }
 
@@ -134,8 +135,8 @@ public class DomainConnect implements DomainI {
         return game.getCurrentRoom().getRoomInv();
     }
 
-    @Override
     // METODER TIL AT REPLACE TING I RUM
+    @Override
     public String replaceStaticGUI(int indexRoom) {
         // METODE til at replace faste ting i baggrundsbilledet der skal have en label
 
@@ -153,28 +154,23 @@ public class DomainConnect implements DomainI {
         return returnEnergylabel;
     }
 
+    @Override
     public String replaceDynamicGUI(int indexRoom) {
         // METODE til at replace faste ting i baggrundsbilledet der skal have en label
 
-        // finder index i player's inventory
-        int indexPlayer = game.getPlayerInvIndex(indexRoom);
+        int indexPlayer = game.getPlayerInvIndex(indexRoom); // finder index i player's inventory
         if (indexPlayer == -1) return null; // findes ikke i player inventory
 
-        // henter navn på det der indsættes: null=ingen mærkning
-        String returnName = game.getPlayer().getInventory().getItem(indexPlayer).getName();
+        String returnName = game.getPlayer().getInventory().getItem(indexPlayer).getName(); // henter navn på det der indsættes
 
-        // indsætter item og opdaterer status & inventory
-        game.insertItem(indexRoom, indexPlayer);
+        game.insertItem(indexRoom, indexPlayer);  // indsætter item og opdaterer status & inventory
 
-        // returnerer streng med energimærke
-        return returnName;
+        return returnName; // returnerer streng med navn på item
     }
 
     public boolean canAffordMore() {
         return game.canAffordMore();
     }
-
-    // METODER TIL SPIL FLOW
 
     // START SKÆRM
     @Override
@@ -198,9 +194,10 @@ public class DomainConnect implements DomainI {
         result += game.endStatusText();
         return result;
     }
+
     @Override
     public boolean newRound() {
-        // starter ny runde, returnerer false hvis max runder er udført!
+        // starter ny runde, returnerer false, hvis max runder er udført!
 
         // tjekker om vi er nået max antal runder
         if (game.getPlayer().getRounds() == (game.getPlayer().getMaxNumberOfRounds() - 1)) {
