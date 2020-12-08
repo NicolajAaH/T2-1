@@ -189,6 +189,10 @@ public class DomainConnect implements DomainI {
     // NY RUNDE SKÆRM
     @Override
     public String newRoundText() {
+
+        // opdaterer runde score
+        game.getPlayer().saveRoundScore();
+
         String result;
         result = "\nDu har nu afsluttet " + ((game.getPlayer().getRounds()) + 1) + ". år\n";
         result += game.endStatusText();
