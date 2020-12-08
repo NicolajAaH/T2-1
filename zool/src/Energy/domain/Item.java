@@ -1,15 +1,14 @@
 package Energy.domain;
 
 public class Item {
-
-    // attributter:
+    // ATTRIBUTTER
     private String name;
     private int price;
     private int scoreImpact;
     private int itemType;
     private String energyLabel = null;
 
-    // constructor
+    // CONSTRUCTOR
     public Item(String name, int price, int scoreImpact, int itemType, String energyLabel) {
         this.name = name;
         this.price = price;
@@ -18,7 +17,7 @@ public class Item {
         this.energyLabel = energyLabel;
     }
 
-    // Getters & Setters
+    // GETTERS & SETTERS
     public String getName() {
         return name;
     }
@@ -39,9 +38,9 @@ public class Item {
         return energyLabel;
     }
 
+    // METODER
     @Override
     public String toString() {
         return "" + name + ", Pris: " + price + ", Årlig besparelse: " + scoreImpact;
     }
-
 }
