@@ -3,8 +3,7 @@ package Energy.domain;
 import java.util.Set;
 import java.util.HashMap;
 
-class Room
-{
+class Room {
     // ATTRIBUTTER
     private String description;
     private HashMap<String, Room> exits;
@@ -12,8 +11,7 @@ class Room
     private String name;
 
     // CONSTRUCTOR
-    public Room(String description, String name)
-    {
+    public Room(String description, String name) {
         this.name = name;
         this.description = description;
         exits = new HashMap<String, Room>();
@@ -33,17 +31,15 @@ class Room
     }
 
     // METODER
-    public void setExit(String direction, Room neighbor) 
-    {
+    public void setExit(String direction, Room neighbor) {
         exits.put(direction, neighbor);
     }
 
-    public Room getExit(String direction)
-    {
+    public Room getExit(String direction) {
         return exits.get(direction);
     }
 
-    public void addToInventory(Item item){
+    public void addToInventory(Item item) {
         roomInv.addItem(item);
     }
 
@@ -69,6 +65,7 @@ class Room
         }
         return returnString;
     }
+
     public String getInvDescriptionString() {
         // overrides ved andre typer rum!
         return "Rummet indeholder:\n";

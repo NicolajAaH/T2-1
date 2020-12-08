@@ -2,12 +2,12 @@ package Energy.domain;
 
 class Outside extends Room {
 
-    // Constructor
+    // CONSTRUCTOR
     public Outside(String description, String name) {
         super(description, name);
     }
 
-    // Metoder
+    // METODER
     @Override
     public String getInvDescriptionString() {
         return "Dit hus har:\n";
