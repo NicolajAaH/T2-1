@@ -73,10 +73,9 @@ public class Inventory {
     public int getSize() {
         return items.size();
     }
-
-    // - metode til udskrift af inventory (kunne også være toString())
-    public String printInventory() {
-
+    
+    @Override
+    public String toString() {
         String result = "";
 
         for (int i = 0; i < items.size(); i++) {

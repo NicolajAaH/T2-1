@@ -51,7 +51,7 @@ class Room {
         // tilføjer inventory til string hvis der er noget i den!
         if (!roomInv.isEmpty()) {
             returnString += getInvDescriptionString();
-            returnString += roomInv.printInventory();
+            returnString += roomInv;
         }
         return returnString;
     }
