@@ -2,15 +2,14 @@ package Energy.domain;
 
 import java.util.HashMap;
 
-
 class CommandWords {
-    //opretter et hashmap fra String og commandWord
 
+    // ATTRIBUTTER
+    private HashMap<String, CommandWord> validCommands; //opretter et hashmap fra String og commandWord
 
-    private HashMap<String, CommandWord> validCommands;
-
-    public CommandWords() // opretter commandwords i valid commands
-    {
+    // CONSTRUCTOR
+    public CommandWords() {
+        // opretter commandwords i valid commands
         validCommands = new HashMap<String, CommandWord>();
         for (CommandWord command : CommandWord.values()) {
             if (command != CommandWord.UNKNOWN) {
@@ -19,8 +18,8 @@ class CommandWords {
         }
     }
 
-    public CommandWord getCommandWord(String commandWord) // getter
-    {
+    // METODER
+    public CommandWord getCommandWord(String commandWord) {
         CommandWord command = validCommands.get(commandWord);
         if (command != null) {
             return command;
@@ -29,17 +28,16 @@ class CommandWords {
         }
     }
 
-    public boolean isCommand(String aString) // tjekker om en streng er en valid command
-    {
+    public boolean isCommand(String aString) {
+        // tjekker om en streng er en valid command
         return validCommands.containsKey(aString);
     }
 
-    public void showAll() // printer tilgængelige kommandoer
-    {
+    public void showAll() {
+        // printer tilgængelige kommandoer
         for (String command : validCommands.keySet()) {
             System.out.print(command + "  ");
         }
         System.out.println();
     }
 }
-
