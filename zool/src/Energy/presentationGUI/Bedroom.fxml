@@ -38,11 +38,7 @@
         <Button fx:id="endGame" layoutX="495.0" layoutY="549.0" mnemonicParsing="false" text="Afslut spillet" />
         <Label fx:id="savings" layoutX="593.0" layoutY="564.0" prefHeight="17.0" prefWidth="141.0" text="Årlig besparelse:" />
       <Label fx:id="bulbBedroom" layoutX="571.0" layoutY="137.0" prefHeight="67.0" prefWidth="85.0" textFill="#036b13" />
-      <Label fx:id="windowBedroom" alignment="CENTER" layoutX="21.0" layoutY="142.0" prefHeight="125.0" prefWidth="149.0" textFill="#e0b54f">
-          <font>
-              <Font size="17.0" />
-          </font>
-      </Label>
+      <Label fx:id="windowBedroom" alignment="CENTER" layoutX="21.0" layoutY="137.0" prefHeight="138.0" prefWidth="149.0" textFill="#e0b54f" />
       <ImageView fx:id="holeWallBedroom" fitHeight="125.0" fitWidth="160.0" layoutX="229.0" layoutY="125.0" pickOnBounds="true" preserveRatio="true" />
     </children>
 </AnchorPane>
