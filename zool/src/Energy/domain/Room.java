@@ -5,13 +5,13 @@ import java.util.HashMap;
 
 class Room
 {
-    // attributter
+    // ATTRIBUTTER
     private String description;
     private HashMap<String, Room> exits;
     private Inventory roomInv = new Inventory();
     private String name;
 
-    // Constructor
+    // CONSTRUCTOR
     public Room(String description, String name)
     {
         this.name = name;
@@ -19,7 +19,20 @@ class Room
         exits = new HashMap<String, Room>();
     }
 
-    // Metoder
+    // GETTERS & SETTERS
+    public String getName() {
+        return name;
+    }
+
+    public HashMap<String, Room> getExits() {
+        return exits;
+    }
+
+    public Inventory getRoomInv() {
+        return roomInv;
+    }
+
+    // METODER
     public void setExit(String direction, Room neighbor) 
     {
         exits.put(direction, neighbor);
@@ -30,58 +43,35 @@ class Room
         return exits.get(direction);
     }
 
-    public HashMap<String, Room> getExits() {
-        return exits;
-    }
-
     public void addToInventory(Item item){
         roomInv.addItem(item);
     }
 
-    public Inventory getRoomInv() {
-        return roomInv;
-    }
-
     // String metoder
-    public String getLongDescription()
-    {
+    public String getLongDescription() {
         String returnString;
         // returnerer rum og udgange
-        returnString = " - Du er " + description + " -\n" + getExitString()+"\n\n";
-        // returnerer inventory hvis der er noget i den!
+        returnString = " - Du er " + description + " -\n" + getExitString() + "\n\n";
+        // tilføjer inventory til string hvis der er noget i den!
         if (!roomInv.isEmpty()) {
             returnString += getInvDescriptionString();
-            returnString += getRoomInvString();
+            returnString += roomInv.printInventory();
         }
-
         return returnString;
-    }
-
-    public String getShortDescription()
-    {
-        return description;
     }
 
     private String getExitString() // henter mulige udgange (keys i hashmap) og returnerer dem i en streng.
     {
         String returnString = "Udgange:";
         Set<String> keys = exits.keySet();
-        for(String exit : keys) {
+        for (String exit : keys) {
             returnString += " " + exit;
         }
         return returnString;
     }
-
-    public String getRoomInvString() {
-        return roomInv.printInventory();
-    }
-
     public String getInvDescriptionString() {
+        // overrides ved andre typer rum!
         return "Rummet indeholder:\n";
-    }
-
-    public String getName() {
-        return name;
     }
 }
 
