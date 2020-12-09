@@ -13,11 +13,11 @@ import javafx.scene.control.ListView;
 public class StoreController extends Controller {
     //fxml variable
     @FXML
-    ListView<Item> storeList;
+    private ListView<Item> storeList;
     @FXML
-    Button buyButton;
+    private Button buyButton;
     @FXML
-    Label textStore;
+    private Label textStore;
 
     //initialize fra superklassen
     public void initialize() {

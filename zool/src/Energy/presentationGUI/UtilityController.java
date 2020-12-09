@@ -9,11 +9,11 @@ import javafx.scene.input.MouseEvent;
 public class UtilityController extends Controller {
     //FXML variable
     @FXML
-    ImageView heatingSystem;
+    private ImageView heatingSystem;
     @FXML
-    Label washingMachineLabel;
+    private Label washingMachineLabel;
     @FXML
-    Label tumbleDryerLabel;
+    private Label tumbleDryerLabel;
 
     //initialize fra super klassen og sætter labels
     public void initialize() {

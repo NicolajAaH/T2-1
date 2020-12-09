@@ -8,11 +8,11 @@ import javafx.scene.input.MouseEvent;
 public class LivingRoomController extends Controller {
     //fxml variable
     @FXML
-    Label tvLabel;
+    private Label tvLabel;
     @FXML
-    Label windowLabelLiving;
+    private Label windowLabelLiving;
     @FXML
-    Label lightLiving;
+    private Label lightLiving;
 
     //initialize fra superklassen, og opdaterer labels på tingene når man kommer ind i rummet.
     public void initialize() {
