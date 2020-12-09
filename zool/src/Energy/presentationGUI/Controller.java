@@ -200,7 +200,7 @@ public class Controller {
         wallet.setText("Penge tilbage: " + getDomainI().getWallet());
         savings.setText("Årlig besparelse: " + getDomainI().getScore());
         movesLeft.setText("Bevægelser tilbage: " + domainI.getMovesRemaing());
-        AffordMore();
+        affordMore();
     }
 
     //giver pilene forskellige billeder, og skjuler eller viser dem i hvert rum, afhængig af om der er udveje.
@@ -289,7 +289,7 @@ public class Controller {
         }
     }
 
-    public void AffordMore() {
+    public void affordMore() {
         if (!domainI.canAffordMore()) {
             Parent newRoot = null;
             try {
