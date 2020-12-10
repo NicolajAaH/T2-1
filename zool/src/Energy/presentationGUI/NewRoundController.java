@@ -1,12 +1,12 @@
 package Energy.presentationGUI;
 
-import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.input.MouseEvent;
 
 import java.io.IOException;
 
@@ -25,9 +25,9 @@ public class NewRoundController extends Controller {
         textNewYear.setText(getDomainI().newRoundText());
 
         //eventhandler for knappen der skifter scene afhængigt af om man har nået max antal runder
-        newYear.setOnAction(new EventHandler<ActionEvent>() {
+        newYear.setOnMouseClicked(new EventHandler<MouseEvent>() {
             @Override
-            public void handle(ActionEvent actionEvent) {
+            public void handle(MouseEvent mouseEvent) {
                 boolean status = getDomainI().newRound();
                 Parent newRoot = null;
                 if (status == true) {
@@ -48,9 +48,9 @@ public class NewRoundController extends Controller {
             }
         });
         //eventhandler for knappen til at slutte spille, som loader exit skærmen
-        exitGame.setOnAction(new EventHandler<ActionEvent>() {
+        exitGame.setOnMouseClicked(new EventHandler<MouseEvent>() {
             @Override
-            public void handle(ActionEvent actionEvent) {
+            public void handle(MouseEvent mouseEvent) {
                 Parent newRoot = null;
                 try {
                     newRoot = runGui.getFxmlLoader().load(getClass().getResource("Exit.fxml"));

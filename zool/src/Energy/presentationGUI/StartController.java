@@ -1,6 +1,5 @@
 package Energy.presentationGUI;
 
-import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.scene.Parent;
@@ -8,6 +7,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
+import javafx.scene.input.MouseEvent;
 
 import java.io.IOException;
 
@@ -28,9 +28,9 @@ public class StartController extends Controller {
         welcomeText.setText(getDomainI().welcomeText());
 
         //eventhandler for buttonclick, der sætter fxml til outside, da man derefter starter den nye runde
-        okButton.setOnAction(new EventHandler<ActionEvent>() {
+        okButton.setOnMouseClicked(new EventHandler<MouseEvent>() {
             @Override
-            public void handle(ActionEvent actionEvent) {
+            public void handle(MouseEvent mouseEvent) {
                 while (true) {
                     String error = getDomainI().setStartAmountGUI(input.getText());
                     errorLabel.setText(error);

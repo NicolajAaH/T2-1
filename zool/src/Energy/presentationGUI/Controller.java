@@ -2,7 +2,6 @@ package Energy.presentationGUI;
 
 import Energy.Interface.DomainI;
 import Energy.domain.DomainConnect;
-import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.scene.Parent;
@@ -11,6 +10,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.MouseEvent;
 
 import java.io.IOException;
 
@@ -59,9 +59,9 @@ public class Controller {
         showExits();
         updateInventory();
         updateStatus();
-        endGame.setOnAction(new EventHandler<ActionEvent>() {
+        endGame.setOnMouseClicked(new EventHandler<MouseEvent>() {
             @Override
-            public void handle(ActionEvent actionEvent) {
+            public void handle(MouseEvent mouseEvent) {
                 Parent newRoot = null;
                 try {
                     newRoot = runGui.getFxmlLoader().load(getClass().getResource("Exit.fxml"));
@@ -73,9 +73,9 @@ public class Controller {
             }
         });
 
-        endYear.setOnAction(new EventHandler<ActionEvent>() {
+        endYear.setOnMouseClicked(new EventHandler<MouseEvent>() {
             @Override
-            public void handle(ActionEvent actionEvent) {
+            public void handle(MouseEvent mouseEvent) {
                 Parent newRoot = null;
                 try {
                     newRoot = runGui.getFxmlLoader().load(getClass().getResource("NewRound.fxml"));
