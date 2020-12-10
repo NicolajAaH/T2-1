@@ -68,4 +68,5 @@ public interface DomainI {
 
     // exit
     String endGameText();
+
 }
