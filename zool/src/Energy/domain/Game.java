@@ -308,23 +308,49 @@ class Game {
     }
 
     // metoder til køb og replace kommandoer
-    void buyCLI(Command command){
+    void buyCLI(Command command) {
         String errorCheck = checkBuyConditionsCLI(command);
         if (errorCheck != null) {
-            System.out.println(errorCheck); // skal slettes
+            System.out.println(errorCheck); // udskriver fejl hvis fejl!
             return;
         }
 
         // finder index til replacement
         int index = Integer.parseInt(command.getSecondWord()) - 1;
-        buy(index);
 
+        buy(index); // udfører køb
+    }
+
+    String checkBuyConditionsCLI(Command command) {
+        // Tjekker betingelser kun relateret CLI og returnerer fejlmeddelelse hvis ugyldigt input ellers 0
+
+        // Undersøger om du er i butikken
+        if (!inShop()) {
+            return "Du kan kun handle i butikken!";
+        }
+
+        // undersøger om kommandoen har et andet ord
+        if (!command.hasSecondWord()) {
+            return "Køb Hvad?";
+        }
+
+        // Tjekker at det andet ord (string) kan parses til en Integer
+        if (!isInt(command.getSecondWord())) {
+            return "Dette er ikke et gyldigt nummer!";
+        }
+
+        // laver kommandoword om til int og finder index af det der skal købes
+        int index = Integer.parseInt(command.getSecondWord()) - 1;
+
+        // Tjekker om index er mellem 0 og butikkens max antal varer
+        if (0 > index || index + 1 > store.getRoomInv().getSize()) {
+            return "Dette er ikke et gyldigt nummer!";
+        }
+        return null;
     }
 
     String buy(int index) {
-        // returnerer streng med fejlmeddelelse
-
-        // TJEKKER BETINGELSER FOR KØB
+        // returnerer streng med evt. fejlmeddelelse
 
         // finder pris på det der skal købes
         int price = store.getRoomInv().getItem(index).getPrice();
@@ -352,32 +378,6 @@ class Game {
         // udskriver køb
         System.out.println("Du har købt " + store.getRoomInv().getItem(index).getName() + "\n");
         return "Du har købt " + store.getRoomInv().getItem(index).getName();
-    }
-    public String checkBuyConditionsCLI(Command command) {
-        // Tjekker CLI conditions
-        // Undersøger om du er i butikken
-        if (!inShop()) {
-            return "Du kan kun handle i butikken!";
-        }
-
-        // undersøger om kommandoen har et andet ord
-        if (!command.hasSecondWord()) {
-            return "Køb Hvad?";
-        }
-
-        // Tjekker at det andet ord (string) kan parses til en Integer
-        if (!isInt(command.getSecondWord())) {
-            return "Dette er ikke et gyldigt nummer!";
-        }
-
-        // laver kommandoword om til int og finder index af det der skal købes
-        int index = Integer.parseInt(command.getSecondWord()) - 1;
-
-        // Tjekker om index er mellem 0 og butikkens max antal varer
-        if (0 > index || index + 1 > store.getRoomInv().getSize()) {
-            return "Dette er ikke et gyldigt nummer!";
-        }
-        return null;
     }
 
     private boolean inShop() {
@@ -499,7 +499,6 @@ class Game {
 
     private boolean nextRoundCLI() {
 
-        // TODO implemetner nextRoundText fra domainConnect når pakken er flyttet
         System.out.println("\nDu har nu afsluttet " + (player.getRounds() + 1) + ". år\n");
 
         // checker om vi har nået max antal runder
@@ -525,6 +524,32 @@ class Game {
         return false;
     }
 
+    public String nextRoundText() {
+        // opdaterer runde score
+        player.saveRoundScore();
+
+        // opretter streng til udskrift
+        String result;
+        result = "\nDu har nu afsluttet " + ((player.getRounds()) + 1) + ". år\n";
+        result += statusText();
+        return result;
+    }
+
+    public boolean nextRoundGUI() {
+        // starter ny runde, returnerer false, hvis max runder er udført!
+
+        // tjekker om vi er nået max antal runder
+        if (player.getRounds() == (player.getMaxNumberOfRounds() - 1)) {
+            player.setRounds((player.getRounds()) + 1);
+            return false;
+        }
+
+        // intialiser ny runde
+        initNewRound();
+        return true;
+    }
+
+
     void initNewRound() {
         // opdatere runde count
         player.setRounds(player.getRounds() + 1);
@@ -536,9 +561,33 @@ class Game {
     }
 
     //  metoder til udskrift
+    private void printWelcome() {
+        // velkomst tekst til CLI
+        System.out.println(welcomeText());
+
+        setStartAmountCLI();
+
+        System.out.println("\nSkriv '" + CommandWord.HELP + "' hvis du har brug for hjælp.\n");
+        System.out.println(currentRoom.getLongDescription());
+    }
+
     private void printExit() {
         // Udskriver sluttekst - CLI
         System.out.println(endGameText());
+    }
+
+    String welcomeText() {
+        String result;
+        result = "Du befinder dig i et dansk parcelhus på 160 m2\n" +
+                " Dit årlige forbrug er på " + player.getStartValue() +
+                " som giver huset energimærke " + EnergyLabel.createEnergyLabel(player.getScore(), player.getStartValue()) + "\n\n" +
+                "Din mission er at forbedre din boligs energiforbrug\n\n" +
+                "Du kan købe mere energivenlige produkter til dit hus i Super Byg, " +
+                "så din bolig bruger mindre energi, og dermed opnår bedre energimærke\n\n" +
+                "Du skal opnå de størst mulige forbedringer med det tilgængelige budget\n\n" +
+                "Spillet løber over en årrække, når du har brugt dit budget,\n" +
+                "eller efter " + player.getMovesPerRound() + " bevægelser skiftes til nyt år\n";
+        return result;
     }
 
     String statusText() {
@@ -557,7 +606,7 @@ class Game {
         return result;
     }
 
-    public String endGameText() {
+    String endGameText() {
         String result = "";
 
         // Tilføjer tekst, hvis slutskærmen vises pga max antal år
@@ -570,30 +619,6 @@ class Game {
         result += "\n\nLavet af: Yusuf Baysoz, Victor Poulsen, Emil Spangenberg, Theis Langlands & Nicolaj Hansen";
         result += "\n--- Tak for, at du spillede vores spil ---\n";
 
-        return result;
-    }
-
-    private void printWelcome() {
-        // velkomst tekst til CLI
-        System.out.println(welcomeText());
-
-        setStartAmountCLI();
-
-        System.out.println("\nSkriv '" + CommandWord.HELP + "' hvis du har brug for hjælp.\n");
-        System.out.println(currentRoom.getLongDescription());
-    }
-
-    String welcomeText() {
-        String result;
-        result = "Du befinder dig i et dansk parcelhus på 160 m2\n" +
-                " Dit årlige forbrug er på " + player.getStartValue() +
-                " som giver huset energimærke " + EnergyLabel.createEnergyLabel(player.getScore(), player.getStartValue()) + "\n\n" +
-                "Din mission er at forbedre din boligs energiforbrug\n\n" +
-                "Du kan købe mere energivenlige produkter til dit hus i Super Byg, " +
-                "så din bolig bruger mindre energi, og dermed opnår bedre energimærke\n\n" +
-                "Du skal opnå de størst mulige forbedringer med det tilgængelige budget\n\n" +
-                "Spillet løber over en årrække, når du har brugt dit budget,\n" +
-                "eller efter " + player.getMovesPerRound() + " bevægelser skiftes til nyt år\n";
         return result;
     }
 }
