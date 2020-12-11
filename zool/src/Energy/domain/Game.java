@@ -7,7 +7,8 @@ class Game {
     private Room currentRoom; // holder styr på det rum man befinder sig i
     Room store, outside, utility, bathroom, bedroom, kidsRoom, room, kitchen, livingRoom, corridor1, corridor2, corridor3, corridor4; // liste over rum
 
-    private final int maxStartAmount = 100000; // top grænsen for beløb
+    private final int MAX_START_AMOUNT = 100000; // top grænsen for spillerens budget
+    private final int START_VALUE = 29000; // start forbrug (til Energimærkeberegning)
 
     // konstanter til Item - typer
     public final int WASHINGMACHINE = 1;
@@ -150,14 +151,15 @@ class Game {
             // invalid input
         }
 
-        if (value > 0 && value <= maxStartAmount) {
+        if (value > 0 && value <= MAX_START_AMOUNT) {
             player.setWallet(value);
             player.setStartAmount(value);
             return null;
         }
-        return "Fejl: Indtast beløb mellem 0 og " + maxStartAmount + " kr.";
+        return "Fejl: Indtast beløb mellem 0 og " + MAX_START_AMOUNT + " kr.";
     }
 
+    // metorder til buy og replace
     String buy(int index) {
         // returnerer streng med evt. fejlmeddelelse
 
@@ -255,8 +257,8 @@ class Game {
     String welcomeText() {
         String result;
         result = "Du befinder dig i et dansk parcelhus på 160 m2\n" +
-                "Dit årlige forbrug er på " + player.getStartValue() + "kr." +
-                " som giver huset energimærke " + EnergyLabel.createEnergyLabel(player.getScore(), player.getStartValue()) + "\n\n" +
+                " Dit årlige forbrug er på " + START_VALUE +
+                " som giver huset energimærke " + EnergyLabel.createEnergyLabel(player.getScore(), START_VALUE) + "\n\n" +
                 "Din mission er at forbedre din boligs energiforbrug\n\n" +
                 "Du kan købe mere energivenlige produkter til dit hus i Super Byg, " +
                 "så din bolig bruger mindre energi, og dermed opnår bedre energimærke\n\n" +
@@ -287,8 +289,8 @@ class Game {
         }
 
         result += "Du har samlet opnået " + player.getScore() + " kr. om året i energiforbedringer\n" +
-                "\nDu startede med energimærke " + EnergyLabel.createEnergyLabel(0, player.getStartValue()) + "\n" +
-                "og er nu på energimærke " + EnergyLabel.createEnergyLabel(player.getScore(), player.getStartValue());
+                "\nDu startede med energimærke " + EnergyLabel.createEnergyLabel(0, START_VALUE) + "\n" +
+                "og er nu på energimærke " + EnergyLabel.createEnergyLabel(player.getScore(), START_VALUE);
 
         return result;
     }
