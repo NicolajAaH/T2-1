@@ -363,11 +363,15 @@ class Game {
     }
 
     private boolean replaceCLI(Command command) {
-        // tjekker input og returnerer index: eller -1 = ugyldigt input
-        int roomInvIndex = checkReplaceConditions(command);
-        if (roomInvIndex == -1) return false;
+        // tjekker input
+        String error = checkReplaceConditions(command);
+        if (error != null) {
+            System.out.println(error);
+            return false;
+        }
 
-        
+        int roomInvIndex = Integer.parseInt(command.getSecondWord()) - 1;
+
         // Finder index i players inventory.
         int playerInvIndex = getPlayerInvIndex(roomInvIndex);
 
@@ -393,34 +397,31 @@ class Game {
         return false;
     }
 
-    private int checkReplaceConditions(Command command) {
+    private String checkReplaceConditions(Command command) {
+        // returnerer om det er muligt at udføre replace kommando, returnerer streng med fejl
+
         // Undersøger om du er i butikken
         if (inShop()) {
-            System.out.println("Du kan kun handle når du er i butikken!");
-            return -1;
+            return "Du kan kun handle når du er i butikken!";
         }
 
         // undersøger om kommandoen har et andet ord
         if (!command.hasSecondWord()) {
-            System.out.println("Udskift hvad?");
-            return -1;
+            return "Udskift hvad?";
         }
-
-        // Tjekker at det andet ord (string) kan parses til en Integer
-        if (!isInt(command.getSecondWord())) {
-            System.out.println("Dette er ikke et gyldigt nummer!");
-            return -1;
+        // tjekker om andet ord er integer
+        int index = 0;
+        try {
+            index = Integer.parseInt(command.getSecondWord()) - 1;
+        } catch (NumberFormatException e) {
+            return "Dette er ikke et gyldigt nummer!";
         }
-
-        // laver kommandoword om til int og finder index af det der skal udskiftes
-        int index = Integer.parseInt(command.getSecondWord()) - 1;
 
         // Tjekker om index er mellem 0 og rummets max antal items
         if (0 > index || index + 1 > currentRoom.getRoomInv().getSize()) {
-            System.out.println("Dette er ikke et gyldigt nummer!");
-            return -1;
+            return "Dette er ikke et gyldigt nummer!";
         }
-        return index;
+        return null;
     }
 
     boolean canAffordMore() {
@@ -463,14 +464,7 @@ class Game {
         }
         return playerInvIndex;
     }
-
-    private boolean isInt(String s) {
-        for (int i = 0; i < s.length(); i++) {
-            if (!Character.isDigit(s.charAt(i))) return false;
-        }
-        return true;
-    }
-
+    
     // metoder til ny runde kommando
 
     private boolean nextRoundCLI() {
