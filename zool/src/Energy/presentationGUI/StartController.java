@@ -32,7 +32,7 @@ public class StartController extends Controller {
             @Override
             public void handle(ActionEvent actionEvent) {
                 while (true) {
-                    String error = getDomainI().setStartAmountGUI(input.getText());
+                    String error = getDomainI().setStartAmount(input.getText());
                     errorLabel.setText(error);
                     if (error == null) {
                         Parent newRoot = null;

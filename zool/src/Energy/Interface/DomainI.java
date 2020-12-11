@@ -4,7 +4,7 @@ import Energy.domain.Inventory;
 
 public interface DomainI {
 
-    // Metoder til parent Controller
+    // Metoder
     Inventory getPlayerInventory();
 
     String getCurrentRoomName();
@@ -57,8 +57,7 @@ public interface DomainI {
 
     // INFOSKÆRME
     // start
-    String setStartAmountGUI(String value); // ved fejl: Returnere meddelelse, ingen fejl: null
-    void setStartAmountCLI();
+    String setStartAmount(String value); // ved fejl: Returnere meddelelse, ingen fejl: null
 
     String welcomeText();
 

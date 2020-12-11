@@ -1,7 +1,5 @@
 package Energy.domain;
 
-import java.util.Scanner;
-
 class Game {
     // ATTRIBUTTER
 
@@ -143,22 +141,6 @@ class Game {
         currentRoom = outside;
     }
 
-    void setStartAmountCLI() {
-        // Henter budget fra bruger
-        System.out.print("Indtast dit årlige renoverings budget: ");
-
-        Scanner s = new Scanner(System.in);
-
-        while (true) {
-            String input = s.nextLine();
-            String error = setStartAmount(input);
-            if (error == null) {
-                break;
-            } else {
-                System.out.print(error + " : ");
-            }
-        }
-    }
     String setStartAmount(String input) {
         // returnerer fejlmeddelelse ved fejlinput ellers sættes startbeløb
         int value = 0;
@@ -267,7 +249,6 @@ class Game {
         currentRoom = outside; // sætter startrummet
         return true;
     }
-
 
     //  metoder til udskrift
 

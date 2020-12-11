@@ -3,6 +3,8 @@ package Energy.presentationCLI;
 import Energy.Interface.DomainI;
 import Energy.domain.DomainConnect;
 
+import java.util.Scanner;
+
 class PlayGame {
     private Parser parser = new Parser();
 
@@ -32,7 +34,7 @@ class PlayGame {
         // velkomst tekst til CLI
         System.out.println(domainI.welcomeText());
 
-        domainI.setStartAmountCLI();
+        setStartAmountCLI();
 
         System.out.println("\nSkriv '" + CommandWord.HELP + "' hvis du har brug for hjælp.\n");
         System.out.println(domainI.getRoomDescriptionText());
@@ -306,6 +308,23 @@ class PlayGame {
         System.out.println(domainI.getRoomDescriptionText());
 
         return false;
+    }
+
+    void setStartAmountCLI() {
+        // Henter budget fra bruger
+        System.out.print("Indtast dit årlige renoverings budget: ");
+
+        Scanner s = new Scanner(System.in);
+
+        while (true) {
+            String input = s.nextLine();
+            String error = domainI.setStartAmount(input);
+            if (error == null) {
+                break;
+            } else {
+                System.out.print(error + " : ");
+            }
+        }
     }
 }
 

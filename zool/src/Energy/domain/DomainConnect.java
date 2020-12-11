@@ -191,12 +191,8 @@ public class DomainConnect implements DomainI {
     }
 
     @Override
-    public String setStartAmountGUI(String value) {
+    public String setStartAmount(String value) {
         return game.setStartAmount(value);
-    }
-
-    public void setStartAmountCLI(){
-        game.setStartAmountCLI();
     }
 
     // NY RUNDE SKÆRM
