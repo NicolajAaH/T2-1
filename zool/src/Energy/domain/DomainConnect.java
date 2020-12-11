@@ -184,19 +184,19 @@ public class DomainConnect implements DomainI {
 
     // NY RUNDE SKÆRM
     @Override
-    public String newRoundText() {
+    public String nextRoundText() {
 
         // opdaterer runde score
         game.getPlayer().saveRoundScore();
 
         String result;
         result = "\nDu har nu afsluttet " + ((game.getPlayer().getRounds()) + 1) + ". år\n";
-        result += game.endStatusText();
+        result += game.statusText();
         return result;
     }
 
     @Override
-    public boolean newRound() {
+    public boolean nextRoundGUI() {
         // starter ny runde, returnerer false, hvis max runder er udført!
 
         // tjekker om vi er nået max antal runder
@@ -213,18 +213,7 @@ public class DomainConnect implements DomainI {
     // SLUT SKÆRM
     @Override
     public String endGameText() {
-        String result = "";
-
-        // Tilføjer tekst, hvis slutskærmen vises pga max antal år
-        if (game.getPlayer().getRounds() == game.getPlayer().getMaxNumberOfRounds()) {
-            result += " - Du har spillet max antal år - \n";
-            game.getPlayer().setRounds((game.getPlayer().getRounds()) - 1);
-        }
-        result += "\n--- Tak for, at du spillede vores spil ---\n";
-        result += game.endStatusText();
-        result += "\n\nLavet af: Yusuf Baysoz, Victor Poulsen, Emil Spangenberg, Theis Langlands & Nicolaj Hansen";
-
-        return result;
+        return game.endGameText();
     }
 
 }

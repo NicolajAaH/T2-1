@@ -62,9 +62,9 @@ public interface DomainI {
     String welcomeText();
 
     // ny runde
-    String newRoundText();
+    String nextRoundText();
 
-    boolean newRound(); // returnerer false ved max antal runder!
+    boolean nextRoundGUI(); // returnerer false ved max antal runder!
 
     // exit
     String endGameText();

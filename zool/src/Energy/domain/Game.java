@@ -521,24 +521,25 @@ class Game {
     }
 
     private boolean nextRoundCLI() {
-        System.out.println("\nDu har nu afsluttet " + (player.getRounds() + 1) + ". år");
+        System.out.println("\nDu har nu afsluttet " + (player.getRounds() + 1) + ". år\n");
 
         // checker om vi har nået max antal runder
         if (player.getRounds() == (player.getMaxNumberOfRounds() - 1)) {
-            System.out.println("Du har spillet max antal år\n");
+            getPlayer().setRounds((getPlayer().getRounds()) + 1);
             return true; // spillet er slut - sætter want to quit til True
         }
 
         // opdaterer runde sore
         player.saveRoundScore();
 
-
         // Udskriver status
-        System.out.println(endStatusText());
+        System.out.println(statusText());
+
         // opretter ny runde!
         initNewRound();
+
         // Udskriver velkommen til nyt år
-        System.out.println("\n --- Velkommen til år " + (player.getRounds() + 1) + " ---");
+        System.out.println("\n --- Velkommen til år " + (player.getRounds() + 1) + " ---\n");
         System.out.println("Dit nye årsbudget er " + player.getWallet());
         System.out.println();
 
@@ -558,12 +559,10 @@ class Game {
     //  metoder til udskrift
     private void printExit() {
         // Udskriver sluttekst - CLI
-        System.out.println("--- Tak for, at du spillede vores spil ---\n");
-        System.out.println(endStatusText());
-        System.out.println("\nLavet af: Yusuf Baysoz, Victor Poulsen, Emil Spangenberg, Theis Langlands & Nicolaj Hansen");
+        System.out.println(endGameText());
     }
 
-    String endStatusText() {
+    String statusText() {
         String result;
         result = "Du har samlet brugt " + player.getTotalUsedAmount() + " kr,-\n" +
                 " - Energibesparelse -\n";
@@ -575,6 +574,22 @@ class Game {
         result += "Total " + player.getScore() + " kr. om året i energiforbedringer\n" +
                 "\nDu startede med energimærke " + EnergyLabel.createEnergyLabel(0, player.getStartValue()) + "\n" +
                 "og er nu på energimærke " + EnergyLabel.createEnergyLabel(player.getScore(), player.getStartValue());
+
+        return result;
+    }
+
+    public String endGameText() {
+        String result = "";
+
+        // Tilføjer tekst, hvis slutskærmen vises pga max antal år
+        if (getPlayer().getRounds() == getPlayer().getMaxNumberOfRounds()) {
+            result += " --- Du har spillet max antal år --- \n";
+            getPlayer().setRounds((getPlayer().getRounds()) - 1);
+        }
+
+        result += statusText();
+        result += "\n\nLavet af: Yusuf Baysoz, Victor Poulsen, Emil Spangenberg, Theis Langlands & Nicolaj Hansen";
+        result += "\n--- Tak for, at du spillede vores spil ---\n";
 
         return result;
     }
