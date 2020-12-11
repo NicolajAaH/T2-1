@@ -226,8 +226,6 @@ class Game {
             wantToQuit = newRound();
         } else if (commandWord == CommandWord.INVENTORY) {
             printInventory();
-        } else if (commandWord == CommandWord.DELETE) {
-            delete(command);
         } else if (commandWord == CommandWord.QUIT) {
             wantToQuit = quit(command);
         } else if (commandWord == CommandWord.BUY) {
@@ -283,37 +281,6 @@ class Game {
     private void status() {
         System.out.println("Du har opnået en samlet årlig besparelse på: " + player.getScore() +
                 ", og du har " + player.getWallet() + "kr. tilbage på budgettet i år");
-    }
-
-    private void delete(Command command) {
-
-        // undersøger om kommandoen har et andet ord
-        if (!command.hasSecondWord()) {
-            System.out.println("Slet hvad?");
-            return;
-        }
-
-        // Tjekker at det andet ord (string) kan parses til en Integer
-        if (!isInt(command.getSecondWord())) {
-            System.out.println("Dette er ikke et gyldigt nummer!");
-            return;
-        }
-
-        // laver kommandoword om til int og finder index af det der skal udskiftes
-        int index = Integer.parseInt(command.getSecondWord()) - 1;
-
-        // Tjekker om index er mellem 0 og player items
-        if (0 > index || index + 1 > player.getInventory().getSize()) {
-            System.out.println("Dette er ikke et gyldigt nummer!");
-            return;
-        }
-
-        // fjerner Item fra inventory
-        player.getInventory().removeItem(player.getInventory().getItem(index));
-
-        // printer ny inventory
-        System.out.println("Nyt inventar:");
-        System.out.println(player.getInventory());
     }
 
     private void printInventory() {
