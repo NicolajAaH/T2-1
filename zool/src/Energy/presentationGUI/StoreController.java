@@ -30,7 +30,7 @@ public class StoreController extends Controller {
         buyButton.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent actionEvent) {
-                int selectedItem = storeList.getSelectionModel().getSelectedIndex() + 1;
+                int selectedItem = storeList.getSelectionModel().getSelectedIndex();
                 textStore.setText(getDomainI().buyItem(selectedItem));
                 updateInventory();
                 updateStatus();
