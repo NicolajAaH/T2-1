@@ -124,12 +124,8 @@ public class DomainConnect implements DomainI {
     @Override
     public String buyItem(int itemIndex) {
         // returnerer status om købet lykkedes eller fejlrapport til print på statuslabel i butik
-        CommandWords cvs = new CommandWords();
-        CommandWord cv = cvs.getCommandWord("køb");
-        Command cmd = new Command(cv, String.valueOf(itemIndex));
-        return game.buy(cmd);
+        return game.buy(itemIndex);
     }
-
 
     @Override
     public Inventory getRoomInventory() {

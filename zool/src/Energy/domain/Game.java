@@ -229,11 +229,11 @@ class Game {
         } else if (commandWord == CommandWord.QUIT) {
             wantToQuit = quit(command);
         } else if (commandWord == CommandWord.BUY) {
-            buy(command);
+            buyCLI(command);
         } else if (commandWord == CommandWord.REPLACE) {
             wantToQuit = replaceCLI(command);
         } else if (commandWord == CommandWord.STATUS) {
-            status();
+            printStatus();
         }
         return wantToQuit;
     }
@@ -278,7 +278,7 @@ class Game {
         return true;
     }
 
-    private void status() {
+    private void printStatus() {
         System.out.println("Du har opnået en samlet årlig besparelse på: " + player.getScore() +
                 ", og du har " + player.getWallet() + "kr. tilbage på budgettet i år");
     }
@@ -304,20 +304,25 @@ class Game {
         System.out.println("Kommandoen: 'skrot' NUMMER skrotter og fjerner en ting fra dit inventar.");
         System.out.println("Kommandoen: 'inventar' viser dit inventar.");
         System.out.println("Kommandoen: 'gå' RETNING bevæger dig rundt.");
-        System.out.println("Kommandoen: 'status' fortæller din årlige besparelse, og dit budget for året.");
+        System.out.println("Kommandoen: 'printStatus' fortæller din årlige besparelse, og dit budget for året.");
     }
 
     // metoder til køb og replace kommandoer
-    String buy(Command command) {
-        // returnerer streng med fejlmeddelelse
+    void buyCLI(Command command){
         String errorCheck = checkBuyConditionsCLI(command);
         if (errorCheck != null) {
             System.out.println(errorCheck); // skal slettes
-            return errorCheck; // returnerer fejl og afbryder køb
+            return;
         }
 
         // finder index til replacement
         int index = Integer.parseInt(command.getSecondWord()) - 1;
+        buy(index);
+
+    }
+
+    String buy(int index) {
+        // returnerer streng med fejlmeddelelse
 
         // TJEKKER BETINGELSER FOR KØB
 
@@ -506,7 +511,7 @@ class Game {
         // opdaterer runde sore
         player.saveRoundScore();
 
-        // Udskriver status
+        // Udskriver printStatus
         System.out.println(statusText());
 
         // opretter ny runde!
