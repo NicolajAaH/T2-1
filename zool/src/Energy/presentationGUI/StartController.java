@@ -8,6 +8,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
+import javafx.scene.input.MouseEvent;
 
 import java.io.IOException;
 
@@ -24,13 +25,12 @@ public class StartController extends Controller {
 
     //initialize fra superklassen, og opdaterer labels på tingene når man kommer ind i rummet.
     public void initialize() {
-
         welcomeText.setText(getDomainI().welcomeText());
-
+        okButton.setDefaultButton(true);
         //eventhandler for buttonclick, der sætter fxml til outside, da man derefter starter den nye runde
-        okButton.setOnAction(new EventHandler<ActionEvent>() {
+        okButton.setOnMouseClicked(new EventHandler<MouseEvent>() {
             @Override
-            public void handle(ActionEvent actionEvent) {
+            public void handle(MouseEvent actionEvent) {
                 while (true) {
                     String error = getDomainI().setStartAmount(input.getText());
                     errorLabel.setText(error);
