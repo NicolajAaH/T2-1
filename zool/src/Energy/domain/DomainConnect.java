@@ -9,10 +9,12 @@ public class DomainConnect implements DomainI {
     // ATTRIBUTTER
     private Game game;
 
+
     // CONSTRUCTOR
     public DomainConnect() {
         this.game = new Game();
     }
+
 
     // METODER
     @Override
@@ -26,16 +28,10 @@ public class DomainConnect implements DomainI {
     }
 
     @Override
-    public boolean addMove() {
-        // hvis returner false = gå til næste år
-        game.getPlayer().addMove();
-        return game.getPlayer().getMoves() != game.getMovesPerRound();
-    }
-
-    @Override
     public int getRound() {
         return game.getPlayer().getRounds();
     }
+
     // Info til statuslinie
     @Override
     public int getWallet() {
@@ -117,11 +113,20 @@ public class DomainConnect implements DomainI {
         game.setCurrentRoom(game.getCurrentRoom().getExit("vest"));
     }
 
+    @Override
     public String getRoomDescriptionText(){
         return game.getCurrentRoom().getLongDescription();
     }
 
-    // METODER TIL STORE
+    @Override
+    public boolean addMove() {
+        // hvis returner false = gå til næste år
+        game.getPlayer().addMove();
+        return game.getPlayer().getMoves() != game.getMovesPerRound();
+    }
+
+
+    // METODER TIL BUTIK
     @Override
     public Inventory getStoreInventory() {
         return game.store.getRoomInv();
@@ -133,17 +138,7 @@ public class DomainConnect implements DomainI {
         return game.buy(itemIndex);
     }
 
-    public boolean inShop() {
-        return game.inShop();
-    }
-
-    @Override
-    public Inventory getRoomInventory() {
-        return game.getCurrentRoom().getRoomInv();
-    }
-
-
-    // METODER TIL AT REPLACE TING I RUM
+    // METODER TIL AT UDSKIFTE TING I RUM
     @Override
     public String replaceStaticGUI(int indexRoom) {
         // METODE til at replace faste ting i baggrundsbilledet der skal have en label
@@ -162,8 +157,6 @@ public class DomainConnect implements DomainI {
         return returnEnergylabel;
     }
 
-
-
     @Override
     public String replaceDynamicGUI(int indexRoom) {
         // METODE til at replace faste ting i baggrundsbilledet der skal have en label
@@ -178,10 +171,21 @@ public class DomainConnect implements DomainI {
         return returnName; // returnerer streng med navn på item
     }
 
+    @Override
     public boolean canAffordMore() {
         return game.canAffordMore();
     }
 
+    // ANDRE METODER RELATERET TIL RUM
+    @Override
+    public boolean inShop() {
+        return game.inShop();
+    }
+
+    @Override
+    public Inventory getRoomInventory() {
+        return game.getCurrentRoom().getRoomInv();
+    }
 
     // START SKÆRM
     @Override
@@ -212,5 +216,4 @@ public class DomainConnect implements DomainI {
     public String endGameText() {
         return game.endGameText();
     }
-
 }
