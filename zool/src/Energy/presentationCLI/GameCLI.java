@@ -5,7 +5,7 @@ import Energy.domain.DomainConnect;
 
 import java.util.Scanner;
 
-class PlayGame {
+class GameCLI {
     private Parser parser = new Parser();
 
     //vores 'spil' og vores bindeled mellem domain og interface
