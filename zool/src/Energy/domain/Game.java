@@ -189,7 +189,7 @@ class Game {
         }
         return "Fejl: Indtast beløb mellem 0 og " + maxStartAmount + " kr.";
     }
-    
+
     private boolean processCommand(Command command) {
         boolean wantToQuit = false;
         CommandWord commandWord = command.getCommandWord();
@@ -296,11 +296,12 @@ class Game {
         // finder index til replacement
         int index = Integer.parseInt(command.getSecondWord()) - 1;
 
-        buy(index); // udfører køb
+        System.out.println(buy(index)); // udfører køb eller udskriver fejl
+        System.out.println("Du har nu\n" + player.getInventory());
     }
 
     String checkBuyConditionsCLI(Command command) {
-        // Tjekker betingelser kun relateret CLI og returnerer fejlmeddelelse hvis ugyldigt input ellers 0
+        // Tjekker betingelser kun relateret CLI og returnerer fejlmeddelelse hvis ugyldigt input ellers null
 
         // Undersøger om du er i butikken
         if (!inShop()) {
@@ -313,17 +314,19 @@ class Game {
         }
 
         // Tjekker at det andet ord (string) kan parses til en Integer
-        if (!isInt(command.getSecondWord())) {
+        int index = 0;
+
+        try {
+            index = Integer.parseInt(command.getSecondWord()) - 1;
+        } catch (NumberFormatException e) {
             return "Dette er ikke et gyldigt nummer!";
         }
-
-        // laver kommandoword om til int og finder index af det der skal købes
-        int index = Integer.parseInt(command.getSecondWord()) - 1;
 
         // Tjekker om index er mellem 0 og butikkens max antal varer
         if (0 > index || index + 1 > store.getRoomInv().getSize()) {
             return "Dette er ikke et gyldigt nummer!";
         }
+
         return null;
     }
 
@@ -335,13 +338,11 @@ class Game {
 
         // tjekker om spiller har råd
         if (player.getWallet() < price) {
-            System.out.println("Du har ikke råd!");
             return "Det har du ikke råd til!";
         }
 
         // Undersøger om spillers inventory er fyldt
         if (player.getInventory().getSize() == player.getInventory().getMaxSize()) {
-            System.out.println("Inventar er fyldt!");
             return "Du har ikke plads til mere!";
         }
 
@@ -354,7 +355,6 @@ class Game {
         player.addAmountToTotal(price);
 
         // udskriver køb
-        System.out.println("Du har købt " + store.getRoomInv().getItem(index).getName() + "\n");
         return "Du har købt " + store.getRoomInv().getItem(index).getName();
     }
 
@@ -367,6 +367,7 @@ class Game {
         int roomInvIndex = checkReplaceConditions(command);
         if (roomInvIndex == -1) return false;
 
+        
         // Finder index i players inventory.
         int playerInvIndex = getPlayerInvIndex(roomInvIndex);
 
