@@ -86,7 +86,6 @@ class GameCLI {
         System.out.println("Kommandoen: 'køb' NUMMER køber en ting fra butikken.");
         System.out.println("Kommandoen: 'udskift' NUMMER udskifter en ting i rummet eller udenfor.");
         System.out.println("Kommandoen: 'hjælp' printer dette igen.");
-        System.out.println("Kommandoen: 'skrot' NUMMER skrotter og fjerner en ting fra dit inventar.");
         System.out.println("Kommandoen: 'inventar' viser dit inventar.");
         System.out.println("Kommandoen: 'gå' RETNING bevæger dig rundt.");
         System.out.println("Kommandoen: 'printStatus' fortæller din årlige besparelse, og dit budget for året.");
