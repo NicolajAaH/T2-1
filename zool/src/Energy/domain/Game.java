@@ -160,26 +160,25 @@ class Game {
     private void setStartAmountCLI() {
         // Henter budget fra bruger
         System.out.print("Indtast dit årlige renoverings budget: ");
+
         Scanner s = new Scanner(System.in);
+
         while (true) {
-            String value = s.nextLine();
-            if (isInt(value)) {
-                int value2 = 0;
-                try {
-                    value2 = Integer.parseInt(value);
-                } catch (NumberFormatException e) {
-                    System.out.println("Værdien er for høj!");
-                }
-                if (value2 > 0 && value2 <= maxStartAmount) {
-                    player.setWallet(value2);
-                    player.setStartAmount(value2);
-                    break;
-                } else {
-                    System.out.println("Der må ikke stå bogstaver i beløbet og værdien skal være mellem 0 og " + maxStartAmount + " kr. \nIndtast nyt beløb: ");
-                }
-            } else {
-                System.out.println("Der må ikke stå bogstaver i beløbet og værdien skal være mellem 0 og " + maxStartAmount + " kr. \nIndtast nyt beløb: ");
+            String input = s.nextLine();
+            int value = 0;
+            try {
+                value = Integer.parseInt(input);
+            } catch (NumberFormatException e) {
+                // invalid input
             }
+
+            if (value > 0 && value <= maxStartAmount) {
+                player.setWallet(value);
+                player.setStartAmount(value);
+                break;
+            }
+            System.out.println("\nFejl: Ugyldigt input");
+            System.out.print("Indtast beløb mellem 0 og " + maxStartAmount + " kr. : ");
         }
     }
 
@@ -210,7 +209,6 @@ class Game {
         player.setStartAmount(result);
         return null;
     }
-
 
     private boolean processCommand(Command command) {
         boolean wantToQuit = false;
@@ -493,7 +491,7 @@ class Game {
     }
 
     // metoder til ny runde kommando
-    
+
     private boolean nextRoundCLI() {
 
         if (!nextRound()) return true; // hvis next round er false sætte wantToQuit til true
