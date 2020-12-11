@@ -130,6 +130,7 @@ public class DomainConnect implements DomainI {
         return game.buy(cmd);
     }
 
+
     @Override
     public Inventory getRoomInventory() {
         return game.getCurrentRoom().getRoomInv();

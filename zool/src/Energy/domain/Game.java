@@ -343,35 +343,14 @@ class Game {
     // metoder til køb og replace kommandoer
     String buy(Command command) {
         // returnerer streng med fejlmeddelelse
-
-        // Tjekker CLI conditions
-        // Undersøger om du er i butikken
-        if (!inShop()) {
-            System.out.println("Du kan kun handle i butikken!");
-            return null;
+        String errorCheck = checkBuyConditionsCLI(command);
+        if (errorCheck != null) {
+            System.out.println(errorCheck); // skal slettes
+            return errorCheck; // returnerer fejl og afbryder køb
         }
 
-        // undersøger om kommandoen har et andet ord
-        if (!command.hasSecondWord()) {
-            System.out.println("Køb Hvad?");
-            return null;
-        }
-
-        // Tjekker at det andet ord (string) kan parses til en Integer
-        if (!isInt(command.getSecondWord())) {
-            System.out.println("Dette er ikke et gyldigt nummer!");
-            return null;
-        }
-
-        // laver kommandoword om til int og finder index af det der skal købes
+        // finder index til replacement
         int index = Integer.parseInt(command.getSecondWord()) - 1;
-
-        // Tjekker om index er mellem 0 og butikkens max antal varer
-        if (0 > index || index + 1 > store.getRoomInv().getSize()) {
-            System.out.println("Dette er ikke et gyldigt nummer!");
-            return null;
-        }
-
 
         // TJEKKER BETINGELSER FOR KØB
 
@@ -401,6 +380,32 @@ class Game {
         // udskriver køb
         System.out.println("Du har købt " + store.getRoomInv().getItem(index).getName() + "\n");
         return "Du har købt " + store.getRoomInv().getItem(index).getName();
+    }
+    public String checkBuyConditionsCLI(Command command) {
+        // Tjekker CLI conditions
+        // Undersøger om du er i butikken
+        if (!inShop()) {
+            return "Du kan kun handle i butikken!";
+        }
+
+        // undersøger om kommandoen har et andet ord
+        if (!command.hasSecondWord()) {
+            return "Køb Hvad?";
+        }
+
+        // Tjekker at det andet ord (string) kan parses til en Integer
+        if (!isInt(command.getSecondWord())) {
+            return "Dette er ikke et gyldigt nummer!";
+        }
+
+        // laver kommandoword om til int og finder index af det der skal købes
+        int index = Integer.parseInt(command.getSecondWord()) - 1;
+
+        // Tjekker om index er mellem 0 og butikkens max antal varer
+        if (0 > index || index + 1 > store.getRoomInv().getSize()) {
+            return "Dette er ikke et gyldigt nummer!";
+        }
+        return null;
     }
 
     private boolean inShop() {
@@ -521,6 +526,8 @@ class Game {
     }
 
     private boolean nextRoundCLI() {
+
+        // TODO implemetner nextRoundText fra domainConnect når pakken er flyttet
         System.out.println("\nDu har nu afsluttet " + (player.getRounds() + 1) + ". år\n");
 
         // checker om vi har nået max antal runder
