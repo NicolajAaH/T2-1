@@ -187,11 +187,6 @@ class Game {
 
         int result = 0;
 
-        // Tjekker om input er et heltal
-        if (!isInt(value)) {
-            return "Fejl: indtast et heltal imellem 0 og " + maxStartAmount;
-        }
-
         // Laver string til integer
         try {
             result = Integer.parseInt(value);
