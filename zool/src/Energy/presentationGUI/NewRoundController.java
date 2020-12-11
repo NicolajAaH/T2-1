@@ -22,13 +22,13 @@ public class NewRoundController extends Controller {
 
     //køres når rummet loades
     public void initialize() {
-        textNewYear.setText(getDomainI().newRoundText());
+        textNewYear.setText(getDomainI().nextRoundText());
 
         //eventhandler for knappen der skifter scene afhængigt af om man har nået max antal runder
         newYear.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent actionEvent) {
-                boolean status = getDomainI().newRound();
+                boolean status = getDomainI().nextRoundGUI();
                 Parent newRoot = null;
                 if (status == true) {
                     try {
