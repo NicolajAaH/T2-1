@@ -189,7 +189,7 @@ public class DomainConnect implements DomainI {
     @Override
     public boolean nextRoundGUI() {
         // starter ny runde, returnerer false, hvis max runder er udført!
-        return game.nextRoundGUI();
+        return game.nextRound();
     }
 
     // SLUT SKÆRM

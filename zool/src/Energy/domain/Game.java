@@ -223,7 +223,7 @@ class Game {
         } else if (commandWord == CommandWord.GO) {
             wantToQuit = goRoom(command);
         } else if (commandWord == CommandWord.NEWROUND) {
-            wantToQuit = newRound();
+            wantToQuit = nextRoundCLI();
         } else if (commandWord == CommandWord.INVENTORY) {
             printInventory();
         } else if (commandWord == CommandWord.QUIT) {
@@ -493,35 +493,19 @@ class Game {
     }
 
     // metoder til ny runde kommando
-    private boolean newRound() {
-        return nextRoundCLI();
-    }
-
+    
     private boolean nextRoundCLI() {
 
-        System.out.println("\nDu har nu afsluttet " + (player.getRounds() + 1) + ". år\n");
+        if (!nextRound()) return true; // hvis next round er false sætte wantToQuit til true
 
-        // checker om vi har nået max antal runder
-        if (player.getRounds() == (player.getMaxNumberOfRounds() - 1)) {
-            getPlayer().setRounds((getPlayer().getRounds()) + 1);
-            return true; // spillet er slut - sætter want to quit til True
-        }
-
-        // opdaterer runde sore
-        player.saveRoundScore();
-
-        // Udskriver printStatus
-        System.out.println(statusText());
-
-        // opretter ny runde!
-        initNewRound();
+        System.out.println(nextRoundText());
 
         // Udskriver velkommen til nyt år
         System.out.println("\n --- Velkommen til år " + (player.getRounds() + 1) + " ---\n");
         System.out.println("Dit nye årsbudget er " + player.getWallet());
         System.out.println();
 
-        return false;
+        return false; // fortsæt spil
     }
 
     public String nextRoundText() {
@@ -535,7 +519,7 @@ class Game {
         return result;
     }
 
-    public boolean nextRoundGUI() {
+    public boolean nextRound() {
         // starter ny runde, returnerer false, hvis max runder er udført!
 
         // tjekker om vi er nået max antal runder
@@ -544,20 +528,12 @@ class Game {
             return false;
         }
 
-        // intialiser ny runde
-        initNewRound();
-        return true;
-    }
-
-
-    void initNewRound() {
-        // opdatere runde count
-        player.setRounds(player.getRounds() + 1);
-
-        // intialiserer nyt år
+        // intialiser nyt år
+        player.setRounds(player.getRounds() + 1); // opdatere runde count
         player.setWallet(player.getWallet() + player.getStartAmount() + player.getScore()); // nyt årsbudget!
         player.setMoves(0); // resetter moves
-        currentRoom = outside;
+        currentRoom = outside; // sætter startrummet
+        return true;
     }
 
     //  metoder til udskrift
@@ -592,14 +568,14 @@ class Game {
 
     String statusText() {
         String result;
-        result = "Du har samlet brugt " + player.getTotalUsedAmount() + " kr,-\n" +
+        result = "Du har samlet brugt " + player.getTotalUsedAmount() + " kr.\n" +
                 " - Energibesparelse -\n";
 
         for (int i = 0; i <= player.getRounds(); i++) {
             result += " År " + (i + 1) + ": " + player.getRoundScore(i) + "\n";
         }
 
-        result += "Total " + player.getScore() + " kr. om året i energiforbedringer\n" +
+        result += "Du har samlet opnået " + player.getScore() + " kr. om året i energiforbedringer\n" +
                 "\nDu startede med energimærke " + EnergyLabel.createEnergyLabel(0, player.getStartValue()) + "\n" +
                 "og er nu på energimærke " + EnergyLabel.createEnergyLabel(player.getScore(), player.getStartValue());
 
@@ -611,7 +587,7 @@ class Game {
 
         // Tilføjer tekst, hvis slutskærmen vises pga max antal år
         if (getPlayer().getRounds() == getPlayer().getMaxNumberOfRounds()) {
-            result += " --- Du har spillet max antal år --- \n";
+            result += " --- Du har spillet max antal år --- \n\n";
             getPlayer().setRounds((getPlayer().getRounds()) - 1);
         }
 
