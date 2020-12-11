@@ -2,7 +2,6 @@ package Energy.presentationGUI;
 
 import Energy.Interface.DomainI;
 import Energy.domain.DomainConnect;
-import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.scene.Parent;
@@ -11,6 +10,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.MouseEvent;
 
 import java.io.IOException;
 
@@ -59,9 +59,9 @@ public class Controller {
         showExits();
         updateInventory();
         updateStatus();
-        endGame.setOnAction(new EventHandler<ActionEvent>() {
+        endGame.setOnMouseClicked(new EventHandler<MouseEvent>() {
             @Override
-            public void handle(ActionEvent actionEvent) {
+            public void handle(MouseEvent actionEvent) {
                 Parent newRoot = null;
                 try {
                     newRoot = runGui.getFxmlLoader().load(getClass().getResource("Exit.fxml"));
@@ -73,9 +73,9 @@ public class Controller {
             }
         });
 
-        endYear.setOnAction(new EventHandler<ActionEvent>() {
+        endYear.setOnMouseClicked(new EventHandler<MouseEvent>() {
             @Override
-            public void handle(ActionEvent actionEvent) {
+            public void handle(MouseEvent actionEvent) {
                 Parent newRoot = null;
                 try {
                     newRoot = runGui.getFxmlLoader().load(getClass().getResource("NewRound.fxml"));
@@ -147,7 +147,7 @@ public class Controller {
         if (itemName.equals("Hul-fikser-kit")) {
             return new Image("/Images/wallfixer-kit_icon.png");
         }
-        if (itemName.equals("Isolering")) {
+        if (itemName.equals("Tyk isolering")) {
             return new Image("/Images/insulation_icon.png");
         }
         if (itemName.equals("Solceller")) {
@@ -252,7 +252,7 @@ public class Controller {
     public void goNorth() throws IOException {
         domainI.goNorth();
         if (moves()) {
-            String resource = domainI.getCurrentRoom() + ".fxml";
+            String resource = domainI.getCurrentRoomName() + ".fxml";
             Parent newRoot = runGui.getFxmlLoader().load(getClass().getResource(resource));
             runGui.getStage().setScene(new Scene(newRoot));
             runGui.getStage().show();
@@ -262,7 +262,7 @@ public class Controller {
     public void goSouth() throws IOException {
         domainI.goSouth();
         if (moves()) {
-            String resource = domainI.getCurrentRoom() + ".fxml";
+            String resource = domainI.getCurrentRoomName() + ".fxml";
             Parent newRoot = runGui.getFxmlLoader().load(getClass().getResource(resource));
             runGui.getStage().setScene(new Scene(newRoot));
             runGui.getStage().show();
@@ -272,7 +272,7 @@ public class Controller {
     public void goWest() throws IOException {
         domainI.goWest();
         if (moves()) {
-            String resource = domainI.getCurrentRoom() + ".fxml";
+            String resource = domainI.getCurrentRoomName() + ".fxml";
             Parent newRoot = runGui.getFxmlLoader().load(getClass().getResource(resource));
             runGui.getStage().setScene(new Scene(newRoot));
             runGui.getStage().show();
@@ -282,7 +282,7 @@ public class Controller {
     public void goEast() throws IOException {
         domainI.goEast();
         if (moves()) {
-            String resource = domainI.getCurrentRoom() + ".fxml";
+            String resource = domainI.getCurrentRoomName() + ".fxml";
             Parent newRoot = runGui.getFxmlLoader().load(getClass().getResource(resource));
             runGui.getStage().setScene(new Scene(newRoot));
             runGui.getStage().show();

@@ -1,9 +1,9 @@
-package Energy.domain;
+package Energy.presentationCLI;
 
 enum CommandWord {
     //de forskllige kommandoer
     GO("gå"), QUIT("afslut"), HELP("hjælp"), UNKNOWN("?"), BUY("køb"), STATUS("status"),
-    REPLACE("udskift"), DELETE("skrot"), INVENTORY("inventar"), NEWROUND("nytår"),
+    REPLACE("udskift"), INVENTORY("inventar"), NEWROUND("nytår"),
     ;
 
     private String commandString;

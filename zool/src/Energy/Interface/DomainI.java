@@ -4,13 +4,21 @@ import Energy.domain.Inventory;
 
 public interface DomainI {
 
-    // Metoder til parent Controller
+    // Metoder
     Inventory getPlayerInventory();
 
-    String getCurrentRoom();
+    String getCurrentRoomName();
 
+    int getRound();
 
-    // Metoder der returnerer om currentroom har en udgang i en retning
+    // Info til statuslinie
+    int getWallet();
+
+    int getScore();
+
+    int getMovesRemaing();
+
+    // Metoder til tjek af udgange og skift af rum
     boolean hasNorthExit();
 
     boolean hasSouthExit();
@@ -19,8 +27,6 @@ public interface DomainI {
 
     boolean hasWestExit();
 
-
-    // Metoder til at skifte rum
     void goNorth();
 
     void goSouth();
@@ -31,42 +37,37 @@ public interface DomainI {
 
     boolean addMove();
 
+    String getRoomDescriptionText();
 
-    // Statuslinie
-    int getWallet();
+    // METODER TIL BUTIK
+    Inventory getStoreInventory();  // Returnerer butikkens Inventory
 
-    int getScore();
+    String buyItem(int ItemIndex);     // Returnere streng med status på køb
 
-    int getMovesRemaing();
-
-
-    // metoder til rum / udenfor
+    // METODER TIL AT UDSKIFTE TING I RUM
     String replaceStaticGUI(int indexRoom);     // Indsætter Items fra player inventory i room inventory:  returnerer Energimærke
 
     String replaceDynamicGUI(int indexRoom); // Indsætter Items fra player inventory i room inventory:  returnerer navn på indsat Item
 
     boolean canAffordMore(); // checker om der er råd til den billigste ting i butikken
 
+    // ANDRE METODER RELATERET TIL RUM
+    boolean inShop();
+
     Inventory getRoomInventory(); // Returnerer rummets Inventory
 
-    // metoder til butikken
-    Inventory getStoreInventory();  // Returnerer butikkens Inventory
-
-    String buyItem(int ItemIndex);     // Returnere streng med status på køb
-
-
-    // INFOSKÆRME
-    // start
-    String setStartAmountGUI(String value); // ved fejl: Returnere meddelelse, ingen fejl: null
-
+    // START SKÆRM
     String welcomeText();
 
-    // ny runde
-    String newRoundText();
+    String setStartAmount(String value); // ved fejl: Returnere meddelelse, ingen fejl: null
 
-    boolean newRound(); // returnerer false ved max antal runder!
+    // NY RUNDE SKÆRM
+    String nextRoundText();
 
-    // exit
+    boolean nextRound(); // returnerer false ved max antal runder!
+
+    // SLUT SKÆRM
     String endGameText();
+
 
 }

@@ -24,15 +24,14 @@ public class StartController extends Controller {
 
     //initialize fra superklassen, og opdaterer labels på tingene når man kommer ind i rummet.
     public void initialize() {
-
         welcomeText.setText(getDomainI().welcomeText());
-
+        okButton.setDefaultButton(true);
         //eventhandler for buttonclick, der sætter fxml til outside, da man derefter starter den nye runde
         okButton.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent actionEvent) {
                 while (true) {
-                    String error = getDomainI().setStartAmountGUI(input.getText());
+                    String error = getDomainI().setStartAmount(input.getText());
                     errorLabel.setText(error);
                     if (error == null) {
                         Parent newRoot = null;

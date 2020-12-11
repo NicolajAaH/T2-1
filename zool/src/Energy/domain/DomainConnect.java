@@ -9,10 +9,12 @@ public class DomainConnect implements DomainI {
     // ATTRIBUTTER
     private Game game;
 
+
     // CONSTRUCTOR
     public DomainConnect() {
         this.game = new Game();
     }
+
 
     // METODER
     @Override
@@ -21,15 +23,13 @@ public class DomainConnect implements DomainI {
     }
 
     @Override
-    public String getCurrentRoom() {
+    public String getCurrentRoomName() {
         return game.getCurrentRoom().getName(); // Returnerer navnet på current room
     }
 
     @Override
-    public boolean addMove() {
-        // hvis returner false = gå til næste år
-        game.getPlayer().addMove();
-        return game.getPlayer().getMoves() != game.getPlayer().getMovesPerRound();
+    public int getRound() {
+        return game.getPlayer().getRounds();
     }
 
     // Info til statuslinie
@@ -45,9 +45,8 @@ public class DomainConnect implements DomainI {
 
     @Override
     public int getMovesRemaing() {
-        return game.getPlayer().getMovesPerRound() - game.getPlayer().getMoves();
+        return game.getMovesPerRound() - game.getPlayer().getMoves();
     }
-
 
     // Metoder til tjek af udgange og skift af rum
     @Override
@@ -114,8 +113,20 @@ public class DomainConnect implements DomainI {
         game.setCurrentRoom(game.getCurrentRoom().getExit("vest"));
     }
 
+    @Override
+    public String getRoomDescriptionText(){
+        return game.getCurrentRoom().getLongDescription();
+    }
 
-    // METODER TIL STORE
+    @Override
+    public boolean addMove() {
+        // hvis returner false = gå til næste år
+        game.getPlayer().addMove();
+        return game.getPlayer().getMoves() != game.getMovesPerRound();
+    }
+
+
+    // METODER TIL BUTIK
     @Override
     public Inventory getStoreInventory() {
         return game.store.getRoomInv();
@@ -124,18 +135,10 @@ public class DomainConnect implements DomainI {
     @Override
     public String buyItem(int itemIndex) {
         // returnerer status om købet lykkedes eller fejlrapport til print på statuslabel i butik
-        CommandWords cvs = new CommandWords();
-        CommandWord cv = cvs.getCommandWord("køb");
-        Command cmd = new Command(cv, String.valueOf(itemIndex));
-        return game.buy(cmd);
+        return game.buy(itemIndex);
     }
 
-    @Override
-    public Inventory getRoomInventory() {
-        return game.getCurrentRoom().getRoomInv();
-    }
-
-    // METODER TIL AT REPLACE TING I RUM
+    // METODER TIL AT UDSKIFTE TING I RUM
     @Override
     public String replaceStaticGUI(int indexRoom) {
         // METODE til at replace faste ting i baggrundsbilledet der skal have en label
@@ -168,8 +171,20 @@ public class DomainConnect implements DomainI {
         return returnName; // returnerer streng med navn på item
     }
 
+    @Override
     public boolean canAffordMore() {
         return game.canAffordMore();
+    }
+
+    // ANDRE METODER RELATERET TIL RUM
+    @Override
+    public boolean inShop() {
+        return game.inShop();
+    }
+
+    @Override
+    public Inventory getRoomInventory() {
+        return game.getCurrentRoom().getRoomInv();
     }
 
     // START SKÆRM
@@ -178,53 +193,27 @@ public class DomainConnect implements DomainI {
         return game.welcomeText();
     }
 
-    public String setStartAmountGUI(String value) {
-        return game.setStartAmountGUI(value);
+    @Override
+    public String setStartAmount(String value) {
+        return game.setStartAmount(value);
     }
 
     // NY RUNDE SKÆRM
     @Override
-    public String newRoundText() {
-
-        // opdaterer runde score
-        game.getPlayer().saveRoundScore();
-
-        String result;
-        result = "\nDu har nu afsluttet " + ((game.getPlayer().getRounds()) + 1) + ". år\n";
-        result += game.endStatusText();
-        return result;
+    public String nextRoundText() {
+        // opdaterer rundecount og returner tekst
+        return game.nextRoundText();
     }
 
     @Override
-    public boolean newRound() {
+    public boolean nextRound() {
         // starter ny runde, returnerer false, hvis max runder er udført!
-
-        // tjekker om vi er nået max antal runder
-        if (game.getPlayer().getRounds() == (game.getPlayer().getMaxNumberOfRounds() - 1)) {
-            game.getPlayer().setRounds((game.getPlayer().getRounds()) + 1);
-            return false;
-        }
-
-        // intialiser ny runde
-        game.initNewRound();
-        return true;
+        return game.nextRound();
     }
 
     // SLUT SKÆRM
     @Override
     public String endGameText() {
-        String result = "";
-
-        // Tilføjer tekst, hvis slutskærmen vises pga max antal år
-        if (game.getPlayer().getRounds() == game.getPlayer().getMaxNumberOfRounds()) {
-            result += " - Du har spillet max antal år - \n";
-            game.getPlayer().setRounds((game.getPlayer().getRounds()) - 1);
-        }
-        result += "\n--- Tak for, at du spillede vores spil ---\n";
-        result += game.endStatusText();
-        result += "\n\nLavet af: Yusuf Baysoz, Victor Poulsen, Emil Spangenberg, Theis Langlands & Nicolaj Hansen";
-
-        return result;
+        return game.endGameText();
     }
-
 }

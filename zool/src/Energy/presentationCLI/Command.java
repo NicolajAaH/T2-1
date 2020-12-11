@@ -1,4 +1,4 @@
-package Energy.domain;
+package Energy.presentationCLI;
 
 class Command {
     // ATTRIBUTTER
