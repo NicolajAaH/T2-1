@@ -88,7 +88,7 @@ class GameCLI {
         System.out.println("Kommandoen: 'hjælp' printer dette igen.");
         System.out.println("Kommandoen: 'inventar' viser dit inventar.");
         System.out.println("Kommandoen: 'gå' RETNING bevæger dig rundt.");
-        System.out.println("Kommandoen: 'printStatus' fortæller din årlige besparelse, og dit budget for året.");
+        System.out.println("Kommandoen: 'status' fortæller din årlige besparelse, og dit budget for året.");
     }
 
     private void printInventory() {
@@ -284,26 +284,6 @@ class GameCLI {
             System.out.println("Du har nået max antal bevægelser i dette år.");
             return nextRoundCLI();
         }
-
-        /*
-        Room nextRoom = currentRoom.getExit(direction);
-
-        // tjekker om der er et rum i den retning
-        if (nextRoom == null) {
-            System.out.println("Der er ingen udgang den vej!");
-            return false;
-        }
-
-        // lægger en til move og tjekker om vi er på max
-        domainI.addMove();
-        if (player.getMoves() == player.getMovesPerRound()) {
-            System.out.println("Du har nået max antal bevægelser i dette år.");
-            return nextRoundCLI();
-        }
-
-        currentRoom = nextRoom;
-
-         */
         System.out.println(domainI.getRoomDescriptionText());
 
         return false;
