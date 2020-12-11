@@ -165,46 +165,31 @@ class Game {
 
         while (true) {
             String input = s.nextLine();
-            int value = 0;
-            try {
-                value = Integer.parseInt(input);
-            } catch (NumberFormatException e) {
-                // invalid input
-            }
-
-            if (value > 0 && value <= maxStartAmount) {
-                player.setWallet(value);
-                player.setStartAmount(value);
+            String error = setStartAmount(input);
+            if (error == null) {
                 break;
+            } else {
+                System.out.print(error + " : ");
             }
-            System.out.println("\nFejl: Ugyldigt input");
-            System.out.print("Indtast beløb mellem 0 og " + maxStartAmount + " kr. : ");
         }
     }
-
-    String setStartAmountGUI(String value) {
-        // metode til GUI input af start amount, returnerer streng med fejlmeddelelse og null ved succes
-
-        int result = 0;
-
-        // Laver string til integer
+    String setStartAmount(String input) {
+        // returnerer fejlmeddelelse ved fejlinput ellers sættes startbeløb
+        int value = 0;
         try {
-            result = Integer.parseInt(value);
+            value = Integer.parseInt(input);
         } catch (NumberFormatException e) {
-            return "Fejl: Værdien skal være mellem 0 og " + maxStartAmount + " kr.";
+            // invalid input
         }
 
-        // Tjekker om beløbet er mellem og max grænsen.
-        if (!(result > 0 && result <= maxStartAmount)) {
-            return "Fejl: Værdien skal være mellem 0 og " + maxStartAmount + " kr.";
+        if (value > 0 && value <= maxStartAmount) {
+            player.setWallet(value);
+            player.setStartAmount(value);
+            return null;
         }
-
-        // Sætter startbeløb og husker årlige budget budget
-        player.setWallet(result);
-        player.setStartAmount(result);
-        return null;
+        return "Fejl: Indtast beløb mellem 0 og " + maxStartAmount + " kr.";
     }
-
+    
     private boolean processCommand(Command command) {
         boolean wantToQuit = false;
         CommandWord commandWord = command.getCommandWord();

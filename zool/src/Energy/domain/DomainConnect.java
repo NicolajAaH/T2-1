@@ -176,7 +176,7 @@ public class DomainConnect implements DomainI {
     }
 
     public String setStartAmountGUI(String value) {
-        return game.setStartAmountGUI(value);
+        return game.setStartAmount(value);
     }
 
     // NY RUNDE SKÆRM
