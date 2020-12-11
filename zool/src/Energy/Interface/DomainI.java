@@ -9,7 +9,6 @@ public interface DomainI {
 
     String getCurrentRoomName();
 
-
     // Metoder der returnerer om currentroom har en udgang i en retning
     boolean hasNorthExit();
 
@@ -18,7 +17,6 @@ public interface DomainI {
     boolean hasEastExit();
 
     boolean hasWestExit();
-
 
     // Metoder til at skifte rum
     void goNorth();

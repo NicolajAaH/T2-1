@@ -1,9 +1,8 @@
 package Energy.domain;
 
-
 import java.util.Scanner;
 
-public class Game {
+class Game {
     // ATTRIBUTTER
 
     private Player player;
@@ -250,18 +249,7 @@ public class Game {
         return playerInvIndex;
     }
 
-
     // metoder til ny runde kommando
-    public String nextRoundText() {
-        // opdaterer runde score
-        player.saveRoundScore();
-
-        // opretter streng til udskrift
-        String result;
-        result = "\nDu har nu afsluttet " + ((player.getRounds()) + 1) + ". år\n";
-        result += statusText();
-        return result;
-    }
 
     public boolean nextRound() {
         // starter ny runde, returnerer false, hvis max runder er udført!
@@ -294,6 +282,17 @@ public class Game {
                 "Du skal opnå de størst mulige forbedringer med det tilgængelige budget\n\n" +
                 "Spillet løber over en årrække, når du har brugt dit budget,\n" +
                 "eller efter " + player.getMovesPerRound() + " bevægelser skiftes til nyt år\n";
+        return result;
+    }
+
+    public String nextRoundText() {
+        // opdaterer runde score
+        player.saveRoundScore();
+
+        // opretter streng til udskrift
+        String result;
+        result = "\nDu har nu afsluttet " + ((player.getRounds()) + 1) + ". år\n";
+        result += statusText();
         return result;
     }
 

@@ -3,7 +3,6 @@ package Energy.presentationCLI;
 import Energy.Interface.DomainI;
 import Energy.domain.DomainConnect;
 
-
 class PlayGame {
     private Parser parser = new Parser();
 
@@ -242,20 +241,41 @@ class PlayGame {
 
         switch(direction){
             case "nord":
-                if (domainI.hasNorthExit()) domainI.goNorth();
+                if (domainI.hasNorthExit()) {
+                    domainI.goNorth();
+                } else {
+                    System.out.println("Der er ingen udgang den vej!");
+                }
                 break;
+
             case "syd":
-                if (domainI.hasSouthExit()) domainI.goSouth();
+                if (domainI.hasSouthExit()) {
+                    domainI.goSouth();
+                } else {
+                    System.out.println("Der er ingen udgang den vej!");
+                }
                 break;
+
             case "øst":
-                if (domainI.hasEastExit()) domainI.goEast();
+                if (domainI.hasEastExit()) {
+                    domainI.goEast();
+                } else {
+                    System.out.println("Der er ingen udgang den vej!");
+                }
                 break;
+
             case "vest":
-                if (domainI.hasWestExit()) domainI.goWest();
+                if (domainI.hasWestExit()) {
+                    domainI.goWest();
+                } else {
+                    System.out.println("Der er ingen udgang den vej!");
+                }
                 break;
+
             default:
-                System.out.println("Der er ingen udgang den vej!");
+                System.out.println("Fejl i indtastning");
                 return false;
+
         }
         // lægger en til move og tjekker om vi er på max
         domainI.addMove();
@@ -287,7 +307,5 @@ class PlayGame {
 
         return false;
     }
-
-
 }
 
