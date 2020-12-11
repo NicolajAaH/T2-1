@@ -121,7 +121,7 @@ class Game {
         store.addToInventory(new Item("Pillefyr (varmeanlæg)", 22500, 2500, HEATING, null));
         store.addToInventory(new Item("Gas (varmeanlæg)", 25000, 3000, HEATING, null));
         store.addToInventory(new Item("Hul-fikser-kit", 1500, 1500, WALLFIXER, null));
-        store.addToInventory(new Item("Isolering", 10000, 750, ISOLATION, null));
+        store.addToInventory(new Item("Tyk isolering", 10000, 750, ISOLATION, null));
         store.addToInventory(new Item("Solceller", 30000, 3500, SOLARCELLS, null));
         store.addToInventory(new Item("Bruser A+", 2000, 300, BATH, "A+"));
 
@@ -266,14 +266,14 @@ class Game {
     String welcomeText() {
         String result;
         result = "Du befinder dig i et dansk parcelhus på 160 m2\n" +
-                " Dit årlige forbrug er på " + START_VALUE +
-                " som giver huset energimærke " + EnergyLabel.createEnergyLabel(player.getScore(), START_VALUE) + "\n\n" +
+                "Dit årlige forbrug er på " + START_VALUE +
+                ", hvilket giver huset energimærket " + EnergyLabel.createEnergyLabel(player.getScore(), START_VALUE) + "\n\n" +
                 "Din mission er at forbedre din boligs energiforbrug\n\n" +
                 "Du kan købe mere energivenlige produkter til dit hus i Super Byg, " +
                 "så din bolig bruger mindre energi, og dermed opnår bedre energimærke\n\n" +
                 "Du skal opnå de størst mulige forbedringer med det tilgængelige budget\n\n" +
-                "Spillet løber over en årrække, når du har brugt dit budget,\n" +
-                "eller efter " + MOVES_PER_ROUND + " bevægelser skiftes til nyt år\n";
+                "Spillet løber over en årrække\n" +
+                "Når du har brugt dit budget, eller efter " + MOVES_PER_ROUND + " bevægelser, skiftes der til et nyt år\n";
         return result;
     }
 

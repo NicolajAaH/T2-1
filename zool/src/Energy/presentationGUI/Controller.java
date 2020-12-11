@@ -147,7 +147,7 @@ public class Controller {
         if (itemName.equals("Hul-fikser-kit")) {
             return new Image("/Images/wallfixer-kit_icon.png");
         }
-        if (itemName.equals("Isolering")) {
+        if (itemName.equals("Tyk isolering")) {
             return new Image("/Images/insulation_icon.png");
         }
         if (itemName.equals("Solceller")) {
