@@ -8,13 +8,11 @@ class Player {
     private int totalUsedAmount = 0; // summeret forbrug
 
     private int round = 0; // holder styr på runder (år)
-    final private int maxNumberOfRounds = 5;
 
     private int score = 0; // samlet energibesparelse
-    private int[] roundScore = new int[maxNumberOfRounds]; // score i de individuelle år
+    private int[] roundScore = new int[Game.getMaxNumberOfRounds()]; // score i de individuelle år
 
     private int moves = 0; // holder styr på antal skift imellem rum
-    final private int movesPerRound = 40;
 
     private Inventory inventory = new Inventory();
 
@@ -47,10 +45,6 @@ class Player {
         this.round = rounds;
     }
 
-    public int getMaxNumberOfRounds() {
-        return maxNumberOfRounds;
-    }
-
     public int getScore() {
         return score;
     }
@@ -69,10 +63,6 @@ class Player {
 
     public void setMoves(int moves) {
         this.moves = moves;
-    }
-
-    public int getMovesPerRound() {
-        return movesPerRound;
     }
 
     public Inventory getInventory() {
