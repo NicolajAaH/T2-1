@@ -176,35 +176,20 @@ public class DomainConnect implements DomainI {
     }
 
     public String setStartAmountGUI(String value) {
-        return game.setStartAmountGUI(value);
+        return game.setStartAmount(value);
     }
 
     // NY RUNDE SKÆRM
     @Override
     public String nextRoundText() {
-
-        // opdaterer runde score
-        game.getPlayer().saveRoundScore();
-
-        String result;
-        result = "\nDu har nu afsluttet " + ((game.getPlayer().getRounds()) + 1) + ". år\n";
-        result += game.statusText();
-        return result;
+        // opdaterer rundecount og returner tekst
+        return game.nextRoundText();
     }
 
     @Override
     public boolean nextRoundGUI() {
         // starter ny runde, returnerer false, hvis max runder er udført!
-
-        // tjekker om vi er nået max antal runder
-        if (game.getPlayer().getRounds() == (game.getPlayer().getMaxNumberOfRounds() - 1)) {
-            game.getPlayer().setRounds((game.getPlayer().getRounds()) + 1);
-            return false;
-        }
-
-        // intialiser ny runde
-        game.initNewRound();
-        return true;
+        return game.nextRound();
     }
 
     // SLUT SKÆRM
