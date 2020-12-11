@@ -28,7 +28,7 @@ public class NewRoundController extends Controller {
         newYear.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent actionEvent) {
-                boolean status = getDomainI().nextRoundGUI();
+                boolean status = getDomainI().nextRound();
                 Parent newRoot = null;
                 if (status == true) {
                     try {

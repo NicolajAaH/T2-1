@@ -1,10 +1,11 @@
 package Energy.domain;
 
+
 import java.util.Scanner;
 
-class Game {
+public class Game {
     // ATTRIBUTTER
-    private Parser parser;
+
     private Player player;
     private Room currentRoom; // holder styr på det rum man befinder sig i
     Room store, outside, utility, bathroom, bedroom, kidsRoom, room, kitchen, livingRoom, corridor1, corridor2, corridor3, corridor4; // liste over rum
@@ -30,7 +31,6 @@ class Game {
     public Game() {
         // opretter nyt spil
         createRooms(); // opretter rum, udgange og indhold
-        parser = new Parser();
         player = new Player();
         player.getInventory().setMaxSize(5);  // sætter max kapacitet i player inventory
     }
@@ -144,20 +144,7 @@ class Game {
         currentRoom = outside;
     }
 
-    public void playCLI() {
-
-        printWelcome(); // opstart af spil
-
-        boolean gameFinished = false;
-        while (!gameFinished) {
-            Command command = parser.getCommand();
-            gameFinished = processCommand(command);
-        }
-
-        printExit();
-    }
-
-    private void setStartAmountCLI() {
+    void setStartAmountCLI() {
         // Henter budget fra bruger
         System.out.print("Indtast dit årlige renoverings budget: ");
 
@@ -190,146 +177,6 @@ class Game {
         return "Fejl: Indtast beløb mellem 0 og " + maxStartAmount + " kr.";
     }
 
-    private boolean processCommand(Command command) {
-        boolean wantToQuit = false;
-        CommandWord commandWord = command.getCommandWord();
-
-        if (commandWord == CommandWord.UNKNOWN) {
-            System.out.println("Jeg ved ikke, hvad du mener. Skriv 'hjælp' for at se dine kommandoer.");
-        } else if (commandWord == CommandWord.HELP) {
-            printHelp();
-        } else if (commandWord == CommandWord.GO) {
-            wantToQuit = goRoom(command);
-        } else if (commandWord == CommandWord.NEWROUND) {
-            wantToQuit = nextRoundCLI();
-        } else if (commandWord == CommandWord.INVENTORY) {
-            printInventory();
-        } else if (commandWord == CommandWord.QUIT) {
-            wantToQuit = quit(command);
-        } else if (commandWord == CommandWord.BUY) {
-            buyCLI(command);
-        } else if (commandWord == CommandWord.REPLACE) {
-            wantToQuit = replaceCLI(command);
-        } else if (commandWord == CommandWord.STATUS) {
-            printStatus();
-        }
-        return wantToQuit;
-    }
-
-    // metoder til processCommand
-    private boolean goRoom(Command command) {
-
-        // Tjekker om der er et ord efter go i kommando
-        if (!command.hasSecondWord()) {
-            System.out.println("Hvilken retning?");
-            return false;
-        }
-
-        String direction = command.getSecondWord();
-
-        Room nextRoom = currentRoom.getExit(direction);
-
-        // tjekker om der er et rum i den retning
-        if (nextRoom == null) {
-            System.out.println("Der er ingen udgang den vej!");
-            return false;
-        }
-
-        // lægger en til move og tjekker om vi er på max
-        player.addMove();
-        if (player.getMoves() == player.getMovesPerRound()) {
-            System.out.println("Du har nået max antal bevægelser i dette år.");
-            return nextRoundCLI();
-        }
-
-        currentRoom = nextRoom;
-        System.out.println(currentRoom.getLongDescription());
-
-        return false;
-    }
-
-    private boolean quit(Command command) {
-        if (command.hasSecondWord()) {
-            System.out.println("Afslut hvad?");
-            return false;
-        }
-        return true;
-    }
-
-    private void printStatus() {
-        System.out.println("Du har opnået en samlet årlig besparelse på: " + player.getScore() +
-                ", og du har " + player.getWallet() + "kr. tilbage på budgettet i år");
-    }
-
-    private void printInventory() {
-        if (player.getInventory().isEmpty()) {
-            System.out.println("Du har ikke nogle ting, tag en tur i Superbyg");
-        } else {
-            System.out.print("Du har: \n");
-            System.out.println(player.getInventory());
-        }
-    }
-
-    private void printHelp() {
-        System.out.println("");
-        System.out.println("Dine kommandoer er:\n");
-        parser.showCommands();
-        System.out.println("\nKommandoen: 'nytår' starter et nyt år.");
-        System.out.println("Kommandoen: 'afslut' afslutter spillet.");
-        System.out.println("Kommandoen: 'køb' NUMMER køber en ting fra butikken.");
-        System.out.println("Kommandoen: 'udskift' NUMMER udskifter en ting i rummet eller udenfor.");
-        System.out.println("Kommandoen: 'hjælp' printer dette igen.");
-        System.out.println("Kommandoen: 'skrot' NUMMER skrotter og fjerner en ting fra dit inventar.");
-        System.out.println("Kommandoen: 'inventar' viser dit inventar.");
-        System.out.println("Kommandoen: 'gå' RETNING bevæger dig rundt.");
-        System.out.println("Kommandoen: 'printStatus' fortæller din årlige besparelse, og dit budget for året.");
-    }
-
-    // metoder til køb og replace kommandoer
-    void buyCLI(Command command) {
-        String errorCheck = checkBuyConditionsCLI(command);
-        if (errorCheck != null) {
-            System.out.println(errorCheck); // udskriver fejl hvis fejl!
-            return;
-        }
-
-        // finder index til replacement
-        int index = Integer.parseInt(command.getSecondWord()) - 1;
-
-        System.out.println(buy(index)); // udfører køb eller udskriver fejl
-        System.out.println("Du har nu\n" + player.getInventory());
-    }
-
-    String checkBuyConditionsCLI(Command command) {
-        // Tjekker betingelser kun relateret CLI og returnerer fejlmeddelelse hvis ugyldigt input ellers null
-
-        // Undersøger om du er i butikken
-        if (!inShop()) {
-            return "Du kan kun handle i butikken!";
-        }
-
-        // undersøger om kommandoen har et andet ord
-        if (!command.hasSecondWord()) {
-            return "Køb Hvad?";
-        }
-
-        // Tjekker at det andet ord (string) kan parses til en Integer
-        int index = 0;
-
-        try {
-            index = Integer.parseInt(command.getSecondWord()) - 1;
-        } catch (NumberFormatException e) {
-            return "Dette er ikke et gyldigt nummer!";
-        }
-
-        // Tjekker om index er mellem 0 og butikkens max antal varer
-        if (0 > index || index + 1 > store.getRoomInv().getSize()) {
-            return "Dette er ikke et gyldigt nummer!";
-        }
-
-        return null;
-    }
-
     String buy(int index) {
         // returnerer streng med evt. fejlmeddelelse
 
@@ -358,70 +205,8 @@ class Game {
         return "Du har købt " + store.getRoomInv().getItem(index).getName();
     }
 
-    private boolean inShop() {
+    boolean inShop() {
         return currentRoom == store;
-    }
-
-    private boolean replaceCLI(Command command) {
-        // tjekker input
-        String error = checkReplaceConditions(command);
-        if (error != null) {
-            System.out.println(error);
-            return false;
-        }
-
-        int roomInvIndex = Integer.parseInt(command.getSecondWord()) - 1;
-
-        // Finder index i players inventory.
-        int playerInvIndex = getPlayerInvIndex(roomInvIndex);
-
-        // tjekker om spiller har item i inventar
-        if (playerInvIndex == -1) {
-            System.out.println("Du har ikke den type i dit inventar, gå i Super Byg!");
-            return false;
-        }
-
-        insertItem(roomInvIndex, playerInvIndex);
-
-        // Udskriver inventory fra player og Room
-        printInventory();
-        System.out.println("Rummet indeholder: ");
-        System.out.println(currentRoom.getRoomInv());
-        System.out.println("Du har nu opnået en årlig besparelse på: " + player.getScore());
-
-        // Tjekker om spiller har råd til at købe flere item - ellers gåes videre til næste runde!
-        if (!canAffordMore()) {
-            System.out.println("Du har brugt dette års budget, og har ikke råd til mere i butikken");
-            return nextRoundCLI();
-        }
-        return false;
-    }
-
-    private String checkReplaceConditions(Command command) {
-        // returnerer om det er muligt at udføre replace kommando, returnerer streng med fejl
-
-        // Undersøger om du er i butikken
-        if (inShop()) {
-            return "Du kan kun handle når du er i butikken!";
-        }
-
-        // undersøger om kommandoen har et andet ord
-        if (!command.hasSecondWord()) {
-            return "Udskift hvad?";
-        }
-        // tjekker om andet ord er integer
-        int index = 0;
-        try {
-            index = Integer.parseInt(command.getSecondWord()) - 1;
-        } catch (NumberFormatException e) {
-            return "Dette er ikke et gyldigt nummer!";
-        }
-
-        // Tjekker om index er mellem 0 og rummets max antal items
-        if (0 > index || index + 1 > currentRoom.getRoomInv().getSize()) {
-            return "Dette er ikke et gyldigt nummer!";
-        }
-        return null;
     }
 
     boolean canAffordMore() {
@@ -464,23 +249,9 @@ class Game {
         }
         return playerInvIndex;
     }
-    
+
+
     // metoder til ny runde kommando
-
-    private boolean nextRoundCLI() {
-
-        if (!nextRound()) return true; // hvis next round er false sætte wantToQuit til true
-
-        System.out.println(nextRoundText());
-
-        // Udskriver velkommen til nyt år
-        System.out.println("\n --- Velkommen til år " + (player.getRounds() + 1) + " ---\n");
-        System.out.println("Dit nye årsbudget er " + player.getWallet());
-        System.out.println();
-
-        return false; // fortsæt spil
-    }
-
     public String nextRoundText() {
         // opdaterer runde score
         player.saveRoundScore();
@@ -509,21 +280,8 @@ class Game {
         return true;
     }
 
+
     //  metoder til udskrift
-    private void printWelcome() {
-        // velkomst tekst til CLI
-        System.out.println(welcomeText());
-
-        setStartAmountCLI();
-
-        System.out.println("\nSkriv '" + CommandWord.HELP + "' hvis du har brug for hjælp.\n");
-        System.out.println(currentRoom.getLongDescription());
-    }
-
-    private void printExit() {
-        // Udskriver sluttekst - CLI
-        System.out.println(endGameText());
-    }
 
     String welcomeText() {
         String result;

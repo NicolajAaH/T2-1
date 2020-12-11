@@ -7,7 +7,7 @@ public interface DomainI {
     // Metoder til parent Controller
     Inventory getPlayerInventory();
 
-    String getCurrentRoom();
+    String getCurrentRoomName();
 
 
     // Metoder der returnerer om currentroom har en udgang i en retning
@@ -31,6 +31,7 @@ public interface DomainI {
 
     boolean addMove();
 
+    String getRoomDescriptionText();
 
     // Statuslinie
     int getWallet();
@@ -54,17 +55,22 @@ public interface DomainI {
 
     String buyItem(int ItemIndex);     // Returnere streng med status på køb
 
+    boolean inShop();
 
     // INFOSKÆRME
     // start
     String setStartAmountGUI(String value); // ved fejl: Returnere meddelelse, ingen fejl: null
+    void setStartAmountCLI();
 
     String welcomeText();
 
     // ny runde
     String nextRoundText();
 
-    boolean nextRoundGUI(); // returnerer false ved max antal runder!
+    boolean nextRound(); // returnerer false ved max antal runder!
+
+    int getRound();
+
 
     // exit
     String endGameText();

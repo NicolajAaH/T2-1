@@ -21,7 +21,7 @@ public class DomainConnect implements DomainI {
     }
 
     @Override
-    public String getCurrentRoom() {
+    public String getCurrentRoomName() {
         return game.getCurrentRoom().getName(); // Returnerer navnet på current room
     }
 
@@ -32,6 +32,10 @@ public class DomainConnect implements DomainI {
         return game.getPlayer().getMoves() != game.getPlayer().getMovesPerRound();
     }
 
+    @Override
+    public int getRound() {
+        return game.getPlayer().getRounds();
+    }
     // Info til statuslinie
     @Override
     public int getWallet() {
@@ -114,6 +118,9 @@ public class DomainConnect implements DomainI {
         game.setCurrentRoom(game.getCurrentRoom().getExit("vest"));
     }
 
+    public String getRoomDescriptionText(){
+        return game.getCurrentRoom().getLongDescription();
+    }
 
     // METODER TIL STORE
     @Override
@@ -127,10 +134,15 @@ public class DomainConnect implements DomainI {
         return game.buy(itemIndex);
     }
 
+    public boolean inShop() {
+        return game.inShop();
+    }
+
     @Override
     public Inventory getRoomInventory() {
         return game.getCurrentRoom().getRoomInv();
     }
+
 
     // METODER TIL AT REPLACE TING I RUM
     @Override
@@ -151,6 +163,8 @@ public class DomainConnect implements DomainI {
         return returnEnergylabel;
     }
 
+
+
     @Override
     public String replaceDynamicGUI(int indexRoom) {
         // METODE til at replace faste ting i baggrundsbilledet der skal have en label
@@ -169,14 +183,20 @@ public class DomainConnect implements DomainI {
         return game.canAffordMore();
     }
 
+
     // START SKÆRM
     @Override
     public String welcomeText() {
         return game.welcomeText();
     }
 
+    @Override
     public String setStartAmountGUI(String value) {
         return game.setStartAmount(value);
+    }
+
+    public void setStartAmountCLI(){
+        game.setStartAmountCLI();
     }
 
     // NY RUNDE SKÆRM
@@ -187,7 +207,7 @@ public class DomainConnect implements DomainI {
     }
 
     @Override
-    public boolean nextRoundGUI() {
+    public boolean nextRound() {
         // starter ny runde, returnerer false, hvis max runder er udført!
         return game.nextRound();
     }

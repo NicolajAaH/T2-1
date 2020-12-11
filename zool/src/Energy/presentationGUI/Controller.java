@@ -252,7 +252,7 @@ public class Controller {
     public void goNorth() throws IOException {
         domainI.goNorth();
         if (moves()) {
-            String resource = domainI.getCurrentRoom() + ".fxml";
+            String resource = domainI.getCurrentRoomName() + ".fxml";
             Parent newRoot = runGui.getFxmlLoader().load(getClass().getResource(resource));
             runGui.getStage().setScene(new Scene(newRoot));
             runGui.getStage().show();
@@ -262,7 +262,7 @@ public class Controller {
     public void goSouth() throws IOException {
         domainI.goSouth();
         if (moves()) {
-            String resource = domainI.getCurrentRoom() + ".fxml";
+            String resource = domainI.getCurrentRoomName() + ".fxml";
             Parent newRoot = runGui.getFxmlLoader().load(getClass().getResource(resource));
             runGui.getStage().setScene(new Scene(newRoot));
             runGui.getStage().show();
@@ -272,7 +272,7 @@ public class Controller {
     public void goWest() throws IOException {
         domainI.goWest();
         if (moves()) {
-            String resource = domainI.getCurrentRoom() + ".fxml";
+            String resource = domainI.getCurrentRoomName() + ".fxml";
             Parent newRoot = runGui.getFxmlLoader().load(getClass().getResource(resource));
             runGui.getStage().setScene(new Scene(newRoot));
             runGui.getStage().show();
@@ -282,7 +282,7 @@ public class Controller {
     public void goEast() throws IOException {
         domainI.goEast();
         if (moves()) {
-            String resource = domainI.getCurrentRoom() + ".fxml";
+            String resource = domainI.getCurrentRoomName() + ".fxml";
             Parent newRoot = runGui.getFxmlLoader().load(getClass().getResource(resource));
             runGui.getStage().setScene(new Scene(newRoot));
             runGui.getStage().show();
