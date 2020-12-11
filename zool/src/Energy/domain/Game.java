@@ -257,8 +257,8 @@ class Game {
     String welcomeText() {
         String result;
         result = "Du befinder dig i et dansk parcelhus på 160 m2\n" +
-                " Dit årlige forbrug er på " + START_VALUE +
-                " som giver huset energimærke " + EnergyLabel.createEnergyLabel(player.getScore(), START_VALUE) + "\n\n" +
+                "Dit årlige forbrug er på " + START_VALUE +
+                ", hvilket giver huset energimærket " + EnergyLabel.createEnergyLabel(player.getScore(), START_VALUE) + "\n\n" +
                 "Din mission er at forbedre din boligs energiforbrug\n\n" +
                 "Du kan købe mere energivenlige produkter til dit hus i Super Byg, " +
                 "så din bolig bruger mindre energi, og dermed opnår bedre energimærke\n\n" +
