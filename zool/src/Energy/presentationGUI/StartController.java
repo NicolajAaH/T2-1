@@ -8,7 +8,6 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
-import javafx.scene.input.MouseEvent;
 
 import java.io.IOException;
 
@@ -28,9 +27,9 @@ public class StartController extends Controller {
         welcomeText.setText(getDomainI().welcomeText());
         okButton.setDefaultButton(true);
         //eventhandler for buttonclick, der sætter fxml til outside, da man derefter starter den nye runde
-        okButton.setOnMouseClicked(new EventHandler<MouseEvent>() {
+        okButton.setOnAction(new EventHandler<ActionEvent>() {
             @Override
-            public void handle(MouseEvent actionEvent) {
+            public void handle(ActionEvent actionEvent) {
                 while (true) {
                     String error = getDomainI().setStartAmount(input.getText());
                     errorLabel.setText(error);
