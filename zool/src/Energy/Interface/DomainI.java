@@ -9,7 +9,16 @@ public interface DomainI {
 
     String getCurrentRoomName();
 
-    // Metoder der returnerer om currentroom har en udgang i en retning
+    int getRound();
+
+    // Info til statuslinie
+    int getWallet();
+
+    int getScore();
+
+    int getMovesRemaing();
+
+    // Metoder til tjek af udgange og skift af rum
     boolean hasNorthExit();
 
     boolean hasSouthExit();
@@ -18,7 +27,6 @@ public interface DomainI {
 
     boolean hasWestExit();
 
-    // Metoder til at skifte rum
     void goNorth();
 
     void goSouth();
@@ -31,44 +39,35 @@ public interface DomainI {
 
     String getRoomDescriptionText();
 
-    // Statuslinie
-    int getWallet();
+    // METODER TIL BUTIK
+    Inventory getStoreInventory();  // Returnerer butikkens Inventory
 
-    int getScore();
+    String buyItem(int ItemIndex);     // Returnere streng med status på køb
 
-    int getMovesRemaing();
-
-    // metoder til rum / udenfor
+    // METODER TIL AT UDSKIFTE TING I RUM
     String replaceStaticGUI(int indexRoom);     // Indsætter Items fra player inventory i room inventory:  returnerer Energimærke
 
     String replaceDynamicGUI(int indexRoom); // Indsætter Items fra player inventory i room inventory:  returnerer navn på indsat Item
 
     boolean canAffordMore(); // checker om der er råd til den billigste ting i butikken
 
-    Inventory getRoomInventory(); // Returnerer rummets Inventory
-
-    // metoder til butikken
-    Inventory getStoreInventory();  // Returnerer butikkens Inventory
-
-    String buyItem(int ItemIndex);     // Returnere streng med status på køb
-
+    // ANDRE METODER RELATERET TIL RUM
     boolean inShop();
 
-    // INFOSKÆRME
-    // start
-    String setStartAmount(String value); // ved fejl: Returnere meddelelse, ingen fejl: null
+    Inventory getRoomInventory(); // Returnerer rummets Inventory
 
+    // START SKÆRM
     String welcomeText();
 
-    // ny runde
+    String setStartAmount(String value); // ved fejl: Returnere meddelelse, ingen fejl: null
+
+    // NY RUNDE SKÆRM
     String nextRoundText();
 
     boolean nextRound(); // returnerer false ved max antal runder!
 
-    int getRound();
-
-
-    // exit
+    // SLUT SKÆRM
     String endGameText();
+
 
 }
