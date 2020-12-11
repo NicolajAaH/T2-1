@@ -112,7 +112,7 @@ class Game {
         store.addToInventory(new Item("Pillefyr (varmeanlæg)", 22500, 2500, HEATING, null));
         store.addToInventory(new Item("Gas (varmeanlæg)", 25000, 3000, HEATING, null));
         store.addToInventory(new Item("Hul-fikser-kit", 1500, 1500, WALLFIXER, null));
-        store.addToInventory(new Item("Isolering", 10000, 750, ISOLATION, null));
+        store.addToInventory(new Item("Tyk isolering", 10000, 750, ISOLATION, null));
         store.addToInventory(new Item("Solceller", 30000, 3500, SOLARCELLS, null));
         store.addToInventory(new Item("Bruser A+", 2000, 300, BATH, "A+"));
 
