@@ -168,7 +168,7 @@ class PlayGame {
 
         // tjekker om spiller har item i inventar
         String result = domainI.replaceDynamicGUI(roomInvIndex);
-        if (result != null) {
+        if (result == null) {
             System.out.println("Du har ikke købt den type, gå i Super Byg!");
             return false;
         }
