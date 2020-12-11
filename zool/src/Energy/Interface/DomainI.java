@@ -38,7 +38,6 @@ public interface DomainI {
 
     int getMovesRemaing();
 
-
     // metoder til rum / udenfor
     String replaceStaticGUI(int indexRoom);     // Indsætter Items fra player inventory i room inventory:  returnerer Energimærke
 

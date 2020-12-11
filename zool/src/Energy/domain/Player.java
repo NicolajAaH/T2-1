@@ -6,7 +6,6 @@ class Player {
     private int wallet = 0; // aktuel saldo
     private int startAmount = 0; // årligt renoverings budget - start saldo
     private int totalUsedAmount = 0; // summeret forbrug
-    final private int startValue = 29000; // start forbrug (til Energimærkeberegning)
 
     private int round = 0; // holder styr på runder (år)
     final private int maxNumberOfRounds = 5;
@@ -38,10 +37,6 @@ class Player {
 
     public int getTotalUsedAmount() {
         return totalUsedAmount;
-    }
-
-    public int getStartValue() {
-        return startValue;
     }
 
     public int getRounds() {
