@@ -29,7 +29,7 @@ public class DomainConnect implements DomainI {
     public boolean addMove() {
         // hvis returner false = gå til næste år
         game.getPlayer().addMove();
-        return game.getPlayer().getMoves() != game.getPlayer().getMovesPerRound();
+        return game.getPlayer().getMoves() != game.getMovesPerRound();
     }
 
     @Override
@@ -49,9 +49,8 @@ public class DomainConnect implements DomainI {
 
     @Override
     public int getMovesRemaing() {
-        return game.getPlayer().getMovesPerRound() - game.getPlayer().getMoves();
+        return game.getMovesPerRound() - game.getPlayer().getMoves();
     }
-
 
     // Metoder til tjek af udgange og skift af rum
     @Override

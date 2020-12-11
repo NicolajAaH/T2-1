@@ -2,28 +2,14 @@ package Energy.domain;
 
 class Game {
     // ATTRIBUTTER
-
     private Player player;
     private Room currentRoom; // holder styr på det rum man befinder sig i
     Room store, outside, utility, bathroom, bedroom, kidsRoom, room, kitchen, livingRoom, corridor1, corridor2, corridor3, corridor4; // liste over rum
 
     private final int MAX_START_AMOUNT = 100000; // top grænsen for spillerens budget
-    private final int START_VALUE = 29000; // start forbrug (til Energimærkeberegning)
-
-    // konstanter til Item - typer
-    public final int WASHINGMACHINE = 1;
-    public final int DRYER = 2;
-    public final int HEATING = 3;
-    public final int STOVE = 4;
-    public final int FRIDGE = 5;
-    public final int DISHWASHER = 6;
-    public final int WINDOW = 7;
-    public final int LIGHTS = 8;
-    public final int TV = 9;
-    public final int WALLFIXER = 10;
-    public final int ISOLATION = 11;
-    public final int SOLARCELLS = 12;
-    public final int BATH = 13;
+    private final int START_VALUE = 30500; // start forbrug (til Energimærkeberegning)
+    private final int MOVES_PER_ROUND = 40; // max antal træk pr. år
+    private final static int MAX_NUMBER_OF_ROUNDS = 5;
 
     // CONSTRUCTORS
     public Game() {
@@ -44,6 +30,14 @@ class Game {
 
     public Player getPlayer() {
         return player;
+    }
+
+    public int getMovesPerRound() {
+        return MOVES_PER_ROUND;
+    }
+
+    public static int getMaxNumberOfRounds() {
+        return MAX_NUMBER_OF_ROUNDS;
     }
 
     // Metoder
@@ -93,6 +87,21 @@ class Game {
         room.setExit("nord", corridor4); //fra room kan man gå til gang 4
 
         // tilføjer varer til butikken
+        // konstanter til Item - typer
+        final int WASHINGMACHINE = 1;
+        final int DRYER = 2;
+        final int HEATING = 3;
+        final int STOVE = 4;
+        final int FRIDGE = 5;
+        final int DISHWASHER = 6;
+        final int WINDOW = 7;
+        final int LIGHTS = 8;
+        final int TV = 9;
+        final int WALLFIXER = 10;
+        final int ISOLATION = 11;
+        final int SOLARCELLS = 12;
+        final int BATH = 13;
+
         store.addToInventory(new Item("Opvaskemaskine A", 2500, 150, DISHWASHER, "A"));
         store.addToInventory(new Item("Opvaskemaskine A++", 3300, 200, DISHWASHER, "A++"));
         store.addToInventory(new Item("Vaskemaskine A+", 2400, 65, WASHINGMACHINE, "A+"));
@@ -239,7 +248,7 @@ class Game {
         // starter ny runde, returnerer false, hvis max runder er udført!
 
         // tjekker om vi er nået max antal runder
-        if (player.getRounds() == (player.getMaxNumberOfRounds() - 1)) {
+        if (player.getRounds() == (MAX_NUMBER_OF_ROUNDS - 1)) {
             player.setRounds((player.getRounds()) + 1);
             return false;
         }
@@ -264,7 +273,7 @@ class Game {
                 "så din bolig bruger mindre energi, og dermed opnår bedre energimærke\n\n" +
                 "Du skal opnå de størst mulige forbedringer med det tilgængelige budget\n\n" +
                 "Spillet løber over en årrække\n" +
-                "Når du har brugt dit budget, eller efter " + player.getMovesPerRound() + " bevægelser, skiftes der til et nyt år\n";
+                "Når du har brugt dit budget, eller efter " + MOVES_PER_ROUND + " bevægelser, skiftes der til et nyt år\n";
         return result;
     }
 
@@ -299,7 +308,7 @@ class Game {
         String result = "";
 
         // Tilføjer tekst, hvis slutskærmen vises pga max antal år
-        if (getPlayer().getRounds() == getPlayer().getMaxNumberOfRounds()) {
+        if (getPlayer().getRounds() == MAX_NUMBER_OF_ROUNDS) {
             result += " --- Du har spillet max antal år --- \n\n";
             getPlayer().setRounds((getPlayer().getRounds()) - 1);
         }
