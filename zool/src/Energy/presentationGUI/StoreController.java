@@ -31,9 +31,11 @@ public class StoreController extends Controller {
             @Override
             public void handle(MouseEvent actionEvent) {
                 int selectedItem = storeList.getSelectionModel().getSelectedIndex();
-                textStore.setText(getDomainI().buyItem(selectedItem));
-                updateInventory();
-                updateStatus();
+                if (selectedItem >= 0) {
+                    textStore.setText(getDomainI().buyItem(selectedItem));
+                    updateInventory();
+                    updateStatus();
+                }
             }
         });
     }

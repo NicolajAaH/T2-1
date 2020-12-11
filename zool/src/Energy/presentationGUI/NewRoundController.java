@@ -32,19 +32,19 @@ public class NewRoundController extends Controller {
                 Parent newRoot = null;
                 if (status == true) {
                     try {
-                        newRoot = runGui.getFxmlLoader().load(getClass().getResource("Outside.fxml"));
+                        newRoot = runGUI.getFxmlLoader().load(getClass().getResource("Outside.fxml"));
                     } catch (IOException e) {
                         e.printStackTrace();
                     }
                 } else {
                     try {
-                        newRoot = runGui.getFxmlLoader().load(getClass().getResource("Exit.fxml"));
+                        newRoot = runGUI.getFxmlLoader().load(getClass().getResource("Exit.fxml"));
                     } catch (IOException e) {
                         e.printStackTrace();
                     }
                 }
-                runGui.getStage().setScene(new Scene(newRoot));
-                runGui.getStage().show();
+                runGUI.getStage().setScene(new Scene(newRoot));
+                runGUI.getStage().show();
             }
         });
         //eventhandler for knappen til at slutte spille, som loader exit skærmen
@@ -53,12 +53,12 @@ public class NewRoundController extends Controller {
             public void handle(MouseEvent actionEvent) {
                 Parent newRoot = null;
                 try {
-                    newRoot = runGui.getFxmlLoader().load(getClass().getResource("Exit.fxml"));
+                    newRoot = runGUI.getFxmlLoader().load(getClass().getResource("Exit.fxml"));
                 } catch (IOException e) {
                     e.printStackTrace();
                 }
-                runGui.getStage().setScene(new Scene(newRoot));
-                runGui.getStage().show();
+                runGUI.getStage().setScene(new Scene(newRoot));
+                runGUI.getStage().show();
             }
         });
     }

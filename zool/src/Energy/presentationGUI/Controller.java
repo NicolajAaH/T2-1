@@ -64,12 +64,12 @@ public class Controller {
             public void handle(MouseEvent actionEvent) {
                 Parent newRoot = null;
                 try {
-                    newRoot = runGui.getFxmlLoader().load(getClass().getResource("Exit.fxml"));
+                    newRoot = runGUI.getFxmlLoader().load(getClass().getResource("Exit.fxml"));
                 } catch (IOException e) {
                     e.printStackTrace();
                 }
-                runGui.getStage().setScene(new Scene(newRoot));
-                runGui.getStage().show();
+                runGUI.getStage().setScene(new Scene(newRoot));
+                runGUI.getStage().show();
             }
         });
 
@@ -78,12 +78,12 @@ public class Controller {
             public void handle(MouseEvent actionEvent) {
                 Parent newRoot = null;
                 try {
-                    newRoot = runGui.getFxmlLoader().load(getClass().getResource("NewRound.fxml"));
+                    newRoot = runGUI.getFxmlLoader().load(getClass().getResource("NewRound.fxml"));
                 } catch (IOException e) {
                     e.printStackTrace();
                 }
-                runGui.getStage().setScene(new Scene(newRoot));
-                runGui.getStage().show();
+                runGUI.getStage().setScene(new Scene(newRoot));
+                runGUI.getStage().show();
             }
         });
     }
@@ -236,12 +236,12 @@ public class Controller {
         if (!domainI.addMove()) {
             Parent newRoot = null;
             try {
-                newRoot = runGui.getFxmlLoader().load(getClass().getResource("NewRound.fxml"));
+                newRoot = runGUI.getFxmlLoader().load(getClass().getResource("NewRound.fxml"));
             } catch (IOException e) {
                 e.printStackTrace();
             }
-            runGui.getStage().setScene(new Scene(newRoot));
-            runGui.getStage().show();
+            runGUI.getStage().setScene(new Scene(newRoot));
+            runGUI.getStage().show();
             return false;
         } else {
             return true;
@@ -253,9 +253,9 @@ public class Controller {
         domainI.goNorth();
         if (moves()) {
             String resource = domainI.getCurrentRoomName() + ".fxml";
-            Parent newRoot = runGui.getFxmlLoader().load(getClass().getResource(resource));
-            runGui.getStage().setScene(new Scene(newRoot));
-            runGui.getStage().show();
+            Parent newRoot = runGUI.getFxmlLoader().load(getClass().getResource(resource));
+            runGUI.getStage().setScene(new Scene(newRoot));
+            runGUI.getStage().show();
         }
     }
 
@@ -263,9 +263,9 @@ public class Controller {
         domainI.goSouth();
         if (moves()) {
             String resource = domainI.getCurrentRoomName() + ".fxml";
-            Parent newRoot = runGui.getFxmlLoader().load(getClass().getResource(resource));
-            runGui.getStage().setScene(new Scene(newRoot));
-            runGui.getStage().show();
+            Parent newRoot = runGUI.getFxmlLoader().load(getClass().getResource(resource));
+            runGUI.getStage().setScene(new Scene(newRoot));
+            runGUI.getStage().show();
         }
     }
 
@@ -273,9 +273,9 @@ public class Controller {
         domainI.goWest();
         if (moves()) {
             String resource = domainI.getCurrentRoomName() + ".fxml";
-            Parent newRoot = runGui.getFxmlLoader().load(getClass().getResource(resource));
-            runGui.getStage().setScene(new Scene(newRoot));
-            runGui.getStage().show();
+            Parent newRoot = runGUI.getFxmlLoader().load(getClass().getResource(resource));
+            runGUI.getStage().setScene(new Scene(newRoot));
+            runGUI.getStage().show();
         }
     }
 
@@ -283,9 +283,9 @@ public class Controller {
         domainI.goEast();
         if (moves()) {
             String resource = domainI.getCurrentRoomName() + ".fxml";
-            Parent newRoot = runGui.getFxmlLoader().load(getClass().getResource(resource));
-            runGui.getStage().setScene(new Scene(newRoot));
-            runGui.getStage().show();
+            Parent newRoot = runGUI.getFxmlLoader().load(getClass().getResource(resource));
+            runGUI.getStage().setScene(new Scene(newRoot));
+            runGUI.getStage().show();
         }
     }
 
@@ -293,12 +293,12 @@ public class Controller {
         if (!domainI.canAffordMore()) {
             Parent newRoot = null;
             try {
-                newRoot = runGui.getFxmlLoader().load(getClass().getResource("NewRound.fxml"));
+                newRoot = runGUI.getFxmlLoader().load(getClass().getResource("NewRound.fxml"));
             } catch (IOException e) {
                 e.printStackTrace();
             }
-            runGui.getStage().setScene(new Scene(newRoot));
-            runGui.getStage().show();
+            runGUI.getStage().setScene(new Scene(newRoot));
+            runGUI.getStage().show();
         }
     }
 }

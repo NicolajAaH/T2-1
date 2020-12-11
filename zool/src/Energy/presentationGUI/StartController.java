@@ -36,12 +36,12 @@ public class StartController extends Controller {
                     if (error == null) {
                         Parent newRoot = null;
                         try {
-                            newRoot = runGui.getFxmlLoader().load(getClass().getResource("Outside.fxml"));
+                            newRoot = runGUI.getFxmlLoader().load(getClass().getResource("Outside.fxml"));
                         } catch (IOException e) {
                             e.printStackTrace();
                         }
-                        runGui.getStage().setScene(new Scene(newRoot));
-                        runGui.getStage().show();
+                        runGUI.getStage().setScene(new Scene(newRoot));
+                        runGUI.getStage().show();
                         break;
                     }
                     break;

@@ -6,7 +6,7 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 
-public class runGui extends Application {
+public class runGUI extends Application {
 
     //FXMLLoader og stage gemmes i variable
     private static FXMLLoader fxmlLoader = new FXMLLoader();
